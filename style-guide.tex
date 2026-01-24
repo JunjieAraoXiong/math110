@@ -1,0 +1,760 @@
+%==============================================================================
+% LATEX NOTES STYLE GUIDE
+% Reference this file when creating new lecture notes
+%==============================================================================
+
+%------------------------------------------------------------------------------
+% WRITING PHILOSOPHY
+%------------------------------------------------------------------------------
+%
+% PRIORITY: Clarity over brevity. These are learning notes, not cheat sheets.
+%
+% 1. BE DETAILED IN PROCESS:
+%    - Show every step in derivations (don't skip algebra)
+%    - State what you're doing before you do it ("By rank-nullity:", "Row reducing:")
+%    - Use LHS/RHS labels when comparing expressions
+%    - Explain WHY each step works, not just WHAT it is
+%
+% 2. BE CLEAR IN EXPLANATIONS:
+%    - Use plain English, avoid jargon abbreviations
+%    - State goals explicitly ("Goal: Show that T is diagonalizable")
+%    - Add intuition boxes after formal proofs
+%    - Use concrete examples with actual matrices
+%
+% 3. STRUCTURE FOR UNDERSTANDING:
+%    - Label steps: "Step 1:", "Step 2:", etc.
+%    - Use parallel structure (if example A has 4 steps, example B should too)
+%    - Put key formulas in boxes, but show the work to get there
+%    - End with "Intuition:" or boxed takeaway
+%
+% 4. WHAT TO AVOID:
+%    - Cryptic abbreviations without definition
+%    - Skipping "obvious" steps (nothing is obvious when learning)
+%    - Dense walls of math without prose guidance
+%    - Assuming the reader remembers earlier definitions
+%    - Em dashes (---). Use colons, semicolons, or break into sentences instead
+%
+%------------------------------------------------------------------------------
+% DOCUMENT CLASS & LAYOUT
+%------------------------------------------------------------------------------
+\documentclass[10pt, twocolumn]{article}
+\usepackage[margin=0.75in, columnsep=0.3in]{geometry}
+
+% Two-column layout for compact reading (2 pages per page feel)
+% 10pt font for density, 0.75in margins for space efficiency
+
+%------------------------------------------------------------------------------
+% REQUIRED PACKAGES
+%------------------------------------------------------------------------------
+\usepackage{amsmath, amssymb, amsthm}   % Math essentials
+\usepackage{enumitem}                    % List customization
+\usepackage{fancyhdr}                    % Headers/footers
+\usepackage{titlesec}                    % Section formatting
+\usepackage{tcolorbox}                   % Boxed results
+\usepackage{booktabs}                    % Professional tables
+\usepackage{tikz}                        % Diagrams
+\usetikzlibrary{matrix, arrows.meta, positioning, calc, cd}
+\usepackage{graphicx}                    % Image scaling
+
+%------------------------------------------------------------------------------
+% IMPROVED SPACING FOR READABILITY
+%------------------------------------------------------------------------------
+\linespread{1.08}                        % Slightly more space between lines
+\setlength{\parskip}{0.4ex plus 0.2ex minus 0.1ex}  % Space between paragraphs
+
+%------------------------------------------------------------------------------
+% BOX STYLES (for key results and formulas)
+%------------------------------------------------------------------------------
+\tcbset{
+    boxrule=0.8pt,
+    colback=white,
+    colframe=black,
+    arc=0pt,
+    boxsep=3pt,
+    left=4pt, right=4pt, top=4pt, bottom=4pt
+}
+
+% Light highlight for key results (no heavy border) - PREFERRED for formulas
+\newtcolorbox{result}{
+    boxrule=0pt,
+    colback=black!5,
+    colframe=white,
+    arc=0pt,
+    boxsep=2pt,
+    left=4pt, right=4pt, top=4pt, bottom=4pt
+}
+
+%------------------------------------------------------------------------------
+% SECTION FORMATTING (compact)
+%------------------------------------------------------------------------------
+\titleformat{\section}{\large\bfseries}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titlespacing*{\section}{0pt}{1.5ex}{1ex}
+\titlespacing*{\subsection}{0pt}{1ex}{0.5ex}
+
+%------------------------------------------------------------------------------
+% LIST FORMATTING (balanced readability)
+%------------------------------------------------------------------------------
+\setlist{itemsep=1pt, topsep=3pt, parsep=1pt, leftmargin=1.5em}
+% itemsep: space between items (1pt for breathing room)
+% topsep: space before/after list (3pt)
+% parsep: space between paragraphs within items (1pt)
+% leftmargin: consistent indentation (1.5em)
+
+%------------------------------------------------------------------------------
+% HEADER/FOOTER
+%------------------------------------------------------------------------------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small MATH 110}           % Change course name as needed
+\fancyhead[R]{\small Lecture X}          % Change lecture number
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+%------------------------------------------------------------------------------
+% THEOREM ENVIRONMENTS
+%------------------------------------------------------------------------------
+\theoremstyle{definition}
+\newtheorem{property}{Property}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+
+%------------------------------------------------------------------------------
+% CUSTOM COMMANDS
+%------------------------------------------------------------------------------
+% Number fields
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+
+% Matrix/space operations
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\nullity}{nullity}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\row}{row}
+\DeclareMathOperator{\nul}{null}
+\DeclareMathOperator{\range}{range}
+\DeclareMathOperator{\im}{im}
+
+% Inner products and norms
+\newcommand{\inner}[2]{\langle #1, #2 \rangle}
+\newcommand{\norm}[1]{\| #1 \|}
+\newcommand{\proj}{\operatorname{proj}}
+
+% Vectors and matrices
+\newcommand{\vect}[1]{\mathbf{#1}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+
+%==============================================================================
+%==============================================================================
+%
+%                         STYLE REFERENCE GUIDE
+%
+%==============================================================================
+%==============================================================================
+
+%------------------------------------------------------------------------------
+% 1. DOCUMENT STRUCTURE
+%------------------------------------------------------------------------------
+%
+% SECTION NUMBERING AND ORGANIZATION:
+%
+%   The number and order of sections should follow the textbook structure.
+%   Use the textbook's topic organization as the authoritative source for:
+%   - Section titles and numbering
+%   - The logical flow of subtopics
+%   - What constitutes a "new topic" vs a continuation
+%
+%   Example: If textbook Section 1A covers:
+%     1.1 Complex Numbers
+%     1.2 Properties of Complex Arithmetic
+%     1.3 Lists and F^n
+%   Then your notes should mirror this structure.
+%
+% PAGE BREAKS FOR NEW SUBTOPICS:
+%
+%   When starting a new major subtopic (a new \section), use \newpage to
+%   start on a fresh page. This improves readability and keeps related
+%   content together.
+%
+%   \newpage
+%   %==============================================================================
+%   \section{New Major Topic}
+%   %==============================================================================
+%
+%   Note: In twocolumn mode, \newpage moves to the next column first.
+%   Use \clearpage to force a completely new page if needed.
+%
+% TITLE BLOCK (use minipage for consistent spacing):
+%
+%   \noindent
+%   \begin{minipage}{\linewidth}
+%       \centering
+%       \textbf{\Large Lecture X: Topic Name} \\[0.5em]
+%       \hrule
+%   \end{minipage}
+%   \vspace{1em}
+%
+% KEY TAKEAWAYS (at end of document):
+%
+%   \vfill
+%   \begin{center}
+%   \rule{0.5\linewidth}{0.4pt}
+%   \textit{Key Takeaways}
+%   \end{center}
+%   \begin{enumerate}
+%       \item \textbf{First point:} explanation.
+%       \item \textbf{Second point:} explanation.
+%   \end{enumerate}
+
+%------------------------------------------------------------------------------
+% 2. BOX HIERARCHY (from most to least prominent)
+%------------------------------------------------------------------------------
+%
+% LEVEL 1 - KEY FORMULAS (light gray background, NO border - PREFERRED):
+%
+%   Pattern A: Pure formula
+%   \begin{result}
+%   \[
+%       \dim(V) = \rank(T) + \nullity(T)
+%   \]
+%   \end{result}
+%
+%   Pattern B: Formula with title/label
+%   \begin{result}
+%   \textbf{Rank-Nullity Theorem:}
+%   \[
+%       \dim(V) = \rank(T) + \nullity(T)
+%   \]
+%   \end{result}
+%
+%   Pattern C: For long formulas, use \small
+%   \begin{result}
+%   {\small
+%   \begin{align*}
+%       \det(\mat{A}\mat{B}) &= \det(\mat{A})\det(\mat{B}) \\
+%       \det(\mat{A}^{-1}) &= \frac{1}{\det(\mat{A})} \\
+%       \det(\mat{A}^T) &= \det(\mat{A})
+%   \end{align*}}
+%   \end{result}
+%
+% LEVEL 1-ALT - INLINE BOXED (for simple property statements):
+%
+%   \begin{property}[Dimension Formula]
+%   For subspaces $U, W$: $\boxed{\dim(U + W) = \dim(U) + \dim(W) - \dim(U \cap W)}$
+%   \end{property}
+%
+% LEVEL 2 - AXIOMS/DEFINITIONS (black border - use sparingly):
+%
+%   \begin{tcolorbox}
+%   \textbf{Definition:} A linear map $T: V \to W$ satisfies
+%   $T(\vect{u} + \vect{v}) = T(\vect{u}) + T(\vect{v})$ and $T(c\vect{v}) = cT(\vect{v})$.
+%   \end{tcolorbox}
+%
+% LEVEL 3 - STRATEGIES/INSIGHTS (gray border):
+%
+%   \begin{tcolorbox}[colframe=black!50]
+%   \textbf{Strategy:} To check diagonalizability, verify algebraic = geometric
+%   multiplicity for each eigenvalue.
+%   \end{tcolorbox}
+%
+% LEVEL 4 - PROOFS (light gray border with title):
+%
+%   \begin{tcolorbox}[colframe=black!40, title={\small Proof}]
+%   \textbf{Step 1:} First step here.
+%
+%   \textbf{Step 2:} Second step here.
+%
+%   Therefore, result follows. \hfill $\square$
+%   \end{tcolorbox}
+%
+% LEVEL 5 - SIDE NOTES/DEFINITIONS (gray border with title):
+%
+%   \begin{tcolorbox}[colframe=black!50, title={\small Note: Similar Matrices}]
+%   Matrices $\mat{A}$ and $\mat{B}$ are \textbf{similar} if $\mat{B} = \mat{P}^{-1}\mat{A}\mat{P}$.
+%   Similar matrices have the same eigenvalues, determinant, and trace.
+%   \end{tcolorbox}
+
+%------------------------------------------------------------------------------
+% 3. STEP-BY-STEP DERIVATIONS
+%------------------------------------------------------------------------------
+%
+% Use bold labels for each step:
+%
+%   \textbf{Step 1: Set up the augmented matrix.}
+%
+%   \[
+%       \left[\begin{array}{ccc|c}
+%       1 & 2 & 3 & 0 \\
+%       4 & 5 & 6 & 0 \\
+%       7 & 8 & 9 & 0
+%       \end{array}\right]
+%   \]
+%
+%   \textbf{Step 2: Row reduce to echelon form.}
+%
+%   ...
+%
+% After key results, add sanity checks:
+%
+%   \textit{Sanity check:} $\rank + \nullity = 3 = \dim(V)$. \checkmark
+
+%------------------------------------------------------------------------------
+% 3.5 FRACTIONS AND MATHEMATICAL DISPLAY
+%------------------------------------------------------------------------------
+%
+% FRACTION FORMATTING:
+%
+%   ALWAYS use stacked fractions with \frac{}{}, NEVER use slash notation:
+%
+%   GOOD:  $\frac{1}{3}$, $\frac{a}{b}$, $s_i = \frac{1}{r_i}$
+%   BAD:   $1/3$, $a/b$, $s_i = 1/r_i$
+%
+%   For vectors/tuples with fractions:
+%   GOOD:  $\left(\frac{1}{3}, \frac{2}{3}, \frac{1}{2}\right)$
+%   BAD:   $(1/3, 2/3, 1/2)$
+%
+% DISPLAY EQUATIONS IN PROOFS:
+%
+%   Use align* for multi-step calculations with vertical spacing:
+%
+%   \begin{align*}
+%   \vect{u}_2 &= \vect{v}_2 - \proj_{\vect{u}_1}(\vect{v}_2)\\[3pt]
+%   &= \vect{v}_2 - \frac{\inner{\vect{v}_2}{\vect{u}_1}}{\inner{\vect{u}_1}{\vect{u}_1}} \vect{u}_1
+%   \end{align*}
+%
+%   The \\[3pt] adds vertical spacing between lines for readability.
+%
+% MATRICES WITH FRACTIONS:
+%
+%   Add vertical spacing between rows using \\[4pt]:
+%
+%   \begin{pmatrix}
+%   \frac{1}{3} & \frac{2}{3}\\[4pt]
+%   \frac{1}{2} & \frac{1}{2}
+%   \end{pmatrix}
+%
+% BOXED ANSWERS:
+%
+%   Use \boxed{} for final answers in worked examples:
+%
+%   Solve: $\boxed{\lambda_1 = 3}$, \quad $\lambda_2 = \boxed{-1}$
+%
+
+%------------------------------------------------------------------------------
+% 4. PROPERTIES AND THEOREMS
+%------------------------------------------------------------------------------
+%
+% Format: Statement first (boxed), then proof (boxed separately):
+%
+%   \begin{property}[Rank-Nullity]
+%   For $T: V \to W$ linear:
+%   \begin{tcolorbox}
+%   \vspace{-0.8em}
+%   \[
+%       \dim(V) = \rank(T) + \nullity(T)
+%   \]
+%   \vspace{-0.8em}
+%   \end{tcolorbox}
+%   \end{property}
+%
+%   \begin{tcolorbox}[colframe=black!40, title={\small Proof}]
+%   \begin{enumerate}
+%       \item Let $\{\vect{u}_1, \ldots, \vect{u}_k\}$ be a basis for $\ker(T)$.
+%       \item Extend to basis $\{\vect{u}_1, \ldots, \vect{u}_k, \vect{v}_1, \ldots, \vect{v}_r\}$ for $V$.
+%       \item Show $\{T(\vect{v}_1), \ldots, T(\vect{v}_r)\}$ is a basis for $\im(T)$. \hfill $\square$
+%   \end{enumerate}
+%   \end{tcolorbox}
+%
+%   \textbf{Intuition:} The domain splits into what gets killed and what produces output.
+
+%------------------------------------------------------------------------------
+% 5. TABLES
+%------------------------------------------------------------------------------
+%
+% Use booktabs for professional tables:
+%
+%   \begin{center}
+%   \begin{tabular}{@{}lc@{}}
+%   \toprule
+%   \textbf{Row Operation} & \textbf{Effect on $\det$} \\
+%   \midrule
+%   Swap two rows & Multiply by $-1$ \\
+%   Multiply row by $c$ & Multiply by $c$ \\
+%   Add multiple of row & No change \\
+%   \bottomrule
+%   \end{tabular}
+%   \end{center}
+
+%------------------------------------------------------------------------------
+% 6. VECTOR SPACE DIAGRAMS (TikZ)
+%------------------------------------------------------------------------------
+%
+% Subspace inclusion diagram:
+%
+%   \begin{center}
+%   \begin{tikzpicture}[scale=0.6]
+%       \draw[thick] (0,0) ellipse (2.5cm and 1.5cm);
+%       \draw[thick, fill=black!15] (0,0) ellipse (1.2cm and 0.8cm);
+%       \node at (0,0) {$U$};
+%       \node at (1.8,1) {$V$};
+%   \end{tikzpicture}
+%   \end{center}
+%
+% Direct sum visualization:
+%
+%   \begin{center}
+%   \begin{tikzpicture}[scale=0.7]
+%       \draw[->, thick] (-2,0) -- (2,0) node[right] {$U$};
+%       \draw[->, thick] (0,-1.5) -- (0,1.5) node[above] {$W$};
+%       \node at (1.5,1) {$V = U \oplus W$};
+%       \filldraw (0,0) circle (2pt) node[below left] {$\vect{0}$};
+%   \end{tikzpicture}
+%   \end{center}
+%
+% Kernel and image diagram:
+%
+%   \begin{center}
+%   \begin{tikzpicture}[>=Stealth, scale=0.8]
+%       \draw[thick] (-2,0) ellipse (1cm and 1.5cm);
+%       \draw[thick] (2,0) ellipse (1cm and 1.5cm);
+%       \draw[->, thick] (-0.8,0) -- (0.8,0) node[midway, above] {$T$};
+%       \node at (-2,-2) {$V$};
+%       \node at (2,-2) {$W$};
+%       \draw[thick, fill=black!20] (-2,0) ellipse (0.4cm and 0.6cm);
+%       \node at (-2,0) {\small $\ker$};
+%       \draw[thick, fill=black!20] (2,0) ellipse (0.5cm and 0.8cm);
+%       \node at (2,0) {\small $\im$};
+%   \end{tikzpicture}
+%   \end{center}
+
+%------------------------------------------------------------------------------
+% 7. MATH FORMATTING
+%------------------------------------------------------------------------------
+%
+% ELLIPSIS:
+%   - Multiplication: $\lambda_1 \cdot \lambda_2 \cdots \lambda_n$
+%   - Lists: $\vect{v}_1, \vect{v}_2, \ldots, \vect{v}_n$
+%   - Never use ... (three periods)
+%
+% PUNCTUATION IN DISPLAY MATH:
+%   - End equations with period or comma as appropriate:
+%     \[
+%         \det(\mat{A}) = \lambda_1 \lambda_2 \cdots \lambda_n.
+%     \]
+%
+% ABBREVIATIONS:
+%   - Use backslash-space after abbreviations: Fig.\ 1, Eq.\ 2
+%
+% ALIGN ENVIRONMENT (for multi-line equations):
+%   \begin{align*}
+%       \det(\mat{A} - \lambda \mat{I}) &= \lambda^2 - \tr(\mat{A})\lambda + \det(\mat{A}) \\
+%       &= (\lambda - \lambda_1)(\lambda - \lambda_2).
+%   \end{align*}
+
+%------------------------------------------------------------------------------
+% 8. TEXT FORMATTING
+%------------------------------------------------------------------------------
+%
+% EMPHASIS HIERARCHY:
+%   - \textbf{} : Key terms on first use, step labels
+%   - \emph{}   : Emphasis within sentences
+%   - \textit{} : Side comments ("Sanity check:", "Remark:")
+%
+% QUOTATION MARKS:
+%   - Use `` and '' for proper LaTeX quotes
+%   - Example: ``linearly independent''
+
+%------------------------------------------------------------------------------
+% 9. AUGMENTED MATRICES (Row Reduction)
+%------------------------------------------------------------------------------
+%
+% Augmented matrix for solving systems:
+%
+%   \[
+%       \left[\begin{array}{ccc|c}
+%       1 & 2 & -1 & 3 \\
+%       0 & 1 & 2 & -1 \\
+%       0 & 0 & 1 & 4
+%       \end{array}\right]
+%   \]
+%
+% Row operation notation:
+%
+%   \[
+%       \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}
+%       \xrightarrow{R_2 - 3R_1}
+%       \begin{bmatrix} 1 & 2 \\ 0 & -2 \end{bmatrix}
+%   \]
+%
+% Multiple operations:
+%
+%   $\mat{A} \xrightarrow{R_1 \leftrightarrow R_2}
+%   \xrightarrow{R_2 - 2R_1}
+%   \xrightarrow{\frac{1}{3}R_2} \text{RREF}$
+
+%------------------------------------------------------------------------------
+% 10. COMMUTATIVE DIAGRAMS (for Linear Maps)
+%------------------------------------------------------------------------------
+%
+% Change of basis diagram:
+%
+%   \[
+%   \begin{tikzcd}
+%       V \arrow[r, "T"] \arrow[d, "{[\cdot]_\mathcal{B}}"'] & V \arrow[d, "{[\cdot]_\mathcal{B}}"] \\
+%       \F^n \arrow[r, "{[T]_\mathcal{B}}"'] & \F^n
+%   \end{tikzcd}
+%   \]
+%
+% First isomorphism theorem:
+%
+%   \[
+%   \begin{tikzcd}
+%       V \arrow[r, "T"] \arrow[dr, two heads] & W \\
+%       & V/\ker(T) \arrow[u, hook', "\cong"']
+%   \end{tikzcd}
+%   \]
+
+%------------------------------------------------------------------------------
+% 11. EIGENVALUE PATTERNS
+%------------------------------------------------------------------------------
+%
+% Characteristic polynomial:
+%   \[
+%       p(\lambda) = \det(\mat{A} - \lambda \mat{I})
+%   \]
+%
+% For $2 \times 2$:
+%   \[
+%       \det\begin{pmatrix} a - \lambda & b \\ c & d - \lambda \end{pmatrix}
+%       = \lambda^2 - (a+d)\lambda + (ad - bc)
+%   \]
+%
+% Eigenspace:
+%   \[
+%       E_\lambda = \nul(\mat{A} - \lambda \mat{I}) = \ker(\mat{A} - \lambda \mat{I})
+%   \]
+
+%------------------------------------------------------------------------------
+% 12. GRAM-SCHMIDT PATTERN
+%------------------------------------------------------------------------------
+%
+%   \textbf{Step 1:} $\vect{u}_1 = \vect{v}_1$.
+%
+%   \textbf{Step 2:}
+%   $\vect{u}_2 = \vect{v}_2 - \frac{\inner{\vect{v}_2}{\vect{u}_1}}{\inner{\vect{u}_1}{\vect{u}_1}} \vect{u}_1$
+%
+%   \textbf{Step 3:}
+%   $\vect{u}_3 = \vect{v}_3 - \frac{\inner{\vect{v}_3}{\vect{u}_1}}{\inner{\vect{u}_1}{\vect{u}_1}} \vect{u}_1
+%   - \frac{\inner{\vect{v}_3}{\vect{u}_2}}{\inner{\vect{u}_2}{\vect{u}_2}} \vect{u}_2$
+%
+%   \textbf{Step 4:} Normalize: $\vect{e}_i = \frac{\vect{u}_i}{\norm{\vect{u}_i}}$.
+
+%------------------------------------------------------------------------------
+% 13. WARNING BOXES (common mistakes)
+%------------------------------------------------------------------------------
+%
+%   \begin{tcolorbox}[colframe=black!50]
+%   \textbf{Warning:} Matrix multiplication is \emph{not} commutative!
+%   In general, $\mat{A}\mat{B} \neq \mat{B}\mat{A}$.
+%   \end{tcolorbox}
+%
+%   \begin{tcolorbox}
+%   \textbf{Basis Dependence:} The matrix $[T]_\mathcal{B}$ depends on
+%   choice of basis. Different bases give similar matrices.
+%   \end{tcolorbox}
+%
+%   \begin{tcolorbox}[colframe=black!50]
+%   \textbf{Common mistake:} $\det(\mat{A} + \mat{B}) \neq \det(\mat{A}) + \det(\mat{B})$.
+%   Determinant is multiplicative, not additive!
+%   \end{tcolorbox}
+
+%------------------------------------------------------------------------------
+% 14. COMPARISON TABLES
+%------------------------------------------------------------------------------
+%
+% Injective vs Surjective:
+%   \begin{center}
+%   \begin{tabular}{@{}ll@{}}
+%   \toprule
+%   \textbf{Injective} & \textbf{Surjective} \\
+%   \midrule
+%   $\ker(T) = \{\vect{0}\}$ & $\im(T) = W$ \\
+%   $\nullity(T) = 0$ & $\rank(T) = \dim(W)$ \\
+%   \bottomrule
+%   \end{tabular}
+%   \end{center}
+%
+% Similarity invariants:
+%   \begin{center}
+%   \begin{tabular}{@{}ll@{}}
+%   \toprule
+%   \textbf{Invariant} & \textbf{Meaning} \\
+%   \midrule
+%   Determinant & $\det(\mat{P}^{-1}\mat{A}\mat{P}) = \det(\mat{A})$ \\
+%   Trace & $\tr(\mat{P}^{-1}\mat{A}\mat{P}) = \tr(\mat{A})$ \\
+%   Eigenvalues & Same char. polynomial \\
+%   \bottomrule
+%   \end{tabular}
+%   \end{center}
+
+%------------------------------------------------------------------------------
+% 15. QUICK REFERENCE: BOX BORDER COLORS
+%------------------------------------------------------------------------------
+%
+%   black       : Key formulas (most important)
+%   black!50    : Strategies, insights, warnings, side notes
+%   black!40    : Proofs (with title)
+%   black!15    : Diagram fill (light)
+%   black!35    : Diagram emphasis (darker)
+
+%------------------------------------------------------------------------------
+% 16. QUICK REFERENCE: SPACING
+%------------------------------------------------------------------------------
+%
+%   DOCUMENT-LEVEL SPACING (add after packages):
+%   \linespread{1.08}                                    % Line height
+%   \setlength{\parskip}{0.4ex plus 0.2ex minus 0.1ex}  % Paragraph spacing
+%
+%   LIST SPACING (replaces noitemsep for readability):
+%   \setlist{itemsep=1pt, topsep=3pt, parsep=1pt, leftmargin=1.5em}
+%
+%   PREFERRED: Use \begin{result}...\end{result} - NO vspace needed!
+%
+%   For long formulas that might overflow: wrap in {\small ... }
+%
+%   OLD PATTERN (avoid if possible):
+%   Pure formula box:           \vspace{-0.8em} before and after
+%   Formula with title:         \vspace{-0.5em} before, \vspace{-0.8em} after
+%
+%   OVERFLOW PREVENTION:
+%   - Use shorter index notation: $i < j$ instead of $1 \le i < j \le n$
+%   - Use abbreviations: $[n]$ for $\{1,\ldots,n\}$
+%   - Wrap in {\small ...} for multi-line formulas
+
+%------------------------------------------------------------------------------
+% 17. BASIS/DIMENSION PROOFS
+%------------------------------------------------------------------------------
+%
+% Two verification methods:
+%   \begin{center}
+%   \begin{tabular}{@{}ll@{}}
+%   \toprule
+%   \textbf{Direct} & Check spanning AND independence \\[1em]
+%   \textbf{Shortcut} & $|\mathcal{B}| = \dim(V)$ + (spanning OR independence) \\
+%   \bottomrule
+%   \end{tabular}
+%   \end{center}
+%
+% Matrix test for $\R^n$:
+%   Form $\mat{A}$ with vectors as columns; $\det(\mat{A}) \neq 0$ iff basis.
+
+%------------------------------------------------------------------------------
+% 18. DIAGONALIZATION CHECKLIST
+%------------------------------------------------------------------------------
+%
+%   \begin{enumerate}
+%       \item Find eigenvalues: solve $\det(\mat{A} - \lambda \mat{I}) = 0$.
+%       \item For each $\lambda_i$: find basis for $E_{\lambda_i} = \nul(\mat{A} - \lambda_i \mat{I})$.
+%       \item Check: $\sum \dim(E_{\lambda_i}) = n$?
+%       \item If yes: $\mat{P} = [\text{eigenvectors}]$, $\mat{D} = \text{diag}(\lambda_1, \ldots)$.
+%       \item Verify: $\mat{A} = \mat{P}\mat{D}\mat{P}^{-1}$.
+%   \end{enumerate}
+
+%------------------------------------------------------------------------------
+% 19. CONVENTION NOTES
+%------------------------------------------------------------------------------
+%
+%   \begin{tcolorbox}[colframe=black!50]
+%   \textbf{Be careful!} Different textbooks use different conventions:
+%   \begin{itemize}
+%       \item Inner product linear in first vs second argument
+%       \item $[T]_{\mathcal{B}}^{\mathcal{C}}$ vs $[T]_{\mathcal{C}}^{\mathcal{B}}$ notation
+%   \end{itemize}
+%   Always check your source!
+%   \end{tcolorbox}
+
+%------------------------------------------------------------------------------
+% 20. BLOCK MATRICES
+%------------------------------------------------------------------------------
+%
+%   Block multiplication:
+%   \[
+%       \begin{pmatrix} \mat{A} & \mat{B} \\ \mat{C} & \mat{D} \end{pmatrix}
+%       \begin{pmatrix} \mat{E} \\ \mat{F} \end{pmatrix}
+%       = \begin{pmatrix} \mat{A}\mat{E} + \mat{B}\mat{F} \\ \mat{C}\mat{E} + \mat{D}\mat{F} \end{pmatrix}
+%   \]
+%
+%   Block diagonal:
+%   \[
+%       \mat{A} = \begin{pmatrix}
+%       \mat{A}_1 & \mat{0} \\
+%       \mat{0} & \mat{A}_2
+%       \end{pmatrix}, \quad \det(\mat{A}) = \det(\mat{A}_1)\det(\mat{A}_2)
+%   \]
+
+%==============================================================================
+
+\begin{document}
+
+% TEMPLATE TITLE
+\noindent
+\begin{minipage}{\linewidth}
+    \centering
+    \textbf{\Large Lecture X: Topic Name} \\[0.5em]
+    \hrule
+\end{minipage}
+\vspace{1em}
+
+%==============================================================================
+\section{First Section}
+%==============================================================================
+
+Your content here...
+
+\subsection{Subsection Example}
+
+\textbf{Step 1: Label your steps.}
+
+Explanation for step 1.
+
+\textbf{Step 2: Continue the derivation.}
+
+Explanation for step 2.
+
+\begin{tcolorbox}
+\vspace{-0.8em}
+\[
+    \text{Key result goes here.}
+\]
+\vspace{-0.8em}
+\end{tcolorbox}
+
+\textit{Sanity check:} Verify with a simple case. \checkmark
+
+%==============================================================================
+
+\vfill
+
+\begin{center}
+\rule{0.5\linewidth}{0.4pt}
+
+\textit{Key Takeaways}
+\end{center}
+
+\begin{enumerate}
+    \item \textbf{First insight:} brief explanation.
+    \item \textbf{Second insight:} brief explanation.
+\end{enumerate}
+
+\end{document}

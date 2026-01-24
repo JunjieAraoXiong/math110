@@ -1,0 +1,809 @@
+%==============================================================================
+% LATEX EXERCISES STYLE GUIDE
+% Reference this file when creating practice problems and exercises
+%==============================================================================
+
+%------------------------------------------------------------------------------
+% WRITING PHILOSOPHY
+%------------------------------------------------------------------------------
+%
+% PRIORITY: Clarity over brevity. These are learning exercises, not exams.
+%
+% 1. BE DETAILED IN SOLUTIONS:
+%    - Show every step in derivations (don't skip algebra)
+%    - State what you're doing before you do it ("By rank-nullity:", "Row reducing:")
+%    - Use LHS/RHS labels when comparing expressions
+%    - Explain WHY each step works, not just WHAT it is
+%
+% 2. BE CLEAR IN PROBLEM STATEMENTS:
+%    - Use plain English, avoid jargon abbreviations
+%    - State goals explicitly ("Show that...", "Find...", "Prove...")
+%    - Include hints when appropriate
+%    - Use concrete examples with actual matrices
+%
+% 3. STRUCTURE FOR UNDERSTANDING:
+%    - Label steps: "Step 1:", "Step 2:", etc.
+%    - Use parallel structure across similar problems
+%    - Put key results in boxes, but show the work to get there
+%    - End solutions with boxed final answers
+%
+% 4. WHAT TO AVOID:
+%    - Cryptic abbreviations without definition
+%    - Skipping "obvious" steps (nothing is obvious when learning)
+%    - Dense walls of math without prose guidance
+%    - Assuming the reader remembers earlier definitions
+%    - Em dashes (---). Use colons, semicolons, or break into sentences instead
+%
+%------------------------------------------------------------------------------
+% DOCUMENT CLASS & LAYOUT
+%------------------------------------------------------------------------------
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+
+% Single-column layout for exercises (more space for worked solutions)
+% 11pt font for readability, 1in margins for comfortable reading
+
+%------------------------------------------------------------------------------
+% REQUIRED PACKAGES
+%------------------------------------------------------------------------------
+\usepackage{amsmath, amssymb, amsthm}   % Math essentials
+\usepackage{enumitem}                    % List customization
+\usepackage{fancyhdr}                    % Headers/footers
+\usepackage{titlesec}                    % Section formatting
+\usepackage{tcolorbox}                   % Boxed results
+\usepackage{booktabs}                    % Professional tables
+\usepackage{tikz}                        % Diagrams
+\usetikzlibrary{matrix, arrows.meta, positioning, calc, cd}
+\usepackage{xcolor}                      % Colors (for worksheet formatting)
+\usepackage{graphicx}                    % Image scaling
+
+%------------------------------------------------------------------------------
+% IMPROVED SPACING FOR READABILITY
+%------------------------------------------------------------------------------
+\linespread{1.15}                        % More space between lines for exercises
+\setlength{\parskip}{0.5ex plus 0.2ex minus 0.1ex}  % Space between paragraphs
+
+%------------------------------------------------------------------------------
+% BOX STYLES (for key results and formulas)
+%------------------------------------------------------------------------------
+\tcbset{
+    boxrule=0.8pt,
+    colback=white,
+    colframe=black,
+    arc=0pt,
+    boxsep=3pt,
+    left=4pt, right=4pt, top=4pt, bottom=4pt
+}
+
+% Light highlight for key results (no heavy border) - PREFERRED for formulas
+\newtcolorbox{result}{
+    boxrule=0pt,
+    colback=black!5,
+    colframe=white,
+    arc=0pt,
+    boxsep=2pt,
+    left=4pt, right=4pt, top=4pt, bottom=4pt
+}
+
+% Solution box
+\newtcolorbox{solutionbox}{
+    boxrule=0.5pt,
+    colback=black!3,
+    colframe=black!40,
+    arc=0pt,
+    boxsep=4pt,
+    left=6pt, right=6pt, top=6pt, bottom=6pt
+}
+
+% Hint box
+\newtcolorbox{hintbox}{
+    boxrule=0pt,
+    colback=black!8,
+    colframe=white,
+    arc=0pt,
+    boxsep=2pt,
+    left=4pt, right=4pt, top=4pt, bottom=4pt
+}
+
+%------------------------------------------------------------------------------
+% SECTION FORMATTING
+%------------------------------------------------------------------------------
+\titleformat{\section}{\large\bfseries}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titlespacing*{\section}{0pt}{2ex}{1.5ex}
+\titlespacing*{\subsection}{0pt}{1.5ex}{1ex}
+
+%------------------------------------------------------------------------------
+% LIST FORMATTING (balanced readability)
+%------------------------------------------------------------------------------
+\setlist{itemsep=2pt, topsep=4pt, parsep=2pt, leftmargin=1.5em}
+% itemsep: space between items (2pt for breathing room)
+% topsep: space before/after list (4pt)
+% parsep: space between paragraphs within items (2pt)
+% leftmargin: consistent indentation (1.5em)
+
+%------------------------------------------------------------------------------
+% HEADER/FOOTER
+%------------------------------------------------------------------------------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small MATH 110}           % Change course name as needed
+\fancyhead[R]{\small Problem Set X}      % Change problem set number
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+%------------------------------------------------------------------------------
+% THEOREM/EXERCISE ENVIRONMENTS
+%------------------------------------------------------------------------------
+\theoremstyle{definition}
+\newtheorem{exercise}{Exercise}[section]
+\newtheorem{problem}{Problem}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+
+% Solution environment
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+%------------------------------------------------------------------------------
+% CUSTOM COMMANDS
+%------------------------------------------------------------------------------
+% Number fields
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+
+% Matrix/space operations
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\nullity}{nullity}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\row}{row}
+\DeclareMathOperator{\nul}{null}
+\DeclareMathOperator{\range}{range}
+\DeclareMathOperator{\im}{im}
+
+% Inner products and norms
+\newcommand{\inner}[2]{\langle #1, #2 \rangle}
+\newcommand{\norm}[1]{\| #1 \|}
+\newcommand{\proj}{\operatorname{proj}}
+
+% Vectors and matrices
+\newcommand{\vect}[1]{\mathbf{#1}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+
+%------------------------------------------------------------------------------
+% WORKSHEET FORMATTING (for practice worksheets without solutions)
+%------------------------------------------------------------------------------
+% Simple exercise counter and command (use instead of theorem-style \exercise)
+% \newcounter{exercise}  % Already defined above via \newtheorem
+% \newcommand{\exercise}{\refstepcounter{exercise}\noindent\textbf{Exercise \theexercise.} }
+
+% Ruled solution space with gray separator line
+\newcommand{\ruledspace}[1]{%
+  \par\vspace{0.3em}%
+  \noindent\textcolor{gray!30}{\hrule}%
+  \vspace{#1}%
+}
+
+% Answer line for computation problems
+\newcommand{\answerline}{%
+  \vspace{0.5em}%
+  \noindent\textbf{Answer:} \hrulefill%
+  \vspace{1em}%
+}
+
+%==============================================================================
+%==============================================================================
+%
+%                         STYLE REFERENCE GUIDE
+%
+%==============================================================================
+%==============================================================================
+
+%------------------------------------------------------------------------------
+% 1. DOCUMENT STRUCTURE
+%------------------------------------------------------------------------------
+%
+% TITLE BLOCK (use minipage for consistent spacing):
+%
+%   \noindent
+%   \begin{minipage}{\linewidth}
+%       \centering
+%       \textbf{\Large Problem Set X: Topic Name} \\[0.5em]
+%       \textit{Chapter Y Exercises} \\[0.3em]
+%       \hrule
+%   \end{minipage}
+%   \vspace{1.5em}
+%
+% SECTION ORGANIZATION:
+%
+%   \section{Computational Problems}
+%   \section{Proof Problems}
+%   \section{Challenge Problems}
+
+%------------------------------------------------------------------------------
+% 2. PROBLEM STATEMENT FORMATS
+%------------------------------------------------------------------------------
+%
+% BASIC EXERCISE (numbered automatically):
+%
+%   \begin{exercise}
+%   Let $T: \R^3 \to \R^2$ be the linear map defined by
+%   $T(x, y, z) = (x + y, y - z)$. Find $\ker(T)$ and $\im(T)$.
+%   \end{exercise}
+%
+% PROBLEM WITH PARTS:
+%
+%   \begin{problem}
+%   Let $\mat{A} = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$.
+%   \begin{enumerate}[label=(\alph*)]
+%       \item Find the eigenvalues of $\mat{A}$.
+%       \item For each eigenvalue, find the corresponding eigenspace.
+%       \item Is $\mat{A}$ diagonalizable? If so, find $\mat{P}$ and $\mat{D}$.
+%   \end{enumerate}
+%   \end{problem}
+%
+% PROBLEM WITH HINT:
+%
+%   \begin{exercise}
+%   Prove that if $T: V \to V$ satisfies $T^2 = T$, then $V = \ker(T) \oplus \im(T)$.
+%   \end{exercise}
+%
+%   \begin{hintbox}
+%   \textbf{Hint:} Show that every $\vect{v} \in V$ can be written as
+%   $\vect{v} = (\vect{v} - T(\vect{v})) + T(\vect{v})$.
+%   \end{hintbox}
+
+%------------------------------------------------------------------------------
+% 3. SOLUTION FORMATS
+%------------------------------------------------------------------------------
+%
+% INLINE SOLUTION (for short answers):
+%
+%   \begin{solution}
+%   Row reducing the augmented matrix:
+%   \[
+%       \left[\begin{array}{ccc|c} 1 & 2 & 1 & 0 \\ 0 & 1 & -1 & 0 \end{array}\right]
+%       \implies \ker(T) = \spn\left\{ \begin{pmatrix} -3 \\ 1 \\ 1 \end{pmatrix} \right\}.
+%   \]
+%   Therefore $\boxed{\dim(\ker T) = 1}$ and $\boxed{\dim(\im T) = 2}$.
+%   \end{solution}
+%
+% BOXED SOLUTION (for longer solutions):
+%
+%   \begin{solutionbox}
+%   \textbf{Solution:}
+%
+%   \textbf{Step 1:} Set up the characteristic polynomial.
+%   ...
+%
+%   \textbf{Step 2:} Find the roots.
+%   ...
+%
+%   \textbf{Final answer:} $\boxed{\lambda_1 = 3, \lambda_2 = -1}$
+%   \end{solutionbox}
+%
+% STEP-BY-STEP SOLUTION:
+%
+%   \begin{solution}
+%   \textbf{Step 1: Find the characteristic polynomial.}
+%
+%   \[
+%       p(\lambda) = \det(\mat{A} - \lambda \mat{I}) = \det\begin{pmatrix}
+%       1 - \lambda & 2 \\ 3 & 4 - \lambda
+%       \end{pmatrix} = \lambda^2 - 5\lambda - 2.
+%   \]
+%
+%   \textbf{Step 2: Solve for eigenvalues.}
+%
+%   Using the quadratic formula: $\lambda = \frac{5 \pm \sqrt{33}}{2}$.
+%
+%   \textbf{Step 3: Find eigenvectors.}
+%
+%   For $\lambda_1 = \frac{5 + \sqrt{33}}{2}$:
+%   ...
+%   \end{solution}
+
+%------------------------------------------------------------------------------
+% 4. MULTI-PART PROBLEMS
+%------------------------------------------------------------------------------
+%
+% ALPHABETIC PARTS (most common):
+%
+%   \begin{enumerate}[label=(\alph*)]
+%       \item First part
+%       \item Second part
+%       \item Third part
+%   \end{enumerate}
+%
+% ROMAN NUMERAL PARTS:
+%
+%   \begin{enumerate}[label=(\roman*)]
+%       \item First part
+%       \item Second part
+%   \end{enumerate}
+%
+% NESTED PARTS:
+%
+%   \begin{enumerate}[label=(\alph*)]
+%       \item Main part
+%       \begin{enumerate}[label=(\roman*)]
+%           \item Sub-part i
+%           \item Sub-part ii
+%       \end{enumerate}
+%       \item Another main part
+%   \end{enumerate}
+
+%------------------------------------------------------------------------------
+% 5. ANSWER FORMATTING
+%------------------------------------------------------------------------------
+%
+% BOXED FINAL ANSWERS:
+%
+%   The eigenvalues are $\boxed{\lambda_1 = 3}$ and $\boxed{\lambda_2 = -1}$.
+%
+% BOXED MATRICES:
+%
+%   \[
+%       \boxed{\mat{A}^{-1} = \begin{pmatrix} -2 & 1 \\ \frac{3}{2} & -\frac{1}{2} \end{pmatrix}}
+%   \]
+%
+% BOXED SETS:
+%
+%   \[
+%       \boxed{\ker(T) = \spn\left\{ \begin{pmatrix} 1 \\ -1 \\ 0 \end{pmatrix},
+%       \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix} \right\}}
+%   \]
+
+%------------------------------------------------------------------------------
+% 6. PROOF PROBLEMS
+%------------------------------------------------------------------------------
+%
+% DIRECT PROOF:
+%
+%   \begin{solution}
+%   Let $\vect{v} \in \ker(T)$. Then $T(\vect{v}) = \vect{0}$.
+%
+%   Since $T$ is linear, $T(c\vect{v}) = cT(\vect{v}) = c \cdot \vect{0} = \vect{0}$.
+%
+%   Therefore $c\vect{v} \in \ker(T)$, so $\ker(T)$ is closed under scalar multiplication.
+%
+%   Similarly, for $\vect{u}, \vect{v} \in \ker(T)$:
+%   $T(\vect{u} + \vect{v}) = T(\vect{u}) + T(\vect{v}) = \vect{0} + \vect{0} = \vect{0}$.
+%
+%   Thus $\ker(T)$ is a subspace. \hfill $\square$
+%   \end{solution}
+%
+% PROOF BY CONTRADICTION:
+%
+%   \begin{solution}
+%   Suppose, for contradiction, that $\vect{v}_1, \ldots, \vect{v}_n$ are
+%   linearly dependent.
+%
+%   Then there exist $c_1, \ldots, c_n$, not all zero, such that
+%   $c_1\vect{v}_1 + \cdots + c_n\vect{v}_n = \vect{0}$.
+%
+%   ...
+%
+%   This contradicts our assumption. \hfill $\lightning$
+%   \end{solution}
+%
+% PROOF BY INDUCTION:
+%
+%   \begin{solution}
+%   \textbf{Base case:} When $n = 1$, ...
+%
+%   \textbf{Inductive hypothesis:} Assume the result holds for $n = k$.
+%
+%   \textbf{Inductive step:} We show the result holds for $n = k + 1$.
+%   ...
+%
+%   By induction, the result holds for all $n \geq 1$. \hfill $\square$
+%   \end{solution}
+
+%------------------------------------------------------------------------------
+% 7. COMPUTATIONAL TEMPLATES
+%------------------------------------------------------------------------------
+%
+% ROW REDUCTION:
+%
+%   \[
+%       \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix}
+%       \xrightarrow{R_2 - 4R_1}
+%       \begin{bmatrix} 1 & 2 & 3 \\ 0 & -3 & -6 \\ 7 & 8 & 9 \end{bmatrix}
+%       \xrightarrow{R_3 - 7R_1}
+%       \begin{bmatrix} 1 & 2 & 3 \\ 0 & -3 & -6 \\ 0 & -6 & -12 \end{bmatrix}
+%   \]
+%
+% EIGENVALUE COMPUTATION:
+%
+%   \begin{align*}
+%       \det(\mat{A} - \lambda \mat{I}) &= \det\begin{pmatrix}
+%       2 - \lambda & 1 \\ 1 & 2 - \lambda
+%       \end{pmatrix} \\
+%       &= (2 - \lambda)^2 - 1 \\
+%       &= \lambda^2 - 4\lambda + 3 \\
+%       &= (\lambda - 1)(\lambda - 3).
+%   \end{align*}
+%
+% GRAM-SCHMIDT:
+%
+%   \begin{align*}
+%       \vect{u}_1 &= \vect{v}_1 = \begin{pmatrix} 1 \\ 1 \\ 0 \end{pmatrix} \\[6pt]
+%       \vect{u}_2 &= \vect{v}_2 - \frac{\inner{\vect{v}_2}{\vect{u}_1}}{\inner{\vect{u}_1}{\vect{u}_1}} \vect{u}_1
+%       = \begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix} - \frac{1}{2} \begin{pmatrix} 1 \\ 1 \\ 0 \end{pmatrix}
+%       = \begin{pmatrix} \frac{1}{2} \\ -\frac{1}{2} \\ 1 \end{pmatrix}
+%   \end{align*}
+
+%------------------------------------------------------------------------------
+% 8. TABLES FOR PROBLEMS
+%------------------------------------------------------------------------------
+%
+% MATCHING PROBLEM:
+%
+%   Match each linear map with its rank and nullity:
+%   \begin{center}
+%   \begin{tabular}{@{}lcc@{}}
+%   \toprule
+%   Linear Map $T: \R^3 \to \R^2$ & $\rank(T)$ & $\nullity(T)$ \\
+%   \midrule
+%   $T(x,y,z) = (x, y)$ & & \\
+%   $T(x,y,z) = (0, 0)$ & & \\
+%   $T(x,y,z) = (x+y, y+z)$ & & \\
+%   \bottomrule
+%   \end{tabular}
+%   \end{center}
+%
+% ANSWER KEY TABLE:
+%
+%   \begin{center}
+%   \begin{tabular}{@{}cl@{}}
+%   \toprule
+%   Problem & Answer \\
+%   \midrule
+%   1(a) & $\lambda = 2, 3$ \\
+%   1(b) & $E_2 = \spn\{(1, -1)^T\}$ \\
+%   1(c) & Yes, diagonalizable \\
+%   \bottomrule
+%   \end{tabular}
+%   \end{center}
+
+%------------------------------------------------------------------------------
+% 9. DIFFICULTY MARKERS
+%------------------------------------------------------------------------------
+%
+% Use stars or labels to indicate difficulty:
+%
+%   \begin{exercise}[$\star$]          % Easy
+%   ...
+%   \end{exercise}
+%
+%   \begin{exercise}[$\star\star$]     % Medium
+%   ...
+%   \end{exercise}
+%
+%   \begin{exercise}[$\star\star\star$] % Hard
+%   ...
+%   \end{exercise}
+%
+% Or use text labels:
+%
+%   \begin{exercise}[Computational]
+%   \begin{exercise}[Proof]
+%   \begin{exercise}[Challenge]
+
+%------------------------------------------------------------------------------
+% 10. HINT PATTERNS
+%------------------------------------------------------------------------------
+%
+% INLINE HINT (short):
+%
+%   \textit{Hint: Use rank-nullity.}
+%
+% BOXED HINT:
+%
+%   \begin{hintbox}
+%   \textbf{Hint:} Consider the matrix representation with respect to the
+%   standard basis.
+%   \end{hintbox}
+%
+% MULTIPLE HINTS:
+%
+%   \begin{hintbox}
+%   \textbf{Hints:}
+%   \begin{enumerate}[label=(\roman*)]
+%       \item First, show that $\ker(T) \cap \im(T) = \{\vect{0}\}$.
+%       \item Then show that $\dim(\ker T) + \dim(\im T) = \dim(V)$.
+%   \end{enumerate}
+%   \end{hintbox}
+
+%------------------------------------------------------------------------------
+% 11. TRUE/FALSE PROBLEMS
+%------------------------------------------------------------------------------
+%
+%   Determine if each statement is true or false. Justify your answer.
+%
+%   \begin{enumerate}[label=\textbf{\arabic*.}]
+%       \item If $\mat{A}$ and $\mat{B}$ are similar, then $\mat{A} = \mat{B}$.
+%
+%       \textbf{Answer:} \boxed{\text{False}}
+%
+%       \textit{Counterexample:} $\mat{A} = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$
+%       and $\mat{B} = \mat{P}^{-1}\mat{A}\mat{P}$ where $\mat{P} \neq \mat{I}$.
+%
+%       \item Every invertible matrix is diagonalizable.
+%
+%       \textbf{Answer:} \boxed{\text{False}}
+%
+%       \textit{Counterexample:} $\begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$
+%       is invertible but not diagonalizable.
+%   \end{enumerate}
+
+%------------------------------------------------------------------------------
+% 12. FILL-IN-THE-BLANK
+%------------------------------------------------------------------------------
+%
+%   Complete each statement:
+%
+%   \begin{enumerate}
+%       \item If $T: V \to W$ is linear and $\dim(V) = 5$, $\dim(\ker T) = 2$,
+%       then $\dim(\im T) = $ \underline{\hspace{1cm}}.
+%
+%       \item The matrix $\begin{pmatrix} 2 & 0 \\ 0 & 3 \end{pmatrix}$ has
+%       eigenvalues \underline{\hspace{1cm}} and \underline{\hspace{1cm}}.
+%   \end{enumerate}
+%
+% WITH SOLUTIONS:
+%
+%   $\dim(\im T) = $ \underline{$\boxed{3}$} (by rank-nullity).
+
+%------------------------------------------------------------------------------
+% 13. BOOK EXERCISE REFERENCES
+%------------------------------------------------------------------------------
+%
+% Reference format:
+%
+%   \textbf{Axler 3.A.5:} Let $T \in \mathcal{L}(V, W)$. Prove that...
+%
+%   \textbf{(Hoffman-Kunze 6.2.3):} Show that...
+%
+% Section header with book reference:
+%
+%   \section{Exercises from Axler Chapter 3}
+%
+%   The following problems are adapted from \textit{Linear Algebra Done Right}.
+
+%------------------------------------------------------------------------------
+% 14. WARNING BOXES
+%------------------------------------------------------------------------------
+%
+%   \begin{tcolorbox}[colframe=black!50]
+%   \textbf{Common Error:} Many students forget that $\mat{A}\mat{B} \neq \mat{B}\mat{A}$
+%   in general. Always check the order of multiplication!
+%   \end{tcolorbox}
+%
+%   \begin{tcolorbox}[colframe=black!50]
+%   \textbf{Watch out:} The zero vector is never an eigenvector!
+%   \end{tcolorbox}
+
+%------------------------------------------------------------------------------
+% 15. QUICK REFERENCE: BOX BORDER COLORS
+%------------------------------------------------------------------------------
+%
+%   black       : Key formulas (most important)
+%   black!50    : Hints, warnings, notes
+%   black!40    : Solutions (boxed)
+%   black!3     : Solution background (light)
+%   black!8     : Hint background
+
+%------------------------------------------------------------------------------
+% 16. QUICK REFERENCE: SPACING
+%------------------------------------------------------------------------------
+%
+%   DOCUMENT-LEVEL SPACING:
+%   \linespread{1.15}                                    % Line height
+%   \setlength{\parskip}{0.5ex plus 0.2ex minus 0.1ex}  % Paragraph spacing
+%
+%   LIST SPACING:
+%   \setlist{itemsep=2pt, topsep=4pt, parsep=2pt, leftmargin=1.5em}
+%
+%   BETWEEN PROBLEMS:
+%   Use \vspace{1em} or blank lines between problems for visual separation.
+
+%------------------------------------------------------------------------------
+% 17. WORKSHEET FORMATTING (for practice without solutions)
+%------------------------------------------------------------------------------
+%
+% For worksheets where students write answers directly on the page:
+%
+% SIMPLE EXERCISE COMMAND (define in worksheet preamble):
+%
+%   \newcounter{exercise}
+%   \newcommand{\exercise}{\refstepcounter{exercise}\noindent\textbf{Exercise \theexercise.} }
+%
+% USAGE:
+%
+%   \exercise
+%   Find real numbers $c$ and $d$ such that $\frac{1}{a+bi} = c + di$.
+%   \ruledspace{4cm}
+%   \answerline
+%
+% RULED SPACE adds a faint gray separator line, then vertical space:
+%
+%   \ruledspace{5cm}    % 5cm of blank space for student work
+%   \ruledspace{7cm}    % 7cm for longer proofs
+%
+% ANSWER LINE adds "Answer: ___________" for computation problems:
+%
+%   \ruledspace{4cm}
+%   \answerline         % Use after ruledspace for computation exercises
+%
+% SPACING GUIDELINES:
+%
+%   | Problem Type           | Recommended Space |
+%   |------------------------|-------------------|
+%   | Computation            | 4-5cm + \answerline |
+%   | Verification/Show      | 5cm               |
+%   | Short proof            | 5-6cm             |
+%   | Uniqueness proof       | 7cm               |
+%   | Explanation            | 7cm               |
+%   | Multi-step proof       | 7-8cm             |
+
+%------------------------------------------------------------------------------
+% 18. PROBLEM SET HEADER TEMPLATE
+%------------------------------------------------------------------------------
+%
+%   \noindent
+%   \begin{minipage}{\linewidth}
+%       \centering
+%       \textbf{\Large Problem Set 3: Linear Transformations} \\[0.5em]
+%       \textit{Sections 3.A--3.C} \\[0.3em]
+%       \hrule
+%   \end{minipage}
+%   \vspace{1em}
+%
+%   \noindent
+%   \textbf{Instructions:} Show all work. Justify each step.
+%   Collaboration is allowed, but write solutions independently.
+%
+%   \vspace{1em}
+
+%------------------------------------------------------------------------------
+% 19. MIXED PROBLEM TYPES
+%------------------------------------------------------------------------------
+%
+% A good problem set includes:
+%   - 2-3 computational problems (finding bases, eigenvalues, etc.)
+%   - 2-3 short proof problems (verify properties, show equivalence)
+%   - 1 longer proof or challenge problem
+%
+% Example structure:
+%
+%   \section*{Part I: Computation}
+%   Problems 1-3
+%
+%   \section*{Part II: Short Proofs}
+%   Problems 4-6
+%
+%   \section*{Part III: Challenge}
+%   Problem 7 (optional/bonus)
+
+%------------------------------------------------------------------------------
+% 20. ANSWER KEY FORMAT
+%------------------------------------------------------------------------------
+%
+%   \section*{Answer Key}
+%
+%   \textbf{1.} (a) $\lambda = 1, 3$ \quad (b) $E_1 = \spn\{(1,1)^T\}$
+%
+%   \textbf{2.} $\rank = 2$, $\nullity = 1$
+%
+%   \textbf{3.} True, False, True, False
+%
+% Or as a table (see Section 8).
+
+%------------------------------------------------------------------------------
+% 21. FRACTIONS AND DISPLAY
+%------------------------------------------------------------------------------
+%
+% Same rules as lecture notes:
+%   - Always use \frac{}{}, never slash notation
+%   - Use \\[4pt] for spacing in matrices with fractions
+%   - Use \boxed{} for final answers
+%
+%   \[
+%       \mat{A}^{-1} = \frac{1}{\det(\mat{A})} \begin{pmatrix}
+%       d & -b \\[4pt]
+%       -c & a
+%       \end{pmatrix}
+%   \]
+
+%==============================================================================
+
+\begin{document}
+
+% TEMPLATE TITLE
+\noindent
+\begin{minipage}{\linewidth}
+    \centering
+    \textbf{\Large Problem Set X: Topic Name} \\[0.5em]
+    \textit{Chapter Y Exercises} \\[0.3em]
+    \hrule
+\end{minipage}
+\vspace{1.5em}
+
+\noindent
+\textbf{Instructions:} Show all work. Justify each step.
+
+\vspace{1em}
+
+%==============================================================================
+\section*{Part I: Computation}
+%==============================================================================
+
+\begin{problem}
+Let $\mat{A} = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}$.
+\begin{enumerate}[label=(\alph*)]
+    \item Find the eigenvalues of $\mat{A}$.
+    \item Find a basis for each eigenspace.
+    \item Is $\mat{A}$ diagonalizable? If so, find matrices $\mat{P}$ and $\mat{D}$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\textbf{(a)} The characteristic polynomial is:
+\[
+    \det(\mat{A} - \lambda \mat{I}) = (2-\lambda)^2 - 1 = \lambda^2 - 4\lambda + 3 = (\lambda - 1)(\lambda - 3).
+\]
+So $\boxed{\lambda_1 = 1, \lambda_2 = 3}$.
+
+\textbf{(b)} For $\lambda = 1$: Solve $(\mat{A} - \mat{I})\vect{x} = \vect{0}$.
+\[
+    E_1 = \spn\left\{ \begin{pmatrix} 1 \\ -1 \end{pmatrix} \right\}.
+\]
+
+For $\lambda = 3$: Solve $(\mat{A} - 3\mat{I})\vect{x} = \vect{0}$.
+\[
+    E_3 = \spn\left\{ \begin{pmatrix} 1 \\ 1 \end{pmatrix} \right\}.
+\]
+
+\textbf{(c)} Yes, $\mat{A}$ is diagonalizable since we have 2 linearly independent eigenvectors.
+\[
+    \boxed{\mat{P} = \begin{pmatrix} 1 & 1 \\ -1 & 1 \end{pmatrix}, \quad
+    \mat{D} = \begin{pmatrix} 1 & 0 \\ 0 & 3 \end{pmatrix}}
+\]
+\end{solution}
+
+\vspace{1em}
+
+%==============================================================================
+\section*{Part II: Proofs}
+%==============================================================================
+
+\begin{problem}
+Prove that if $T: V \to V$ is a linear operator and $T^2 = T$, then $V = \ker(T) \oplus \im(T)$.
+\end{problem}
+
+\begin{hintbox}
+\textbf{Hint:} For any $\vect{v} \in V$, write $\vect{v} = (\vect{v} - T(\vect{v})) + T(\vect{v})$.
+\end{hintbox}
+
+%==============================================================================
+
+\vfill
+
+\begin{center}
+\rule{0.5\linewidth}{0.4pt}
+
+\textit{End of Problem Set}
+\end{center}
+
+\end{document}
