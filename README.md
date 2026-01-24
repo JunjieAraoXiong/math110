@@ -1,37 +1,53 @@
-# Math 110: Linear Algebra
+# Math 110: Linear Algebra 🧮
 
-**UC Berkeley | Spring 2026**
+**UC Berkeley | Spring 2026** 🐻💙💛
 
-Course materials for Math 110: Linear Algebra, based on *Linear Algebra Done Right* (4th edition) by Sheldon Axler.
+> *"The study of linear algebra is a beautiful subject in its own right."*
+> — Sheldon Axler
 
-## Contents
+Course materials for Math 110, based on *Linear Algebra Done Right* (4th edition).
+
+## 📁 What's Inside
 
 ```
-.
-├── style-guide.tex              # LaTeX style guide for course materials
-├── textbook/
-│   ├── exercises/
-│   │   ├── exercises-1a-worksheet.tex   # Chapter 1A practice worksheet
-│   │   └── style-guide-exercises.tex    # Exercise formatting reference
-│   └── notes/                   # Lecture notes
-└── slc/                         # Student Learning Center materials
+📂 math110/
+├── 📄 style-guide.tex              # LaTeX style guide
+├── 📂 textbook/
+│   ├── 📂 exercises/
+│   │   ├── 📝 exercises-1a-worksheet.tex   # Chapter 1A practice
+│   │   └── 📘 style-guide-exercises.tex    # Formatting reference
+│   └── 📂 notes/                   # Lecture notes
+└── 📂 slc/                         # SLC materials
 ```
 
-## Exercises
+## 📚 Exercise Worksheets
 
-Practice worksheets follow the textbook chapter structure:
-- **1A**: R^n and C^n
+| Chapter | Topic | Status |
+|---------|-------|--------|
+| 1A | R^n and C^n | ✅ |
+| 1B | Definition of Vector Space | 🔜 |
+| 1C | Subspaces | 🔜 |
 
-Each worksheet includes space for written solutions and answer lines for computation problems.
+## 🛠️ Build Instructions
 
-## Building
-
-Compile LaTeX files with:
 ```bash
 pdflatex <filename>.tex
 ```
 
-## Resources
+## 🔗 Resources
 
-- [Course Website](https://math.berkeley.edu/courses/math-110)
-- [Textbook](https://linear.axler.net/) (free online)
+| Resource | Link |
+|----------|------|
+| Course Website | [math.berkeley.edu](https://math.berkeley.edu/courses/math-110) |
+| Free Textbook | [linear.axler.net](https://linear.axler.net/) |
+| Office Hours | TBD |
+
+## 🎯 Goals
+
+- [ ] Complete all chapter worksheets
+- [ ] Add solution keys
+- [ ] Create exam review sheets
+
+---
+
+*Go Bears!* 🐻
