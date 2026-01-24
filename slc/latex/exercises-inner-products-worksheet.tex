@@ -1,0 +1,173 @@
+%==============================================================================
+% EXERCISES: INNER PRODUCTS WORKSHEET
+% Linear Algebra Done Right (4th ed.) - Sheldon Axler
+%==============================================================================
+
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+
+% Required packages
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{xcolor}
+
+% Custom commands (from style guide)
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Poly}{\mathcal{P}}
+\newcommand{\ip}[2]{\langle #1, #2 \rangle}
+\newcommand{\norm}[1]{\|#1\|}
+
+% Header/footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small MATH 110}
+\fancyhead[R]{\small Inner Products}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Exercise counter and command
+\newcounter{exercise}
+\newcommand{\exercise}{\refstepcounter{exercise}\noindent\textbf{Exercise \theexercise.} }
+
+% Ruled solution space with gray separator
+\newcommand{\ruledspace}[1]{%
+  \par\vspace{0.3em}%
+  \noindent\textcolor{gray!30}{\hrule}%
+  \vspace{#1}%
+}
+
+% Answer line for computation problems
+\newcommand{\answerline}{%
+  \vspace{0.5em}%
+  \noindent\textbf{Answer:} \hrulefill%
+  \vspace{1em}%
+}
+
+\begin{document}
+
+\noindent
+\begin{minipage}{\linewidth}
+    \centering
+    \textbf{\Large Inner Products} \\[0.5em]
+    \textit{Linear Algebra Done Right, 4th ed.}\\[0.3em]
+    \hrule
+\end{minipage}
+\vspace{1.5em}
+
+%==============================================================================
+% INNER PRODUCT VERIFICATION (1-2)
+%==============================================================================
+
+\exercise
+Consider the space $V = \Poly_n(\C)$. Show that
+\[
+    \ip{f}{g} = \int_0^1 f(x) \overline{g(x)}\, dx
+\]
+defines an inner product on $V$.
+\ruledspace{7cm}
+
+%------------------------------------------------------------------------------
+
+\exercise
+Consider a fixed set of points $x_1, \ldots, x_n \in \C$. For two functions $f, g \in \Poly_n(\C)$, is
+\[
+    \ip{f}{g} = \sum_{i=1}^{n} f(x_i) \overline{g(x_i)}
+\]
+an inner product? For which values of $k$ is this an inner product on $\Poly_k(\C)$?
+\ruledspace{7cm}
+
+\newpage
+
+%==============================================================================
+% NORM INEQUALITIES (3-4)
+%==============================================================================
+
+\exercise
+(Axler 6.A.22) Show that if $u, v \in V$, then
+\[
+    \norm{u + v} \cdot \norm{u - v} \leq \norm{u}^2 + \norm{v}^2.
+\]
+\ruledspace{7cm}
+
+%------------------------------------------------------------------------------
+
+\exercise
+(Axler 6.A.23) Suppose $v_1, \ldots, v_m \in V$ are such that $\norm{v_k} \leq 1$ for each $k = 1, \ldots, m$. Show that there exists $a_1, \ldots, a_m \in \{1, -1\}$ such that
+\[
+    \norm{a_1 v_1 + \cdots + a_m v_m} \leq \sqrt{m}.
+\]
+\ruledspace{8cm}
+
+\newpage
+
+%==============================================================================
+% GRAM-SCHMIDT (5)
+%==============================================================================
+
+\exercise
+For $n = 1, 2, 3$, use the Gram-Schmidt algorithm to orthonormalize the basis $1, x, \ldots, x^n$ of $\Poly_n(\C)$ equipped with the inner product of Exercise 1.
+\ruledspace{10cm}
+
+\newpage
+
+%==============================================================================
+% ORTHONORMAL BASES (6-8)
+%==============================================================================
+
+\exercise
+(Axler 6.B.6a) Suppose $e_1, e_2, \ldots, e_n$ is an orthonormal basis of $V$. Prove that if $v_1, v_2, \ldots, v_n$ are vectors in $V$ such that
+\[
+    \norm{e_k - v_k} < \frac{1}{\sqrt{n}}
+\]
+for each $k$, then $v_1, v_2, \ldots, v_n$ is a basis of $V$.
+\ruledspace{8cm}
+
+%------------------------------------------------------------------------------
+
+\exercise
+(Axler 6.B.18) Suppose $u_1, u_2, \ldots, u_m$ is a linearly independent list of vectors in $V$. Show that there exists $v \in V$ such that $\ip{u_i}{v} = 1$ for all $i = 1, \ldots, m$.
+\ruledspace{7cm}
+
+\newpage
+
+%------------------------------------------------------------------------------
+
+\exercise
+Prove that every (pairwise) orthogonal list of non-zero vectors is linearly independent.
+\ruledspace{6cm}
+
+%==============================================================================
+% ORTHOGONAL PROJECTIONS (9-11)
+%==============================================================================
+
+\exercise
+(Axler 6.C.10) Suppose $V$ is finite-dimensional, $T \in \mathcal{L}(V)$, and $U$ is a subspace of $V$. Prove that $U$ and $U^\perp$ are both invariant under $T$ if and only if $P_U T = T P_U$.
+\ruledspace{8cm}
+
+\newpage
+
+%------------------------------------------------------------------------------
+
+\exercise
+(Axler 6.C.12) Find $p \in \Poly_3(\R)$ such that $p(0) = 0$, $p'(0) = 0$, and
+\[
+    \int_0^1 |2 + 3x - p(x)|^2\, dx
+\]
+is as small as possible.
+\ruledspace{8cm}
+\answerline
+
+%------------------------------------------------------------------------------
+
+\exercise
+(Axler 6.C.9) Suppose $V$ is finite-dimensional. Suppose $P \in \mathcal{L}(V)$ is such that $P^2 = P$ and every vector in $\operatorname{null}(P)$ is orthogonal to every vector in $\operatorname{range}(P)$. Prove that there exists a subspace $U$ of $V$ such that $P = P_U$.
+\ruledspace{8cm}
+
+\vfill
+
+\end{document}

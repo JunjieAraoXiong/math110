@@ -1,0 +1,196 @@
+%==============================================================================
+% EXERCISES: VECTOR SPACES, LINEAR MAPS, AND DUALITY WORKSHEET
+% Linear Algebra Done Right (4th ed.) - Sheldon Axler
+%==============================================================================
+
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+
+% Required packages
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{xcolor}
+
+% Custom commands (from style guide)
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Poly}{\mathcal{P}}
+
+% Header/footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small MATH 110}
+\fancyhead[R]{\small Vector Spaces, Linear Maps, and Duality}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Exercise counter and command
+\newcounter{exercise}
+\newcommand{\exercise}{\refstepcounter{exercise}\noindent\textbf{Exercise \theexercise.} }
+
+% Ruled solution space with gray separator
+\newcommand{\ruledspace}[1]{%
+  \par\vspace{0.3em}%
+  \noindent\textcolor{gray!30}{\hrule}%
+  \vspace{#1}%
+}
+
+% Answer line for computation problems
+\newcommand{\answerline}{%
+  \vspace{0.5em}%
+  \noindent\textbf{Answer:} \hrulefill%
+  \vspace{1em}%
+}
+
+\begin{document}
+
+\noindent
+\begin{minipage}{\linewidth}
+    \centering
+    \textbf{\Large Vector Spaces, Linear Maps, and Duality} \\[0.5em]
+    \textit{Linear Algebra Done Right, 4th ed.}\\[0.3em]
+    \hrule
+\end{minipage}
+\vspace{1.5em}
+
+%==============================================================================
+% SUBSPACES AND DIRECT SUMS (1)
+%==============================================================================
+
+\exercise
+Given a matrix
+\[
+    A := \begin{bmatrix}
+    a_{11} & \cdots & a_{15} \\
+    \vdots & \ddots & \vdots \\
+    a_{51} & \cdots & a_{55}
+    \end{bmatrix} \in \R^{5 \times 5},
+\]
+we say that $A$ is \emph{symmetric} if and only if $a_{ij} = a_{ji}$ for each $i$ and $j$, and we say that $A$ is \emph{skew-symmetric} if and only if $a_{ij} = -a_{ji}$.
+
+\begin{enumerate}[label=(\alph*)]
+    \item Let $Y$ and $K$ be the set of symmetric and skew-symmetric matrices in $\R^{5 \times 5}$, respectively. Show that $Y$ and $K$ are subspaces of $\R^{5 \times 5}$.
+    \ruledspace{6cm}
+
+    \item Compute $\dim Y$ and $\dim K$.
+    \ruledspace{5cm}
+    \answerline
+
+    \item Show that $\R^{5 \times 5}$ is the direct sum of the subspaces $Y$ and $K$.
+    \ruledspace{7cm}
+\end{enumerate}
+
+\newpage
+
+%------------------------------------------------------------------------------
+
+\exercise
+(Axler 2.C.17) Fix a finite-dimensional vector space $V$ over a field $\F$, and fix subspaces $U_1, \ldots, U_n$ of $V$.
+
+\begin{enumerate}[label=(\alph*)]
+    \item Show that
+    \[
+        \dim(U_1 + \cdots + U_n) \leq \dim U_1 + \cdots + \dim U_n.
+    \]
+    \ruledspace{6cm}
+
+    \item In fact, show that equality holds in (a) if and only if the sum $U_1 + \cdots + U_n$ is direct.
+    \ruledspace{7cm}
+\end{enumerate}
+
+%------------------------------------------------------------------------------
+
+\exercise
+Fix a linear transformation $T \colon V \to W$ of vector spaces over a field $\F$. For any $w \in W$, suppose there is a vector $v_0 \in V$ such that $T(v_0) = w$. Then show that
+\[
+    \{v \in V : T(v) = w\} = \{v + v_0 : v \in \operatorname{null} T\}.
+\]
+\ruledspace{7cm}
+
+\newpage
+
+%------------------------------------------------------------------------------
+
+\exercise
+(Axler 3.B.28) Suppose $p \in \Poly(\R)$. Prove that there exists a polynomial $q \in \Poly(\R)$ such that
+\[
+    5q'' + 3q' = p.
+\]
+\ruledspace{8cm}
+
+%------------------------------------------------------------------------------
+
+\exercise
+Let $I$ be the linear map $I \colon \Poly_5(\R) \to \Poly_6(\R)$ by
+\[
+    I(f) := \int_0^x f(t)\, dt.
+\]
+
+\begin{enumerate}[label=(\alph*)]
+    \item Convince yourself that $I$ is a linear map.
+    \ruledspace{5cm}
+
+    \item Find bases of $\Poly_5(\R)$ and $\Poly_6(\R)$.
+    \ruledspace{4cm}
+    \answerline
+
+    \item Use the bases found in (b) in order to write dual bases for $\Poly_5(\R)'$ and $\Poly_6(\R)'$.
+    \ruledspace{5cm}
+
+    \item Use the dual bases found in (c) in order to write $I' \colon \Poly_6(\R)' \to \Poly_5(\R)'$ as a matrix.
+    \ruledspace{6cm}
+\end{enumerate}
+
+\newpage
+
+%------------------------------------------------------------------------------
+
+\exercise
+Let $V$ be a 2-dimensional vector space, and let $\varphi, \psi \in V'$. Show that $\varphi$ and $\psi$ are linearly independent if and only if
+\[
+    \operatorname{null}(\varphi) \cap \operatorname{null}(\psi) = \{0\}.
+\]
+\ruledspace{7cm}
+
+%------------------------------------------------------------------------------
+
+\exercise
+Fix a finite-dimensional vector space $V$. Call a linear map $T \colon V \to V$ a \emph{projection} if and only if $T \circ T = T$.
+
+\begin{enumerate}[label=(\alph*)]
+    \item Give an example of a projection $T \colon \R^2 \to \R^2$ which is neither the zero nor the identity operators.
+    \ruledspace{4cm}
+    \answerline
+
+    \item For any projection $T$, show that $T$ fixes $\operatorname{range} T$.
+    \ruledspace{5cm}
+
+    \item For any projection $T$, show that $\operatorname{range} T \cap \operatorname{null} T = \{0\}$. Conclude that $V = \operatorname{range} T \oplus \operatorname{null} T$.
+    \ruledspace{6cm}
+
+    \item We say that a linear transformation $T \in \mathcal{L}(V)$ is \emph{diagonal} if and only if there is a basis $\{v_1, \ldots, v_n\}$ of $V$ and constants $\lambda_1, \ldots, \lambda_n$ such that $Tv_i = \lambda_i v_i$ for each $i$. Show that $T$ can be written as a linear combination of projections.
+    \ruledspace{7cm}
+\end{enumerate}
+
+\newpage
+
+%------------------------------------------------------------------------------
+
+\exercise
+(Axler 3.F.23) Let $V$ be a finite-dimensional vector space, and let $U$ and $W$ be subspaces of $V$.
+
+\begin{enumerate}[label=(\alph*)]
+    \item Show that $(U + W)^0 = U^0 \cap W^0$.
+    \ruledspace{7cm}
+
+    \item Show that $(U \cap W)^0 = U^0 + W^0$.
+    \ruledspace{7cm}
+\end{enumerate}
+
+\vfill
+
+\end{document}

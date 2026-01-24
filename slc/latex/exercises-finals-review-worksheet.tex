@@ -1,0 +1,136 @@
+%==============================================================================
+% EXERCISES: FINALS REVIEW WORKSHEET
+% Linear Algebra Done Right (4th ed.) - Sheldon Axler
+%==============================================================================
+
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+
+% Required packages
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{xcolor}
+
+% Custom commands (from style guide)
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Poly}{\mathcal{P}}
+\newcommand{\ip}[2]{\langle #1, #2 \rangle}
+\newcommand{\norm}[1]{\|#1\|}
+
+% Header/footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small MATH 110}
+\fancyhead[R]{\small Finals Review}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Exercise counter and command
+\newcounter{exercise}
+\newcommand{\exercise}{\refstepcounter{exercise}\noindent\textbf{Exercise \theexercise.} }
+
+% Ruled solution space with gray separator
+\newcommand{\ruledspace}[1]{%
+  \par\vspace{0.3em}%
+  \noindent\textcolor{gray!30}{\hrule}%
+  \vspace{#1}%
+}
+
+% Answer line for computation problems
+\newcommand{\answerline}{%
+  \vspace{0.5em}%
+  \noindent\textbf{Answer:} \hrulefill%
+  \vspace{1em}%
+}
+
+\begin{document}
+
+\noindent
+\begin{minipage}{\linewidth}
+    \centering
+    \textbf{\Large Finals Review} \\[0.5em]
+    \textit{Linear Algebra Done Right, 4th ed.}\\[0.3em]
+    \hrule
+\end{minipage}
+\vspace{1.5em}
+
+%==============================================================================
+% EIGENVECTOR PROBLEM (1)
+%==============================================================================
+
+\exercise
+(Gomez Midterm 2 \#2) Let $u, v$ be eigenvectors of $T$ such that $u + v$ is also an eigenvector of $T$. Prove that $u$ and $v$ have the same eigenvalue. \textit{(Hint: Contradiction)}
+\ruledspace{7cm}
+
+%==============================================================================
+% NORMAL OPERATORS (2)
+%==============================================================================
+
+\exercise
+(Gomez Final \#2) Let $T$ be a normal operator on an inner product space $V$. If $T$ has eigenvalues $1, 2$, and $3$, prove that there exists a vector $v$ such that $\norm{v} = \sqrt{3}$ and $\norm{Tv} = \sqrt{14}$.
+\ruledspace{8cm}
+
+\newpage
+
+%==============================================================================
+% GENERALIZED EIGENSPACES (3)
+%==============================================================================
+
+\exercise
+(Axler 8.B.2) Suppose $T \in \mathcal{L}(V)$ is invertible. Prove that $G(\lambda, T) = G\left(\frac{1}{\lambda}, T^{-1}\right)$ for every $\lambda \in \F$ with $\lambda \neq 0$.
+\ruledspace{8cm}
+
+%==============================================================================
+% NORMAL OPERATORS AND NORMS (4)
+%==============================================================================
+
+\exercise
+(Axler 7.A.20) Suppose $T$ is a normal operator on $V$. Suppose also that $v, w \in V$ satisfy the equations
+\[
+    \norm{v} = \norm{w} = 2, \quad Tv = 3v, \quad Tw = 4w.
+\]
+Show that $\norm{T(v + w)} = 10$.
+\ruledspace{7cm}
+
+\newpage
+
+%==============================================================================
+% JORDAN NORMAL FORM (5)
+%==============================================================================
+
+\exercise
+Let the matrix representation of an operator $T \in \mathcal{L}(\C^3)$ be
+\[
+    M(T) = \begin{bmatrix}
+    2 & 4 & -3 \\
+    0 & 2 & 0 \\
+    0 & 3 & -1
+    \end{bmatrix}.
+\]
+Compute a basis for $\C^3$ such that the matrix representation is in Jordan Normal Form.
+\ruledspace{10cm}
+\answerline
+
+\newpage
+
+%==============================================================================
+% ORTHOGONAL PROJECTION (6)
+%==============================================================================
+
+\exercise
+(Axler 6.C.12) Find a polynomial $p \in \Poly_3(\R)$ such that $p(0) = 0$, $p'(0) = 0$, and
+\[
+    \int_0^1 (2 + 3x - p(x))^2\, dx
+\]
+is as small as possible.
+\ruledspace{8cm}
+\answerline
+
+\vfill
+
+\end{document}

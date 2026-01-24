@@ -1,0 +1,152 @@
+%==============================================================================
+% EXERCISES: EIGENVALUES AND EIGENVECTORS WORKSHEET
+% Linear Algebra Done Right (4th ed.) - Sheldon Axler
+%==============================================================================
+
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+
+% Required packages
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{xcolor}
+
+% Custom commands (from style guide)
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Poly}{\mathcal{P}}
+
+% Header/footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small MATH 110}
+\fancyhead[R]{\small Eigenvalues and Eigenvectors}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Exercise counter and command
+\newcounter{exercise}
+\newcommand{\exercise}{\refstepcounter{exercise}\noindent\textbf{Exercise \theexercise.} }
+
+% Ruled solution space with gray separator
+\newcommand{\ruledspace}[1]{%
+  \par\vspace{0.3em}%
+  \noindent\textcolor{gray!30}{\hrule}%
+  \vspace{#1}%
+}
+
+% Answer line for computation problems
+\newcommand{\answerline}{%
+  \vspace{0.5em}%
+  \noindent\textbf{Answer:} \hrulefill%
+  \vspace{1em}%
+}
+
+\begin{document}
+
+\noindent
+\begin{minipage}{\linewidth}
+    \centering
+    \textbf{\Large Eigenvalues and Eigenvectors} \\[0.5em]
+    \textit{Linear Algebra Done Right, 4th ed.}\\[0.3em]
+    \hrule
+\end{minipage}
+\vspace{1.5em}
+
+%==============================================================================
+% EIGENVALUE BASICS (1-2)
+%==============================================================================
+
+\exercise
+(Axler 5.B.10) Let $p$ be a polynomial and $T \colon V \to V$ be a linear map. Given an eigenvector $v \in V$ with eigenvalue $\lambda$, show that $p(T)v = p(\lambda)v$.
+\ruledspace{6cm}
+
+%------------------------------------------------------------------------------
+
+\exercise
+Let $V$ denote the $\R$-vector space spanned by the functions $\{1, \sin x, \cos x, \sin 2x, \cos 2x\}$, and let $d \colon V \to V$ denote the differentiation operator. What are the eigenvalues of $d$? Is $d$ diagonalizable?
+\ruledspace{7cm}
+\answerline
+
+\newpage
+
+%==============================================================================
+% UPPER-TRIANGULAR MATRICES (3)
+%==============================================================================
+
+\exercise
+\begin{enumerate}[label=(\alph*)]
+    \item Define the linear map $T \colon \C^2 \to \C^2$ by $T(x, y) := (y, -x)$. What are the eigenvalues of $T$? Find a basis of $\C^2$ such that the matrix associated to $T$ is upper-triangular.
+    \ruledspace{6cm}
+    \answerline
+
+    \item Define the linear map $T \colon \R^2 \to \R^2$ by $T(x, y) := (y, -x)$. Show that there is no basis of $\R^2$ such that the matrix associated to $T$ is upper-triangular.
+    \ruledspace{6cm}
+\end{enumerate}
+
+%------------------------------------------------------------------------------
+
+\exercise
+(Axler 5.B.18) Fix an invertible linear map $T \colon V \to V$.
+
+\begin{enumerate}[label=(\alph*)]
+    \item If $p(x)$ is the minimal polynomial of $T$, show that $x^{\deg p} p(1/x)$ is the minimal polynomial of $T^{-1}$.
+    \ruledspace{6cm}
+
+    \item For each nonzero scalar $\lambda$, show that $E(\lambda, T) = E(\lambda^{-1}, T^{-1})$.
+    \ruledspace{6cm}
+\end{enumerate}
+
+\newpage
+
+%==============================================================================
+% EIGENSPACES AND RANGE (5)
+%==============================================================================
+
+\exercise
+Fix a finite-dimensional vector space $V$. Fix a linear map $T \colon V \to V$ with nonzero eigenvalues $\lambda_1, \ldots, \lambda_m$.
+
+\begin{enumerate}[label=(\alph*)]
+    \item Show that $E(\lambda_i, T) \subseteq \operatorname{range} T$ for each eigenvalue $\lambda_i$.
+    \ruledspace{6cm}
+
+    \item Use (a) to conclude that
+    \[
+        \dim E(\lambda_1, T) + \cdots + \dim E(\lambda_m, T) \leq \dim \operatorname{range} T.
+    \]
+    \ruledspace{5cm}
+\end{enumerate}
+
+%==============================================================================
+% GENERALIZED EIGENSPACES (6)
+%==============================================================================
+
+\exercise
+Find the bases for the generalized eigenspace(s) of the following matrix:
+\[
+    \begin{bmatrix}
+    4 & 1 & 0 \\
+    1 & 4 & 1 \\
+    4 & -4 & 7
+    \end{bmatrix}
+\]
+\ruledspace{8cm}
+\answerline
+
+\newpage
+
+%==============================================================================
+% ADVANCED EIGENVALUE PROBLEM (7)
+%==============================================================================
+
+\exercise
+(Axler 8.B.4) Suppose $\dim V \geq 2$ and $T \colon V \to V$ is a linear map such that $\operatorname{null} T^{\dim V - 2} \neq \operatorname{null} T^{\dim V - 1}$. Prove that $T$ has at most two distinct eigenvalues.
+\ruledspace{8cm}
+
+\vfill
+
+\end{document}

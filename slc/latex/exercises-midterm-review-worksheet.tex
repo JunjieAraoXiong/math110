@@ -1,0 +1,112 @@
+%==============================================================================
+% EXERCISES: MIDTERM REVIEW WORKSHEET
+% Linear Algebra Done Right (4th ed.) - Sheldon Axler
+%==============================================================================
+
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+
+% Required packages
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{xcolor}
+
+% Custom commands (from style guide)
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Poly}{\mathcal{P}}
+
+% Header/footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small MATH 110}
+\fancyhead[R]{\small Midterm Review}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Exercise counter and command
+\newcounter{exercise}
+\newcommand{\exercise}{\refstepcounter{exercise}\noindent\textbf{Exercise \theexercise.} }
+
+% Ruled solution space with gray separator
+\newcommand{\ruledspace}[1]{%
+  \par\vspace{0.3em}%
+  \noindent\textcolor{gray!30}{\hrule}%
+  \vspace{#1}%
+}
+
+% Answer line for computation problems
+\newcommand{\answerline}{%
+  \vspace{0.5em}%
+  \noindent\textbf{Answer:} \hrulefill%
+  \vspace{1em}%
+}
+
+\begin{document}
+
+\noindent
+\begin{minipage}{\linewidth}
+    \centering
+    \textbf{\Large Midterm Review} \\[0.5em]
+    \textit{Linear Algebra Done Right, 4th ed.}\\[0.3em]
+    \hrule
+\end{minipage}
+\vspace{1.5em}
+
+%==============================================================================
+% LINEAR MAPS AND DUAL SPACES (1)
+%==============================================================================
+
+\exercise
+Given a finite-dimensional vector space $V$ with basis $v_1, \ldots, v_n$.
+
+\begin{enumerate}[label=(\alph*)]
+    \item Prove that if two linear maps $S$ and $T$ have $S(v_1) = T(v_1), \ldots, S(v_n) = T(v_n)$, then $S = T$.
+    \ruledspace{6cm}
+
+    \item Prove that for a linear map $T$, we have $T(v) = \varphi_1(v)T(v_1) + \cdots + \varphi_n(v)T(v_n)$ with $\varphi_1, \ldots, \varphi_n$ the dual basis of $v_1, \ldots, v_n$.
+    \ruledspace{7cm}
+\end{enumerate}
+
+\newpage
+
+%==============================================================================
+% DIFFERENTIATION OPERATOR (2)
+%==============================================================================
+
+\exercise
+Let $V$ denote the $\R$-vector space spanned by the functions $\{1, \sin x, \cos x, \sin 2x, \cos 2x\}$, and let $d \colon V \to V$ denote the differentiation operator. What are the eigenvalues of $d$? Is $d$ diagonalizable?
+\ruledspace{8cm}
+\answerline
+
+%==============================================================================
+% UPPER-TRIANGULAR MATRICES (3)
+%==============================================================================
+
+\exercise
+\begin{enumerate}[label=(\alph*)]
+    \item Define the linear map $T \colon \C^2 \to \C^2$ by $T(x, y) := (y, -x)$. What are the eigenvalues of $T$? Find a basis of $\C^2$ such that the matrix associated to $T$ is upper-triangular.
+    \ruledspace{6cm}
+    \answerline
+
+    \item Define the linear map $T \colon \R^2 \to \R^2$ by $T(x, y) := (y, -x)$. Show that there is no basis of $\R^2$ such that the matrix associated to $T$ is upper-triangular.
+    \ruledspace{6cm}
+\end{enumerate}
+
+\newpage
+
+%==============================================================================
+% ISOMORPHISM (4)
+%==============================================================================
+
+\exercise
+(Spring 2024 Frenkel Mock Midterm Problem 3) Prove that a vector space $V$ over a field $\F$ is isomorphic to $\F^n$ (where $n$ is a positive integer) if and only if $\dim(V) = n$.
+\ruledspace{8cm}
+
+\vfill
+
+\end{document}
