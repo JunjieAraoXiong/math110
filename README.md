@@ -3,7 +3,7 @@
 **UC Berkeley | Spring 2026**
 
 <p align="center">
-  <img src="LADR.png" alt="Linear Algebra Done Right" width="300">
+  <img src="assets/LADR.png" alt="Linear Algebra Done Right" width="300">
 </p>
 
 > *"The study of linear algebra is a beautiful subject in its own right."*
