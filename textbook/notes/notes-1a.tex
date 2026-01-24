@@ -426,7 +426,27 @@ Let $0$ denote the list of length $n$ whose coordinates are all $0$:
 
 \textbf{Geometric intuition:} The zero vector $0$ represents the origin. Adding $0$ to any vector leaves it unchanged---you're adding ``no displacement.''
 
-\textbf{1.16 Example:} In the statement $x + 0 = x$ for all $x \in \F^n$, the $0$ must be the vector $(0, \ldots, 0)$ because we can only add vectors to vectors.
+\begin{tcolorbox}[colframe=black!50]
+\textbf{1.16 Example: The Zero Vector Notation}
+
+When we write $x + 0 = x$ for $x \in \F^n$, the symbol $0$ means the \textbf{zero vector}:
+\[
+    0 = (0, 0, \ldots, 0) \quad \text{($n$ zeros)}
+\]
+
+\textbf{Why?} Addition in $\F^n$ is only defined for two vectors. Since $x$ is a vector, the $0$ in ``$x + 0$'' must also be a vector---not the number zero.
+
+\textbf{Example in $\R^3$:}
+\[
+    (1, 2, 3) + 0 = (1, 2, 3) + (0, 0, 0) = (1, 2, 3) \checkmark
+\]
+
+\textbf{Key point:} The symbol ``$0$'' means different things depending on context:
+\begin{itemize}
+    \item In $\F$ (scalars): $0$ is the number zero
+    \item In $\F^n$ (vectors): $0$ is the zero vector $(0, \ldots, 0)$
+\end{itemize}
+\end{tcolorbox}
 
 \begin{tcolorbox}
 \textbf{1.17 Definition: Additive Inverse in $\F^n$}
