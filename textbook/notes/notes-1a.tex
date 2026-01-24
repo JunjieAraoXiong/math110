@@ -487,12 +487,14 @@ The product of a number $\lambda \in \F$ and a vector in $\F^n$ is computed by m
 \end{tcolorbox}
 
 \begin{example}[Scalar Multiplication in $\R^n$]
+Here $\lambda = -2 \in \R$.
 \[
     -2(1, 2, 3) = (-2 \cdot 1, -2 \cdot 2, -2 \cdot 3) = \boxed{(-2, -4, -6)}
 \]
 \end{example}
 
 \begin{example}[Scalar Multiplication in $\C^n$]
+Here $\lambda = 1+i \in \C$.
 \begin{align*}
     (1+i)(2, -i) &= ((1+i) \cdot 2, (1+i)(-i)) \\
     &= (2 + 2i, -i - i^2) \\
@@ -508,7 +510,19 @@ The product of a number $\lambda \in \F$ and a vector in $\F^n$ is computed by m
     \item If $\lambda < 0$: $\lambda x$ points in the opposite direction, with length $|\lambda|$ times the length of $x$.
 \end{itemize}
 
-\textbf{Note:} All scalar multiples of $x$ lie on a single line through the origin. This ``direction preservation'' is fundamental to linear maps (Chapter 3).
+\begin{tcolorbox}[colframe=black!50]
+\textbf{Direction Preservation Property}
+
+All scalar multiples of a nonzero vector $x$ lie on a single line through the origin.
+
+\textbf{Proof:} Let $x = (x_1, \ldots, x_n) \neq 0$. The set of all scalar multiples is:
+\[
+    \{\lambda x : \lambda \in \F\} = \{(\lambda x_1, \ldots, \lambda x_n) : \lambda \in \F\}
+\]
+This is precisely the parametric equation of the line through the origin with direction vector $x$. As $\lambda$ varies over $\F$, we trace out every point on this line. \qed
+
+\textbf{Key insight:} This property is fundamental to linear maps (Chapter 3)---they preserve these lines through the origin.
+\end{tcolorbox}
 
 \vspace{0.5em}
 \begin{center}
