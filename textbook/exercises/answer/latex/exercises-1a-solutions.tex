@@ -13,12 +13,61 @@
 \usepackage{tikz}
 \usepackage{xcolor}
 \usepackage{tcolorbox}
+\usepackage{titlesec}
+\usepackage{booktabs}
+\usetikzlibrary{matrix, arrows.meta, positioning, calc, cd}
+
+% Improved spacing
+\linespread{1.15}
+\setlength{\parskip}{0.5ex plus 0.2ex minus 0.1ex}
 
 % Custom commands (from style guide)
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\F}{\mathbb{F}}
 \newcommand{\Z}{\mathbb{Z}}
+
+% Custom operators
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\nullity}{nullity}
+\DeclareMathOperator{\spn}{span}
+
+% Box environments (from style guide)
+\tcbset{
+    boxrule=0.8pt,
+    colback=white,
+    colframe=black,
+    arc=0pt,
+    boxsep=3pt,
+    left=4pt, right=4pt, top=4pt, bottom=4pt
+}
+
+\newtcolorbox{solutionbox}{
+    boxrule=0.5pt,
+    colback=black!3,
+    colframe=black!40,
+    arc=0pt,
+    boxsep=4pt,
+    left=6pt, right=6pt, top=6pt, bottom=6pt
+}
+
+\newtcolorbox{result}{
+    boxrule=0.8pt,
+    colback=white,
+    colframe=black,
+    arc=0pt,
+    boxsep=3pt,
+    left=4pt, right=4pt, top=4pt, bottom=4pt
+}
+
+\newtcolorbox{hintbox}{
+    boxrule=0.5pt,
+    colback=yellow!5,
+    colframe=black!30,
+    arc=0pt,
+    boxsep=3pt,
+    left=4pt, right=4pt, top=4pt, bottom=4pt
+}
 
 % Header/footer
 \pagestyle{fancy}
@@ -80,8 +129,8 @@ Show that
 \]
 is a cube root of $1$ (meaning that its cube equals $1$).
 
-\begin{solution}
-Let $\omega = \frac{-1 + \sqrt{3}\,i}{2}$. We compute $\omega^3$ step by step.
+\begin{solutionbox}
+\textbf{Solution:} Let $\omega = \frac{-1 + \sqrt{3}\,i}{2}$. We compute $\omega^3$ step by step.
 
 First, compute $\omega^2$:
 \begin{align*}
@@ -98,15 +147,15 @@ Now compute $\omega^3 = \omega^2 \cdot \omega$:
 \end{align*}
 
 Therefore $\omega^3 = 1$, so $\omega$ is a cube root of $1$. \hfill $\square$
-\end{solution}
+\end{solutionbox}
 
 %------------------------------------------------------------------------------
 
 \exercise
 Find two distinct square roots of $i$.
 
-\begin{solution}
-We seek $z = a + bi$ such that $z^2 = i$, where $a, b \in \R$.
+\begin{solutionbox}
+\textbf{Solution:} We seek $z = a + bi$ such that $z^2 = i$, where $a, b \in \R$.
 
 Expanding $z^2$:
 \[
@@ -130,7 +179,19 @@ Therefore the two square roots of $i$ are:
 \[
     \boxed{z_1 = \frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}}i = \frac{\sqrt{2}}{2}(1 + i), \quad z_2 = -\frac{1}{\sqrt{2}} - \frac{1}{\sqrt{2}}i = -\frac{\sqrt{2}}{2}(1 + i)}
 \]
-\end{solution}
+\end{solutionbox}
+
+\begin{hintbox}
+\textbf{Intuition:} The phrase ``two distinct square roots of $i$'' simply means: find two \emph{different} complex numbers whose square equals $i$.
+
+\textit{Why do two exist?} If $z^2 = i$, then $(-z)^2 = z^2 = i$ as well. So square roots come in $\pm$ pairs. Unless $z = 0$, these two are different.
+
+\textit{Why say ``distinct''?} To emphasize we want two different answers, not the same number listed twice.
+
+\textit{Why does ``no real solutions'' matter for complex numbers?} The solution writes $z = a + bi$ where $a, b \in \R$. This is crucial: even though $z$ is complex, the components $a$ and $b$ are \emph{required to be real} by the definition of complex number notation. When $a = -b$, we get $-2a^2 = 1$, which has no solution in $\R$. Since $a$ must be real, this case is impossible.
+
+\textit{Geometric view:} Squaring a complex number doubles its angle. The angles $\frac{\pi}{4}$ and $\frac{5\pi}{4}$ both double to $\frac{\pi}{2}$ (the angle of $i$). This is why every nonzero complex number has exactly two square roots.
+\end{hintbox}
 
 \newpage
 
@@ -193,8 +254,8 @@ Therefore $(\alpha + \beta) + \lambda = \alpha + (\beta + \lambda)$. \hfill $\sq
 \exercise
 Show that $(\alpha\beta)\lambda = \alpha(\beta\lambda)$ for all $\alpha, \beta, \lambda \in \C$.
 
-\begin{solution}
-Let $\alpha = a + bi$, $\beta = c + di$, and $\lambda = e + fi$ where $a, b, c, d, e, f \in \R$.
+\begin{solutionbox}
+\textbf{Solution:} Let $\alpha = a + bi$, $\beta = c + di$, and $\lambda = e + fi$ where $a, b, c, d, e, f \in \R$.
 
 First, compute $\alpha\beta$:
 \[
@@ -221,7 +282,7 @@ Then compute $\alpha(\beta\lambda)$:
 \end{align*}
 
 Comparing terms, we see that LHS $=$ RHS. Therefore $(\alpha\beta)\lambda = \alpha(\beta\lambda)$. \hfill $\square$
-\end{solution}
+\end{solutionbox}
 
 \newpage
 
@@ -258,8 +319,8 @@ Therefore $\beta$ is unique. \hfill $\square$
 \exercise
 Show that for every $\alpha \in \C$ with $\alpha \neq 0$, there exists a unique $\beta \in \C$ such that $\alpha\beta = 1$.
 
-\begin{solution}
-Let $\alpha = a + bi$ where $a, b \in \R$ and $a$ and $b$ are not both zero.
+\begin{solutionbox}
+\textbf{Solution:} Let $\alpha = a + bi$ where $a, b \in \R$ and $a$ and $b$ are not both zero.
 
 \textbf{Existence:} Define $\beta = \frac{a}{a^2 + b^2} - \frac{b}{a^2 + b^2}i$.
 
@@ -278,7 +339,7 @@ Then:
 \end{align*}
 
 Therefore $\beta$ is unique. \hfill $\square$
-\end{solution}
+\end{solutionbox}
 
 \newpage
 
