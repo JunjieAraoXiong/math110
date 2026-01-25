@@ -44,6 +44,28 @@
 % 10pt font for density, 0.75in margins for space efficiency
 
 %------------------------------------------------------------------------------
+% FILE ORGANIZATION
+%------------------------------------------------------------------------------
+%
+% LaTeX source files and compiled PDFs follow a consistent structure:
+%
+%   parent-folder/
+%   ├── document.pdf          <- Compiled PDF lives here
+%   └── latex/
+%       └── document.tex      <- LaTeX source lives here
+%
+% RULES:
+%   1. All .tex source files go in a "latex/" subfolder
+%   2. Compiled PDFs go in the parent folder (one level up from latex/)
+%   3. NEVER create or commit PDFs inside the latex/ folder
+%   4. To find the source of any PDF, look in the nearest "latex/" subfolder
+%
+% EXAMPLES:
+%   textbook/notes/notes-1a.pdf        -> source: textbook/notes/latex/notes-1a.tex
+%   textbook/exercises/psat/ex-1a.pdf  -> source: textbook/exercises/psat/latex/ex-1a.tex
+%
+
+%------------------------------------------------------------------------------
 % REQUIRED PACKAGES
 %------------------------------------------------------------------------------
 \usepackage{amsmath, amssymb, amsthm}   % Math essentials

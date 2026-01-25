@@ -1,0 +1,467 @@
+%==============================================================================
+% MATH 110 - Section 1C Notes: Subspaces
+% Linear Algebra Done Right, 4th ed. - Sheldon Axler
+%==============================================================================
+
+\documentclass[10pt, twocolumn]{article}
+\usepackage[margin=0.75in, columnsep=0.3in]{geometry}
+
+%------------------------------------------------------------------------------
+% PACKAGES
+%------------------------------------------------------------------------------
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{tcolorbox}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{matrix, arrows.meta, positioning, calc, cd}
+\usepackage{graphicx}
+
+%------------------------------------------------------------------------------
+% SPACING
+%------------------------------------------------------------------------------
+\linespread{1.08}
+\setlength{\parskip}{0.4ex plus 0.2ex minus 0.1ex}
+
+%------------------------------------------------------------------------------
+% BOX STYLES
+%------------------------------------------------------------------------------
+\tcbset{
+    boxrule=0.8pt,
+    colback=white,
+    colframe=black,
+    arc=0pt,
+    boxsep=3pt,
+    left=4pt, right=4pt, top=4pt, bottom=4pt
+}
+
+\newtcolorbox{result}{
+    boxrule=0pt,
+    colback=black!5,
+    colframe=white,
+    arc=0pt,
+    boxsep=2pt,
+    left=4pt, right=4pt, top=4pt, bottom=4pt
+}
+
+%------------------------------------------------------------------------------
+% SECTION FORMATTING
+%------------------------------------------------------------------------------
+\titleformat{\section}{\large\bfseries}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titlespacing*{\section}{0pt}{1.5ex}{1ex}
+\titlespacing*{\subsection}{0pt}{1ex}{0.5ex}
+
+%------------------------------------------------------------------------------
+% LIST FORMATTING
+%------------------------------------------------------------------------------
+\setlist{itemsep=1pt, topsep=3pt, parsep=1pt, leftmargin=1.5em}
+
+%------------------------------------------------------------------------------
+% HEADER/FOOTER
+%------------------------------------------------------------------------------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small MATH 110}
+\fancyhead[R]{\small Section 1C}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+%------------------------------------------------------------------------------
+% THEOREM ENVIRONMENTS
+%------------------------------------------------------------------------------
+\theoremstyle{definition}
+\newtheorem{property}{Property}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+
+%------------------------------------------------------------------------------
+% CUSTOM COMMANDS
+%------------------------------------------------------------------------------
+% Number fields
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+
+% Matrix/space operations
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\nullity}{nullity}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\row}{row}
+\DeclareMathOperator{\nul}{null}
+\DeclareMathOperator{\range}{range}
+\DeclareMathOperator{\im}{im}
+
+% Inner products and norms
+\newcommand{\inner}[2]{\langle #1, #2 \rangle}
+\newcommand{\norm}[1]{\| #1 \|}
+\newcommand{\proj}{\operatorname{proj}}
+
+% Vectors and matrices
+\newcommand{\vect}[1]{\mathbf{#1}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+
+%==============================================================================
+\begin{document}
+%==============================================================================
+
+\noindent
+\begin{minipage}{\linewidth}
+    \centering
+    \textbf{\Large Section 1C: Subspaces} \\[0.5em]
+    \hrule
+\end{minipage}
+\vspace{1em}
+
+%==============================================================================
+\section{Introduction to Subspaces}
+%==============================================================================
+
+Often we want to find vector spaces that ``live inside'' a larger vector space. For example, lines and planes through the origin in $\R^3$ turn out to be vector spaces in their own right. The key idea is that a subset can inherit the vector space structure from its parent.
+
+\begin{tcolorbox}
+\textbf{1.33 Definition: Subspace}
+
+A subset $U$ of $V$ is called a \textbf{subspace} of $V$ if $U$ is also a vector space (using the same addition and scalar multiplication as on $V$).
+\end{tcolorbox}
+
+\textbf{Key point:} A subspace uses the \textit{same} operations as the parent space. We don't invent new addition or scalar multiplication---we just restrict to a subset.
+
+\textbf{Note:} The additive identity of a subspace must be the same as the additive identity of the larger space. If $0_U$ is the additive identity of $U$ and $0$ is the additive identity of $V$, then for any $v \in U$:
+\[
+    0_U = 0_U + 0 = 0 + 0_U = 0
+\]
+So subspaces always contain the zero vector of $V$.
+
+%==============================================================================
+\section{The Subspace Test}
+%==============================================================================
+
+Checking all 8 vector space axioms would be tedious. Fortunately, most axioms are inherited automatically. The following result gives us a simpler test.
+
+\begin{tcolorbox}
+\textbf{1.34 Conditions for a Subspace}
+
+A subset $U$ of $V$ is a subspace of $V$ if and only if $U$ satisfies the following three conditions:
+
+\textbf{additive identity:}
+\[
+    0 \in U
+\]
+
+\textbf{closed under addition:}
+\[
+    u, w \in U \implies u + w \in U
+\]
+
+\textbf{closed under scalar multiplication:}
+\[
+    a \in \F \text{ and } u \in U \implies au \in U
+\]
+\end{tcolorbox}
+
+\textbf{Proof sketch:}
+
+$(\Rightarrow)$ If $U$ is a subspace, it's a vector space, so it has an additive identity. Since the additive identity is unique in $V$ (by 1.26), it must be $0$. Closure under addition and scalar multiplication follow because these are operations on $U$.
+
+$(\Leftarrow)$ Suppose $U$ satisfies the three conditions. We verify $U$ is a vector space:
+\begin{itemize}
+    \item The three conditions give us $0 \in U$, closure under $+$, and closure under scalar multiplication.
+    \item For $u \in U$: $-u = (-1)u \in U$ by closure under scalar multiplication. So additive inverses exist in $U$.
+    \item Commutativity, associativity, distributivity, and the multiplicative identity hold because they hold in $V$ and $U \subseteq V$.
+\end{itemize}
+\hfill $\square$
+
+\begin{result}
+\textbf{Alternative condition:} Instead of checking $0 \in U$, you can check that $U$ is \textbf{nonempty}. Here's why:
+
+If $U \neq \emptyset$, pick any $u \in U$. By closure under scalar multiplication:
+\[
+    0 \cdot u = 0 \in U
+\]
+
+So ``$U$ is nonempty'' $\Leftrightarrow$ ``$0 \in U$'' when the other conditions hold.
+\end{result}
+
+%==============================================================================
+\section{Examples of Subspaces}
+%==============================================================================
+
+\begin{tcolorbox}[colframe=black!50]
+\textbf{1.35(a) Example: $\{(x_1, x_2, x_3, x_4) \in \F^4 : x_3 = 5x_4 + b\}$}
+
+For which values of $b \in \F$ is this set a subspace of $\F^4$?
+
+\textbf{Answer:} Only when $b = 0$.
+
+\textbf{If $b = 0$:} The set is $\{(x_1, x_2, x_3, x_4) : x_3 = 5x_4\}$.
+\begin{itemize}
+    \item $0 = (0,0,0,0)$ satisfies $0 = 5 \cdot 0$. \checkmark
+    \item Closed under $+$: If $x_3 = 5x_4$ and $y_3 = 5y_4$, then $x_3 + y_3 = 5(x_4 + y_4)$. \checkmark
+    \item Closed under scalar mult: If $x_3 = 5x_4$, then $\lambda x_3 = 5(\lambda x_4)$. \checkmark
+\end{itemize}
+
+\textbf{If $b \neq 0$:} The zero vector $(0,0,0,0)$ does not satisfy $0 = 5 \cdot 0 + b = b$. So $0 \notin U$, and $U$ is not a subspace.
+\end{tcolorbox}
+
+\textbf{Lesson:} Subspaces must pass through the origin. A constraint like $x_3 = 5x_4 + b$ with $b \neq 0$ defines an ``affine subspace'' (a shifted subspace), not a true subspace.
+
+\begin{tcolorbox}[colframe=black!50]
+\textbf{1.35(b) Example: Continuous Functions}
+
+The set of continuous real-valued functions on $[0,1]$ is a subspace of $\R^{[0,1]}$ (the space of all functions from $[0,1]$ to $\R$).
+
+\textbf{Verification:}
+\begin{itemize}
+    \item The zero function $0(x) = 0$ is continuous. \checkmark
+    \item Sum of continuous functions is continuous. \checkmark
+    \item Scalar multiple of a continuous function is continuous. \checkmark
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colframe=black!50]
+\textbf{1.35(c) Example: Differentiable Functions}
+
+The set of differentiable real-valued functions on $\R$ is a subspace of $\R^\R$.
+
+\textbf{Verification:}
+\begin{itemize}
+    \item The zero function is differentiable (with derivative $0$). \checkmark
+    \item Sum of differentiable functions is differentiable. \checkmark
+    \item Scalar multiple of a differentiable function is differentiable. \checkmark
+\end{itemize}
+
+\textbf{Note:} We also have a chain of subspaces:
+\[
+    \{\text{polynomials}\} \subseteq \{C^\infty\} \subseteq \{C^1\} \subseteq \{C^0\} \subseteq \R^\R
+\]
+\end{tcolorbox}
+
+\begin{tcolorbox}[colframe=black!50]
+\textbf{1.35(d) Example: $\{f \in \R^\R : f \text{ differentiable and } f'(2) = b\}$}
+
+For which values of $b \in \R$ is this a subspace?
+
+\textbf{Answer:} Only when $b = 0$.
+
+\textbf{If $b = 0$:} This is the set of differentiable functions whose derivative vanishes at $2$.
+\begin{itemize}
+    \item The zero function has $0'(2) = 0$. \checkmark
+    \item If $f'(2) = 0$ and $g'(2) = 0$, then $(f+g)'(2) = 0$. \checkmark
+    \item If $f'(2) = 0$, then $(\lambda f)'(2) = \lambda \cdot 0 = 0$. \checkmark
+\end{itemize}
+
+\textbf{If $b \neq 0$:} The zero function has $0'(2) = 0 \neq b$, so $0 \notin U$.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colframe=black!50]
+\textbf{1.35(e) Example: Sequences Converging to 0}
+
+The set
+\[
+    \{(a_1, a_2, \ldots) \in \C^\infty : \lim_{n \to \infty} a_n = 0\}
+\]
+is a subspace of $\C^\infty$.
+
+\textbf{Verification:}
+\begin{itemize}
+    \item The zero sequence $(0, 0, \ldots)$ has limit $0$. \checkmark
+    \item If $\lim a_n = 0$ and $\lim b_n = 0$, then $\lim(a_n + b_n) = 0$. \checkmark
+    \item If $\lim a_n = 0$, then $\lim(\lambda a_n) = \lambda \cdot 0 = 0$. \checkmark
+\end{itemize}
+\end{tcolorbox}
+
+\begin{result}
+\textbf{Extreme subspaces:} Every vector space $V$ has two ``trivial'' subspaces:
+\begin{itemize}
+    \item The \textbf{smallest subspace}: $\{0\}$ (just the zero vector)
+    \item The \textbf{largest subspace}: $V$ itself
+\end{itemize}
+
+\textbf{Why the empty set is not a subspace:} $\emptyset$ fails the condition $0 \in U$. Every subspace must contain the zero vector.
+\end{result}
+
+%==============================================================================
+\section{Sums of Subspaces}
+%==============================================================================
+
+Given subspaces $U_1, \ldots, U_m$ of $V$, we want to build new subspaces from them. The natural candidate---the union---usually fails.
+
+\textbf{Why not unions?} If $U$ and $W$ are subspaces of $V$, then $U \cup W$ is \textit{usually not} a subspace. For example, in $\R^2$:
+\begin{itemize}
+    \item Let $U = \{(x, 0) : x \in \R\}$ (the $x$-axis)
+    \item Let $W = \{(0, y) : y \in \R\}$ (the $y$-axis)
+    \item Then $(1, 0) \in U$ and $(0, 1) \in W$
+    \item But $(1, 0) + (0, 1) = (1, 1) \notin U \cup W$
+\end{itemize}
+
+The union is not closed under addition! We need something else.
+
+\begin{tcolorbox}
+\textbf{1.36 Definition: Sum of Subspaces}
+
+Suppose $U_1, \ldots, U_m$ are subspaces of $V$. The \textbf{sum} of $U_1, \ldots, U_m$, denoted $U_1 + \cdots + U_m$, is the set of all possible sums of elements of $U_1, \ldots, U_m$:
+\[
+    U_1 + \cdots + U_m = \{u_1 + \cdots + u_m : u_j \in U_j\}
+\]
+\end{tcolorbox}
+
+\textbf{Key insight:} The sum $U_1 + \cdots + U_m$ is the \textit{smallest} subspace of $V$ containing all of $U_1, \ldots, U_m$.
+
+\textbf{Verification that the sum is a subspace:}
+\begin{itemize}
+    \item $0 = 0 + \cdots + 0 \in U_1 + \cdots + U_m$ \checkmark
+    \item Closed under addition: $(u_1 + \cdots + u_m) + (v_1 + \cdots + v_m) = (u_1 + v_1) + \cdots + (u_m + v_m)$, and each $u_j + v_j \in U_j$. \checkmark
+    \item Closed under scalar mult: $\lambda(u_1 + \cdots + u_m) = \lambda u_1 + \cdots + \lambda u_m$, and each $\lambda u_j \in U_j$. \checkmark
+\end{itemize}
+
+\begin{tcolorbox}[colframe=black!50]
+\textbf{1.37 Example: Sum of Subspaces of $\F^3$}
+
+Let $U = \{(x, 0, 0) \in \F^3 : x \in \F\}$ (the $x$-axis).
+
+Let $W = \{(0, y, 0) \in \F^3 : y \in \F\}$ (the $y$-axis).
+
+Then:
+\[
+    U + W = \{(x, y, 0) \in \F^3 : x, y \in \F\}
+\]
+
+This is the $xy$-plane! A general element of $U + W$ is:
+\[
+    (x, 0, 0) + (0, y, 0) = (x, y, 0)
+\]
+\end{tcolorbox}
+
+\begin{tcolorbox}[colframe=black!50]
+\textbf{1.38 Example: Sum of Subspaces of $\F^4$}
+
+Let $U = \{(x, x, y, y) \in \F^4 : x, y \in \F\}$.
+
+Let $W = \{(x, x, x, y) \in \F^4 : x, y \in \F\}$.
+
+\textbf{Claim:} $U + W = \{(x, x, y, z) \in \F^4 : x, y, z \in \F\}$.
+
+\textbf{Proof of $\subseteq$:} Take $u \in U$ and $w \in W$:
+\begin{align*}
+    u &= (a, a, b, b) \quad \text{for some } a, b \in \F \\
+    w &= (c, c, c, d) \quad \text{for some } c, d \in \F \\
+    u + w &= (a+c, a+c, b+c, b+d)
+\end{align*}
+Notice that the first two coordinates are equal. So $u + w$ has the form $(x, x, y, z)$.
+
+\textbf{Proof of $\supseteq$:} \textbf{(1.39)} Given $(x, x, y, z) \in \F^4$, we want to write it as $u + w$ with $u \in U$ and $w \in W$.
+
+Choose:
+\begin{align*}
+    u &= (x, x, y, y) \in U \\
+    w &= (0, 0, 0, z-y) \in W \quad \text{(since } (0, 0, 0, z-y) \text{ has form } (t, t, t, s) \text{ with } t=0)
+\end{align*}
+
+Then $u + w = (x, x, y, y) + (0, 0, 0, z-y) = (x, x, y, z)$. \checkmark
+\end{tcolorbox}
+
+%==============================================================================
+\newpage
+\section*{Strategy: How to Check if $U$ is a Subspace}
+%==============================================================================
+
+\begin{result}
+\textbf{The Subspace Checklist:}
+
+To verify that $U \subseteq V$ is a subspace, check three things:
+
+\begin{enumerate}
+    \item \textbf{Zero vector:} Show $0 \in U$.
+
+    (Alternatively, show $U \neq \emptyset$.)
+
+    \item \textbf{Closed under addition:} Take \textit{arbitrary} $u, w \in U$. Show that $u + w \in U$.
+
+    (Use the definition of $U$ to verify the sum satisfies the defining property.)
+
+    \item \textbf{Closed under scalar multiplication:} Take \textit{arbitrary} $a \in \F$ and $u \in U$. Show that $au \in U$.
+\end{enumerate}
+
+\textbf{Common mistakes to avoid:}
+\begin{itemize}
+    \item Don't use specific vectors; use \textit{arbitrary} elements.
+    \item Don't forget to check $0 \in U$ (or nonemptiness).
+    \item Remember: the operations come from $V$, not something new.
+\end{itemize}
+\end{result}
+
+\begin{result}
+\textbf{Quick tests for NON-subspaces:}
+
+A subset $U \subseteq V$ is \textbf{NOT} a subspace if any of these hold:
+\begin{itemize}
+    \item $0 \notin U$ (e.g., $\{x : x_1 = 1\}$)
+    \item Not closed under $+$ (find $u, w \in U$ with $u + w \notin U$)
+    \item Not closed under scalar mult (find $a \in \F$, $u \in U$ with $au \notin U$)
+\end{itemize}
+
+\textbf{Rule of thumb:} Constraints of the form ``$= b$'' with $b \neq 0$ usually fail the subspace test because $0$ won't satisfy the constraint.
+\end{result}
+
+%==============================================================================
+\section*{Key Results Summary}
+%==============================================================================
+
+\begin{tcolorbox}
+\textbf{Definitions:}
+\begin{itemize}
+    \item \textbf{Subspace} (1.33): A subset that is itself a vector space with the inherited operations
+    \item \textbf{Sum of subspaces} (1.36): $U_1 + \cdots + U_m = \{u_1 + \cdots + u_m : u_j \in U_j\}$
+\end{itemize}
+
+\textbf{The Subspace Test} (1.34):
+
+$U$ is a subspace of $V$ $\Leftrightarrow$
+\begin{enumerate}
+    \item $0 \in U$
+    \item $u, w \in U \Rightarrow u + w \in U$
+    \item $a \in \F, u \in U \Rightarrow au \in U$
+\end{enumerate}
+
+\textbf{Key Facts:}
+\begin{itemize}
+    \item Every subspace contains $0$
+    \item $\{0\}$ and $V$ are always subspaces of $V$
+    \item The empty set is never a subspace
+    \item Sums of subspaces are subspaces
+    \item Unions of subspaces are usually NOT subspaces
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}
+\textbf{Common Problem Types:}
+
+\begin{description}[style=nextline, leftmargin=1em, labelindent=0pt]
+    \item[Determine if $U$ is a subspace]
+    Use the three-condition test. Check $0 \in U$, closure under $+$, closure under scalar mult.
+
+    \item[For which $b$ is $U$ a subspace?]
+    Usually $b = 0$. Check whether $0$ satisfies the defining condition.
+
+    \item[Describe $U + W$]
+    Write a general element as $u + w$ where $u \in U$, $w \in W$. Simplify to find the pattern.
+
+    \item[Prove $U + W = $ some set $S$]
+    Show $U + W \subseteq S$ (every sum has the right form) and $S \subseteq U + W$ (every element of $S$ can be written as a sum).
+\end{description}
+\end{tcolorbox}
+
+\end{document}

@@ -57,6 +57,87 @@
 \vspace{1.5em}
 
 %==============================================================================
+% SUBSPACE DETERMINATION (1-10)
+%==============================================================================
+
+\exercise
+For each of the following subsets of $\F^3$, determine whether it is a subspace of $\F^3$.
+\begin{enumerate}[label=(\alph*)]
+    \item $\{(x_1, x_2, x_3) \in \F^3 : x_1 + 2x_2 + 3x_3 = 0\}$
+    \item $\{(x_1, x_2, x_3) \in \F^3 : x_1 + 2x_2 + 3x_3 = 4\}$
+    \item $\{(x_1, x_2, x_3) \in \F^3 : x_1 x_2 x_3 = 0\}$
+    \item $\{(x_1, x_2, x_3) \in \F^3 : x_1 = 5x_3\}$
+\end{enumerate}
+\ruledspace{6cm}
+
+%------------------------------------------------------------------------------
+
+\exercise
+Verify all assertions about subspaces in Example 1.35.
+\ruledspace{6cm}
+
+\newpage
+
+%------------------------------------------------------------------------------
+
+\exercise
+Show that the set of differentiable real-valued functions $f$ on the interval $(-4, 4)$ such that $f'(-1) = 3f(2)$ is a subspace of $\R^{(-4,4)}$.
+\ruledspace{6cm}
+
+%------------------------------------------------------------------------------
+
+\exercise
+Suppose $b \in \R$. Show that the set of continuous real-valued functions $f$ on the interval $[0, 1]$ such that $\int_0^1 f = b$ is a subspace of $\R^{[0,1]}$ if and only if $b = 0$.
+\ruledspace{7cm}
+
+\newpage
+
+%------------------------------------------------------------------------------
+
+\exercise
+Is $\R^2$ a subspace of the complex vector space $\C^2$?
+\ruledspace{5cm}
+
+%------------------------------------------------------------------------------
+
+\exercise
+\begin{enumerate}[label=(\alph*)]
+    \item Is $\{(a, b, c) \in \R^3 : a^3 = b^3\}$ a subspace of $\R^3$?
+    \item Is $\{(a, b, c) \in \C^3 : a^3 = b^3\}$ a subspace of $\C^3$?
+\end{enumerate}
+\ruledspace{7cm}
+
+\newpage
+
+%------------------------------------------------------------------------------
+
+\exercise
+Prove or give a counterexample: If $U$ is a nonempty subset of $\R^2$ such that $U$ is closed under addition and under taking additive inverses (meaning $-u \in U$ whenever $u \in U$), then $U$ is a subspace of $\R^2$.
+\ruledspace{7cm}
+
+%------------------------------------------------------------------------------
+
+\exercise
+Give an example of a nonempty subset $U$ of $\R^2$ such that $U$ is closed under scalar multiplication, but $U$ is not a subspace of $\R^2$.
+\ruledspace{5cm}
+
+\newpage
+
+%------------------------------------------------------------------------------
+
+\exercise
+A function $f\colon \R \to \R$ is called \textbf{periodic} if there exists a positive number $p$ such that $f(x) = f(x + p)$ for all $x \in \R$. Is the set of periodic functions from $\R$ to $\R$ a subspace of $\R^\R$? Explain.
+\ruledspace{7cm}
+
+%------------------------------------------------------------------------------
+
+\exercise
+Suppose $V_1$ and $V_2$ are subspaces of $V$. Prove that the intersection $V_1 \cap V_2$ is a subspace of $V$.
+\ruledspace{6cm}
+
+\newpage
+
+%==============================================================================
 % INTERSECTION AND UNION OF SUBSPACES (11-13)
 %==============================================================================
 
@@ -77,7 +158,7 @@ Prove that the union of two subspaces of $V$ is a subspace of $V$ if and only if
 \exercise
 Prove that the union of three subspaces of $V$ is a subspace of $V$ if and only if one of the subspaces contains the other two.
 
-\textit{Hint:} This exercise is more complicated than the previous exercise; there is no quick argument. First prove this in the special case where $\F$ has only two elements, and then prove it when $\F$ has more than two elements.
+\textit{This exercise is surprisingly harder than Exercise 12, possibly because this exercise is not true if we replace $\F$ with a field containing only two elements.}
 \ruledspace{10cm}
 
 \newpage
@@ -87,15 +168,11 @@ Prove that the union of three subspaces of $V$ is a subspace of $V$ if and only 
 %==============================================================================
 
 \exercise
-Suppose $U$ is the subspace of $\F^3$ defined by
+Suppose
 \[
-    U = \{(x, -x, 2x) \in \F^3 : x \in \F\}.
+    U = \{(x, -x, 2x) \in \F^3 : x \in \F\} \quad \text{and} \quad W = \{(x, x, 2x) \in \F^3 : x \in \F\}.
 \]
-Also suppose $W$ is the subspace of $\F^3$ defined by
-\[
-    W = \{(x, x, 2x) \in \F^3 : x \in \F\}.
-\]
-Describe $U + W$ both symbolically and non-symbolically.
+Describe $U + W$ using symbols, and also give a description of $U + W$ that uses no symbols.
 \ruledspace{6cm}
 \answerline
 
@@ -136,18 +213,14 @@ Does the operation of addition on the subspaces of $V$ have an additive identity
 %==============================================================================
 
 \exercise
-Suppose $V_1$, $V_2$, and $U$ are subspaces of $V$. Prove or give a counterexample: If $V_1 + U = V_2 + U$, then $V_1 = V_2$.
+Prove or give a counterexample: If $V_1$, $V_2$, $U$ are subspaces of $V$ such that
+\[
+    V_1 + U = V_2 + U,
+\]
+then $V_1 = V_2$.
 \ruledspace{7cm}
 
 \newpage
-
-%------------------------------------------------------------------------------
-
-\exercise
-Suppose $V_1$, $V_2$, and $U$ are subspaces of $V$. Prove or give a counterexample: If $V = V_1 \oplus U$ and $V = V_2 \oplus U$, then $V_1 = V_2$.
-
-\textit{Hint:} Think about subspaces of $\F^2$.
-\ruledspace{7cm}
 
 %==============================================================================
 % DIRECT SUM PROBLEMS (20-22)
@@ -162,8 +235,6 @@ Find a subspace $W$ of $\F^4$ such that $\F^4 = U \oplus W$.
 \ruledspace{6cm}
 \answerline
 
-\newpage
-
 %------------------------------------------------------------------------------
 
 \exercise
@@ -175,6 +246,8 @@ Find a subspace $W$ of $\F^5$ such that $\F^5 = U \oplus W$.
 \ruledspace{7cm}
 \answerline
 
+\newpage
+
 %------------------------------------------------------------------------------
 
 \exercise
@@ -182,10 +255,22 @@ Suppose
 \[
     U = \{(x, y, x+y, x-y, 2x) \in \F^5 : x, y \in \F\}.
 \]
-Find three nonzero subspaces $W_1$, $W_2$, $W_3$ of $\F^5$, none of which equals $\{0\}$, such that
+Find three subspaces $W_1$, $W_2$, $W_3$ of $\F^5$, none of which equals $\{0\}$, such that
 \[
     \F^5 = U \oplus W_1 \oplus W_2 \oplus W_3.
 \]
+\ruledspace{7cm}
+
+%------------------------------------------------------------------------------
+
+\exercise
+Prove or give a counterexample: If $V_1$, $V_2$, $U$ are subspaces of $V$ such that
+\[
+    V = V_1 \oplus U \quad \text{and} \quad V = V_2 \oplus U,
+\]
+then $V_1 = V_2$.
+
+\textit{Hint: When trying to discover whether a conjecture in linear algebra is true or false, it is often useful to start by experimenting in $\F^2$.}
 \ruledspace{7cm}
 
 \newpage
@@ -195,17 +280,17 @@ Find three nonzero subspaces $W_1$, $W_2$, $W_3$ of $\F^5$, none of which equals
 %==============================================================================
 
 \exercise
-A function $f: \R \to \R$ is called \textbf{even} if
+A function $f\colon \R \to \R$ is called \textbf{even} if
 \[
-    f(-x) = f(x) \quad \text{for all } x \in \R.
+    f(-x) = f(x)
 \]
-A function $f: \R \to \R$ is called \textbf{odd} if
+for all $x \in \R$. A function $f\colon \R \to \R$ is called \textbf{odd} if
 \[
-    f(-x) = -f(x) \quad \text{for all } x \in \R.
+    f(-x) = -f(x)
 \]
-Let $V_e$ denote the set of real-valued even functions on $\R$, and let $V_o$ denote the set of real-valued odd functions on $\R$. Show that
+for all $x \in \R$. Let $V_{\mathrm{e}}$ denote the set of real-valued even functions on $\R$ and let $V_{\mathrm{o}}$ denote the set of real-valued odd functions on $\R$. Show that
 \[
-    \R^\R = V_e \oplus V_o.
+    \R^\R = V_{\mathrm{e}} \oplus V_{\mathrm{o}}.
 \]
 \ruledspace{10cm}
 

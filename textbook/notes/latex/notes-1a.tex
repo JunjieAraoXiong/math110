@@ -547,6 +547,8 @@ This is precisely the parametric equation of the line through the origin with di
 
 \begin{result}
 \textbf{Scalar multiplication vs dot product:} Scalar multiplication takes a scalar and a vector, producing a \textbf{vector}. The dot product (Chapter 6) takes two vectors and produces a \textbf{scalar}. These are different operations.
+
+\textbf{Generalization:} The dot product in $\R^n$ generalizes to the \textbf{inner product} in Chapter 6, which works for both $\R^n$ and $\C^n$ (and more abstract vector spaces).
 \end{result}
 
 %==============================================================================
@@ -565,23 +567,50 @@ A \textbf{field} is a set containing at least two distinct elements called $0$ a
 
 %==============================================================================
 
-\vfill
+\newpage
+%==============================================================================
+\section*{Exercise Reference}
+%==============================================================================
 
-\begin{center}
-\rule{0.5\linewidth}{0.4pt}
+\subsection*{Key Formulas}
 
-\textit{Key Takeaways}
-\end{center}
+\begin{tcolorbox}
+\textbf{Complex Inverse:}
+\[
+    \frac{1}{a+bi} = \frac{a-bi}{a^2+b^2}
+\]
 
-\begin{enumerate}
-    \item \textbf{Complex numbers} $\C = \{a + bi : a, b \in \R\}$ with $i^2 = -1$.
-    \item \textbf{Arithmetic:} $(a+bi)(c+di) = (ac-bd) + (ad+bc)i$.
-    \item \textbf{Field properties} (1.3): commutativity, associativity, identities, inverses, distributivity.
-    \item \textbf{$\F$ notation:} $\F$ denotes either $\R$ or $\C$.
-    \item \textbf{$\F^n$} is the set of all $n$-tuples $(x_1, \ldots, x_n)$ with $x_j \in \F$.
-    \item \textbf{Addition} is coordinate-wise.
-    \item \textbf{Scalar multiplication:} $\lambda(x_1, \ldots, x_n) = (\lambda x_1, \ldots, \lambda x_n)$.
-    \item \textbf{Zero vector} $0 = (0, \ldots, 0)$ is the additive identity.
-\end{enumerate}
+\textbf{Addition in $\C$:} $(a+bi) + (c+di) = (a+c) + (b+d)i$
+
+\textbf{Multiplication in $\C$:} $(a+bi)(c+di) = (ac-bd) + (ad+bc)i$
+
+\textbf{Addition in $\F^n$:} $(x_1,\ldots,x_n) + (y_1,\ldots,y_n) = (x_1+y_1,\ldots,x_n+y_n)$
+
+\textbf{Scalar Multiplication:} $\lambda(x_1,\ldots,x_n) = (\lambda x_1,\ldots,\lambda x_n)$
+\end{tcolorbox}
+
+\subsection*{Common Problem Types}
+
+\begin{tcolorbox}
+\begin{description}[style=nextline, leftmargin=1em, labelindent=0pt]
+    \item[Computing Complex Inverses/Roots]
+    Multiply numerator and denominator by the conjugate. To verify a root, substitute and compute the power directly.
+
+    \item[Proving Field Properties in $\C$]
+    Write complex numbers as $\alpha = a+bi$, $\beta = c+di$. Expand both sides using definitions; compare real and imaginary parts.
+
+    \item[Proving Uniqueness (of inverses, identities)]
+    Assume two objects satisfy the defining property. Use that property to show they must be equal.
+
+    \item[Solving Vector Equations]
+    Isolate the unknown using additive inverses and scalar multiplication. Work component-wise.
+
+    \item[Showing No Scalar $\lambda$ Exists]
+    If $\lambda x = y$, then each component ratio $y_j/x_j$ must equal $\lambda$. Check if all ratios are consistent.
+
+    \item[Proving $\F^n$ Properties]
+    Write vectors as $x = (x_1,\ldots,x_n)$. Apply definitions of addition/scalar multiplication, then use field axioms on each component.
+\end{description}
+\end{tcolorbox}
 
 \end{document}

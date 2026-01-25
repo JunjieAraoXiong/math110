@@ -1,0 +1,521 @@
+%==============================================================================
+% MATH 110 - Section 1B Notes: Definition of Vector Space
+% Linear Algebra Done Right, 4th ed. - Sheldon Axler
+%==============================================================================
+
+\documentclass[10pt, twocolumn]{article}
+\usepackage[margin=0.75in, columnsep=0.3in]{geometry}
+
+%------------------------------------------------------------------------------
+% PACKAGES
+%------------------------------------------------------------------------------
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{tcolorbox}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{matrix, arrows.meta, positioning, calc, cd}
+\usepackage{graphicx}
+
+%------------------------------------------------------------------------------
+% SPACING
+%------------------------------------------------------------------------------
+\linespread{1.08}
+\setlength{\parskip}{0.4ex plus 0.2ex minus 0.1ex}
+
+%------------------------------------------------------------------------------
+% BOX STYLES
+%------------------------------------------------------------------------------
+\tcbset{
+    boxrule=0.8pt,
+    colback=white,
+    colframe=black,
+    arc=0pt,
+    boxsep=3pt,
+    left=4pt, right=4pt, top=4pt, bottom=4pt
+}
+
+\newtcolorbox{result}{
+    boxrule=0pt,
+    colback=black!5,
+    colframe=white,
+    arc=0pt,
+    boxsep=2pt,
+    left=4pt, right=4pt, top=4pt, bottom=4pt
+}
+
+%------------------------------------------------------------------------------
+% SECTION FORMATTING
+%------------------------------------------------------------------------------
+\titleformat{\section}{\large\bfseries}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titlespacing*{\section}{0pt}{1.5ex}{1ex}
+\titlespacing*{\subsection}{0pt}{1ex}{0.5ex}
+
+%------------------------------------------------------------------------------
+% LIST FORMATTING
+%------------------------------------------------------------------------------
+\setlist{itemsep=1pt, topsep=3pt, parsep=1pt, leftmargin=1.5em}
+
+%------------------------------------------------------------------------------
+% HEADER/FOOTER
+%------------------------------------------------------------------------------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small MATH 110}
+\fancyhead[R]{\small Section 1B}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+%------------------------------------------------------------------------------
+% THEOREM ENVIRONMENTS
+%------------------------------------------------------------------------------
+\theoremstyle{definition}
+\newtheorem{property}{Property}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+
+%------------------------------------------------------------------------------
+% CUSTOM COMMANDS
+%------------------------------------------------------------------------------
+% Number fields
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+
+% Matrix/space operations
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\nullity}{nullity}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\row}{row}
+\DeclareMathOperator{\nul}{null}
+\DeclareMathOperator{\range}{range}
+\DeclareMathOperator{\im}{im}
+
+% Inner products and norms
+\newcommand{\inner}[2]{\langle #1, #2 \rangle}
+\newcommand{\norm}[1]{\| #1 \|}
+\newcommand{\proj}{\operatorname{proj}}
+
+% Vectors and matrices
+\newcommand{\vect}[1]{\mathbf{#1}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+
+%==============================================================================
+\begin{document}
+%==============================================================================
+
+\noindent
+\begin{minipage}{\linewidth}
+    \centering
+    \textbf{\Large Section 1B: Definition of Vector Space} \\[0.5em]
+    \hrule
+\end{minipage}
+\vspace{1em}
+
+%==============================================================================
+\section{Addition and Scalar Multiplication}
+%==============================================================================
+
+In Section 1A, we defined addition and scalar multiplication on $\F^n$. Now we abstract these operations to define vector spaces in general.
+
+\begin{tcolorbox}
+\textbf{1.19 Definition: Addition, Scalar Multiplication}
+
+\begin{itemize}
+    \item An \textbf{addition} on a set $V$ is a function that assigns an element $u + v \in V$ to each pair of elements $u, v \in V$.
+    \item A \textbf{scalar multiplication} on a set $V$ is a function that assigns an element $\lambda v \in V$ to each $\lambda \in \F$ and each $v \in V$.
+\end{itemize}
+\end{tcolorbox}
+
+\textbf{Key point:} Addition takes two elements of $V$ and produces an element of $V$. Scalar multiplication takes a scalar from $\F$ and an element of $V$, producing an element of $V$. These are \textit{functions}: every input has exactly one output.
+
+\textbf{Notation:} We will also use juxtaposition for scalar multiplication: $\lambda v$ means the same as $\lambda \cdot v$.
+
+%==============================================================================
+\section{Definition of Vector Space}
+%==============================================================================
+
+The following definition is the central definition of linear algebra.
+
+\begin{tcolorbox}
+\textbf{1.20 Definition: Vector Space}
+
+A \textbf{vector space} is a set $V$ along with an addition on $V$ and a scalar multiplication on $V$ such that the following properties hold:
+
+\textbf{commutativity:}
+\[
+    u + v = v + u \quad \text{for all } u, v \in V
+\]
+
+\textbf{associativity:}
+\[
+    (u + v) + w = u + (v + w) \text{ and } (ab)v = a(bv)
+\]
+for all $u, v, w \in V$ and all $a, b \in \F$
+
+\textbf{additive identity:}
+there exists an element $0 \in V$ such that $v + 0 = v$ for all $v \in V$
+
+\textbf{additive inverse:}
+for every $v \in V$, there exists $w \in V$ such that $v + w = 0$
+
+\textbf{multiplicative identity:}
+\[
+    1v = v \quad \text{for all } v \in V
+\]
+
+\textbf{distributive properties:}
+\[
+    a(u + v) = au + av \text{ and } (a + b)v = av + bv
+\]
+for all $a, b \in \F$ and all $u, v \in V$
+\end{tcolorbox}
+
+\begin{tcolorbox}
+\textbf{1.21 Definition: Vector, Point}
+
+Elements of a vector space are called \textbf{vectors} or \textbf{points}.
+\end{tcolorbox}
+
+\textbf{Terminology:} The elements of $\F$ are called \textbf{scalars}. The word ``scalar'' is used because elements of $\F$ scale vectors via scalar multiplication.
+
+\begin{tcolorbox}
+\textbf{1.22 Definition: Real Vector Space, Complex Vector Space}
+
+\begin{itemize}
+    \item A vector space over $\R$ is called a \textbf{real vector space}.
+    \item A vector space over $\C$ is called a \textbf{complex vector space}.
+\end{itemize}
+\end{tcolorbox}
+
+\textbf{Note:} The simplest vector space is $\{0\}$, which contains only the additive identity.
+
+\begin{result}
+\textbf{Mnemonic for the 8 axioms:} ``CAAIMD$^2$''
+\begin{itemize}
+    \item \textbf{C}ommutativity of addition
+    \item \textbf{A}ssociativity of addition
+    \item \textbf{A}ssociativity of scalar multiplication
+    \item Additive \textbf{I}dentity
+    \item Additive inverse (``\textbf{I}nverse'')
+    \item \textbf{M}ultiplicative identity
+    \item \textbf{D}istributive (scalar over vector sum)
+    \item \textbf{D}istributive (scalar sum over vector)
+\end{itemize}
+\end{result}
+
+\textbf{Why these axioms?} They capture the essential properties of $\F^n$ that make linear algebra work. The axioms ensure we can:
+\begin{itemize}
+    \item Rearrange sums (commutativity, associativity)
+    \item Solve equations like $v + x = w$ (additive inverse)
+    \item Scale vectors predictably (distributive laws)
+\end{itemize}
+
+%==============================================================================
+\section{Examples of Vector Spaces}
+%==============================================================================
+
+The set $\F^n$ with the addition and scalar multiplication defined in Section 1A is a vector space over $\F$. We verified commutativity in Section 1A; the other vector space properties follow similarly by working coordinate-by-coordinate.
+
+\begin{tcolorbox}[colframe=black!50]
+\textbf{1.23 Example: $\F^\infty$}
+
+Define $\F^\infty$ as the set of all sequences of elements of $\F$:
+\[
+    \F^\infty = \{(x_1, x_2, x_3, \ldots) : x_k \in \F \text{ for } k = 1, 2, \ldots\}
+\]
+
+Addition and scalar multiplication are defined coordinate-wise:
+\begin{align*}
+    (x_1, x_2, \ldots) + (y_1, y_2, \ldots) &= (x_1 + y_1, x_2 + y_2, \ldots) \\
+    \lambda(x_1, x_2, \ldots) &= (\lambda x_1, \lambda x_2, \ldots)
+\end{align*}
+
+With these operations, $\F^\infty$ is a vector space over $\F$.
+\end{tcolorbox}
+
+\textbf{Intuition:} $\F^\infty$ is like $\F^n$ but with infinitely many coordinates. The verification is identical; each axiom is checked coordinate-wise.
+
+\begin{tcolorbox}
+\textbf{1.24 Notation: $\F^S$}
+
+If $S$ is a nonempty set, then $\F^S$ denotes the set of all functions from $S$ to $\F$.
+
+For $f, g \in \F^S$, the \textbf{sum} $f + g \in \F^S$ is the function defined by
+\[
+    (f + g)(x) = f(x) + g(x)
+\]
+for all $x \in S$.
+
+For $\lambda \in \F$ and $f \in \F^S$, the \textbf{product} $\lambda f \in \F^S$ is the function defined by
+\[
+    (\lambda f)(x) = \lambda f(x)
+\]
+for all $x \in S$.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colframe=black!50]
+\textbf{1.25 Example: $\F^S$ is a Vector Space}
+
+If $S$ is a nonempty set, then $\F^S$ (with the operations of addition and scalar multiplication as defined in 1.24) is a vector space over $\F$.
+
+\textbf{Details:}
+\begin{itemize}
+    \item The additive identity of $\F^S$ is the function $0: S \to \F$ defined by $0(x) = 0$ for all $x \in S$.
+    \item For $f \in \F^S$, the additive inverse of $f$ is the function $-f: S \to \F$ defined by $(-f)(x) = -f(x)$ for all $x \in S$.
+\end{itemize}
+\end{tcolorbox}
+
+\textbf{Key insight:} The ``vectors'' in $\F^S$ are \textit{functions}. Addition means adding function values pointwise.
+
+\begin{result}
+\textbf{Unifying perspective:} $\F^n$ is a special case of $\F^S$ where $S = \{1, 2, \ldots, n\}$. A list $(x_1, \ldots, x_n)$ is the same as the function $f: \{1, \ldots, n\} \to \F$ defined by $f(k) = x_k$.
+
+Similarly, $\F^\infty$ is $\F^S$ where $S = \Z^+ = \{1, 2, 3, \ldots\}$.
+\end{result}
+
+%==============================================================================
+\section{Uniqueness Results}
+%==============================================================================
+
+The axioms guarantee existence of additive identities and inverses, but we should verify they are unique.
+
+\begin{tcolorbox}
+\textbf{1.26 Unique Additive Identity}
+
+A vector space has a unique additive identity.
+\end{tcolorbox}
+
+\textbf{Proof:} Suppose $0$ and $0'$ are both additive identities for $V$. Then:
+\[
+    0' = 0' + 0 = 0 + 0' = 0
+\]
+The first equality holds because $0$ is an additive identity. The second uses commutativity. The third holds because $0'$ is an additive identity. \hfill $\square$
+
+\begin{tcolorbox}
+\textbf{1.27 Unique Additive Inverse}
+
+Every element in a vector space has a unique additive inverse.
+\end{tcolorbox}
+
+\textbf{Proof:} Suppose $v \in V$ and both $w$ and $w'$ satisfy $v + w = 0$ and $v + w' = 0$. Then:
+\begin{align*}
+    w' &= w' + 0 \\
+       &= w' + (v + w) \\
+       &= (w' + v) + w \\
+       &= (v + w') + w \\
+       &= 0 + w \\
+       &= w
+\end{align*}
+Thus $w = w'$. \hfill $\square$
+
+\begin{tcolorbox}
+\textbf{1.28 Notation: $-v$, $w - v$}
+
+Let $v, w \in V$.
+\begin{itemize}
+    \item $-v$ denotes the additive inverse of $v$.
+    \item $w - v$ is defined by $w - v = w + (-v)$.
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}
+\textbf{1.29 Notation: $V$}
+
+For the rest of this book, $V$ denotes a vector space over $\F$.
+\end{tcolorbox}
+
+%==============================================================================
+\section{Properties of Vector Spaces}
+%==============================================================================
+
+The following properties are not axioms; they are \textit{consequences} of the axioms.
+
+\begin{tcolorbox}
+\textbf{1.30 $0v = 0$}
+
+For every $v$ in a vector space, $0v = 0$.
+\end{tcolorbox}
+
+\textbf{Proof:} For $v \in V$:
+\begin{align*}
+    0v &= (0 + 0)v \\
+       &= 0v + 0v
+\end{align*}
+Adding the additive inverse of $0v$ to both sides:
+\[
+    0 = 0v
+\]
+\hfill $\square$
+
+\textbf{Notation warning:} In ``$0v = 0$'', the left $0$ is the \textit{scalar} zero, and the right $0$ is the \textit{vector} zero.
+
+\begin{tcolorbox}
+\textbf{1.31 $a0 = 0$}
+
+For every $a \in \F$, $a0 = 0$.
+\end{tcolorbox}
+
+\textbf{Proof:} For $a \in \F$:
+\begin{align*}
+    a0 &= a(0 + 0) \\
+       &= a0 + a0
+\end{align*}
+Adding $-(a0)$ to both sides gives $0 = a0$. \hfill $\square$
+
+\begin{tcolorbox}
+\textbf{1.32 $(-1)v = -v$}
+
+For every $v$ in a vector space, $(-1)v = -v$.
+\end{tcolorbox}
+
+\textbf{Proof:} For $v \in V$:
+\begin{align*}
+    v + (-1)v &= 1v + (-1)v \\
+              &= (1 + (-1))v \\
+              &= 0v \\
+              &= 0
+\end{align*}
+This shows $(-1)v$ is an additive inverse of $v$. By uniqueness (1.27), $(-1)v = -v$. \hfill $\square$
+
+\textbf{Key insight:} We can now write $-v$ as $(-1)v$. Subtraction is just a special case of scalar multiplication!
+
+\begin{result}
+\textbf{Summary of key results:}
+\begin{itemize}
+    \item $0v = 0$ (scalar zero times any vector is the zero vector)
+    \item $a0 = 0$ (any scalar times the zero vector is the zero vector)
+    \item $(-1)v = -v$ (the additive inverse is scalar multiplication by $-1$)
+\end{itemize}
+These three results connect the scalar and vector versions of ``zero'' and ``negative.''
+\end{result}
+
+%==============================================================================
+\newpage
+\section*{Non-Examples and Pitfalls}
+%==============================================================================
+
+Understanding what is \textit{not} a vector space is as important as knowing the definition.
+
+\begin{tcolorbox}[colframe=black!50]
+\textbf{Non-Example: The Empty Set}
+
+The empty set $\emptyset$ is not a vector space because it fails the additive identity axiom: there is no element $0 \in \emptyset$.
+
+\textbf{Key point:} Every vector space must contain at least one element (the zero vector).
+\end{tcolorbox}
+
+\begin{tcolorbox}[colframe=black!50]
+\textbf{Non-Example: $\R^2$ with ``wrong'' scalar multiplication}
+
+Consider $\R^2$ with standard addition but scalar multiplication defined by:
+\[
+    \lambda(x, y) = (\lambda x, 0)
+\]
+
+This is \textbf{not} a vector space. Check the multiplicative identity:
+\[
+    1(x, y) = (1 \cdot x, 0) = (x, 0) \neq (x, y)
+\]
+unless $y = 0$. The axiom $1v = v$ fails.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colframe=black!50]
+\textbf{Non-Example: Positive Reals}
+
+Consider $\R^+ = \{x \in \R : x > 0\}$ with standard addition and scalar multiplication. This is \textbf{not} a vector space because:
+\begin{itemize}
+    \item The additive identity would need to be $0$, but $0 \notin \R^+$.
+    \item For $v = 1 \in \R^+$, the additive inverse $-1 \notin \R^+$.
+\end{itemize}
+
+\textbf{Note:} With different operations (multiplication as ``addition'' and exponentiation as ``scalar multiplication''), $\R^+$ \textit{can} be made into a vector space!
+\end{tcolorbox}
+
+%==============================================================================
+\section*{Verifying Vector Space Axioms}
+%==============================================================================
+
+\begin{result}
+\textbf{Strategy for proving $V$ is a vector space:}
+
+\begin{enumerate}
+    \item Define addition on $V$ (check it maps $V \times V \to V$).
+    \item Define scalar multiplication (check it maps $\F \times V \to V$).
+    \item Verify all 8 axioms.
+\end{enumerate}
+
+\textbf{Common shortcuts:}
+\begin{itemize}
+    \item If $V$ inherits operations from a known vector space (like $\F^n$ or $\F^S$), most axioms follow automatically.
+    \item Commutativity and associativity often follow from the corresponding properties in $\F$.
+\end{itemize}
+\end{result}
+
+\begin{result}
+\textbf{Strategy for proving $V$ is NOT a vector space:}
+
+Find ONE axiom that fails and provide a specific counterexample.
+
+\textbf{Common failures:}
+\begin{itemize}
+    \item No additive identity ($0 \notin V$)
+    \item No additive inverses ($-v \notin V$ for some $v$)
+    \item Not closed under addition ($u + v \notin V$)
+    \item Not closed under scalar multiplication ($\lambda v \notin V$)
+    \item Multiplicative identity fails ($1v \neq v$)
+\end{itemize}
+\end{result}
+
+%==============================================================================
+
+\vfill
+\begin{center}
+\rule{0.5\linewidth}{0.4pt}
+
+\textit{Key Takeaways}
+\end{center}
+\begin{enumerate}
+    \item \textbf{Vector space axioms (CAAIMD$^2$):} 8 properties defining addition and scalar multiplication
+    \item \textbf{Uniqueness:} Additive identity and inverses are unique
+    \item \textbf{Key consequences:} $0v = 0$, $a0 = 0$, $(-1)v = -v$
+    \item \textbf{Verification strategy:} Check all 8 axioms (or find one that fails for non-examples)
+\end{enumerate}
+
+\subsection*{Relevant Exercises}
+Practice these problems from LADR to reinforce the material:
+\begin{itemize}
+    \item Section 1B: 1, 2, 3, 4, 5, 6
+\end{itemize}
+
+\begin{tcolorbox}[colframe=black!50]
+\textbf{Common Problem Types:}
+\begin{description}[style=nextline, leftmargin=1em, labelindent=0pt]
+    \item[Prove a property from axioms]
+    Start with one side. Apply axioms step-by-step. Justify each step by naming the axiom used.
+
+    \item[Prove uniqueness]
+    Assume two objects satisfy the definition. Show they must be equal using the defining property.
+
+    \item[Verify a set is a vector space]
+    Define operations clearly. Verify closure. Check all 8 axioms (use shortcuts when operations are inherited).
+
+    \item[Show a set is NOT a vector space]
+    Find one axiom that fails. Give a specific counterexample with explicit values.
+\end{description}
+\end{tcolorbox}
+
+\end{document}
