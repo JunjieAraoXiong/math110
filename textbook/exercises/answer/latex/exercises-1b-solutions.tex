@@ -99,6 +99,58 @@
 \end{minipage}
 \vspace{1.5em}
 
+%------------------------------------------------------------------------------
+% DEFINITIONS AND KEY RESULTS
+%------------------------------------------------------------------------------
+
+\begin{tcolorbox}
+\textbf{Definition 1.19 (Addition, Scalar Multiplication).}
+\begin{itemize}[nosep, leftmargin=1.5em]
+\item An \textbf{addition} on $V$ assigns $u + v \in V$ to each pair $u, v \in V$.
+\item A \textbf{scalar multiplication} on $V$ assigns $\lambda v \in V$ to each $\lambda \in \F$, $v \in V$.
+\end{itemize}
+
+\medskip
+\textbf{Definition 1.20 (Vector Space).}
+A \textbf{vector space} over $\F$ is a set $V$ with addition and scalar multiplication satisfying:
+
+\smallskip
+\begin{tabular}{@{}ll@{}}
+\textbf{(C)} Commutativity: & $u + v = v + u$ \\
+\textbf{(A1)} Associativity (add): & $(u + v) + w = u + (v + w)$ \\
+\textbf{(A2)} Associativity (scalar): & $(ab)v = a(bv)$ \\
+\textbf{(I)} Additive identity: & $\exists\, 0 \in V$ such that $v + 0 = v$ \\
+\textbf{(Inv)} Additive inverse: & $\forall v \in V$, $\exists w \in V$ such that $v + w = 0$ \\
+\textbf{(M)} Multiplicative identity: & $1v = v$ \\
+\textbf{(D1)} Distributivity: & $a(u + v) = au + av$ \\
+\textbf{(D2)} Distributivity: & $(a + b)v = av + bv$
+\end{tabular}
+
+\medskip
+\textbf{Definition 1.21.} Elements of a vector space are called \textbf{vectors} or \textbf{points}.
+
+\medskip
+\textbf{Definition 1.22.} A vector space over $\R$ is a \textbf{real vector space}; over $\C$ is a \textbf{complex vector space}.
+
+\medskip
+\textbf{Notation 1.24.} $\F^S$ denotes all functions $f: S \to \F$, with pointwise operations: $(f+g)(x) = f(x) + g(x)$ and $(\lambda f)(x) = \lambda f(x)$.
+
+\medskip
+\textbf{Notation 1.28.} $-v$ denotes the additive inverse of $v$; \quad $w - v := w + (-v)$.
+
+\medskip
+\textbf{Key Results:}
+\begin{itemize}[nosep, leftmargin=1.5em]
+\item \textbf{1.26} The additive identity is unique.
+\item \textbf{1.27} Every element has a unique additive inverse (denoted $-v$).
+\item \textbf{1.30} $0v = 0$ for all $v \in V$ (scalar zero $\to$ vector zero).
+\item \textbf{1.31} $a0 = 0$ for all $a \in \F$ (any scalar $\times$ zero vector $= 0$).
+\item \textbf{1.32} $(-1)v = -v$ (negation = scalar multiplication by $-1$).
+\end{itemize}
+\end{tcolorbox}
+
+\bigskip
+
 %==============================================================================
 % BASIC VECTOR SPACE PROPERTIES (1-3)
 %==============================================================================
@@ -106,16 +158,120 @@
 \exercise
 Prove that $-(-v) = v$ for every $v \in V$.
 
+\begin{hintbox}
+\textbf{Reading the Question}
+
+\textit{Step 1: Notice the objects.} The statement involves:
+\begin{itemize}[nosep, leftmargin=1.5em]
+    \item $v \in V$ (a vector)
+    \item $-v$ (additive inverse)
+    \item equality of vectors
+\end{itemize}
+No coordinates, no scalars, no calculations---only \textbf{addition}, \textbf{zero}, and \textbf{inverse}.
+
+\textit{Step 2: Recognize defined symbols.} Is ``$-v$'' something you can manipulate algebraically? \textbf{No.} In LADR, $-v$ is \textit{defined} as the unique vector satisfying $v + (-v) = 0$. When you see inverse, identity, or zero, your brain should trigger: \textbf{unpack the definition}.
+
+\textit{Step 3: Ask ``what does it mean?''} Before proving, translate:
+\begin{itemize}[nosep, leftmargin=1.5em]
+    \item $-v$ = the unique vector that adds to $v$ to give zero
+    \item $-(-v)$ = the unique vector that adds to $(-v)$ to give zero
+\end{itemize}
+So the problem becomes: show that $v$ is the thing that cancels $(-v)$.
+
+\textit{Step 4: Spot the word ``prove.''} The problem says \textit{prove}, not compute, find, or simplify. This means: no formulas, no coordinates---use \textbf{axioms + logic}.
+
+\textit{Step 5: Recognize the uniqueness pattern.} Whenever you see inverse, identity, zero, or cancellation, think: ``There is a \textbf{uniqueness theorem} I can exploit.''
+
+\medskip
+\textbf{Intuition: What Does ``Inverse of an Inverse'' Mean?}
+
+Before diving into the proof, pause and \textit{think}:
+
+\textit{Q1: What is $-v$ conceptually?} It's the vector that ``undoes'' $v$---adding them returns you to zero, the neutral element. Think of $-v$ as the \textbf{reversal} of $v$.
+
+\textit{Q2: What happens when you reverse a reversal?} If you turn around, then turn around again, you face your original direction. If you undo an undo, you're back where you started.
+
+\textit{Q3: Why should $-(-v) = v$?} Because $v$ is the thing that undoes $-v$. The definition of $-(-v)$ is ``the unique vector that cancels $-v$''---and $v$ does exactly that!
+
+\textit{Pattern recognition:} This is an example of an \textbf{involution}---an operation that is its own inverse. Negation applied twice returns to the original. You'll see this pattern throughout mathematics:
+\begin{itemize}[nosep, leftmargin=1.5em]
+    \item Numbers: $-(-5) = 5$
+    \item Logic: $\neg(\neg P) = P$
+    \item Functions: $(f^{-1})^{-1} = f$
+    \item Geometry: reflecting twice across a line returns to original position
+\end{itemize}
+
+The proof below makes this intuition rigorous using only the axioms.
+
+\medskip
+\textbf{Why other proof styles don't work here:}
+\begin{itemize}[nosep, leftmargin=1.5em]
+    \item Contradiction? Nothing to contradict
+    \item Induction? No integer structure
+    \item Computation? No coordinates given
+    \item Examples? Must prove for \textit{all} $v$
+\end{itemize}
+
+\medskip
+\textbf{The proof template:}
+\begin{enumerate}[nosep, leftmargin=1.5em]
+    \item State the definition of $-(-v)$
+    \item Show that $v$ satisfies that definition
+    \item Invoke uniqueness (Lemma 1.25)
+\end{enumerate}
+
+\textit{Axioms used:} commutativity, existence of additive inverse, uniqueness of additive inverse.
+\end{hintbox}
+
 \begin{solutionbox}
-\textbf{Solution:} By definition, $-(-v)$ is the additive inverse of $(-v)$, meaning it is the unique element satisfying $(-v) + (-(-v)) = 0$.
+\textbf{Solution:} We use the uniqueness of the additive inverse.
 
-We claim that $v$ satisfies this property. Indeed:
+\medskip
+\textbf{Proof Strategy:} We cannot ``compute'' $-(-v)$ directly---there's no formula. Instead, we use the \textbf{defining property} of $-(-v)$: it is the unique vector $w$ such that $(-v) + w = 0$. If we can show that $v$ has this property, then $v$ must equal $-(-v)$.
+
+\medskip
+\textbf{Step 1: State what we need to show.}
+
+By definition, $-(-v)$ is characterized by:
 \[
-    (-v) + v = v + (-v) = 0
+    (-v) + (-(-v)) = 0.
 \]
-where the first equality uses commutativity of addition.
+Our goal: verify that $v$ satisfies this same equation, i.e., that $(-v) + v = 0$.
 
-Since $v$ is an element such that $(-v) + v = 0$, and the additive inverse of $(-v)$ is unique, we conclude that $-(-v) = v$. \hfill $\square$
+\medskip
+\textbf{Step 2: Verify that $v$ satisfies the defining property.}
+
+We compute:
+\[
+    (-v) + v = v + (-v) \quad \text{(commutativity of addition)}
+\]
+\[
+    = 0 \quad \text{(definition of additive inverse: } -v \text{ is the inverse of } v\text{)}
+\]
+
+So $v$ satisfies $(-v) + v = 0$---exactly the defining property of $-(-v)$.
+
+\medskip
+\textbf{Step 3: Apply uniqueness.}
+
+Lemma 1.25 (uniqueness of additive inverse) states: for any vector $u$, there is exactly \textbf{one} vector $w$ satisfying $u + w = 0$.
+
+Applying this with $u = -v$:
+\begin{itemize}[nosep, leftmargin=1.5em]
+    \item By definition, $-(-v)$ is the unique solution to $(-v) + w = 0$.
+    \item We just showed $v$ satisfies $(-v) + v = 0$.
+    \item By uniqueness, $v = -(-v)$.
+\end{itemize}
+
+\medskip
+\textbf{Conclusion:}
+\[
+    \boxed{-(-v) = v}
+\]
+
+\medskip
+\textit{Reflection:} Notice we never ``canceled'' anything or used subtraction rules. We only used: (1) the definition of additive inverse, (2) commutativity, and (3) uniqueness. This is a template for many proofs in abstract algebra.
+\hfill $\square$
 \end{solutionbox}
 
 \bigskip
@@ -125,30 +281,133 @@ Since $v$ is an element such that $(-v) + v = 0$, and the additive inverse of $(
 \exercise
 Suppose $a \in \F$, $v \in V$, and $av = 0$. Prove that $a = 0$ or $v = 0$.
 
+\begin{hintbox}
+\textbf{Reading the Question}
+
+\textit{Step 0: Spot the ``or'' in the conclusion.} The statement asks you to prove:
+\[
+a = 0 \quad \text{or} \quad v = 0
+\]
+A standard logical equivalence: $(P \text{ or } Q) \Leftrightarrow (\neg P \Rightarrow Q)$. So the problem is \textit{really} asking: \textbf{if $a \neq 0$, then $v = 0$}. This is why the solution assumes $a \neq 0$ and derives $v = 0$.
+
+\textit{Step 1: Notice ``$a \in \F$'' (field).} What is the key property of a field? Every nonzero element has a \textbf{multiplicative inverse}. So assuming $a \neq 0$ gives you $a^{-1}$---the engine of the proof.
+
+\textit{Step 2: The equation $av = 0$ is a vector equation.} You want to ``cancel'' the scalar $a$. Cancellation works when inverses exist---exactly why we assumed $a \neq 0$.
+
+\textit{Step 3: No coordinates given.} This means: use \textbf{axioms only}, not computation.
+
+\medskip
+\textbf{Clue-to-Strategy Map}
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Clue in problem} & \textbf{What it hints} \\
+\midrule
+``$a \in \F$'' & Use multiplicative inverse \\
+``$av = 0$'' & Cancellation argument \\
+``or'' in conclusion & Use contrapositive \\
+No coordinates & Axioms only \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\medskip
+\textbf{Intuition: Why Can't Scaling Produce Zero from Nothing?}
+
+Before the proof, let's build intuition through questions:
+
+\textit{Q1: What does scalar multiplication do geometrically?} Multiplying a vector by $a$ \textbf{scales} it---stretching if $|a| > 1$, shrinking if $|a| < 1$, and flipping direction if $a < 0$.
+
+\textit{Q2: Can scaling ever ``annihilate'' a vector?} If $v \neq 0$, then $v$ points somewhere in space. Scaling changes \textit{how far} it points, but not \textit{that} it points somewhere (unless the scalar is zero). You can't shrink a nonzero vector into nothing with a nonzero scale factor.
+
+\textit{Q3: What if $av = 0$?} Something collapsed to zero. Either:
+\begin{itemize}[nosep, leftmargin=1.5em]
+    \item The scalar $a = 0$ (you scaled by nothing), or
+    \item The vector $v = 0$ (there was nothing to scale).
+\end{itemize}
+There's no third option. This is the ``no zero divisors'' property.
+
+\textit{Q4: Why does this require a field?} In $\Z/6\Z$ (integers mod 6), we have $2 \cdot 3 = 0$ even though $2 \neq 0$ and $3 \neq 0$. Fields exclude such ``zero divisors'' by requiring every nonzero element to have an inverse. The proof exploits this: if $a \neq 0$, we can ``undo'' the scaling by multiplying by $a^{-1}$.
+
+\textit{Analogy:} Think of $a$ as a ``lens'' and $v$ as ``light.'' If the output is darkness ($0$), either the lens blocked everything ($a = 0$) or there was no light to begin with ($v = 0$). A clear lens ($a \neq 0$) cannot create darkness from light.
+
+\textit{Looking ahead:} This is a load-bearing result for linear independence, bases, and solving linear equations.
+\end{hintbox}
+
 \begin{solutionbox}
-\textbf{Solution:} Suppose $a \neq 0$. We will show that $v = 0$.
+\textbf{Solution:} We prove the contrapositive: if $a \neq 0$, then $v = 0$.
 
-Since $a \neq 0$ and $\F$ is a field, $a$ has a multiplicative inverse $a^{-1} \in \F$.
+\medskip
+\textbf{Proof Strategy:} The statement ``$a = 0$ or $v = 0$'' is logically equivalent to ``if $a \neq 0$, then $v = 0$.'' This reformulation tells us exactly what to assume ($a \neq 0$) and what to prove ($v = 0$).
 
-From $av = 0$, multiply both sides by $a^{-1}$:
+The key insight: if $a \neq 0$, then $a$ has a multiplicative inverse $a^{-1}$ in the field $\F$. We can ``undo'' the scalar multiplication by applying $a^{-1}$.
+
+\medskip
+\textbf{Step 1: Setup---use the field structure.}
+
+Suppose $a \neq 0$. Since $\F$ is a field, every nonzero element has a multiplicative inverse. Therefore, $a^{-1} \in \F$ exists and satisfies $a^{-1} \cdot a = 1$.
+
+\medskip
+\textbf{Step 2: Apply the inverse to both sides.}
+
+Starting from the given equation $av = 0$, multiply both sides on the left by $a^{-1}$:
 \[
-    a^{-1}(av) = a^{-1} \cdot 0.
+    a^{-1}(av) = a^{-1} \cdot 0_V.
 \]
 
-The left side simplifies using associativity of scalar multiplication:
+\textit{Why is this valid?} Scalar multiplication is a function from $\F \times V \to V$. We're applying the same scalar to both sides of a vector equation.
+
+\medskip
+\textbf{Step 3: Simplify the left side.}
+
+Using the \textit{associativity of scalar multiplication} (axiom):
 \[
-    a^{-1}(av) = (a^{-1}a)v = 1 \cdot v = v.
+    a^{-1}(av) = (a^{-1} \cdot a)v = 1 \cdot v.
+\]
+Then using the \textit{multiplicative identity axiom}:
+\[
+    1 \cdot v = v.
 \]
 
-For the right side, we show $a^{-1} \cdot 0_V = 0_V$: Since $0_V = 0_V + 0_V$, we have
+So the left side simplifies to $v$.
+
+\medskip
+\textbf{Step 4: Simplify the right side (sub-lemma).}
+
+We need: $a^{-1} \cdot 0_V = 0_V$ for any scalar $a^{-1}$.
+
+\textit{Proof of sub-lemma:} The zero vector satisfies $0_V + 0_V = 0_V$ (additive identity). Therefore:
+\begin{align*}
+    a^{-1} \cdot 0_V &= a^{-1} \cdot (0_V + 0_V) && \text{(property of } 0_V\text{)} \\
+    &= a^{-1} \cdot 0_V + a^{-1} \cdot 0_V && \text{(distributivity)}
+\end{align*}
+
+Now we have $a^{-1} \cdot 0_V = a^{-1} \cdot 0_V + a^{-1} \cdot 0_V$. Adding $-(a^{-1} \cdot 0_V)$ to both sides:
 \[
-    a^{-1} \cdot 0_V = a^{-1}(0_V + 0_V) = a^{-1} \cdot 0_V + a^{-1} \cdot 0_V.
+    0_V = a^{-1} \cdot 0_V.
 \]
-Adding $-(a^{-1} \cdot 0_V)$ to both sides gives $0_V = a^{-1} \cdot 0_V$.
 
-Therefore $v = 0$.
+\medskip
+\textbf{Step 5: Combine results.}
 
-We have shown: if $a \neq 0$, then $v = 0$. Equivalently, $a = 0$ or $v = 0$. \hfill $\square$
+From Steps 3 and 4:
+\[
+    v = a^{-1}(av) = a^{-1} \cdot 0_V = 0_V.
+\]
+
+\medskip
+\textbf{Conclusion:}
+
+We have shown: if $a \neq 0$, then $v = 0$.
+
+By contrapositive equivalence, this proves: $av = 0 \Rightarrow a = 0$ or $v = 0$.
+\[
+    \boxed{a = 0 \text{ or } v = 0}
+\]
+
+\medskip
+\textit{Reflection:} The proof has two engines: (1) the field structure gives us $a^{-1}$, and (2) the vector space axioms let us ``cancel'' and simplify. This result is foundational---it's why we can solve $av = b$ uniquely when $a \neq 0$.
+\hfill $\square$
 \end{solutionbox}
 
 \bigskip
@@ -158,42 +417,129 @@ We have shown: if $a \neq 0$, then $v = 0$. Equivalently, $a = 0$ or $v = 0$. \h
 \exercise
 Suppose $v, w \in V$. Explain why there exists a unique $x \in V$ such that $v + 3x = w$.
 
+\begin{hintbox}
+\textbf{Reading the Question}
+
+\textit{Step 1: Notice the structure.} The statement involves:
+\begin{itemize}[nosep, leftmargin=1.5em]
+    \item Two given vectors $v, w \in V$
+    \item An unknown vector $x \in V$ to find
+    \item A linear equation $v + 3x = w$
+    \item Two claims: existence and uniqueness
+\end{itemize}
+
+\textit{Step 2: Recognize the pattern.} This is a \textbf{linear equation in one vector variable}. In ordinary algebra, solving $a + 3x = b$ gives $x = \frac{1}{3}(b - a)$. The same algebraic manipulation works in vector spaces---but we must justify each step using axioms.
+
+\textit{Step 3: The word ``explain.''} This signals: show your reasoning clearly. For existence-uniqueness problems, you need two parts:
+\begin{itemize}[nosep, leftmargin=1.5em]
+    \item \textbf{Existence:} Construct an $x$ and verify it works
+    \item \textbf{Uniqueness:} Show any two solutions must be equal
+\end{itemize}
+
+\textit{Step 4: Why does uniqueness require proof?} In some algebraic structures, equations can have multiple solutions or none. Here, the field structure (specifically, $3 \neq 0$ has inverse $\frac{1}{3}$) guarantees exactly one solution.
+
+\medskip
+\textbf{Intuition: Solving Equations in Vector Spaces}
+
+Before the proof, build intuition through questions:
+
+\textit{Q1: What does $v + 3x = w$ mean geometrically?} Starting at $v$, we want to find a vector $x$ such that adding $3x$ (three copies of $x$) lands us at $w$. We need $3x$ to ``bridge the gap'' from $v$ to $w$.
+
+\textit{Q2: What is that gap?} The displacement from $v$ to $w$ is $w - v$. So we need $3x = w - v$, meaning $x$ is one-third of that displacement.
+
+\textit{Q3: Why is there exactly one solution?}
+\begin{itemize}[nosep, leftmargin=1.5em]
+    \item \textbf{Existence:} We can always compute $\frac{1}{3}(w - v)$ because $\frac{1}{3} \in \F$ exists (fields have multiplicative inverses for nonzero elements).
+    \item \textbf{Uniqueness:} If two different $x$'s worked, their difference would satisfy $3(x_1 - x_2) = 0$. By Exercise 2 (no zero divisors), this forces $x_1 - x_2 = 0$.
+\end{itemize}
+
+\textit{Q4: What makes this different from solving equations in $\Z$?} Over integers, $3x = 6$ has solution $x = 2$, but $3x = 7$ has no integer solution. In a vector space over a field, we can always ``divide'' by nonzero scalars.
+
+\textit{Pattern recognition:} This is the prototype for solving $\alpha x = \beta$ in any algebraic structure with inverses. The existence of $\alpha^{-1}$ is the key.
+\end{hintbox}
+
 \begin{solutionbox}
 \textbf{Solution:} We prove both existence and uniqueness.
 
-\textbf{Existence:} Define $x = \frac{1}{3}(w + (-v)) = \frac{1}{3}(w - v)$.
+\medskip
+\textbf{Proof Strategy:} The equation $v + 3x = w$ is linear in $x$. To solve it:
+\begin{enumerate}[nosep, leftmargin=1.5em]
+    \item Isolate $x$ algebraically to guess the answer
+    \item Verify the guess satisfies the equation (existence)
+    \item Show any two solutions must coincide (uniqueness)
+\end{enumerate}
 
-We verify that this $x$ satisfies $v + 3x = w$:
+\medskip
+\textbf{Part 1: Existence---construct a solution.}
+
+\textit{Finding the candidate:} Rearranging $v + 3x = w$ suggests:
+\[
+    3x = w - v = w + (-v), \quad \text{so} \quad x = \tfrac{1}{3}(w - v).
+\]
+This is our candidate. Now we verify it actually works.
+
+\textit{Verification:} Substitute $x = \frac{1}{3}(w - v)$ into $v + 3x$:
 \begin{align*}
-    v + 3x &= v + 3 \cdot \frac{1}{3}(w - v) \\
-    &= v + 1 \cdot (w - v) \\
-    &= v + (w - v) \\
-    &= v + w + (-v) \\
-    &= w + v + (-v) \\
-    &= w + 0 = w.
+    v + 3x &= v + 3 \cdot \tfrac{1}{3}(w - v) = v + (w - v) \\
+    &= v + w + (-v) = w + (v + (-v)) \\
+    &= w + 0 = w. \quad \checkmark
 \end{align*}
 
-\textbf{Uniqueness:} Suppose $x_1$ and $x_2$ both satisfy the equation:
+So $x = \frac{1}{3}(w - v)$ is indeed a solution. $\checkmark$
+
+\medskip
+\textbf{Part 2: Uniqueness---show the solution is the only one.}
+
+\textit{Setup:} Suppose $x_1$ and $x_2$ both satisfy the equation:
 \[
     v + 3x_1 = w \quad \text{and} \quad v + 3x_2 = w.
 \]
 
-Then $v + 3x_1 = v + 3x_2$.
+\textit{Step 1:} Since both equal $w$, we have:
+\[
+    v + 3x_1 = v + 3x_2.
+\]
 
-Adding $(-v)$ to both sides:
+\textit{Step 2:} Add $(-v)$ to both sides (using existence of additive inverse):
+\[
+    (-v) + (v + 3x_1) = (-v) + (v + 3x_2).
+\]
+
+\textit{Step 3:} Apply associativity:
+\[
+    ((-v) + v) + 3x_1 = ((-v) + v) + 3x_2.
+\]
+
+\textit{Step 4:} Simplify using $(-v) + v = 0$ and $0 + 3x_i = 3x_i$:
 \[
     3x_1 = 3x_2.
 \]
 
-Multiplying both sides by $\frac{1}{3}$:
+\textit{Step 5:} Multiply both sides by $\frac{1}{3}$ (the multiplicative inverse of $3$ in $\F$):
 \[
-    x_1 = x_2.
+    \tfrac{1}{3}(3x_1) = \tfrac{1}{3}(3x_2).
 \]
 
-Therefore there exists a unique $x \in V$ such that $v + 3x = w$:
+\textit{Step 6:} Apply associativity of scalar multiplication:
 \[
-    \boxed{x = \frac{1}{3}(w - v)}
+    (\tfrac{1}{3} \cdot 3)x_1 = (\tfrac{1}{3} \cdot 3)x_2 \implies 1 \cdot x_1 = 1 \cdot x_2 \implies x_1 = x_2.
 \]
+
+\medskip
+\textbf{Conclusion:}
+
+There exists a unique $x \in V$ such that $v + 3x = w$, namely:
+\[
+    \boxed{x = \tfrac{1}{3}(w - v)}
+\]
+
+\medskip
+\textit{Reflection:} This proof uses two key features of vector spaces over fields:
+\begin{enumerate}[nosep, leftmargin=1.5em]
+    \item \textbf{Additive structure:} We can ``move $v$ to the other side'' using $(-v)$.
+    \item \textbf{Scalar inverses:} We can ``divide by 3'' using $\frac{1}{3} \in \F$.
+\end{enumerate}
+The same template solves any equation $v + ax = w$ when $a \neq 0$: the unique solution is $x = \frac{1}{a}(w - v)$.
 \hfill $\square$
 \end{solutionbox}
 
@@ -206,19 +552,102 @@ Therefore there exists a unique $x \in V$ such that $v + 3x = w$:
 \exercise
 The empty set is not a vector space. The empty set fails to satisfy only one of the requirements listed in the definition of a vector space (1.20). Which one?
 
-\begin{solutionbox}
-\textbf{Solution:} The empty set fails the \textbf{additive identity} axiom.
-
-The additive identity axiom requires the existence of an element $0 \in V$ such that $v + 0 = v$ for all $v \in V$.
-
-Since the empty set contains no elements, there is no element that could serve as the additive identity. Even though the condition ``$v + 0 = v$ for all $v \in V$'' is vacuously true (there are no $v$ to check), the requirement that such an element \emph{exists} fails.
-
-All other axioms are vacuously satisfied because they are statements about elements of $V$, and the empty set has no elements to violate them. \hfill $\square$
-\end{solutionbox}
-
 \begin{hintbox}
-\textbf{Why not additive inverse?} The additive inverse axiom says: ``for every $v \in V$, there exists $w \in V$ such that $v + w = 0$.'' For the empty set, there are no elements $v$ to consider, so this statement is vacuously true. The key difference is that additive identity requires something to \emph{exist}, while additive inverse only makes claims about elements that are already there.
+\textbf{Reading the Question}
+
+\textit{Step 1: Understand what's being asked.} The problem says the empty set fails \textbf{exactly one} axiom. Your job:
+\begin{itemize}[nosep, leftmargin=1.5em]
+    \item Identify which axiom fails
+    \item Explain why all others are satisfied
+\end{itemize}
+
+\textit{Step 2: Recall the axioms.} Definition 1.20 lists eight axioms. Each has a specific logical structure---some begin with ``there exists,'' others begin with ``for all.''
+
+\textit{Step 3: What does ``empty'' mean logically?}
+\begin{itemize}[nosep, leftmargin=1.5em]
+    \item If $V = \varnothing$, then $V$ contains \textbf{no elements}
+    \item Any statement ``for all $v \in V$, ...'' is \textbf{vacuously true} (there's nothing to check)
+    \item Any statement ``there exists $v \in V$ such that ...'' is \textbf{false} (there's nothing to find)
+\end{itemize}
+
+\medskip
+\textbf{Intuition: Why Does the Empty Set Fail?}
+
+\textit{Q1: What's the difference between ``for all'' and ``there exists''?}
+\begin{itemize}[nosep, leftmargin=1.5em]
+    \item ``For all $v \in V$, $P(v)$'' is true when $V = \varnothing$ (no counterexamples exist)
+    \item ``There exists $v \in V$ such that $P(v)$'' is false when $V = \varnothing$ (no witnesses exist)
+\end{itemize}
+
+\textit{Q2: Which axiom requires something to exist?} The additive identity axiom:
+\[
+    \textcolor{red}{\exists}\, 0 \in V \text{ such that } \forall v \in V,\; v + 0 = v
+\]
+The red $\exists$ is the problem---it demands that $V$ \textbf{contain} an element.
+
+\textit{Q3: Why not the additive inverse axiom?} It says:
+\[
+    \textcolor{blue}{\forall}\, v \in V,\; \exists w \in V \text{ such that } v + w = 0
+\]
+The blue $\forall$ comes \textbf{first}. When $V = \varnothing$, there are no $v$'s to check, so this is vacuously true.
+
+\medskip
+\textbf{Key Insight:} The order of quantifiers matters. ``$\exists \ldots \forall$'' fails on empty sets; ``$\forall \ldots \exists$'' is vacuously true.
 \end{hintbox}
+
+\begin{solutionbox}
+\textbf{Claim.} The empty set $\varnothing$ is not a vector space. Among the axioms in Definition 1.20, it fails \textbf{exactly one}: the additive identity axiom.
+
+\medskip
+\textbf{Proof.}
+
+Recall the \textbf{additive identity axiom} for a vector space $V$:
+\[
+    \exists\, 0 \in V \text{ such that } \forall v \in V,\; v + 0 = v.
+    \tag{AI}
+\]
+
+This axiom has two logically distinct components:
+\begin{enumerate}[nosep, leftmargin=1.5em]
+    \item \textbf{Existence:} there exists an element $0 \in V$;
+    \item \textbf{Universal property:} for all $v \in V$, $v + 0 = v$.
+\end{enumerate}
+
+Now suppose $V = \varnothing$.
+\begin{itemize}[nosep, leftmargin=1.5em]
+    \item Since $\varnothing$ contains no elements, the existential statement $\exists\, 0 \in V$ is \textbf{false}.
+    \item Therefore, axiom (AI) fails.
+\end{itemize}
+
+Hence, the empty set does \textbf{not} satisfy the additive identity axiom and is not a vector space.
+
+\medskip
+\textbf{Why all other axioms are satisfied.}
+
+All remaining vector space axioms have the logical form
+\[
+    \forall v, w \in V,\; P(v,w)
+    \quad\text{or}\quad
+    \forall v \in V,\; \exists w \in V \text{ such that } Q(v,w),
+\]
+where the universal quantifier ranges over elements of $V$.
+
+Since $V = \varnothing$, there are \textbf{no elements} $v$ or $w$ to check. Therefore, every such universally quantified statement is \textbf{vacuously true}.
+
+\textit{Note:} The additive inverse axiom begins with $\forall v \in V$, so it's vacuously true on $\varnothing$ (see hintbox discussion of quantifier order).
+
+\medskip
+\textbf{Conclusion.}
+
+The empty set satisfies all vector space axioms \textbf{except} the additive identity axiom. Consequently, the empty set is not a vector space.
+\[
+    \boxed{\varnothing \text{ is not a vector space because it lacks an additive identity.}}
+\]
+
+\medskip
+\textit{Conceptual one-liner:} A vector space must \emph{contain} an additive identity; the empty set contains nothing.
+\hfill $\square$
+\end{solutionbox}
 
 \bigskip
 
@@ -231,24 +660,101 @@ Show that in the definition of a vector space (1.20), the additive inverse condi
 \]
 Here the $0$ on the left side is the number $0$, and the $0$ on the right side is the additive identity of $V$.
 
+\begin{hintbox}
+\textbf{Reading the Question}
+
+\textit{Step 1: Clarify the two zeros.} This problem uses the same symbol ``$0$'' for two different objects:
+\begin{itemize}[nosep, leftmargin=1.5em]
+    \item Left side: $0$ is the \textbf{scalar zero} in $\F$
+    \item Right side: $0$ is the \textbf{vector zero} $0_V$ in $V$
+\end{itemize}
+The condition $0v = 0$ says: scaling any vector by the scalar zero yields the zero vector.
+
+\textit{Step 2: Understand ``replaced.''} The problem asks: can we swap out one axiom for another equivalent condition? We need to show that under the other axioms, ``$0v = 0$ for all $v$'' implies ``every $v$ has an additive inverse.''
+
+\textit{Step 3: Identify the candidate inverse.} What vector could serve as $-v$? The natural guess is $(-1)v$---scaling by $-1$. We must show $v + (-1)v = 0_V$.
+
+\medskip
+\textbf{Intuition: Why $(-1)v$ Should Be the Inverse}
+
+\textit{Q1: What does $(-1)v$ mean geometrically?} Scaling by $-1$ flips the direction of $v$. Adding $v$ and its flip should return to the origin.
+
+\textit{Q2: How does $0v = 0$ help?} We need to show $v + (-1)v = 0$. Using distributivity:
+\[
+    v + (-1)v = 1 \cdot v + (-1)v = (1 + (-1))v = 0v
+\]
+If we know $0v = 0_V$, we're done!
+
+\textit{Q3: Why is distributivity the key link?} Distributivity connects scalar addition ($1 + (-1) = 0$) to vector structure. Without it, we couldn't ``factor out'' the $v$.
+
+\medskip
+\textbf{Proof template:}
+\begin{enumerate}[nosep, leftmargin=1.5em]
+    \item State the goal: show additive inverse exists for each $v$
+    \item Propose candidate: $w = (-1)v$
+    \item Verify: compute $v + (-1)v$ using distributivity
+    \item Apply assumed condition $0v = 0_V$
+    \item Conclude $(-1)v$ is the additive inverse
+\end{enumerate}
+\end{hintbox}
+
 \begin{solutionbox}
-\textbf{Solution:} We must show that if $V$ satisfies all vector space axioms except the additive inverse axiom, but does satisfy $0v = 0$ for all $v \in V$, then the additive inverse axiom holds.
+\textbf{Solution:} The additive inverse axiom follows from $0v = 0$ using distributivity.
 
-We need to show: for every $v \in V$, there exists $w \in V$ such that $v + w = 0$.
+\medskip
+\textbf{Claim.} If $V$ satisfies all vector space axioms except the additive inverse axiom, but satisfies $0v = 0_V$ for all $v \in V$, then every vector has an additive inverse.
 
-Given $v \in V$, consider $w = (-1)v$.
+\medskip
+\textbf{Proof Strategy:} For each $v \in V$, we must exhibit a vector $w$ such that $v + w = 0_V$. The candidate is $w = (-1)v$. We verify this works using distributivity to ``factor out'' $v$, then apply the assumed condition.
 
-We claim $v + w = 0$:
+\medskip
+\textbf{Step 1: Identify the candidate inverse.}
+
+Given any $v \in V$, consider $w = (-1)v$.
+
+This is well-defined since $-1 \in \F$ and scalar multiplication is defined.
+
+\medskip
+\textbf{Step 2: Verify $v + (-1)v = 0_V$.}
+
 \begin{align*}
-    v + (-1)v &= 1 \cdot v + (-1)v && \text{(multiplicative identity axiom)} \\
-    &= (1 + (-1))v && \text{(distributivity over scalar addition)} \\
-    &= 0v && \text{(arithmetic in } \F\text{)} \\
-    &= 0 && \text{(our assumed condition)}
+    v + (-1)v &= 1 \cdot v + (-1)v && \text{(multiplicative identity: } 1 \cdot v = v\text{)} \\[4pt]
+    &= (1 + (-1))v && \text{(distributivity over scalar addition)} \\[4pt]
+    &= 0 \cdot v && \text{(arithmetic in } \F\text{: } 1 + (-1) = 0\text{)} \\[4pt]
+    &= 0_V && \text{(assumed condition: } 0v = 0_V\text{)}
 \end{align*}
 
-Therefore $(-1)v$ serves as the additive inverse of $v$.
+\medskip
+\textbf{Step 3: Conclude additive inverses exist.}
 
-This shows the additive inverse axiom is a consequence of $0v = 0$ together with the other axioms. Hence the two formulations of vector space are equivalent. \hfill $\square$
+For every $v \in V$, we have found $w = (-1)v \in V$ such that $v + w = 0_V$.
+
+This is precisely the additive inverse axiom.
+
+\medskip
+\textbf{Conclusion:}
+\[
+    \boxed{\text{The condition } 0v = 0 \text{ can replace the additive inverse axiom}}
+\]
+The two formulations of vector space are equivalent: under the other axioms, each implies the other.
+
+\medskip
+\textit{Reflection:} The distributive law is the bridge between scalar arithmetic and vector structure. It lets us transfer the equation $1 + (-1) = 0$ in $\F$ to the equation $v + (-1)v = 0_V$ in $V$.
+
+\medskip
+\textbf{Converse: Standard axiom implies $0v = 0_V$.}
+
+In any vector space (with the standard additive inverse axiom), we have:
+\begin{align*}
+    0v &= (0 + 0)v && \text{(arithmetic: } 0 + 0 = 0\text{)} \\
+    &= 0v + 0v && \text{(distributivity over scalar addition)}
+\end{align*}
+Adding $-(0v)$ to both sides:
+\[
+    0_V = 0v + 0v + (-(0v)) = 0v + 0_V = 0v.
+\]
+Thus the two formulations are equivalent.
+\hfill $\square$
 \end{solutionbox}
 
 \newpage
@@ -269,29 +775,85 @@ Let $\infty$ and $-\infty$ denote two distinct objects, neither of which is in $
 \]
 Is $\R \cup \{\infty, -\infty\}$ a vector space over $\R$? Explain.
 
+\begin{hintbox}
+\textbf{Reading the Question}
+
+\textit{Step 1: Understand the verification strategy.} To show something is \textbf{not} a vector space, we need to find \textbf{one} axiom that fails. We don't need to check all eight---just find a counterexample to one.
+
+\textit{Step 2: Identify suspicious operations.} Look at the definition $\infty + (-\infty) = 0$. This is unusual---it defines a specific value for something that is typically ``indeterminate.'' Whenever you see a forced definition for a problematic case, suspect trouble.
+
+\textit{Step 3: Test associativity.} The axiom $(a + b) + c = a + (b + c)$ requires all groupings to give the same result. The elements $1$, $\infty$, and $-\infty$ interact in potentially inconsistent ways.
+
+\medskip
+\textbf{Intuition: Why Extended Reals Fail}
+
+\textit{Q1: What goes wrong with $\infty$?} The symbol $\infty$ ``absorbs'' finite additions: $1 + \infty = \infty$. But when $\infty$ meets $-\infty$, they ``cancel'' to $0$. These two behaviors clash.
+
+\textit{Q2: Why is this problematic for associativity?} Consider $(1 + \infty) + (-\infty)$:
+\begin{itemize}[nosep, leftmargin=1.5em]
+    \item First grouping: $1 + \infty = \infty$, then $\infty + (-\infty) = 0$
+    \item Second grouping: $\infty + (-\infty) = 0$, then $1 + 0 = 1$
+\end{itemize}
+The finite $1$ gets ``lost'' in the first grouping but ``survives'' in the second.
+
+\textit{Q3: Why is $\infty - \infty$ an indeterminate form in calculus?} Precisely because of this ambiguity---the ``answer'' depends on how you approach it. This is a feature in analysis but a bug for algebra.
+
+\medskip
+\textbf{Proof template:}
+\begin{enumerate}[nosep, leftmargin=1.5em]
+    \item Choose elements that exploit the $\infty + (-\infty) = 0$ rule
+    \item Compute LHS: $(a + b) + c$
+    \item Compute RHS: $a + (b + c)$
+    \item Show LHS $\neq$ RHS
+\end{enumerate}
+\end{hintbox}
+
 \begin{solutionbox}
 \textbf{Solution:} No, $\R \cup \{\infty, -\infty\}$ is not a vector space over $\R$.
 
-The \textbf{associativity of addition} fails.
+\medskip
+\textbf{Claim.} The set $\R \cup \{\infty, -\infty\}$ with the given operations fails the associativity of addition axiom.
 
-Consider the following computation:
+\medskip
+\textbf{Proof Strategy:} To disprove associativity, we find one counterexample: specific elements $a, b, c$ such that $(a + b) + c \neq a + (b + c)$. The key insight is that $\infty$ ``absorbs'' finite numbers, but $\infty + (-\infty) = 0$ creates information loss.
+
+\medskip
+\textbf{Step 1: Choose elements.}
+
+Let $a = 1$, $b = \infty$, and $c = -\infty$.
+
+\medskip
+\textbf{Step 2: Compute LHS = $(a + b) + c$.}
+\begin{align*}
+    (1 + \infty) + (-\infty) &= \infty + (-\infty) && \text{(since } t + \infty = \infty \text{ for } t \in \R\text{)} \\
+    &= 0 && \text{(given definition)}
+\end{align*}
+
+\medskip
+\textbf{Step 3: Compute RHS = $a + (b + c)$.}
+\begin{align*}
+    1 + (\infty + (-\infty)) &= 1 + 0 && \text{(given definition)} \\
+    &= 1 && \text{(standard addition in } \R\text{)}
+\end{align*}
+
+\medskip
+\textbf{Step 4: Compare LHS and RHS.}
 \[
-    (1 + \infty) + (-\infty) = \infty + (-\infty) = 0.
+    \text{LHS} = 0 \neq 1 = \text{RHS}
 \]
 
-But:
+\medskip
+\textbf{Conclusion:}
+
+Since $(1 + \infty) + (-\infty) \neq 1 + (\infty + (-\infty))$, addition is \textbf{not associative}.
 \[
-    1 + (\infty + (-\infty)) = 1 + 0 = 1.
+    \boxed{\R \cup \{\infty, -\infty\} \text{ is not a vector space (associativity fails)}}
 \]
 
-Since $(1 + \infty) + (-\infty) = 0 \neq 1 = 1 + (\infty + (-\infty))$, addition is not associative.
-
-Therefore $\R \cup \{\infty, -\infty\}$ is not a vector space. \hfill $\square$
+\medskip
+\textit{Reflection:} The extended real line is useful in analysis for limits and measure theory, but the rule $\infty + (-\infty) = 0$ forces ``indeterminate form'' behavior that violates associativity. This is why $\infty - \infty$ remains undefined in rigorous calculus.
+\hfill $\square$
 \end{solutionbox}
-
-\begin{hintbox}
-\textbf{Intuition:} The extended real line $\R \cup \{\infty, -\infty\}$ is useful in analysis (limits, measure theory), but the rules $\infty + (-\infty) = 0$ and $t + \infty = \infty$ are inherently inconsistent with associativity. This is why $\infty - \infty$ is considered an ``indeterminate form'' in calculus.
-\end{hintbox}
 
 \newpage
 
@@ -306,35 +868,139 @@ Suppose $S$ is a nonempty set and $V$ is a vector space. Let $V^S$ denote the se
 \]
 for all $f, g \in V^S$, $\lambda \in \F$, and $x \in S$. Prove that $V^S$ is a vector space.
 
+\begin{hintbox}
+\textbf{Reading the Question}
+
+\textit{Step 1: Understand ``pointwise'' operations.} The definitions
+\[
+    (f + g)(x) = f(x) + g(x), \qquad (\lambda f)(x) = \lambda f(x)
+\]
+mean we perform operations \textbf{at each point} $x \in S$ separately, using the operations in $V$.
+
+\textit{Step 2: Recognize the proof pattern.} Every axiom in $V^S$ reduces to the corresponding axiom in $V$. The template is:
+\begin{enumerate}[nosep, leftmargin=1.5em]
+    \item Write the definition of the operation in $V^S$
+    \item Apply the axiom in $V$ at each point $x$
+    \item Translate back to the definition in $V^S$
+\end{enumerate}
+
+\textit{Step 3: Understand function equality.} Two functions $f, g \in V^S$ are equal if and only if $f(x) = g(x)$ for all $x \in S$. This is why ``pointwise'' proofs work.
+
+\medskip
+\textbf{Intuition: Function Spaces as ``Component-wise'' Structures}
+
+\textit{Q1: What is $V^S$ concretely?} Think of $S = \{1, 2, 3\}$. Then $f \in V^S$ is determined by three values: $f(1), f(2), f(3) \in V$. This is essentially $V^3 = V \times V \times V$.
+
+\textit{Q2: What if $S = \R$?} Then $V^S$ is the space of all functions $\R \to V$. For $V = \R$, this includes polynomials, continuous functions, even discontinuous monsters.
+
+\textit{Q3: Why does the proof work uniformly?} Because we never use specific properties of $S$---only that $V$ is a vector space. The pointwise operations ``lift'' the vector space structure from $V$ to $V^S$.
+
+\textit{Pattern recognition:} This construction appears everywhere: function spaces $C([0,1])$, sequence spaces $\ell^p$, and spaces of matrices (which are functions $\{1,\ldots,m\} \times \{1,\ldots,n\} \to \F$).
+
+\medskip
+\textbf{Proof template for each axiom:}
+\begin{enumerate}[nosep, leftmargin=1.5em]
+    \item Let $x \in S$ be arbitrary
+    \item Compute both sides using the pointwise definition
+    \item Apply the corresponding axiom in $V$
+    \item Conclude equality holds for all $x$, hence functions are equal
+\end{enumerate}
+\end{hintbox}
+
 \begin{solutionbox}
-\textbf{Solution:} We verify all eight vector space axioms for $V^S$. Each property is verified pointwise: two functions are equal if and only if they agree at every point $x \in S$.
+\textbf{Solution:} We verify that $V^S$ is a vector space over $\F$.
 
 \medskip
-\textit{Addition axioms:}
-\begin{enumerate}[leftmargin=2em, itemsep=0.3em]
-    \item \textbf{Commutativity:} $(f + g)(x) = f(x) + g(x) = g(x) + f(x) = (g + f)(x)$.
-
-    \item \textbf{Associativity:} $((f + g) + h)(x) = (f(x) + g(x)) + h(x) = f(x) + (g(x) + h(x)) = (f + (g + h))(x)$.
-
-    \item \textbf{Additive identity:} Define $\mathbf{0} \in V^S$ by $\mathbf{0}(x) = 0_V$. Then $(f + \mathbf{0})(x) = f(x) + 0_V = f(x)$.
-
-    \item \textbf{Additive inverse:} Define $(-f)(x) = -f(x)$. Then $(f + (-f))(x) = f(x) + (-f(x)) = 0_V$.
-\end{enumerate}
+\textbf{Proof Strategy:} Each axiom is verified \textbf{pointwise}: we show both sides of each equation agree at every $x \in S$. Since functions are equal if and only if they agree everywhere, this proves the axiom in $V^S$. The key is that each step reduces to the corresponding axiom in $V$.
 
 \medskip
-\textit{Scalar multiplication axioms:}
-\begin{enumerate}[leftmargin=2em, itemsep=0.3em, resume]
-    \item \textbf{Multiplicative identity:} $(1f)(x) = 1 \cdot f(x) = f(x)$.
-
-    \item \textbf{Associativity:} $((\alpha\beta)f)(x) = (\alpha\beta)f(x) = \alpha(\beta f(x)) = (\alpha(\beta f))(x)$.
-
-    \item \textbf{Distributivity (vectors):} $(\lambda(f + g))(x) = \lambda(f(x) + g(x)) = \lambda f(x) + \lambda g(x) = (\lambda f + \lambda g)(x)$.
-
-    \item \textbf{Distributivity (scalars):} $((\alpha + \beta)f)(x) = (\alpha + \beta)f(x) = \alpha f(x) + \beta f(x) = (\alpha f + \beta f)(x)$.
-\end{enumerate}
+\textit{Concrete example:} Let $S = \{1, 2\}$ and $V = \R$. Then $V^S \cong \R^2$: a function $f \in V^S$ corresponds to the pair $(f(1), f(2))$. The operations become:
+\[
+    (f + g) \leftrightarrow (f(1) + g(1),\, f(2) + g(2)), \quad
+    (\lambda f) \leftrightarrow (\lambda f(1),\, \lambda f(2))
+\]
+This is exactly $\R^2$ with component-wise operations. The general proof below works for \textit{any} $S$ and $V$.
 
 \medskip
-All axioms are satisfied, so $V^S$ is a vector space over $\F$. \hfill $\square$
+\textbf{Part 1: Addition Axioms}
+
+\medskip
+\textbf{Step 1: Commutativity of addition.}
+
+Let $f, g \in V^S$ and $x \in S$ be arbitrary.
+\begin{align*}
+    (f + g)(x) &= f(x) + g(x) && \text{(definition of addition in } V^S\text{)} \\
+    &= g(x) + f(x) && \text{(commutativity of addition in } V\text{)} \\
+    &= (g + f)(x) && \text{(definition of addition in } V^S\text{)}
+\end{align*}
+Since this holds for all $x \in S$, we have $f + g = g + f$.
+
+\medskip
+\textbf{Step 2: Associativity of addition.}
+
+Let $f, g, h \in V^S$ and $x \in S$.
+\begin{align*}
+    ((f + g) + h)(x) &= (f + g)(x) + h(x) && \text{(definition)} \\
+    &= (f(x) + g(x)) + h(x) && \text{(definition)} \\
+    &= f(x) + (g(x) + h(x)) && \text{(associativity in } V\text{)} \\
+    &= f(x) + (g + h)(x) && \text{(definition)} \\
+    &= (f + (g + h))(x) && \text{(definition)}
+\end{align*}
+Hence $(f + g) + h = f + (g + h)$.
+
+\medskip
+\textbf{Step 3: Additive identity.}
+
+Define $\mathbf{0} \in V^S$ by $\mathbf{0}(x) = 0_V$ for all $x \in S$ (the constant zero function).
+
+For any $f \in V^S$ and $x \in S$:
+\begin{align*}
+    (f + \mathbf{0})(x) &= f(x) + \mathbf{0}(x) && \text{(definition)} \\
+    &= f(x) + 0_V && \text{(definition of } \mathbf{0}\text{)} \\
+    &= f(x) && \text{(additive identity in } V\text{)}
+\end{align*}
+Hence $f + \mathbf{0} = f$, so $\mathbf{0}$ is the additive identity in $V^S$.
+
+\medskip
+\textbf{Step 4: Additive inverse.}
+
+Given $f \in V^S$, define $(-f) \in V^S$ by $(-f)(x) = -f(x)$ for all $x \in S$.
+
+For any $x \in S$:
+\begin{align*}
+    (f + (-f))(x) &= f(x) + (-f)(x) && \text{(definition)} \\
+    &= f(x) + (-f(x)) && \text{(definition of } -f\text{)} \\
+    &= 0_V && \text{(additive inverse in } V\text{)} \\
+    &= \mathbf{0}(x) && \text{(definition of } \mathbf{0}\text{)}
+\end{align*}
+Hence $f + (-f) = \mathbf{0}$, so $(-f)$ is the additive inverse of $f$.
+
+\medskip
+\textbf{Part 2: Scalar Multiplication Axioms}
+
+\textit{The remaining axioms follow the same pointwise pattern. We show the key step for each:}
+
+\medskip
+\textbf{Step 5 (Multiplicative identity):} $(1 \cdot f)(x) = 1 \cdot f(x) = f(x)$, so $1 \cdot f = f$.
+
+\medskip
+\textbf{Step 6 (Associativity):} $((\alpha\beta)f)(x) = (\alpha\beta)f(x) = \alpha(\beta f(x)) = (\alpha(\beta f))(x)$.
+
+\medskip
+\textbf{Step 7 (Dist.\ over vectors):} $(\lambda(f+g))(x) = \lambda(f(x)+g(x)) = \lambda f(x) + \lambda g(x) = (\lambda f + \lambda g)(x)$.
+
+\medskip
+\textbf{Step 8 (Dist.\ over scalars):} $((\alpha+\beta)f)(x) = (\alpha+\beta)f(x) = \alpha f(x) + \beta f(x) = (\alpha f + \beta f)(x)$.
+
+\medskip
+\textbf{Conclusion:}
+\[
+    \boxed{V^S \text{ is a vector space over } \F}
+\]
+
+\medskip
+\textit{Reflection:} Function spaces are a fundamental construction in mathematics. The proof shows that pointwise operations ``lift'' the vector space structure from $V$ to $V^S$. This same pattern gives us spaces of continuous functions, integrable functions, and infinite-dimensional spaces central to analysis.
+\hfill $\square$
 \end{solutionbox}
 
 \newpage
@@ -355,53 +1021,168 @@ for all $u_1, v_1, u_2, v_2, u, v \in V$ and $a, b \in \R$.
 
 Prove that with the definitions of addition and scalar multiplication as above, $V_\C$ is a complex vector space.
 
+\begin{hintbox}
+\textbf{Reading the Question}
+
+\textit{Step 1: Parse the notation.} The notation $u + iv$ is suggestive but potentially confusing:
+\begin{itemize}[nosep, leftmargin=1.5em]
+    \item This is \textbf{not} actual addition---$u, v \in V$ and $i \notin V$
+    \item Think of $u + iv$ as an \textbf{ordered pair} $(u, v) \in V \times V$
+    \item The ``$i$'' is a formal symbol marking the second component
+\end{itemize}
+
+\textit{Step 2: Understand the operations.} The definitions mimic complex arithmetic:
+\begin{itemize}[nosep, leftmargin=1.5em]
+    \item Addition: component-wise, just like $(a,b) + (c,d) = (a+c, b+d)$
+    \item Scalar mult.: $(a+bi)(u+iv) = (au-bv) + i(av+bu)$ uses the rule $i^2 = -1$
+\end{itemize}
+Compare to $(a+bi)(c+di) = (ac-bd) + (ad+bc)i$ in $\C$.
+
+\textit{Step 3: Proof strategy overview.} We must verify 8 axioms. The addition axioms are straightforward (reduce to $V$). The scalar multiplication axioms require more care, especially associativity.
+
+\medskip
+\textbf{Intuition: Why Complexify?}
+
+\textit{Q1: What is $V_\C$ for a concrete $V$?} If $V = \R^n$, then $V_\C \cong \C^n$. An element $(x_1, \ldots, x_n) + i(y_1, \ldots, y_n)$ corresponds to $(x_1 + iy_1, \ldots, x_n + iy_n) \in \C^n$.
+
+\textit{Q2: Why do we need complexification?} Real vector spaces may lack eigenvalues. For example, the rotation matrix $\begin{psmallmatrix} 0 & -1 \\ 1 & 0 \end{psmallmatrix}$ has no real eigenvalues, but has complex eigenvalues $\pm i$. Complexification gives us access to all eigenvalues.
+
+\textit{Q3: Why does the scalar multiplication formula work?} Expanding $(a+bi)(u+iv)$ formally and using $i^2 = -1$:
+\[
+    au + aiv + biu + bi^2v = au + i(av) + i(bu) - bv = (au - bv) + i(av + bu)
+\]
+
+\textit{Pattern recognition:} Complexification is a \textbf{base change}---extending scalars from $\R$ to $\C$. This construction generalizes to other field extensions in algebra.
+
+\medskip
+\textbf{Proof template:}
+\begin{enumerate}[nosep, leftmargin=1.5em]
+    \item Addition axioms: reduce to component-wise properties in $V$
+    \item Scalar mult.\ axioms: expand using the formula, regroup, use $V$ axioms
+    \item Associativity requires careful algebra with real/imaginary parts
+\end{enumerate}
+\end{hintbox}
+
 \begin{solutionbox}
-\textbf{Solution:} We verify the vector space axioms for $V_\C$ over $\C$. Each axiom reduces to properties of the real vector space $V$.
+\textbf{Solution:} We verify that $V_\C$ is a vector space over $\C$.
 
 \medskip
-\textit{Addition axioms} (straightforward from $V$):
-\begin{enumerate}[leftmargin=2em, itemsep=0.2em]
-    \item \textbf{Commutativity:} $(u_1 + iv_1) + (u_2 + iv_2) = (u_1 + u_2) + i(v_1 + v_2) = (u_2 + u_1) + i(v_2 + v_1)$.
-
-    \item \textbf{Associativity:} Follows from associativity in $V$ applied to both components.
-
-    \item \textbf{Additive identity:} $0_{V_\C} = 0 + i0$. Then $(u + iv) + (0 + i0) = u + iv$.
-
-    \item \textbf{Additive inverse:} $-(u + iv) = (-u) + i(-v)$.
-\end{enumerate}
+\textbf{Proof Strategy:} The addition axioms follow directly from component-wise operations in $V$. The scalar multiplication axioms require expanding the definition and using properties of $V$. The trickiest is associativity of scalar multiplication, which requires tracking real and imaginary parts carefully.
 
 \medskip
-\textit{Scalar multiplication axioms:}
-\begin{enumerate}[leftmargin=2em, itemsep=0.2em, resume]
-    \item \textbf{Multiplicative identity:} $(1 + 0i)(u + iv) = (1 \cdot u - 0 \cdot v) + i(1 \cdot v + 0 \cdot u) = u + iv$. \checkmark
+\textbf{Part 1: Addition Axioms} (component-wise, inherited from $V$)
 
-    \item \textbf{Associativity:} Let $\alpha = a + bi$, $\beta = c + di$, so $\alpha\beta = (ac-bd) + (ad+bc)i$.
-
-    Computing $(\alpha\beta)(u + iv)$:
-    \[
-        = ((ac-bd)u - (ad+bc)v) + i((ac-bd)v + (ad+bc)u).
-    \]
-    Computing $\alpha(\beta(u + iv))$ where $\beta(u+iv) = (cu-dv) + i(cv+du)$:
-    \begin{align*}
-        &= (a(cu-dv) - b(cv+du)) + i(a(cv+du) + b(cu-dv)) \\
-        &= (acu - adv - bcv - bdu) + i(acv + adu + bcu - bdv).
-    \end{align*}
-    Regrouping confirms equality. \checkmark
-
-    \item \textbf{Distributivity (vectors):} For $\lambda = a + bi$:
-    \begin{align*}
-        \lambda((u_1 + iv_1) + (u_2 + iv_2)) &= (a+bi)((u_1+u_2) + i(v_1+v_2)) \\
-        &= \lambda(u_1 + iv_1) + \lambda(u_2 + iv_2). \quad \checkmark
-    \end{align*}
-
-    \item \textbf{Distributivity (scalars):} For $\alpha = a + bi$, $\beta = c + di$:
-    \[
-        (\alpha + \beta)(u + iv) = \alpha(u + iv) + \beta(u + iv). \quad \checkmark
-    \]
-\end{enumerate}
+\begin{itemize}[nosep, leftmargin=1.5em]
+    \item \textbf{Commutativity:} $(u_1+iv_1) + (u_2+iv_2) = (u_1+u_2) + i(v_1+v_2) = (u_2+u_1) + i(v_2+v_1)$ by commutativity in $V$.
+    \item \textbf{Associativity:} Follows from associativity of $+$ in each component.
+    \item \textbf{Identity:} $0_{V_\C} = 0_V + i \cdot 0_V$ satisfies $(u+iv) + 0_{V_\C} = u + iv$.
+    \item \textbf{Inverse:} $-(u+iv) = (-u) + i(-v)$ satisfies $(u+iv) + (-(u+iv)) = 0_{V_\C}$.
+\end{itemize}
 
 \medskip
-All axioms are satisfied, so $V_\C$ is a complex vector space. \hfill $\square$
+\textbf{Part 2: Scalar Multiplication Axioms}
+
+\medskip
+\textbf{Step 5: Multiplicative identity.}
+
+The identity in $\C$ is $1 = 1 + 0i$.
+\begin{align*}
+    (1 + 0i)(u + iv) &= (1 \cdot u - 0 \cdot v) + i(1 \cdot v + 0 \cdot u) && \text{(definition)} \\
+    &= (u - 0_V) + i(v + 0_V) && \text{(scalar mult.\ in } V\text{)} \\
+    &= u + iv && \text{(additive identity in } V\text{)}
+\end{align*}
+
+\medskip
+\textbf{Step 6: Associativity of scalar multiplication.}
+
+Let $\alpha = a + bi$, $\beta = c + di \in \C$, and $u + iv \in V_\C$.
+
+First, compute $\alpha\beta$ in $\C$:
+\[
+    \alpha\beta = (a + bi)(c + di) = (ac - bd) + (ad + bc)i
+\]
+
+\textit{Compute LHS: $(\alpha\beta)(u + iv)$.}
+
+Let $p = ac - bd$ and $q = ad + bc$, so $\alpha\beta = p + qi$.
+\begin{align*}
+    (\alpha\beta)(u + iv) &= (p + qi)(u + iv) \\
+    &= (pu - qv) + i(pv + qu) && \text{(definition)} \\
+    &= ((ac-bd)u - (ad+bc)v) + i((ac-bd)v + (ad+bc)u)
+\end{align*}
+
+\textit{Compute RHS: $\alpha(\beta(u + iv))$.}
+
+First, compute $\beta(u + iv)$:
+\begin{align*}
+    \beta(u + iv) &= (c + di)(u + iv) \\
+    &= (cu - dv) + i(cv + du) && \text{(definition)}
+\end{align*}
+
+Let $w_1 = cu - dv$ and $w_2 = cv + du$. Now compute $\alpha(w_1 + iw_2)$:
+\begin{align*}
+    \alpha(w_1 + iw_2) &= (a + bi)(w_1 + iw_2) \\
+    &= (aw_1 - bw_2) + i(aw_2 + bw_1) && \text{(definition)}
+\end{align*}
+
+Expand the real part:
+\begin{align*}
+    aw_1 - bw_2 &= a(cu - dv) - b(cv + du) \\
+    &= acu - adv - bcv - bdu \\
+    &= (ac - bd)u + (-ad - bc)v \\
+    &= (ac - bd)u - (ad + bc)v
+\end{align*}
+
+Expand the imaginary part:
+\begin{align*}
+    aw_2 + bw_1 &= a(cv + du) + b(cu - dv) \\
+    &= acv + adu + bcu - bdv \\
+    &= (ac - bd)v + (ad + bc)u
+\end{align*}
+
+Therefore:
+\[
+    \alpha(\beta(u + iv)) = ((ac-bd)u - (ad+bc)v) + i((ac-bd)v + (ad+bc)u)
+\]
+
+\textit{Compare:} LHS $=$ RHS. Hence $(\alpha\beta)(u + iv) = \alpha(\beta(u + iv))$.
+
+\medskip
+\textit{Verification summary:}
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Component} & \textbf{Value (both sides)} \\
+\midrule
+Real part & $(ac-bd)u - (ad+bc)v$ \\
+Imaginary part & $(ac-bd)v + (ad+bc)u$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+Since both components match, $(\alpha\beta)(u + iv) = \alpha(\beta(u + iv))$. $\checkmark$
+
+\medskip
+\textbf{Step 7: Distributivity over vector addition.}
+
+Expanding $\lambda((u_1+iv_1) + (u_2+iv_2))$ and regrouping by components:
+\[
+    = ((au_1-bv_1) + (au_2-bv_2)) + i((av_1+bu_1) + (av_2+bu_2)) = \lambda(u_1+iv_1) + \lambda(u_2+iv_2). \; \checkmark
+\]
+
+\medskip
+\textbf{Step 8: Distributivity over scalar addition.}
+
+Similarly, $(\alpha+\beta)(u+iv) = ((a+c)u - (b+d)v) + i((a+c)v + (b+d)u)$ regroups to $\alpha(u+iv) + \beta(u+iv)$. $\checkmark$
+
+\medskip
+\textbf{Conclusion:}
+\[
+    \boxed{V_\C \text{ is a complex vector space}}
+\]
+
+\medskip
+\textit{Reflection:} Complexification extends a real vector space to allow complex scalars. The construction is essential for spectral theory: every linear operator on a finite-dimensional complex vector space has eigenvalues (Fundamental Theorem of Algebra), but real operators may not. Complexification gives us access to the full spectrum.
+\hfill $\square$
 \end{solutionbox}
 
 \vfill
