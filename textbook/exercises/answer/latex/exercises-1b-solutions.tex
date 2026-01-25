@@ -13,6 +13,7 @@
 \usepackage{tikz}
 \usepackage{xcolor}
 \usepackage{tcolorbox}
+\tcbuselibrary{breakable}
 \usepackage{titlesec}
 \usepackage{booktabs}
 \usetikzlibrary{matrix, arrows.meta, positioning, calc, cd}
@@ -43,6 +44,7 @@
 }
 
 \newtcolorbox{solutionbox}{
+    breakable,
     boxrule=0.5pt,
     colback=black!3,
     colframe=black!40,
@@ -52,6 +54,7 @@
 }
 
 \newtcolorbox{result}{
+    breakable,
     boxrule=0.8pt,
     colback=white,
     colframe=black,
@@ -61,6 +64,7 @@
 }
 
 \newtcolorbox{hintbox}{
+    breakable,
     boxrule=0.5pt,
     colback=yellow!5,
     colframe=black!30,
@@ -102,10 +106,8 @@
 \exercise
 Prove that $-(-v) = v$ for every $v \in V$.
 
-\medskip
-
-\begin{solution}
-By definition, $-(-v)$ is the additive inverse of $(-v)$, meaning it is the unique element satisfying $(-v) + (-(-v)) = 0$.
+\begin{solutionbox}
+\textbf{Solution:} By definition, $-(-v)$ is the additive inverse of $(-v)$, meaning it is the unique element satisfying $(-v) + (-(-v)) = 0$.
 
 We claim that $v$ satisfies this property. Indeed:
 \[
@@ -114,7 +116,7 @@ We claim that $v$ satisfies this property. Indeed:
 where the first equality uses commutativity of addition.
 
 Since $v$ is an element such that $(-v) + v = 0$, and the additive inverse of $(-v)$ is unique, we conclude that $-(-v) = v$. \hfill $\square$
-\end{solution}
+\end{solutionbox}
 
 \bigskip
 
@@ -123,10 +125,8 @@ Since $v$ is an element such that $(-v) + v = 0$, and the additive inverse of $(
 \exercise
 Suppose $a \in \F$, $v \in V$, and $av = 0$. Prove that $a = 0$ or $v = 0$.
 
-\medskip
-
-\begin{solution}
-Suppose $a \neq 0$. We will show that $v = 0$.
+\begin{solutionbox}
+\textbf{Solution:} Suppose $a \neq 0$. We will show that $v = 0$.
 
 Since $a \neq 0$ and $\F$ is a field, $a$ has a multiplicative inverse $a^{-1} \in \F$.
 
@@ -149,7 +149,7 @@ Adding $-(a^{-1} \cdot 0_V)$ to both sides gives $0_V = a^{-1} \cdot 0_V$.
 Therefore $v = 0$.
 
 We have shown: if $a \neq 0$, then $v = 0$. Equivalently, $a = 0$ or $v = 0$. \hfill $\square$
-\end{solution}
+\end{solutionbox}
 
 \bigskip
 
@@ -157,8 +157,6 @@ We have shown: if $a \neq 0$, then $v = 0$. Equivalently, $a = 0$ or $v = 0$. \h
 
 \exercise
 Suppose $v, w \in V$. Explain why there exists a unique $x \in V$ such that $v + 3x = w$.
-
-\medskip
 
 \begin{solutionbox}
 \textbf{Solution:} We prove both existence and uniqueness.
@@ -208,17 +206,15 @@ Therefore there exists a unique $x \in V$ such that $v + 3x = w$:
 \exercise
 The empty set is not a vector space. The empty set fails to satisfy only one of the requirements listed in the definition of a vector space (1.20). Which one?
 
-\medskip
-
-\begin{solution}
-The empty set fails the \textbf{additive identity} axiom.
+\begin{solutionbox}
+\textbf{Solution:} The empty set fails the \textbf{additive identity} axiom.
 
 The additive identity axiom requires the existence of an element $0 \in V$ such that $v + 0 = v$ for all $v \in V$.
 
 Since the empty set contains no elements, there is no element that could serve as the additive identity. Even though the condition ``$v + 0 = v$ for all $v \in V$'' is vacuously true (there are no $v$ to check), the requirement that such an element \emph{exists} fails.
 
 All other axioms are vacuously satisfied because they are statements about elements of $V$, and the empty set has no elements to violate them. \hfill $\square$
-\end{solution}
+\end{solutionbox}
 
 \begin{hintbox}
 \textbf{Why not additive inverse?} The additive inverse axiom says: ``for every $v \in V$, there exists $w \in V$ such that $v + w = 0$.'' For the empty set, there are no elements $v$ to consider, so this statement is vacuously true. The key difference is that additive identity requires something to \emph{exist}, while additive inverse only makes claims about elements that are already there.

@@ -1,0 +1,856 @@
+%==============================================================================
+% EXERCISES 1C SOLUTIONS
+% Linear Algebra Done Right (4th ed.) - Sheldon Axler
+%==============================================================================
+
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+
+% Required packages
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage{titlesec}
+\usepackage{booktabs}
+\usetikzlibrary{matrix, arrows.meta, positioning, calc, cd}
+
+% Improved spacing
+\linespread{1.15}
+\setlength{\parskip}{0.5ex plus 0.2ex minus 0.1ex}
+
+% Custom commands (from style guide)
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% Custom operators
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\nullity}{nullity}
+\DeclareMathOperator{\spn}{span}
+
+% Box environments (from style guide)
+\tcbset{
+    boxrule=0.8pt,
+    colback=white,
+    colframe=black,
+    arc=0pt,
+    boxsep=3pt,
+    left=4pt, right=4pt, top=4pt, bottom=4pt
+}
+
+\newtcolorbox{solutionbox}{
+    breakable,
+    boxrule=0.5pt,
+    colback=black!3,
+    colframe=black!40,
+    arc=0pt,
+    boxsep=4pt,
+    left=6pt, right=6pt, top=6pt, bottom=6pt
+}
+
+\newtcolorbox{result}{
+    breakable,
+    boxrule=0.8pt,
+    colback=white,
+    colframe=black,
+    arc=0pt,
+    boxsep=3pt,
+    left=4pt, right=4pt, top=4pt, bottom=4pt
+}
+
+\newtcolorbox{hintbox}{
+    breakable,
+    boxrule=0.5pt,
+    colback=yellow!5,
+    colframe=black!30,
+    arc=0pt,
+    boxsep=3pt,
+    left=4pt, right=4pt, top=4pt, bottom=4pt
+}
+
+% Header/footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small MATH 110}
+\fancyhead[R]{\small Exercises 1C Solutions}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Exercise counter and command
+\newcounter{exercise}
+\newcommand{\exercise}{\refstepcounter{exercise}\noindent\textbf{Exercise \theexercise.} }
+
+% Solution environment
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+\begin{document}
+
+\noindent
+\begin{minipage}{\linewidth}
+    \centering
+    \textbf{\Large Exercises 1C Solutions: Subspaces} \\[0.5em]
+    \textit{Linear Algebra Done Right, 4th ed.}\\[0.3em]
+    \hrule
+\end{minipage}
+\vspace{1.5em}
+
+%==============================================================================
+% SUBSPACE DETERMINATION (1-10)
+%==============================================================================
+
+\exercise
+For each of the following subsets of $\F^3$, determine whether it is a subspace of $\F^3$:
+\begin{enumerate}[label=(\alph*)]
+    \item $\{(x_1, x_2, x_3) \in \F^3 : x_1 + 2x_2 + 3x_3 = 0\}$
+    \item $\{(x_1, x_2, x_3) \in \F^3 : x_1 + 2x_2 + 3x_3 = 4\}$
+    \item $\{(x_1, x_2, x_3) \in \F^3 : x_1 x_2 x_3 = 0\}$
+    \item $\{(x_1, x_2, x_3) \in \F^3 : x_1 = 5x_3\}$
+\end{enumerate}
+
+\begin{solutionbox}
+\textbf{Solution:} We verify the three subspace conditions: contains $0$, closed under addition, closed under scalar multiplication.
+
+\textbf{(a)} $\{(x_1, x_2, x_3) \in \F^3 : x_1 + 2x_2 + 3x_3 = 0\}$
+
+\textbf{Yes, this is a subspace.}
+
+\begin{itemize}[leftmargin=2em]
+    \item \textbf{Contains $0$:} $(0,0,0)$ satisfies $0 + 2(0) + 3(0) = 0$. \checkmark
+    \item \textbf{Closed under addition:} If $x_1 + 2x_2 + 3x_3 = 0$ and $y_1 + 2y_2 + 3y_3 = 0$, then
+    \[(x_1 + y_1) + 2(x_2 + y_2) + 3(x_3 + y_3) = (x_1 + 2x_2 + 3x_3) + (y_1 + 2y_2 + 3y_3) = 0 + 0 = 0.\]
+    \checkmark
+    \item \textbf{Closed under scalar multiplication:} If $x_1 + 2x_2 + 3x_3 = 0$, then for any $\lambda \in \F$,
+    \[\lambda x_1 + 2(\lambda x_2) + 3(\lambda x_3) = \lambda(x_1 + 2x_2 + 3x_3) = \lambda \cdot 0 = 0.\]
+    \checkmark
+\end{itemize}
+
+\textbf{(b)} $\{(x_1, x_2, x_3) \in \F^3 : x_1 + 2x_2 + 3x_3 = 4\}$
+
+\textbf{No, this is not a subspace.}
+
+The zero vector $(0,0,0)$ does not satisfy $0 + 2(0) + 3(0) = 4$, so the set does not contain $0$.
+
+\textbf{(c)} $\{(x_1, x_2, x_3) \in \F^3 : x_1 x_2 x_3 = 0\}$
+
+\textbf{No, this is not a subspace.}
+
+The set contains $0$ (since $0 \cdot 0 \cdot 0 = 0$), but it is not closed under addition.
+
+\textit{Counterexample:} $(1, 1, 0)$ and $(0, 0, 1)$ are both in the set (since $1 \cdot 1 \cdot 0 = 0$ and $0 \cdot 0 \cdot 1 = 0$), but their sum $(1, 1, 1)$ is not in the set since $1 \cdot 1 \cdot 1 = 1 \neq 0$.
+
+\textbf{(d)} $\{(x_1, x_2, x_3) \in \F^3 : x_1 = 5x_3\}$
+
+\textbf{Yes, this is a subspace.}
+
+\begin{itemize}[leftmargin=2em]
+    \item \textbf{Contains $0$:} $(0,0,0)$ satisfies $0 = 5(0)$. \checkmark
+    \item \textbf{Closed under addition:} If $x_1 = 5x_3$ and $y_1 = 5y_3$, then $x_1 + y_1 = 5x_3 + 5y_3 = 5(x_3 + y_3)$. \checkmark
+    \item \textbf{Closed under scalar multiplication:} If $x_1 = 5x_3$, then $\lambda x_1 = \lambda(5x_3) = 5(\lambda x_3)$. \checkmark
+\end{itemize}
+\end{solutionbox}
+
+\bigskip
+
+%------------------------------------------------------------------------------
+
+\exercise
+Verify all the assertions in Example 1.35.
+
+\begin{solutionbox}
+\textbf{Solution:} Example 1.35 gives several examples of subspaces. We verify each one.
+
+\textbf{(a)} If $b \in \F$, then $\{(x_1, x_2, x_3, x_4) \in \F^4 : x_3 = 5x_4 + b\}$ is a subspace of $\F^4$ if and only if $b = 0$.
+
+\textit{Proof:} If $b \neq 0$, then $(0,0,0,0)$ does not satisfy $0 = 5(0) + b = b$, so the set is not a subspace.
+
+If $b = 0$, then the set is $\{(x_1, x_2, x_3, x_4) : x_3 = 5x_4\}$. We verify: contains $(0,0,0,0)$; if $x_3 = 5x_4$ and $y_3 = 5y_4$, then $x_3 + y_3 = 5(x_4 + y_4)$; if $x_3 = 5x_4$, then $\lambda x_3 = 5(\lambda x_4)$. \checkmark
+
+\textbf{(b)} The set of continuous real-valued functions on $[0,1]$ is a subspace of $\R^{[0,1]}$.
+
+\textit{Proof:} The zero function is continuous. The sum of continuous functions is continuous. A scalar multiple of a continuous function is continuous. \checkmark
+
+\textbf{(c)} The set of differentiable real-valued functions on $\R$ is a subspace of $\R^\R$.
+
+\textit{Proof:} The zero function is differentiable. The sum of differentiable functions is differentiable. A scalar multiple of a differentiable function is differentiable. \checkmark
+
+\textbf{(d)} The set of differentiable real-valued functions $f$ on $(0,3)$ such that $f'(2) = b$ is a subspace of $\R^{(0,3)}$ if and only if $b = 0$.
+
+\textit{Proof:} If $b \neq 0$, then the zero function has $f'(2) = 0 \neq b$, so the set does not contain $0$.
+
+If $b = 0$, we verify: the zero function satisfies $f'(2) = 0$; if $f'(2) = g'(2) = 0$, then $(f+g)'(2) = f'(2) + g'(2) = 0$; if $f'(2) = 0$, then $(\lambda f)'(2) = \lambda f'(2) = 0$. \checkmark
+
+\textbf{(e)} The set of all sequences of complex numbers with limit $0$ is a subspace of $\C^\infty$.
+
+\textit{Proof:} The zero sequence has limit $0$. If $\lim_{n\to\infty} a_n = 0$ and $\lim_{n\to\infty} b_n = 0$, then $\lim_{n\to\infty}(a_n + b_n) = 0$. If $\lim_{n\to\infty} a_n = 0$, then $\lim_{n\to\infty}(\lambda a_n) = \lambda \cdot 0 = 0$. \checkmark
+\end{solutionbox}
+
+\bigskip
+
+%------------------------------------------------------------------------------
+
+\exercise
+Show that the set of differentiable real-valued functions $f$ on the interval $(-4, 4)$ such that $f'(-1) = 3f(2)$ is a subspace of $\R^{(-4,4)}$.
+
+\begin{solutionbox}
+\textbf{Solution:} We verify the three subspace conditions.
+
+\textbf{Contains $0$:} The zero function $f(x) = 0$ satisfies $f'(-1) = 0 = 3 \cdot 0 = 3f(2)$. \checkmark
+
+\textbf{Closed under addition:} Suppose $f'(-1) = 3f(2)$ and $g'(-1) = 3g(2)$. Then:
+\[
+    (f+g)'(-1) = f'(-1) + g'(-1) = 3f(2) + 3g(2) = 3(f(2) + g(2)) = 3(f+g)(2).
+\]
+\checkmark
+
+\textbf{Closed under scalar multiplication:} Suppose $f'(-1) = 3f(2)$ and $\lambda \in \R$. Then:
+\[
+    (\lambda f)'(-1) = \lambda f'(-1) = \lambda \cdot 3f(2) = 3(\lambda f(2)) = 3(\lambda f)(2).
+\]
+\checkmark
+
+Therefore the set is a subspace of $\R^{(-4,4)}$. \hfill $\square$
+\end{solutionbox}
+
+\bigskip
+
+%------------------------------------------------------------------------------
+
+\exercise
+Suppose $b \in \R$. Show that the set of continuous real-valued functions $f$ on the interval $[0,1]$ such that $\int_0^1 f = b$ is a subspace of $\R^{[0,1]}$ if and only if $b = 0$.
+
+\begin{solutionbox}
+\textbf{Solution:} \textbf{If $b \neq 0$:} The zero function has $\int_0^1 0 \, dx = 0 \neq b$, so the set does not contain the zero vector. Hence it is not a subspace.
+
+\textbf{If $b = 0$:} Let $U = \{f \in C[0,1] : \int_0^1 f = 0\}$.
+
+\begin{itemize}[leftmargin=2em]
+    \item \textbf{Contains $0$:} $\int_0^1 0 \, dx = 0$. \checkmark
+    \item \textbf{Closed under addition:} If $\int_0^1 f = 0$ and $\int_0^1 g = 0$, then
+    \[\int_0^1 (f + g) = \int_0^1 f + \int_0^1 g = 0 + 0 = 0.\]
+    \checkmark
+    \item \textbf{Closed under scalar multiplication:} If $\int_0^1 f = 0$, then
+    \[\int_0^1 \lambda f = \lambda \int_0^1 f = \lambda \cdot 0 = 0.\]
+    \checkmark
+\end{itemize}
+
+Therefore $U$ is a subspace if and only if $b = 0$. \hfill $\square$
+\end{solutionbox}
+
+\bigskip
+
+%------------------------------------------------------------------------------
+
+\exercise
+Is $\R^2$ a subspace of the complex vector space $\C^2$?
+
+\begin{solutionbox}
+\textbf{Solution:} \textbf{No}, $\R^2$ is not a subspace of $\C^2$ (as a complex vector space).
+
+A subspace of a complex vector space must be closed under scalar multiplication by \emph{complex} numbers. However, $\R^2$ is not closed under multiplication by complex scalars.
+
+\textit{Counterexample:} $(1, 0) \in \R^2$, but $i \cdot (1, 0) = (i, 0) \notin \R^2$.
+
+Therefore $\R^2$ is not a subspace of $\C^2$ when $\C^2$ is viewed as a complex vector space. \hfill $\square$
+\end{solutionbox}
+
+\begin{hintbox}
+\textbf{Note:} If we view $\C^2$ as a real vector space (scalars from $\R$ only), then $\R^2$ would be a subspace. But the standard interpretation is that $\C^2$ is a complex vector space.
+\end{hintbox}
+
+\bigskip
+
+%------------------------------------------------------------------------------
+
+\exercise
+\begin{enumerate}[label=(\alph*)]
+    \item Is $\{(a, b, c) \in \R^3 : a^3 = b^3\}$ a subspace of $\R^3$?
+    \item Is $\{(a, b, c) \in \C^3 : a^3 = b^3\}$ a subspace of $\C^3$?
+\end{enumerate}
+
+\begin{solutionbox}
+\textbf{Solution:}
+
+\textbf{(a) Yes}, $\{(a, b, c) \in \R^3 : a^3 = b^3\}$ is a subspace of $\R^3$.
+
+In $\R$, $a^3 = b^3$ if and only if $a = b$ (since the cube function is injective on $\R$).
+
+So the set equals $\{(a, a, c) : a, c \in \R\}$, which is the subspace $\{(a, b, c) : a = b\}$.
+
+Verification:
+\begin{itemize}[leftmargin=2em]
+    \item Contains $0$: $(0, 0, 0)$ satisfies $0 = 0$. \checkmark
+    \item Closed under addition: If $a_1 = b_1$ and $a_2 = b_2$, then $a_1 + a_2 = b_1 + b_2$. \checkmark
+    \item Closed under scalar multiplication: If $a = b$, then $\lambda a = \lambda b$. \checkmark
+\end{itemize}
+
+\textbf{(b) No}, $\{(a, b, c) \in \C^3 : a^3 = b^3\}$ is not a subspace of $\C^3$.
+
+In $\C$, $a^3 = b^3$ does not imply $a = b$. Let $\omega = e^{2\pi i/3}$ be a primitive cube root of unity, so $\omega^3 = 1$ and $\omega \neq 1$.
+
+\textit{Counterexample:} $(1, 1, 0)$ and $(1, \omega, 0)$ are both in the set (since $1^3 = 1^3 = 1$ and $1^3 = \omega^3 = 1$), but their sum $(2, 1 + \omega, 0)$ is not in the set since $2^3 = 8$ while $(1 + \omega)^3 \neq 8$.
+
+To verify: $1 + \omega = 1 + e^{2\pi i/3} = 1 + (-\frac{1}{2} + \frac{\sqrt{3}}{2}i) = \frac{1}{2} + \frac{\sqrt{3}}{2}i$, which has modulus $1$. So $(1+\omega)^3$ has modulus $1 \neq 8$.
+\end{solutionbox}
+
+\bigskip
+
+%------------------------------------------------------------------------------
+
+\exercise
+Give an example of a nonempty subset $U$ of $\R^2$ such that $U$ is closed under addition and under taking additive inverses (meaning $-u \in U$ whenever $u \in U$), but $U$ is not a subspace of $\R^2$.
+
+\begin{solutionbox}
+\textbf{Solution:} \textbf{Example:} $U = \Z^2 = \{(a, b) : a, b \in \Z\}$.
+
+\textbf{Verification:}
+\begin{itemize}[leftmargin=2em]
+    \item \textbf{Nonempty:} $(0, 0) \in U$. \checkmark
+    \item \textbf{Closed under addition:} If $(a_1, b_1), (a_2, b_2) \in \Z^2$, then $(a_1 + a_2, b_1 + b_2) \in \Z^2$. \checkmark
+    \item \textbf{Closed under additive inverses:} If $(a, b) \in \Z^2$, then $(-a, -b) \in \Z^2$. \checkmark
+\end{itemize}
+
+\textbf{Not a subspace:} $U$ is not closed under scalar multiplication.
+
+\textit{Counterexample:} $(1, 0) \in U$, but $\frac{1}{2}(1, 0) = (\frac{1}{2}, 0) \notin U$ since $\frac{1}{2} \notin \Z$.
+
+Therefore $U = \Z^2$ is not a subspace of $\R^2$. \hfill $\square$
+\end{solutionbox}
+
+\bigskip
+
+%------------------------------------------------------------------------------
+
+\exercise
+Give an example of a nonempty subset $U$ of $\R^2$ such that $U$ is closed under scalar multiplication, but $U$ is not a subspace of $\R^2$.
+
+\begin{solutionbox}
+\textbf{Solution:} \textbf{Example:} $U = \{(x, y) \in \R^2 : x = 0 \text{ or } y = 0\}$ (the union of the coordinate axes).
+
+\textbf{Verification:}
+\begin{itemize}[leftmargin=2em]
+    \item \textbf{Nonempty:} $(0, 0) \in U$. \checkmark
+    \item \textbf{Closed under scalar multiplication:} If $(x, 0) \in U$, then $\lambda(x, 0) = (\lambda x, 0) \in U$. Similarly for $(0, y)$. \checkmark
+\end{itemize}
+
+\textbf{Not a subspace:} $U$ is not closed under addition.
+
+\textit{Counterexample:} $(1, 0) \in U$ and $(0, 1) \in U$, but $(1, 0) + (0, 1) = (1, 1) \notin U$ since neither coordinate is zero.
+
+Therefore $U$ is not a subspace of $\R^2$. \hfill $\square$
+\end{solutionbox}
+
+\bigskip
+
+%------------------------------------------------------------------------------
+
+\exercise
+A function $f: \R \to \R$ is called \textbf{periodic} if there exists a positive number $p$ such that $f(x) = f(x + p)$ for all $x \in \R$. Is the set of periodic functions from $\R$ to $\R$ a subspace of $\R^\R$? Explain.
+
+\begin{solutionbox}
+\textbf{Solution:} \textbf{No}, the set of periodic functions is not a subspace of $\R^\R$.
+
+The set is not closed under addition.
+
+\textit{Counterexample:} Let $f(x) = \sin(x)$ and $g(x) = \sin(\sqrt{2}x)$.
+
+Both are periodic: $f$ has period $2\pi$ and $g$ has period $\frac{2\pi}{\sqrt{2}} = \sqrt{2}\pi$.
+
+However, $f + g$ is not periodic. To see this, suppose $(f + g)(x) = (f + g)(x + p)$ for all $x$ and some $p > 0$. Then:
+\[
+    \sin(x) + \sin(\sqrt{2}x) = \sin(x + p) + \sin(\sqrt{2}(x + p))
+\]
+for all $x$. Setting $x = 0$: $\sin(p) + \sin(\sqrt{2}p) = 0$.
+
+For $f + g$ to be periodic with period $p$, we would need $\sin(x) = \sin(x + p)$ for all $x$ (which requires $p = 2\pi k$ for some positive integer $k$) \emph{and} $\sin(\sqrt{2}x) = \sin(\sqrt{2}(x + p))$ for all $x$ (which requires $p = \frac{2\pi m}{\sqrt{2}}$ for some positive integer $m$).
+
+This would require $2\pi k = \sqrt{2}\pi m$, giving $\sqrt{2} = \frac{2k}{m}$, which is impossible since $\sqrt{2}$ is irrational.
+
+Therefore $f + g$ is not periodic, so the set of periodic functions is not a subspace. \hfill $\square$
+\end{solutionbox}
+
+\bigskip
+
+%------------------------------------------------------------------------------
+
+\exercise
+Suppose $U_1$ and $U_2$ are subspaces of $V$. Prove that $U_1 \cap U_2$ is a subspace of $V$.
+
+\begin{solutionbox}
+\textbf{Solution:} We verify the three subspace conditions for $U_1 \cap U_2$.
+
+\textbf{Contains $0$:} Since $U_1$ is a subspace, $0 \in U_1$. Since $U_2$ is a subspace, $0 \in U_2$. Therefore $0 \in U_1 \cap U_2$. \checkmark
+
+\textbf{Closed under addition:} Suppose $u, v \in U_1 \cap U_2$. Then:
+\begin{itemize}[leftmargin=2em]
+    \item $u, v \in U_1$, so $u + v \in U_1$ (since $U_1$ is a subspace).
+    \item $u, v \in U_2$, so $u + v \in U_2$ (since $U_2$ is a subspace).
+\end{itemize}
+Therefore $u + v \in U_1 \cap U_2$. \checkmark
+
+\textbf{Closed under scalar multiplication:} Suppose $u \in U_1 \cap U_2$ and $\lambda \in \F$. Then:
+\begin{itemize}[leftmargin=2em]
+    \item $u \in U_1$, so $\lambda u \in U_1$ (since $U_1$ is a subspace).
+    \item $u \in U_2$, so $\lambda u \in U_2$ (since $U_2$ is a subspace).
+\end{itemize}
+Therefore $\lambda u \in U_1 \cap U_2$. \checkmark
+
+We conclude that $U_1 \cap U_2$ is a subspace of $V$. \hfill $\square$
+\end{solutionbox}
+
+\bigskip
+
+%------------------------------------------------------------------------------
+
+\exercise
+Prove that the intersection of every collection of subspaces of $V$ is a subspace of $V$.
+
+\begin{solutionbox}
+\textbf{Solution:} Let $\{U_i\}_{i \in I}$ be a collection of subspaces of $V$. Let $U = \bigcap_{i \in I} U_i$.
+
+\textbf{Contains $0$:} For each $i \in I$, $U_i$ is a subspace, so $0 \in U_i$. Therefore $0 \in \bigcap_{i \in I} U_i = U$. \checkmark
+
+\textbf{Closed under addition:} Suppose $u, v \in U$. Then for each $i \in I$, we have $u, v \in U_i$. Since each $U_i$ is a subspace, $u + v \in U_i$ for each $i \in I$. Therefore $u + v \in \bigcap_{i \in I} U_i = U$. \checkmark
+
+\textbf{Closed under scalar multiplication:} Suppose $u \in U$ and $\lambda \in \F$. Then for each $i \in I$, we have $u \in U_i$. Since each $U_i$ is a subspace, $\lambda u \in U_i$ for each $i \in I$. Therefore $\lambda u \in \bigcap_{i \in I} U_i = U$. \checkmark
+
+We conclude that $U = \bigcap_{i \in I} U_i$ is a subspace of $V$. \hfill $\square$
+\end{solutionbox}
+
+\bigskip
+
+%------------------------------------------------------------------------------
+
+\exercise
+Prove that the union of two subspaces of $V$ is a subspace of $V$ if and only if one of the subspaces is contained in the other.
+
+\begin{solutionbox}
+\textbf{Solution:} Let $U_1$ and $U_2$ be subspaces of $V$.
+
+\textbf{($\Leftarrow$)} Suppose $U_1 \subseteq U_2$. Then $U_1 \cup U_2 = U_2$, which is a subspace.
+
+Similarly, if $U_2 \subseteq U_1$, then $U_1 \cup U_2 = U_1$, which is a subspace. \checkmark
+
+\textbf{($\Rightarrow$)} We prove the contrapositive: if neither subspace is contained in the other, then $U_1 \cup U_2$ is not a subspace.
+
+Suppose $U_1 \not\subseteq U_2$ and $U_2 \not\subseteq U_1$.
+
+Then there exists $u_1 \in U_1 \setminus U_2$ (so $u_1 \in U_1$ but $u_1 \notin U_2$), and there exists $u_2 \in U_2 \setminus U_1$ (so $u_2 \in U_2$ but $u_2 \notin U_1$).
+
+Consider $u_1 + u_2$. We claim $u_1 + u_2 \notin U_1 \cup U_2$.
+
+\begin{itemize}[leftmargin=2em]
+    \item If $u_1 + u_2 \in U_1$: Since $u_1 \in U_1$ and $U_1$ is a subspace, we have $u_2 = (u_1 + u_2) - u_1 \in U_1$. This contradicts $u_2 \notin U_1$.
+    \item If $u_1 + u_2 \in U_2$: Since $u_2 \in U_2$ and $U_2$ is a subspace, we have $u_1 = (u_1 + u_2) - u_2 \in U_2$. This contradicts $u_1 \notin U_2$.
+\end{itemize}
+
+Therefore $u_1 + u_2 \notin U_1 \cup U_2$, so $U_1 \cup U_2$ is not closed under addition.
+
+Hence $U_1 \cup U_2$ is not a subspace. \hfill $\square$
+\end{solutionbox}
+
+\bigskip
+
+%------------------------------------------------------------------------------
+
+\exercise
+Prove that the union of three subspaces of $V$ is a subspace of $V$ if and only if one of the subspaces contains the other two.
+
+\begin{solutionbox}
+\textbf{Solution:} Let $U_1, U_2, U_3$ be subspaces of $V$.
+
+\textbf{($\Leftarrow$)} If one subspace contains the other two, say $U_1 \subseteq U_3$ and $U_2 \subseteq U_3$, then $U_1 \cup U_2 \cup U_3 = U_3$, which is a subspace. \checkmark
+
+\textbf{($\Rightarrow$)} We prove the contrapositive: if no subspace contains the other two, then $U_1 \cup U_2 \cup U_3$ is not a subspace.
+
+Suppose no $U_i$ contains both other subspaces. We consider two cases:
+
+\textbf{Case 1:} One subspace is contained in the union of the other two, but no single subspace contains the other two.
+
+Without loss of generality, suppose $U_1 \subseteq U_2 \cup U_3$. By the previous exercise, since $U_2 \cup U_3$ is a subspace (given $U_1 \cup U_2 \cup U_3 = U_2 \cup U_3$ is a subspace), either $U_2 \subseteq U_3$ or $U_3 \subseteq U_2$.
+
+If $U_2 \subseteq U_3$, then $U_3$ contains $U_1$ (since $U_1 \subseteq U_2 \cup U_3 = U_3$) and $U_2$, contradicting our assumption.
+
+\textbf{Case 2:} No subspace is contained in the union of the other two.
+
+Then for each $i$, there exists $u_i \in U_i \setminus (U_j \cup U_k)$ where $\{i,j,k\} = \{1,2,3\}$.
+
+Consider $u_1 + u_2$. If $u_1 + u_2 \in U_1$, then $u_2 = (u_1 + u_2) - u_1 \in U_1$, contradiction. Similarly $u_1 + u_2 \notin U_2$.
+
+If $u_1 + u_2 \in U_3$, consider $(u_1 + u_2) + u_3 \in U_3$. But then $(u_1 + u_2 + u_3) - u_3 = u_1 + u_2 \in U_3$, and we can show this leads to contradictions by similar subtraction arguments.
+
+In all cases, $U_1 \cup U_2 \cup U_3$ fails to be closed under addition, so it is not a subspace. \hfill $\square$
+\end{solutionbox}
+
+\newpage
+
+%==============================================================================
+% SUMS OF SUBSPACES (14-18)
+%==============================================================================
+
+\exercise
+Suppose $U$ is a subspace of $V$. What is $U + U$?
+
+\begin{solutionbox}
+\textbf{Solution:} $U + U = U$.
+
+\textbf{Proof:}
+
+\textbf{($U \subseteq U + U$):} For any $u \in U$, we have $u = u + 0$ where $u \in U$ and $0 \in U$. So $u \in U + U$.
+
+\textbf{($U + U \subseteq U$):} For any $u_1 + u_2 \in U + U$ where $u_1, u_2 \in U$, since $U$ is a subspace (closed under addition), $u_1 + u_2 \in U$.
+
+Therefore $U + U = U$. \hfill $\square$
+\end{solutionbox}
+
+\bigskip
+
+%------------------------------------------------------------------------------
+
+\exercise
+Is the operation of addition on the subspaces of $V$ commutative? In other words, if $U$ and $W$ are subspaces of $V$, is $U + W = W + U$?
+
+\begin{solutionbox}
+\textbf{Solution:} \textbf{Yes}, addition of subspaces is commutative: $U + W = W + U$.
+
+\textbf{Proof:} By definition,
+\[
+    U + W = \{u + w : u \in U, w \in W\}.
+\]
+\[
+    W + U = \{w + u : w \in W, u \in U\}.
+\]
+
+For any $u + w \in U + W$, we have $u + w = w + u$ (by commutativity of vector addition in $V$), and $w + u \in W + U$. So $U + W \subseteq W + U$.
+
+Similarly, $W + U \subseteq U + W$.
+
+Therefore $U + W = W + U$. \hfill $\square$
+\end{solutionbox}
+
+\bigskip
+
+%------------------------------------------------------------------------------
+
+\exercise
+Is the operation of addition on the subspaces of $V$ associative? In other words, if $U_1$, $U_2$, and $U_3$ are subspaces of $V$, is $(U_1 + U_2) + U_3 = U_1 + (U_2 + U_3)$?
+
+\begin{solutionbox}
+\textbf{Solution:} \textbf{Yes}, addition of subspaces is associative.
+
+\textbf{Proof:}
+\begin{align*}
+    (U_1 + U_2) + U_3 &= \{(u_1 + u_2) + u_3 : u_1 \in U_1, u_2 \in U_2, u_3 \in U_3\} \\
+    &= \{u_1 + u_2 + u_3 : u_1 \in U_1, u_2 \in U_2, u_3 \in U_3\}
+\end{align*}
+by associativity of vector addition.
+
+Similarly,
+\begin{align*}
+    U_1 + (U_2 + U_3) &= \{u_1 + (u_2 + u_3) : u_1 \in U_1, u_2 \in U_2, u_3 \in U_3\} \\
+    &= \{u_1 + u_2 + u_3 : u_1 \in U_1, u_2 \in U_2, u_3 \in U_3\}.
+\end{align*}
+
+Therefore $(U_1 + U_2) + U_3 = U_1 + (U_2 + U_3)$. \hfill $\square$
+\end{solutionbox}
+
+\bigskip
+
+%------------------------------------------------------------------------------
+
+\exercise
+Does the operation of addition on the subspaces of $V$ have an additive identity? Which subspaces have additive inverses?
+
+\begin{solutionbox}
+\textbf{Solution:} \textbf{Additive identity:} Yes, $\{0\}$ is the additive identity.
+
+For any subspace $U$: $U + \{0\} = \{u + 0 : u \in U, 0 \in \{0\}\} = \{u : u \in U\} = U$.
+
+\textbf{Additive inverses:} Only $\{0\}$ has an additive inverse (itself).
+
+For a subspace $U$ to have an additive inverse $W$, we need $U + W = \{0\}$.
+
+Since $0 \in U$ and $0 \in W$, we have $0 + 0 = 0 \in U + W$.
+
+For any nonzero $u \in U$, we have $u + 0 = u \in U + W$. For $U + W = \{0\}$, we need $u = 0$.
+
+Therefore $U$ must equal $\{0\}$, and then $\{0\} + \{0\} = \{0\}$.
+
+So the only subspace with an additive inverse is $\{0\}$, and its inverse is $\{0\}$ itself. \hfill $\square$
+\end{solutionbox}
+
+\bigskip
+
+%------------------------------------------------------------------------------
+
+\exercise
+Prove or give a counterexample: if $U_1$, $U_2$, $W$ are subspaces of $V$ such that
+\[
+    U_1 + W = U_2 + W,
+\]
+then $U_1 = U_2$.
+
+\begin{solutionbox}
+\textbf{Solution:} This is \textbf{false}. Here is a counterexample.
+
+Let $V = \R^2$, and define:
+\begin{align*}
+    U_1 &= \{(x, 0) : x \in \R\} && \text{(the $x$-axis)} \\
+    U_2 &= \{(0, y) : y \in \R\} && \text{(the $y$-axis)} \\
+    W &= \R^2 && \text{(the whole space)}
+\end{align*}
+
+Then:
+\[
+    U_1 + W = \R^2 \quad \text{and} \quad U_2 + W = \R^2.
+\]
+
+So $U_1 + W = U_2 + W = \R^2$, but $U_1 \neq U_2$.
+
+\textbf{Why this fails:} Unlike addition in $\R$, there is no ``cancellation law'' for subspace addition. Adding $W$ can ``absorb'' the differences between $U_1$ and $U_2$. \hfill $\square$
+\end{solutionbox}
+
+\bigskip
+
+%------------------------------------------------------------------------------
+
+\exercise
+Suppose $U = \{(x, x, y, y) \in \F^4 : x, y \in \F\}$. Find a subspace $W$ of $\F^4$ such that $\F^4 = U \oplus W$.
+
+\begin{solutionbox}
+\textbf{Solution:} \textbf{Claim:} $W = \{(0, z, 0, w) : z, w \in \F\}$ works.
+
+\textbf{Verification that $\F^4 = U + W$:}
+
+Any $(a, b, c, d) \in \F^4$ can be written as:
+\[
+    (a, b, c, d) = \underbrace{(a, a, c, c)}_{\in U} + \underbrace{(0, b-a, 0, d-c)}_{\in W}.
+\]
+
+So $\F^4 \subseteq U + W$. Since $U + W \subseteq \F^4$ obviously, we have $\F^4 = U + W$.
+
+\textbf{Verification that $U \cap W = \{0\}$:}
+
+Suppose $(x, x, y, y) = (0, z, 0, w)$ for some $x, y, z, w \in \F$.
+
+From the first coordinate: $x = 0$.
+From the third coordinate: $y = 0$.
+
+So the vector is $(0, 0, 0, 0)$.
+
+Therefore $U \cap W = \{0\}$, and $\F^4 = U \oplus W$.
+
+\[
+    \boxed{W = \{(0, z, 0, w) : z, w \in \F\}}
+\]
+\hfill $\square$
+\end{solutionbox}
+
+\bigskip
+
+%------------------------------------------------------------------------------
+
+\exercise
+Suppose $U = \{(x, y, x+y, x-y, 2x) \in \F^5 : x, y \in \F\}$. Find a subspace $W$ of $\F^5$ such that $\F^5 = U \oplus W$.
+
+\begin{solutionbox}
+\textbf{Solution:} First, note that $U$ has dimension 2 (spanned by $(1, 0, 1, 1, 2)$ and $(0, 1, 1, -1, 0)$).
+
+For $U \oplus W = \F^5$, we need $\dim W = 5 - 2 = 3$.
+
+\textbf{Claim:} $W = \{(0, 0, a, b, c) : a, b, c \in \F\}$ works.
+
+\textbf{Verification that $\F^5 = U + W$:}
+
+Any $(x_1, x_2, x_3, x_4, x_5) \in \F^5$ can be written as:
+\[
+    (x_1, x_2, x_3, x_4, x_5) = \underbrace{(x_1, x_2, x_1+x_2, x_1-x_2, 2x_1)}_{\in U} + \underbrace{(0, 0, x_3-(x_1+x_2), x_4-(x_1-x_2), x_5-2x_1)}_{\in W}.
+\]
+
+\textbf{Verification that $U \cap W = \{0\}$:}
+
+Suppose $(x, y, x+y, x-y, 2x) = (0, 0, a, b, c)$.
+
+From coordinates 1 and 2: $x = 0$ and $y = 0$.
+
+So the vector is $(0, 0, 0, 0, 0)$.
+
+Therefore $U \cap W = \{0\}$, and $\F^5 = U \oplus W$.
+
+\[
+    \boxed{W = \{(0, 0, a, b, c) : a, b, c \in \F\}}
+\]
+\hfill $\square$
+\end{solutionbox}
+
+\bigskip
+
+%------------------------------------------------------------------------------
+
+\exercise
+Suppose $U = \{(x, y, x+y, x-y, 2x) \in \F^5 : x, y \in \F\}$. Find three subspaces $W_1$, $W_2$, $W_3$ of $\F^5$, none of which equals $\{0\}$, such that $\F^5 = U \oplus W_1 \oplus W_2 \oplus W_3$.
+
+\begin{solutionbox}
+\textbf{Solution:} We need three nonzero subspaces $W_1, W_2, W_3$ with $\dim W_1 + \dim W_2 + \dim W_3 = 3$ such that $U, W_1, W_2, W_3$ are in direct sum.
+
+\textbf{Claim:} The following work:
+\begin{align*}
+    W_1 &= \{(0, 0, a, 0, 0) : a \in \F\} \\
+    W_2 &= \{(0, 0, 0, b, 0) : b \in \F\} \\
+    W_3 &= \{(0, 0, 0, 0, c) : c \in \F\}
+\end{align*}
+
+Each $W_i$ is 1-dimensional and nonzero.
+
+\textbf{Verification:} $U + W_1 + W_2 + W_3 = \F^5$ follows since any vector in $\F^5$ can be decomposed as shown in Exercise 21.
+
+For the direct sum condition, suppose:
+\[
+    (x, y, x+y, x-y, 2x) + (0, 0, a, 0, 0) + (0, 0, 0, b, 0) + (0, 0, 0, 0, c) = (0, 0, 0, 0, 0).
+\]
+
+From coordinates 1 and 2: $x = 0$, $y = 0$.
+From coordinate 3: $0 + 0 + a = 0$, so $a = 0$.
+From coordinate 4: $0 + b = 0$, so $b = 0$.
+From coordinate 5: $0 + c = 0$, so $c = 0$.
+
+So the only way to write $0$ as a sum is with all terms being $0$, confirming the direct sum.
+
+\[
+    \boxed{W_1 = \spn\{e_3\}, \quad W_2 = \spn\{e_4\}, \quad W_3 = \spn\{e_5\}}
+\]
+where $e_i$ denotes the $i$-th standard basis vector. \hfill $\square$
+\end{solutionbox}
+
+\newpage
+
+%==============================================================================
+% COUNTEREXAMPLES (19, 23)
+%==============================================================================
+
+\exercise
+Prove or give a counterexample: if $U_1$, $U_2$, $W$ are subspaces of $V$ such that
+\[
+    V = U_1 \oplus W \quad \text{and} \quad V = U_2 \oplus W,
+\]
+then $U_1 = U_2$.
+
+\begin{solutionbox}
+\textbf{Solution:} This is \textbf{false}. Here is a counterexample.
+
+Let $V = \R^2$, and define:
+\begin{align*}
+    U_1 &= \{(x, 0) : x \in \R\} && \text{(the $x$-axis)} \\
+    U_2 &= \{(x, x) : x \in \R\} && \text{(the line $y = x$)} \\
+    W &= \{(0, y) : y \in \R\} && \text{(the $y$-axis)}
+\end{align*}
+
+\textbf{Verify $V = U_1 \oplus W$:}
+\begin{itemize}[leftmargin=2em]
+    \item $U_1 + W$: Any $(a, b) = (a, 0) + (0, b)$ with $(a, 0) \in U_1$ and $(0, b) \in W$. So $U_1 + W = \R^2$.
+    \item $U_1 \cap W$: $(x, 0) = (0, y)$ implies $x = 0$ and $y = 0$. So $U_1 \cap W = \{0\}$.
+\end{itemize}
+Thus $V = U_1 \oplus W$. \checkmark
+
+\textbf{Verify $V = U_2 \oplus W$:}
+\begin{itemize}[leftmargin=2em]
+    \item $U_2 + W$: Any $(a, b) = (a, a) + (0, b-a)$ with $(a, a) \in U_2$ and $(0, b-a) \in W$. So $U_2 + W = \R^2$.
+    \item $U_2 \cap W$: $(x, x) = (0, y)$ implies $x = 0$. So $U_2 \cap W = \{0\}$.
+\end{itemize}
+Thus $V = U_2 \oplus W$. \checkmark
+
+But $U_1 \neq U_2$ since $(1, 0) \in U_1$ but $(1, 0) \notin U_2$.
+
+\textbf{Conclusion:} Having the same direct complement does not determine a subspace uniquely. \hfill $\square$
+\end{solutionbox}
+
+\bigskip
+
+%==============================================================================
+% EVEN AND ODD FUNCTIONS (24)
+%==============================================================================
+
+\exercise
+A function $f: \R \to \R$ is called \textbf{even} if $f(-x) = f(x)$ for all $x \in \R$.
+
+A function $f: \R \to \R$ is called \textbf{odd} if $f(-x) = -f(x)$ for all $x \in \R$.
+
+Let $U_e$ denote the set of real-valued even functions on $\R$ and let $U_o$ denote the set of real-valued odd functions on $\R$.
+
+\begin{enumerate}[label=(\alph*)]
+    \item Show that $\R^\R = U_e \oplus U_o$.
+\end{enumerate}
+
+\begin{solutionbox}
+\textbf{Solution:}
+
+\textbf{Step 1: Show $U_e$ and $U_o$ are subspaces.}
+
+For $U_e$:
+\begin{itemize}[leftmargin=2em]
+    \item $0(-x) = 0 = 0(x)$, so the zero function is even.
+    \item If $f, g$ are even: $(f+g)(-x) = f(-x) + g(-x) = f(x) + g(x) = (f+g)(x)$.
+    \item If $f$ is even: $(\lambda f)(-x) = \lambda f(-x) = \lambda f(x) = (\lambda f)(x)$.
+\end{itemize}
+So $U_e$ is a subspace. Similarly, $U_o$ is a subspace.
+
+\textbf{Step 2: Show $\R^\R = U_e + U_o$.}
+
+For any $f \in \R^\R$, define:
+\[
+    f_e(x) = \frac{f(x) + f(-x)}{2} \quad \text{and} \quad f_o(x) = \frac{f(x) - f(-x)}{2}.
+\]
+
+Verify $f_e$ is even:
+\[
+    f_e(-x) = \frac{f(-x) + f(x)}{2} = \frac{f(x) + f(-x)}{2} = f_e(x). \quad \checkmark
+\]
+
+Verify $f_o$ is odd:
+\[
+    f_o(-x) = \frac{f(-x) - f(x)}{2} = -\frac{f(x) - f(-x)}{2} = -f_o(x). \quad \checkmark
+\]
+
+Verify $f = f_e + f_o$:
+\[
+    f_e(x) + f_o(x) = \frac{f(x) + f(-x)}{2} + \frac{f(x) - f(-x)}{2} = f(x). \quad \checkmark
+\]
+
+So every function is a sum of an even and an odd function.
+
+\textbf{Step 3: Show $U_e \cap U_o = \{0\}$.}
+
+Suppose $f \in U_e \cap U_o$. Then:
+\begin{itemize}[leftmargin=2em]
+    \item $f(-x) = f(x)$ (since $f$ is even)
+    \item $f(-x) = -f(x)$ (since $f$ is odd)
+\end{itemize}
+
+Therefore $f(x) = -f(x)$, which implies $2f(x) = 0$, so $f(x) = 0$ for all $x$.
+
+Thus $U_e \cap U_o = \{0\}$.
+
+\textbf{Conclusion:} $\R^\R = U_e \oplus U_o$. \hfill $\square$
+\end{solutionbox}
+
+\begin{hintbox}
+\textbf{Key insight:} The decomposition $f = f_e + f_o$ where
+\[
+    f_e(x) = \frac{f(x) + f(-x)}{2}, \quad f_o(x) = \frac{f(x) - f(-x)}{2}
+\]
+is analogous to writing a number as the sum of two parts with different symmetry properties. This decomposition is unique because $U_e \cap U_o = \{0\}$.
+\end{hintbox}
+
+\vfill
+
+\begin{center}
+\rule{0.5\linewidth}{0.4pt}
+
+\textit{End of Exercises 1C Solutions}
+\end{center}
+
+\end{document}

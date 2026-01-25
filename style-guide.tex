@@ -73,6 +73,7 @@
 \usepackage{fancyhdr}                    % Headers/footers
 \usepackage{titlesec}                    % Section formatting
 \usepackage{tcolorbox}                   % Boxed results
+\tcbuselibrary{breakable}                % Allow boxes to break across pages
 \usepackage{booktabs}                    % Professional tables
 \usepackage{tikz}                        % Diagrams
 \usetikzlibrary{matrix, arrows.meta, positioning, calc, cd}
@@ -98,6 +99,7 @@
 
 % Light highlight for key results (no heavy border) - PREFERRED for formulas
 \newtcolorbox{result}{
+    breakable,
     boxrule=0pt,
     colback=black!5,
     colframe=white,

@@ -51,6 +51,7 @@
 \usepackage{fancyhdr}                    % Headers/footers
 \usepackage{titlesec}                    % Section formatting
 \usepackage{tcolorbox}                   % Boxed results
+\tcbuselibrary{breakable}                % Allow boxes to break across pages
 \usepackage{booktabs}                    % Professional tables
 \usepackage{tikz}                        % Diagrams
 \usetikzlibrary{matrix, arrows.meta, positioning, calc, cd}
@@ -77,6 +78,7 @@
 
 % Light highlight for key results (no heavy border) - PREFERRED for formulas
 \newtcolorbox{result}{
+    breakable,
     boxrule=0pt,
     colback=black!5,
     colframe=white,
@@ -87,6 +89,7 @@
 
 % Solution box
 \newtcolorbox{solutionbox}{
+    breakable,
     boxrule=0.5pt,
     colback=black!3,
     colframe=black!40,
@@ -95,13 +98,14 @@
     left=6pt, right=6pt, top=6pt, bottom=6pt
 }
 
-% Hint box
+% Hint box (yellow tint for visual distinction)
 \newtcolorbox{hintbox}{
-    boxrule=0pt,
-    colback=black!8,
-    colframe=white,
+    breakable,
+    boxrule=0.5pt,
+    colback=yellow!5,
+    colframe=black!30,
     arc=0pt,
-    boxsep=2pt,
+    boxsep=3pt,
     left=4pt, right=4pt, top=4pt, bottom=4pt
 }
 
@@ -311,6 +315,87 @@
 %   For $\lambda_1 = \frac{5 + \sqrt{33}}{2}$:
 %   ...
 %   \end{solution}
+
+%------------------------------------------------------------------------------
+% 3B. SOLUTION FILE FORMATTING (STANDARDIZED)
+%------------------------------------------------------------------------------
+%
+% These rules apply to all solution files (exercises-XX-solutions.tex).
+%
+% SPACING BETWEEN EXERCISES:
+%
+%   After solution/solutionbox/hintbox:
+%
+%       \end{solution}
+%
+%       \bigskip
+%
+%       %------------------------------------------------------------------------------
+%
+%       \exercise
+%       Next problem...
+%
+%   NOTE: No \medskip before solutions. Use \bigskip after.
+%
+% DASH SEPARATORS:
+%
+%   Always use between exercises for visual separation:
+%
+%       \bigskip
+%
+%       %------------------------------------------------------------------------------
+%
+%       \exercise
+%
+% PAGE BREAKS:
+%
+%   Use \newpage at major section breaks (marked with %===...===)
+%   Use \newpage after exercises with hint boxes
+%   Use roughly every 4-6 exercises as a soft guideline
+%
+% HINT BOX PLACEMENT:
+%
+%   Place immediately after solutionbox, before \bigskip:
+%
+%       \end{solutionbox}
+%
+%       \begin{hintbox}
+%       \textbf{Intuition:} ...
+%       \end{hintbox}
+%
+%       \bigskip
+%
+%       %------------------------------------------------------------------------------
+%
+% SOLUTION ENVIRONMENT CHOICE:
+%
+%   ALWAYS use \begin{solutionbox} for ALL solutions.
+%   This provides consistent grey box styling across all exercises.
+%
+%   Format:
+%       \begin{solutionbox}
+%       \textbf{Solution:} [solution content]
+%       \end{solutionbox}
+%
+%   NOTE: The \begin{solution} environment (proof-style) is deprecated
+%   for solution files. Use solutionbox exclusively.
+%
+% EXAMPLE: Complete exercise structure:
+%
+%       \exercise
+%       Show that $\alpha + \beta = \beta + \alpha$ for all $\alpha, \beta \in \C$.
+%
+%       \begin{solution}
+%       Let $\alpha = a + bi$ and $\beta = c + di$...
+%       Therefore $\alpha + \beta = \beta + \alpha$. \hfill $\square$
+%       \end{solution}
+%
+%       \bigskip
+%
+%       %------------------------------------------------------------------------------
+%
+%       \exercise
+%       Next problem...
 
 %------------------------------------------------------------------------------
 % 4. MULTI-PART PROBLEMS
@@ -599,10 +684,11 @@
 %------------------------------------------------------------------------------
 %
 %   black       : Key formulas (most important)
-%   black!50    : Hints, warnings, notes
+%   black!50    : Warnings, notes
 %   black!40    : Solutions (boxed)
+%   black!30    : Hint border
 %   black!3     : Solution background (light)
-%   black!8     : Hint background
+%   yellow!5    : Hint background (visually distinct)
 
 %------------------------------------------------------------------------------
 % 16. QUICK REFERENCE: SPACING

@@ -13,6 +13,7 @@
 \usepackage{tikz}
 \usepackage{xcolor}
 \usepackage{tcolorbox}
+\tcbuselibrary{breakable}
 \usepackage{titlesec}
 \usepackage{booktabs}
 \usetikzlibrary{matrix, arrows.meta, positioning, calc, cd}
@@ -43,6 +44,7 @@
 }
 
 \newtcolorbox{solutionbox}{
+    breakable,
     boxrule=0.5pt,
     colback=black!3,
     colframe=black!40,
@@ -52,6 +54,7 @@
 }
 
 \newtcolorbox{result}{
+    breakable,
     boxrule=0.8pt,
     colback=white,
     colframe=black,
@@ -61,6 +64,7 @@
 }
 
 \newtcolorbox{hintbox}{
+    breakable,
     boxrule=0.5pt,
     colback=yellow!5,
     colframe=black!30,
@@ -96,31 +100,196 @@
 \vspace{1.5em}
 
 %==============================================================================
-% COMPLEX NUMBER EXERCISES (1-6)
+% COMPLEX NUMBER PROPERTIES (1-4)
 %==============================================================================
 
 \exercise
-Suppose $a$ and $b$ are real numbers, not both $0$. Find real numbers $c$ and $d$ such that
+Show that $\alpha + \beta = \beta + \alpha$ for all $\alpha, \beta \in \C$.
+
+\begin{solutionbox}
+\textbf{Solution:} Let $\alpha = a + bi$ and $\beta = c + di$ where $a, b, c, d \in \R$.
+
+Computing $\alpha + \beta$:
 \[
-    \frac{1}{a + bi} = c + di.
+    \alpha + \beta = (a + bi) + (c + di) = (a + c) + (b + d)i.
 \]
 
-\begin{solution}
-Multiply the numerator and denominator by the complex conjugate of the denominator:
+Computing $\beta + \alpha$:
 \[
-    \frac{1}{a + bi} = \frac{1}{a + bi} \cdot \frac{a - bi}{a - bi} = \frac{a - bi}{a^2 + b^2}.
+    \beta + \alpha = (c + di) + (a + bi) = (c + a) + (d + b)i.
 \]
-Since $a$ and $b$ are not both $0$, we have $a^2 + b^2 \neq 0$. Separating into real and imaginary parts:
+
+Since addition of real numbers is commutative ($a + c = c + a$ and $b + d = d + b$):
 \[
-    \frac{1}{a + bi} = \frac{a}{a^2 + b^2} - \frac{b}{a^2 + b^2}i.
+    \alpha + \beta = (a + c) + (b + d)i = (c + a) + (d + b)i = \beta + \alpha.
 \]
-Therefore:
-\[
-    \boxed{c = \frac{a}{a^2 + b^2}, \quad d = \frac{-b}{a^2 + b^2}}
-\]
-\end{solution}
+
+Therefore $\alpha + \beta = \beta + \alpha$ for all $\alpha, \beta \in \C$. \hfill $\square$
+\end{solutionbox}
+
+\bigskip
 
 %------------------------------------------------------------------------------
+
+\exercise
+Show that $(\alpha + \beta) + \lambda = \alpha + (\beta + \lambda)$ for all $\alpha, \beta, \lambda \in \C$.
+
+\begin{solutionbox}
+\textbf{Solution:} Let $\alpha = a + bi$, $\beta = c + di$, and $\lambda = e + fi$ where $a, b, c, d, e, f \in \R$.
+
+Computing the left-hand side:
+\begin{align*}
+    (\alpha + \beta) + \lambda &= \bigl((a + c) + (b + d)i\bigr) + (e + fi) \\
+    &= \bigl((a + c) + e\bigr) + \bigl((b + d) + f\bigr)i.
+\end{align*}
+
+Computing the right-hand side:
+\begin{align*}
+    \alpha + (\beta + \lambda) &= (a + bi) + \bigl((c + e) + (d + f)i\bigr) \\
+    &= \bigl(a + (c + e)\bigr) + \bigl(b + (d + f)\bigr)i.
+\end{align*}
+
+Since addition of real numbers is associative:
+\[
+    (a + c) + e = a + (c + e) \quad \text{and} \quad (b + d) + f = b + (d + f).
+\]
+
+Therefore $(\alpha + \beta) + \lambda = \alpha + (\beta + \lambda)$. \hfill $\square$
+\end{solutionbox}
+
+\bigskip
+
+%------------------------------------------------------------------------------
+
+\exercise
+Show that $(\alpha\beta)\lambda = \alpha(\beta\lambda)$ for all $\alpha, \beta, \lambda \in \C$.
+
+\begin{solutionbox}
+\textbf{Solution:} Let $\alpha = a + bi$, $\beta = c + di$, and $\lambda = e + fi$ where $a, b, c, d, e, f \in \R$.
+
+First, compute $\alpha\beta$:
+\[
+    \alpha\beta = (a + bi)(c + di) = (ac - bd) + (ad + bc)i.
+\]
+
+Then compute $(\alpha\beta)\lambda$:
+\begin{align*}
+    (\alpha\beta)\lambda &= \bigl((ac - bd) + (ad + bc)i\bigr)(e + fi) \\
+    &= \bigl((ac - bd)e - (ad + bc)f\bigr) + \bigl((ac - bd)f + (ad + bc)e\bigr)i \\
+    &= (ace - bde - adf - bcf) + (acf - bdf + ade + bce)i.
+\end{align*}
+
+Now compute $\beta\lambda$:
+\[
+    \beta\lambda = (c + di)(e + fi) = (ce - df) + (cf + de)i.
+\]
+
+Then compute $\alpha(\beta\lambda)$:
+\begin{align*}
+    \alpha(\beta\lambda) &= (a + bi)\bigl((ce - df) + (cf + de)i\bigr) \\
+    &= \bigl(a(ce - df) - b(cf + de)\bigr) + \bigl(a(cf + de) + b(ce - df)\bigr)i \\
+    &= (ace - adf - bcf - bde) + (acf + ade + bce - bdf)i.
+\end{align*}
+
+Comparing terms, we see that LHS $=$ RHS. Therefore $(\alpha\beta)\lambda = \alpha(\beta\lambda)$. \hfill $\square$
+\end{solutionbox}
+
+\newpage
+
+%------------------------------------------------------------------------------
+
+\exercise
+Show that $\lambda(\alpha + \beta) = \lambda\alpha + \lambda\beta$ for all $\lambda, \alpha, \beta \in \C$.
+
+\begin{solutionbox}
+\textbf{Solution:} Let $\lambda = a + bi$, $\alpha = c + di$, and $\beta = e + fi$ where $a, b, c, d, e, f \in \R$.
+
+Computing the left-hand side:
+\begin{align*}
+    \lambda(\alpha + \beta) &= (a + bi)\bigl((c + e) + (d + f)i\bigr) \\
+    &= a(c + e) - b(d + f) + \bigl(a(d + f) + b(c + e)\bigr)i \\
+    &= (ac + ae - bd - bf) + (ad + af + bc + be)i.
+\end{align*}
+
+Computing the right-hand side:
+\begin{align*}
+    \lambda\alpha &= (a + bi)(c + di) = (ac - bd) + (ad + bc)i \\
+    \lambda\beta &= (a + bi)(e + fi) = (ae - bf) + (af + be)i
+\end{align*}
+
+Adding:
+\begin{align*}
+    \lambda\alpha + \lambda\beta &= \bigl((ac - bd) + (ae - bf)\bigr) + \bigl((ad + bc) + (af + be)\bigr)i \\
+    &= (ac + ae - bd - bf) + (ad + af + bc + be)i.
+\end{align*}
+
+Comparing, LHS $=$ RHS. Therefore $\lambda(\alpha + \beta) = \lambda\alpha + \lambda\beta$. \hfill $\square$
+\end{solutionbox}
+
+\bigskip
+
+%==============================================================================
+% EXISTENCE AND UNIQUENESS (5-6)
+%==============================================================================
+
+\exercise
+Show that for every $\alpha \in \C$, there exists a unique $\beta \in \C$ such that $\alpha + \beta = 0$.
+
+\begin{solutionbox}
+\textbf{Solution:} Let $\alpha = a + bi$ where $a, b \in \R$.
+
+\textbf{Existence:} Define $\beta = -a + (-b)i = -a - bi$. Then:
+\[
+    \alpha + \beta = (a + bi) + (-a - bi) = (a - a) + (b - b)i = 0 + 0i = 0.
+\]
+So such a $\beta$ exists.
+
+\textbf{Uniqueness:} Suppose $\beta_1$ and $\beta_2$ both satisfy $\alpha + \beta_1 = 0$ and $\alpha + \beta_2 = 0$.
+
+Then:
+\begin{align*}
+    \beta_1 &= \beta_1 + 0 = \beta_1 + (\alpha + \beta_2) \\
+    &= (\beta_1 + \alpha) + \beta_2 = (\alpha + \beta_1) + \beta_2 \\
+    &= 0 + \beta_2 = \beta_2.
+\end{align*}
+
+Therefore $\beta$ is unique. \hfill $\square$
+\end{solutionbox}
+
+\bigskip
+
+%------------------------------------------------------------------------------
+
+\exercise
+Show that for every $\alpha \in \C$ with $\alpha \neq 0$, there exists a unique $\beta \in \C$ such that $\alpha\beta = 1$.
+
+\begin{solutionbox}
+\textbf{Solution:} Let $\alpha = a + bi$ where $a, b \in \R$ and $a$ and $b$ are not both zero.
+
+\textbf{Existence:} Define $\beta = \frac{a}{a^2 + b^2} - \frac{b}{a^2 + b^2}i$.
+
+Note that $a^2 + b^2 \neq 0$ since $\alpha \neq 0$, so $\beta$ is well-defined. Then:
+\begin{align*}
+    \alpha\beta &= (a + bi)\left(\frac{a}{a^2 + b^2} - \frac{b}{a^2 + b^2}i\right) \\[6pt]
+    &= \frac{a^2}{a^2 + b^2} - \frac{ab}{a^2 + b^2}i + \frac{ab}{a^2 + b^2}i - \frac{b^2}{a^2 + b^2}i^2 \\[6pt]
+    &= \frac{a^2}{a^2 + b^2} + \frac{b^2}{a^2 + b^2} = \frac{a^2 + b^2}{a^2 + b^2} = 1.
+\end{align*}
+
+\textbf{Uniqueness:} Suppose $\beta_1$ and $\beta_2$ both satisfy $\alpha\beta_1 = 1$ and $\alpha\beta_2 = 1$.
+
+Then:
+\begin{align*}
+    \beta_1 &= \beta_1 \cdot 1 = \beta_1(\alpha\beta_2) = (\beta_1\alpha)\beta_2 = (\alpha\beta_1)\beta_2 = 1 \cdot \beta_2 = \beta_2.
+\end{align*}
+
+Therefore $\beta$ is unique. \hfill $\square$
+\end{solutionbox}
+
+\newpage
+
+%==============================================================================
+% ROOTS OF COMPLEX NUMBERS (7-8)
+%==============================================================================
 
 \exercise
 Show that
@@ -148,6 +317,8 @@ Now compute $\omega^3 = \omega^2 \cdot \omega$:
 
 Therefore $\omega^3 = 1$, so $\omega$ is a cube root of $1$. \hfill $\square$
 \end{solutionbox}
+
+\bigskip
 
 %------------------------------------------------------------------------------
 
@@ -195,154 +366,6 @@ Therefore the two square roots of $i$ are:
 
 \newpage
 
-%------------------------------------------------------------------------------
-
-\exercise
-Show that $\alpha + \beta = \beta + \alpha$ for all $\alpha, \beta \in \C$.
-
-\begin{solution}
-Let $\alpha = a + bi$ and $\beta = c + di$ where $a, b, c, d \in \R$.
-
-Computing $\alpha + \beta$:
-\[
-    \alpha + \beta = (a + bi) + (c + di) = (a + c) + (b + d)i.
-\]
-
-Computing $\beta + \alpha$:
-\[
-    \beta + \alpha = (c + di) + (a + bi) = (c + a) + (d + b)i.
-\]
-
-Since addition of real numbers is commutative ($a + c = c + a$ and $b + d = d + b$):
-\[
-    \alpha + \beta = (a + c) + (b + d)i = (c + a) + (d + b)i = \beta + \alpha.
-\]
-
-Therefore $\alpha + \beta = \beta + \alpha$ for all $\alpha, \beta \in \C$. \hfill $\square$
-\end{solution}
-
-%------------------------------------------------------------------------------
-
-\exercise
-Show that $(\alpha + \beta) + \lambda = \alpha + (\beta + \lambda)$ for all $\alpha, \beta, \lambda \in \C$.
-
-\begin{solution}
-Let $\alpha = a + bi$, $\beta = c + di$, and $\lambda = e + fi$ where $a, b, c, d, e, f \in \R$.
-
-Computing the left-hand side:
-\begin{align*}
-    (\alpha + \beta) + \lambda &= \bigl((a + c) + (b + d)i\bigr) + (e + fi) \\
-    &= \bigl((a + c) + e\bigr) + \bigl((b + d) + f\bigr)i.
-\end{align*}
-
-Computing the right-hand side:
-\begin{align*}
-    \alpha + (\beta + \lambda) &= (a + bi) + \bigl((c + e) + (d + f)i\bigr) \\
-    &= \bigl(a + (c + e)\bigr) + \bigl(b + (d + f)\bigr)i.
-\end{align*}
-
-Since addition of real numbers is associative:
-\[
-    (a + c) + e = a + (c + e) \quad \text{and} \quad (b + d) + f = b + (d + f).
-\]
-
-Therefore $(\alpha + \beta) + \lambda = \alpha + (\beta + \lambda)$. \hfill $\square$
-\end{solution}
-
-%------------------------------------------------------------------------------
-
-\exercise
-Show that $(\alpha\beta)\lambda = \alpha(\beta\lambda)$ for all $\alpha, \beta, \lambda \in \C$.
-
-\begin{solutionbox}
-\textbf{Solution:} Let $\alpha = a + bi$, $\beta = c + di$, and $\lambda = e + fi$ where $a, b, c, d, e, f \in \R$.
-
-First, compute $\alpha\beta$:
-\[
-    \alpha\beta = (a + bi)(c + di) = (ac - bd) + (ad + bc)i.
-\]
-
-Then compute $(\alpha\beta)\lambda$:
-\begin{align*}
-    (\alpha\beta)\lambda &= \bigl((ac - bd) + (ad + bc)i\bigr)(e + fi) \\
-    &= \bigl((ac - bd)e - (ad + bc)f\bigr) + \bigl((ac - bd)f + (ad + bc)e\bigr)i \\
-    &= (ace - bde - adf - bcf) + (acf - bdf + ade + bce)i.
-\end{align*}
-
-Now compute $\beta\lambda$:
-\[
-    \beta\lambda = (c + di)(e + fi) = (ce - df) + (cf + de)i.
-\]
-
-Then compute $\alpha(\beta\lambda)$:
-\begin{align*}
-    \alpha(\beta\lambda) &= (a + bi)\bigl((ce - df) + (cf + de)i\bigr) \\
-    &= \bigl(a(ce - df) - b(cf + de)\bigr) + \bigl(a(cf + de) + b(ce - df)\bigr)i \\
-    &= (ace - adf - bcf - bde) + (acf + ade + bce - bdf)i.
-\end{align*}
-
-Comparing terms, we see that LHS $=$ RHS. Therefore $(\alpha\beta)\lambda = \alpha(\beta\lambda)$. \hfill $\square$
-\end{solutionbox}
-
-\newpage
-
-%==============================================================================
-% MORE COMPLEX NUMBER EXERCISES (7-8)
-%==============================================================================
-
-\exercise
-Show that for every $\alpha \in \C$, there exists a unique $\beta \in \C$ such that $\alpha + \beta = 0$.
-
-\begin{solution}
-Let $\alpha = a + bi$ where $a, b \in \R$.
-
-\textbf{Existence:} Define $\beta = -a + (-b)i = -a - bi$. Then:
-\[
-    \alpha + \beta = (a + bi) + (-a - bi) = (a - a) + (b - b)i = 0 + 0i = 0.
-\]
-So such a $\beta$ exists.
-
-\textbf{Uniqueness:} Suppose $\beta_1$ and $\beta_2$ both satisfy $\alpha + \beta_1 = 0$ and $\alpha + \beta_2 = 0$.
-
-Then:
-\begin{align*}
-    \beta_1 &= \beta_1 + 0 = \beta_1 + (\alpha + \beta_2) \\
-    &= (\beta_1 + \alpha) + \beta_2 = (\alpha + \beta_1) + \beta_2 \\
-    &= 0 + \beta_2 = \beta_2.
-\end{align*}
-
-Therefore $\beta$ is unique. \hfill $\square$
-\end{solution}
-
-%------------------------------------------------------------------------------
-
-\exercise
-Show that for every $\alpha \in \C$ with $\alpha \neq 0$, there exists a unique $\beta \in \C$ such that $\alpha\beta = 1$.
-
-\begin{solutionbox}
-\textbf{Solution:} Let $\alpha = a + bi$ where $a, b \in \R$ and $a$ and $b$ are not both zero.
-
-\textbf{Existence:} Define $\beta = \frac{a}{a^2 + b^2} - \frac{b}{a^2 + b^2}i$.
-
-Note that $a^2 + b^2 \neq 0$ since $\alpha \neq 0$, so $\beta$ is well-defined. Then:
-\begin{align*}
-    \alpha\beta &= (a + bi)\left(\frac{a}{a^2 + b^2} - \frac{b}{a^2 + b^2}i\right) \\[6pt]
-    &= \frac{a^2}{a^2 + b^2} - \frac{ab}{a^2 + b^2}i + \frac{ab}{a^2 + b^2}i - \frac{b^2}{a^2 + b^2}i^2 \\[6pt]
-    &= \frac{a^2}{a^2 + b^2} + \frac{b^2}{a^2 + b^2} = \frac{a^2 + b^2}{a^2 + b^2} = 1.
-\end{align*}
-
-\textbf{Uniqueness:} Suppose $\beta_1$ and $\beta_2$ both satisfy $\alpha\beta_1 = 1$ and $\alpha\beta_2 = 1$.
-
-Then:
-\begin{align*}
-    \beta_1 &= \beta_1 \cdot 1 = \beta_1(\alpha\beta_2) = (\beta_1\alpha)\beta_2 = (\alpha\beta_1)\beta_2 = 1 \cdot \beta_2 = \beta_2.
-\end{align*}
-
-Therefore $\beta$ is unique. \hfill $\square$
-\end{solutionbox}
-
-\newpage
-
 %==============================================================================
 % VECTOR EXERCISES (9-10)
 %==============================================================================
@@ -353,8 +376,8 @@ Find $x \in \R^4$ such that
     (4, -3, 1, 7) + 2x = (5, 9, -6, 8).
 \]
 
-\begin{solution}
-Isolate $2x$ by subtracting $(4, -3, 1, 7)$ from both sides:
+\begin{solutionbox}
+\textbf{Solution:} Isolate $2x$ by subtracting $(4, -3, 1, 7)$ from both sides:
 \[
     2x = (5, 9, -6, 8) - (4, -3, 1, 7) = (5 - 4, 9 - (-3), -6 - 1, 8 - 7) = (1, 12, -7, 1).
 \]
@@ -368,7 +391,9 @@ Therefore:
 \[
     \boxed{x = \left(\frac{1}{2}, 6, -\frac{7}{2}, \frac{1}{2}\right)}
 \]
-\end{solution}
+\end{solutionbox}
+
+\bigskip
 
 %------------------------------------------------------------------------------
 
@@ -378,8 +403,8 @@ Explain why there does not exist $\lambda \in \C$ such that
     \lambda(2 - 3i, 5 + 4i, -6 + 7i) = (12 - 5i, 7 + 22i, -32 - 9i).
 \]
 
-\begin{solution}
-If such a $\lambda$ exists, then each component equation must hold simultaneously.
+\begin{solutionbox}
+\textbf{Solution:} If such a $\lambda$ exists, then each component equation must hold simultaneously.
 
 From the first component: $\lambda(2 - 3i) = 12 - 5i$.
 
@@ -401,7 +426,7 @@ Check the third component with $\lambda = 3 + 2i$:
 But we need $-32 - 9i$, not $-32 + 9i$.
 
 Since the imaginary parts differ ($9i \neq -9i$), there is no single $\lambda \in \C$ that satisfies all three component equations simultaneously. \hfill $\square$
-\end{solution}
+\end{solutionbox}
 
 \newpage
 
@@ -412,8 +437,8 @@ Since the imaginary parts differ ($9i \neq -9i$), there is no single $\lambda \i
 \exercise
 Show that $(x + y) + z = x + (y + z)$ for all $x, y, z \in \F^n$.
 
-\begin{solution}
-Let $x = (x_1, \ldots, x_n)$, $y = (y_1, \ldots, y_n)$, and $z = (z_1, \ldots, z_n)$ where $x_j, y_j, z_j \in \F$.
+\begin{solutionbox}
+\textbf{Solution:} Let $x = (x_1, \ldots, x_n)$, $y = (y_1, \ldots, y_n)$, and $z = (z_1, \ldots, z_n)$ where $x_j, y_j, z_j \in \F$.
 
 Computing the left-hand side:
 \begin{align*}
@@ -433,15 +458,17 @@ Since addition in $\F$ is associative, for each $j$:
 \]
 
 Therefore $(x + y) + z = x + (y + z)$. \hfill $\square$
-\end{solution}
+\end{solutionbox}
+
+\bigskip
 
 %------------------------------------------------------------------------------
 
 \exercise
 Show that $(ab)x = a(bx)$ for all $x \in \F^n$ and all $a, b \in \F$.
 
-\begin{solution}
-Let $x = (x_1, \ldots, x_n)$ where $x_j \in \F$.
+\begin{solutionbox}
+\textbf{Solution:} Let $x = (x_1, \ldots, x_n)$ where $x_j \in \F$.
 
 Computing the left-hand side:
 \[
@@ -459,7 +486,9 @@ Since multiplication in $\F$ is associative, for each $j$:
 \]
 
 Therefore $(ab)x = a(bx)$. \hfill $\square$
-\end{solution}
+\end{solutionbox}
+
+\bigskip
 
 \newpage
 
@@ -468,8 +497,8 @@ Therefore $(ab)x = a(bx)$. \hfill $\square$
 \exercise
 Show that $1x = x$ for all $x \in \F^n$.
 
-\begin{solution}
-Let $x = (x_1, \ldots, x_n)$ where $x_j \in \F$.
+\begin{solutionbox}
+\textbf{Solution:} Let $x = (x_1, \ldots, x_n)$ where $x_j \in \F$.
 
 By the definition of scalar multiplication:
 \[
@@ -482,15 +511,17 @@ Therefore:
 \[
     1x = (x_1, \ldots, x_n) = x. \quad \square
 \]
-\end{solution}
+\end{solutionbox}
+
+\bigskip
 
 %------------------------------------------------------------------------------
 
 \exercise
 Show that $\lambda(x + y) = \lambda x + \lambda y$ for all $\lambda \in \F$ and all $x, y \in \F^n$.
 
-\begin{solution}
-Let $x = (x_1, \ldots, x_n)$ and $y = (y_1, \ldots, y_n)$ where $x_j, y_j \in \F$.
+\begin{solutionbox}
+\textbf{Solution:} Let $x = (x_1, \ldots, x_n)$ and $y = (y_1, \ldots, y_n)$ where $x_j, y_j \in \F$.
 
 Computing the left-hand side:
 \begin{align*}
@@ -510,15 +541,17 @@ Since multiplication distributes over addition in $\F$, for each $j$:
 \]
 
 Therefore $\lambda(x + y) = \lambda x + \lambda y$. \hfill $\square$
-\end{solution}
+\end{solutionbox}
+
+\bigskip
 
 %------------------------------------------------------------------------------
 
 \exercise
 Show that $(a + b)x = ax + bx$ for all $a, b \in \F$ and all $x \in \F^n$.
 
-\begin{solution}
-Let $x = (x_1, \ldots, x_n)$ where $x_j \in \F$.
+\begin{solutionbox}
+\textbf{Solution:} Let $x = (x_1, \ldots, x_n)$ where $x_j \in \F$.
 
 Computing the left-hand side:
 \[
@@ -537,7 +570,7 @@ Since multiplication distributes over addition in $\F$, for each $j$:
 \]
 
 Therefore $(a + b)x = ax + bx$. \hfill $\square$
-\end{solution}
+\end{solutionbox}
 
 \vfill
 

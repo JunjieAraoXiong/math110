@@ -14,10 +14,18 @@
 \usepackage{fancyhdr}
 \usepackage{titlesec}
 \usepackage{tcolorbox}
+\tcbuselibrary{breakable}
 \usepackage{booktabs}
 \usepackage{tikz}
-\usetikzlibrary{matrix, arrows.meta, positioning, calc, cd}
+\usetikzlibrary{matrix, arrows.meta, positioning, calc, cd, shapes.geometric}
 \usepackage{graphicx}
+
+% TikZ style definitions for consistent diagrams (matching notes-1a)
+\tikzset{
+    vector/.style={->, >=Stealth, thick},
+    axis/.style={->, thin},
+    point/.style={fill, circle, inner sep=1.5pt}
+}
 
 %------------------------------------------------------------------------------
 % SPACING
@@ -34,7 +42,8 @@
     colframe=black,
     arc=0pt,
     boxsep=3pt,
-    left=4pt, right=4pt, top=4pt, bottom=4pt
+    left=4pt, right=4pt, top=4pt, bottom=4pt,
+    breakable
 }
 
 \newtcolorbox{result}{
@@ -43,7 +52,8 @@
     colframe=white,
     arc=0pt,
     boxsep=2pt,
-    left=4pt, right=4pt, top=4pt, bottom=4pt
+    left=4pt, right=4pt, top=4pt, bottom=4pt,
+    breakable
 }
 
 %------------------------------------------------------------------------------
@@ -217,12 +227,31 @@ Elements of a vector space are called \textbf{vectors} or \textbf{points}.
 \end{itemize}
 \end{result}
 
-\textbf{Why these axioms?} They capture the essential properties of $\F^n$ that make linear algebra work. The axioms ensure we can:
-\begin{itemize}
-    \item Rearrange sums (commutativity, associativity)
-    \item Solve equations like $v + x = w$ (additive inverse)
-    \item Scale vectors predictably (distributive laws)
-\end{itemize}
+\begin{result}
+\textbf{Why These Axioms? (Geometric Intuition)}
+
+These axioms aren't arbitrary; each captures an essential geometric property:
+
+\textbf{Commutativity \& Associativity:} The parallelogram rule for adding vectors works regardless of which vector you draw first. Moving ``3 steps east then 2 north'' reaches the same point as ``2 north then 3 east.''
+
+\smallskip
+\begin{center}
+\begin{tikzpicture}[scale=0.6]
+    \fill (0,0) circle (1.5pt);
+    \draw[vector] (0,0) -- (2,0.5) node[midway, below] {\small$\mathbf{u}$};
+    \draw[vector] (2,0.5) -- (3,2) node[midway, right] {\small$\mathbf{v}$};
+    \draw[vector, dashed] (0,0) -- (1,1.5) node[midway, left] {\small$\mathbf{v}$};
+    \draw[vector, dashed] (1,1.5) -- (3,2) node[midway, above] {\small$\mathbf{u}$};
+    \fill (3,2) circle (2pt) node[above right] {\small$\mathbf{u}+\mathbf{v}$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Additive Identity \& Inverse:} We need a ``do nothing'' operation ($0$) and a way to ``undo'' addition ($-v$). Geometrically: the origin exists, and every direction has an opposite.
+
+\textbf{Multiplicative Identity:} Scaling by 1 leaves a vector unchanged. This anchors our notion of ``unit scale.''
+
+\textbf{Distributive Laws:} Scaling respects the structure of addition. Stretching $\mathbf{u} + \mathbf{v}$ by factor $\lambda$ is the same as stretching each separately, then adding.
+\end{result}
 
 %==============================================================================
 \section{Examples of Vector Spaces}
@@ -248,6 +277,18 @@ With these operations, $\F^\infty$ is a vector space over $\F$.
 \end{tcolorbox}
 
 \textbf{Intuition:} $\F^\infty$ is like $\F^n$ but with infinitely many coordinates. The verification is identical; each axiom is checked coordinate-wise.
+
+\begin{result}
+\textbf{The Abstraction Ladder: From $\F^n$ to $\F^S$}
+
+We've now seen two vector spaces with similar structure:
+\begin{itemize}
+    \item $\F^n$: lists indexed by $\{1, 2, \ldots, n\}$
+    \item $\F^\infty$: sequences indexed by $\Z^+ = \{1, 2, 3, \ldots\}$
+\end{itemize}
+
+What do these have in common? In both cases, we have a set of ``indices'' ($\{1, \ldots, n\}$ or $\Z^+$), and a vector assigns a scalar to each index. This leads to a powerful abstraction: what if we index by \textit{any} set $S$?
+\end{result}
 
 \begin{tcolorbox}
 \textbf{1.24 Notation: $\F^S$}
@@ -281,15 +322,72 @@ If $S$ is a nonempty set, then $\F^S$ (with the operations of addition and scala
 
 \textbf{Key insight:} The ``vectors'' in $\F^S$ are \textit{functions}. Addition means adding function values pointwise.
 
+\textbf{Why functions are vectors:} This may seem abstract, but it's incredibly powerful. A function $f: S \to \F$ assigns a number to each point in $S$---just like a tuple $(x_1, \ldots, x_n)$ assigns a number to each index. The key realization is that \textit{any} way of assigning numbers to a collection of labels can be viewed as a vector. This viewpoint unifies:
+\begin{itemize}
+    \item Polynomials (coefficients indexed by degree)
+    \item Signals (amplitude indexed by time)
+    \item Images (pixel values indexed by position)
+\end{itemize}
+
+\smallskip
+\begin{center}
+\begin{tikzpicture}[scale=0.55]
+    % Axes
+    \draw[axis] (-0.3,0) -- (4.5,0) node[right] {\small$x$};
+    \draw[axis] (0,-0.5) -- (0,2.8) node[above] {\small$y$};
+    % Function f
+    \draw[thick, domain=0.3:4, samples=50] plot (\x, {0.3*\x + 0.5}) node[right] {\small$f$};
+    % Function g
+    \draw[thick, dashed, domain=0.3:4, samples=50] plot (\x, {-0.15*\x + 1.8}) node[right] {\small$g$};
+    % Function f+g
+    \draw[very thick, domain=0.3:4, samples=50] plot (\x, {0.15*\x + 2.3}) node[right] {\small$f+g$};
+    % Vertical line showing pointwise addition
+    \draw[dotted] (2.5,0) -- (2.5,2.68);
+    \node[below] at (2.5,0) {\tiny$s$};
+\end{tikzpicture}
+
+\small\textit{Pointwise addition: $(f+g)(s) = f(s) + g(s)$}
+\end{center}
+\smallskip
+
 \begin{result}
 \textbf{Unifying perspective:} $\F^n$ is a special case of $\F^S$ where $S = \{1, 2, \ldots, n\}$. A list $(x_1, \ldots, x_n)$ is the same as the function $f: \{1, \ldots, n\} \to \F$ defined by $f(k) = x_k$.
 
 Similarly, $\F^\infty$ is $\F^S$ where $S = \Z^+ = \{1, 2, 3, \ldots\}$.
 \end{result}
 
+\smallskip
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+    % Nested ellipses
+    \draw[thick] (0,0) ellipse (3.2cm and 1.4cm);
+    \node at (2.4,1.0) {$\F^S$};
+    \draw[thick] (-0.4,0) ellipse (2.2cm and 1.0cm);
+    \node at (1.2,0.6) {$\F^\infty$};
+    \draw[thick] (-0.8,0) ellipse (1.2cm and 0.6cm);
+    \node at (-0.8,0) {$\F^n$};
+    % Labels below
+    \node at (0,-1.8) {\small\textit{Vector space generalization hierarchy}};
+\end{tikzpicture}
+\end{center}
+\smallskip
+
 %==============================================================================
 \section{Uniqueness Results}
 %==============================================================================
+
+\textbf{Geometric intuition:} The axioms guarantee that additive identities and inverses \textit{exist}, but why should they be \textit{unique}? Geometrically, if there were two different ``origins'' in our space, we'd have two incompatible reference points---vectors would have ambiguous positions. Similarly, if a vector had multiple additive inverses, the notion of ``opposite direction'' would be ill-defined. Uniqueness ensures our geometric intuition is well-founded.
+
+\begin{result}
+\textbf{Proof Technique: Uniqueness Arguments}
+
+To prove an object is unique:
+\begin{enumerate}
+    \item Assume two objects satisfy the defining property
+    \item Show they must be equal using that property
+\end{enumerate}
+This ``assume two, show equal'' pattern appears throughout mathematics.
+\end{result}
 
 The axioms guarantee existence of additive identities and inverses, but we should verify they are unique.
 
@@ -363,6 +461,21 @@ Adding the additive inverse of $0v$ to both sides:
 
 \textbf{Notation warning:} In ``$0v = 0$'', the left $0$ is the \textit{scalar} zero, and the right $0$ is the \textit{vector} zero.
 
+\smallskip
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+    \draw[axis] (-0.5,0) -- (3,0) node[right] {\small$x$};
+    \draw[axis] (0,-0.5) -- (0,2.5) node[above] {\small$y$};
+    \fill (0,0) circle (2pt) node[below left] {$\mathbf{0}$};
+    \draw[vector, thick] (0,0) -- (2.2,1.8) node[above right] {$v$};
+    \draw[->, thick, dashed, gray] (1.1,0.9) -- (0.15,0.12);
+    \node at (1.5,-0.8) {\small $0 \cdot v = \mathbf{0}$};
+\end{tikzpicture}
+
+\small\textit{Scalar zero ``collapses'' any vector to the origin.}
+\end{center}
+\smallskip
+
 \begin{tcolorbox}
 \textbf{1.31 $a0 = 0$}
 
@@ -393,6 +506,21 @@ This shows $(-1)v$ is an additive inverse of $v$. By uniqueness (1.27), $(-1)v =
 
 \textbf{Key insight:} We can now write $-v$ as $(-1)v$. Subtraction is just a special case of scalar multiplication!
 
+\smallskip
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+    \draw[axis] (-2.5,0) -- (2.5,0) node[right] {\small$x$};
+    \draw[axis] (0,-1.5) -- (0,1.5) node[above] {\small$y$};
+    \fill (0,0) circle (1.5pt);
+    \draw[vector] (0,0) -- (2,1) node[above right] {$v$};
+    \draw[vector] (0,0) -- (-2,-1) node[below left] {$(-1)v = -v$};
+    \draw[dotted] (-2.3,-1.15) -- (2.3,1.15);
+\end{tikzpicture}
+
+\small\textit{Scalar multiplication by $-1$ reverses direction.}
+\end{center}
+\smallskip
+
 \begin{result}
 \textbf{Summary of key results:}
 \begin{itemize}
@@ -408,12 +536,36 @@ These three results connect the scalar and vector versions of ``zero'' and ``neg
 \section*{Non-Examples and Pitfalls}
 %==============================================================================
 
-Understanding what is \textit{not} a vector space is as important as knowing the definition.
+Understanding what is \textit{not} a vector space is as important as knowing the definition. For each non-example, we identify the \textbf{specific axiom that fails}.
+
+\smallskip
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    % Table header
+    \node[anchor=west, font=\bfseries\small] at (0,0) {Non-Example};
+    \node[anchor=west, font=\bfseries\small] at (3.5,0) {Axiom Violated};
+    \draw[thick] (-0.2,-0.2) -- (7.5,-0.2);
+    % Row 1
+    \node[anchor=west, font=\small] at (0,-0.6) {$\emptyset$};
+    \node[anchor=west, font=\small] at (3.5,-0.6) {Additive identity};
+    % Row 2
+    \node[anchor=west, font=\small] at (0,-1.0) {$\R^2$, wrong $\cdot$};
+    \node[anchor=west, font=\small] at (3.5,-1.0) {Multiplicative identity};
+    % Row 3
+    \node[anchor=west, font=\small] at (0,-1.4) {$\R^+$};
+    \node[anchor=west, font=\small] at (3.5,-1.4) {Add.\ identity \& inverse};
+\end{tikzpicture}
+
+\small\textit{Quick reference: which axiom each non-example violates}
+\end{center}
+\smallskip
 
 \begin{tcolorbox}[colframe=black!50]
 \textbf{Non-Example: The Empty Set}
 
-The empty set $\emptyset$ is not a vector space because it fails the additive identity axiom: there is no element $0 \in \emptyset$.
+The empty set $\emptyset$ is not a vector space.
+
+\textbf{Axiom violated:} \textit{Additive identity} --- there is no element $0 \in \emptyset$.
 
 \textbf{Key point:} Every vector space must contain at least one element (the zero vector).
 \end{tcolorbox}
@@ -426,23 +578,25 @@ Consider $\R^2$ with standard addition but scalar multiplication defined by:
     \lambda(x, y) = (\lambda x, 0)
 \]
 
-This is \textbf{not} a vector space. Check the multiplicative identity:
-\[
-    1(x, y) = (1 \cdot x, 0) = (x, 0) \neq (x, y)
-\]
-unless $y = 0$. The axiom $1v = v$ fails.
+\textbf{Axiom violated:} \textit{Multiplicative identity} ($1v = v$).
+
+Check: $1(x, y) = (1 \cdot x, 0) = (x, 0) \neq (x, y)$ unless $y = 0$.
+
+The operation ``forgets'' the second coordinate, so scaling by 1 doesn't preserve vectors.
 \end{tcolorbox}
 
 \begin{tcolorbox}[colframe=black!50]
 \textbf{Non-Example: Positive Reals}
 
-Consider $\R^+ = \{x \in \R : x > 0\}$ with standard addition and scalar multiplication. This is \textbf{not} a vector space because:
+Consider $\R^+ = \{x \in \R : x > 0\}$ with standard addition and scalar multiplication.
+
+\textbf{Axioms violated:}
 \begin{itemize}
-    \item The additive identity would need to be $0$, but $0 \notin \R^+$.
-    \item For $v = 1 \in \R^+$, the additive inverse $-1 \notin \R^+$.
+    \item \textit{Additive identity}: $0 \notin \R^+$ (zero is not positive)
+    \item \textit{Additive inverse}: For $v = 1 \in \R^+$, we need $-1$, but $-1 \notin \R^+$
 \end{itemize}
 
-\textbf{Note:} With different operations (multiplication as ``addition'' and exponentiation as ``scalar multiplication''), $\R^+$ \textit{can} be made into a vector space!
+\textbf{Twist:} With different operations (multiplication as ``addition'' and exponentiation as ``scalar multiplication''), $\R^+$ \textit{can} be made into a vector space!
 \end{tcolorbox}
 
 %==============================================================================
@@ -479,6 +633,38 @@ Find ONE axiom that fails and provide a specific counterexample.
     \item Multiplicative identity fails ($1v \neq v$)
 \end{itemize}
 \end{result}
+
+\begin{tcolorbox}[colframe=black!50]
+\textbf{Worked Example: Verifying $\F^2$ is a Vector Space}
+
+Let's verify that $\F^2 = \{(x, y) : x, y \in \F\}$ with coordinate-wise operations is a vector space.
+
+\textbf{1. Commutativity of addition:} Let $u = (u_1, u_2)$ and $v = (v_1, v_2)$.
+\[
+u + v = (u_1 + v_1, u_2 + v_2) = (v_1 + u_1, v_2 + u_2) = v + u \; \checkmark
+\]
+(using commutativity in $\F$)
+
+\textbf{2. Additive identity:} The vector $0 = (0, 0)$ satisfies:
+\[
+(x, y) + (0, 0) = (x + 0, y + 0) = (x, y) \; \checkmark
+\]
+
+\textbf{3. Multiplicative identity:} For any $(x, y) \in \F^2$:
+\[
+1(x, y) = (1 \cdot x, 1 \cdot y) = (x, y) \; \checkmark
+\]
+
+\textbf{4. Distributive (scalar over sum):} Let $a \in \F$, $u, v \in \F^2$:
+\[
+a(u + v) = a(u_1 + v_1, u_2 + v_2) = (a(u_1 + v_1), a(u_2 + v_2))
+\]
+\[
+= (au_1 + av_1, au_2 + av_2) = au + av \; \checkmark
+\]
+
+The remaining axioms (associativity of addition, associativity of scalar multiplication, additive inverses, other distributive law) follow similarly from properties of $\F$.
+\end{tcolorbox}
 
 %==============================================================================
 

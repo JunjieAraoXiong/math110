@@ -14,9 +14,11 @@
 \usepackage{fancyhdr}
 \usepackage{titlesec}
 \usepackage{tcolorbox}
+\tcbuselibrary{breakable}
 \usepackage{booktabs}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
+\usetikzlibrary{matrix, arrows.meta, positioning, calc, cd, shapes.geometric}
+\usepackage{graphicx}
 
 % TikZ style definitions for consistent diagrams
 \tikzset{
@@ -40,7 +42,8 @@
     colframe=black,
     arc=0pt,
     boxsep=3pt,
-    left=4pt, right=4pt, top=4pt, bottom=4pt
+    left=4pt, right=4pt, top=4pt, bottom=4pt,
+    breakable
 }
 
 \newtcolorbox{result}{
@@ -49,7 +52,8 @@
     colframe=white,
     arc=0pt,
     boxsep=2pt,
-    left=4pt, right=4pt, top=4pt, bottom=4pt
+    left=4pt, right=4pt, top=4pt, bottom=4pt,
+    breakable
 }
 
 %------------------------------------------------------------------------------
@@ -76,23 +80,48 @@
 \renewcommand{\headrulewidth}{0.4pt}
 
 %------------------------------------------------------------------------------
-% THEOREM ENVIRONMENTS (numbered to match textbook: 1.1, 1.2, etc.)
+% THEOREM ENVIRONMENTS
 %------------------------------------------------------------------------------
 \theoremstyle{definition}
-\newtheorem{definition}{Definition}[section]
-\newtheorem{example}{Example}[section]
+\newtheorem{property}{Property}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
 
 \theoremstyle{plain}
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
 
 %------------------------------------------------------------------------------
 % CUSTOM COMMANDS
 %------------------------------------------------------------------------------
+% Number fields
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\F}{\mathbb{F}}
 \newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+
+% Matrix/space operations
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\nullity}{nullity}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\row}{row}
+\DeclareMathOperator{\nul}{null}
+\DeclareMathOperator{\range}{range}
+\DeclareMathOperator{\im}{im}
+
+% Inner products and norms
+\newcommand{\inner}[2]{\langle #1, #2 \rangle}
+\newcommand{\norm}[1]{\| #1 \|}
+\newcommand{\proj}{\operatorname{proj}}
+
+% Vectors and matrices
+\newcommand{\vect}[1]{\mathbf{#1}}
+\newcommand{\mat}[1]{\mathbf{#1}}
 
 %==============================================================================
 \begin{document}
@@ -318,7 +347,7 @@ For $(x_1, \ldots, x_n) \in \F^n$ and $k \in \{1, \ldots, n\}$, we say $x_k$ is 
 
 \textbf{Intuition:} Think of $\R^2$ as the plane and $\R^3$ as 3-dimensional space. For $n > 3$, we lose geometric visualization but the algebra works identically.
 
-\vspace{0.5em}
+\smallskip
 \begin{center}
 \begin{tikzpicture}[scale=0.8]
     % Axes
@@ -339,7 +368,7 @@ For $(x_1, \ldots, x_n) \in \F^n$ and $k \in \{1, \ldots, n\}$, we say $x_k$ is 
 
 \small\textit{Elements of $\R^2$ can be thought of as points or as vectors.}
 \end{center}
-\vspace{0.5em}
+\smallskip
 
 \begin{tcolorbox}[colframe=black!50]
 \textbf{1.12 Example: $\C^4$}
@@ -365,7 +394,7 @@ In $\R^3$:
 
 \textbf{Geometric intuition:} In $\R^2$ and $\R^3$, addition corresponds to the parallelogram rule: place the tail of the second vector at the head of the first.
 
-\vspace{0.5em}
+\smallskip
 \begin{center}
 \begin{tikzpicture}[scale=0.8]
     % First vector
@@ -380,9 +409,9 @@ In $\R^3$:
 
 \small\textit{A vector---same length and direction = same vector.}
 \end{center}
-\vspace{0.5em}
+\smallskip
 
-\vspace{0.5em}
+\smallskip
 \begin{center}
 \begin{tikzpicture}[scale=0.8]
     % Origin dot
@@ -397,7 +426,7 @@ In $\R^3$:
 
 \small\textit{The sum of two vectors (tip-to-tail method).}
 \end{center}
-\vspace{0.5em}
+\smallskip
 
 \begin{tcolorbox}
 \textbf{1.14 Commutativity of Addition in $\F^n$}
@@ -460,7 +489,7 @@ If $x = (x_1, \ldots, x_n)$, then $-x = (-x_1, \ldots, -x_n)$.
 
 \textbf{Geometric intuition:} In $\R^2$, $-x$ is the vector with the same length as $x$ but pointing in the opposite direction.
 
-\vspace{0.5em}
+\smallskip
 \begin{center}
 \begin{tikzpicture}[scale=0.8]
     % Origin dot
@@ -473,7 +502,7 @@ If $x = (x_1, \ldots, x_n)$, then $-x = (-x_1, \ldots, -x_n)$.
 
 \small\textit{A vector and its additive inverse.}
 \end{center}
-\vspace{0.5em}
+\smallskip
 
 \textbf{Why not coordinate-wise multiplication?} We \textit{could} define multiplication of two vectors by multiplying corresponding coordinates, but this is not useful for linear algebra. Instead, \textbf{scalar multiplication} (multiplying a vector by a number) is central to our subject.
 
@@ -524,7 +553,7 @@ This is precisely the parametric equation of the line through the origin with di
 \textbf{Key insight:} This property is fundamental to linear maps (Chapter 3)---they preserve these lines through the origin.
 \end{tcolorbox}
 
-\vspace{0.5em}
+\smallskip
 \begin{center}
 \begin{tikzpicture}[scale=0.8]
     % Vertical alignment line (dashed)
@@ -543,7 +572,7 @@ This is precisely the parametric equation of the line through the origin with di
 
 \small\textit{Scalar multiplication: scaling and reversing vectors.}
 \end{center}
-\vspace{0.5em}
+\smallskip
 
 \begin{result}
 \textbf{Scalar multiplication vs dot product:} Scalar multiplication takes a scalar and a vector, producing a \textbf{vector}. The dot product (Chapter 6) takes two vectors and produces a \textbf{scalar}. These are different operations.
@@ -568,6 +597,24 @@ A \textbf{field} is a set containing at least two distinct elements called $0$ a
 %==============================================================================
 
 \newpage
+%==============================================================================
+\section*{Key Takeaways}
+%==============================================================================
+
+\begin{enumerate}
+    \item \textbf{Complex numbers extend the reals:} $\C = \{a + bi : a, b \in \R\}$ with $i^2 = -1$
+    \item \textbf{$\F^n$ generalizes familiar spaces:} Lists of $n$ scalars with coordinate-wise operations
+    \item \textbf{Addition and scalar multiplication:} The two fundamental operations, defined component-wise
+    \item \textbf{The zero vector:} $0 = (0, \ldots, 0)$ is the additive identity in $\F^n$
+    \item \textbf{Conjugate trick:} Multiply by $\overline{z}/\overline{z}$ to compute complex division
+\end{enumerate}
+
+\subsection*{Relevant Exercises}
+Practice these problems from LADR to reinforce the material:
+\begin{itemize}
+    \item Section 1A: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14
+\end{itemize}
+
 %==============================================================================
 \section*{Exercise Reference}
 %==============================================================================
