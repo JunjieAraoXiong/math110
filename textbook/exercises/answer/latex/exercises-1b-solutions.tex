@@ -1,0 +1,413 @@
+%==============================================================================
+% EXERCISES 1B SOLUTIONS
+% Linear Algebra Done Right (4th ed.) - Sheldon Axler
+%==============================================================================
+
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+
+% Required packages
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{titlesec}
+\usepackage{booktabs}
+\usetikzlibrary{matrix, arrows.meta, positioning, calc, cd}
+
+% Improved spacing
+\linespread{1.15}
+\setlength{\parskip}{0.5ex plus 0.2ex minus 0.1ex}
+
+% Custom commands (from style guide)
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% Custom operators
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\nullity}{nullity}
+\DeclareMathOperator{\spn}{span}
+
+% Box environments (from style guide)
+\tcbset{
+    boxrule=0.8pt,
+    colback=white,
+    colframe=black,
+    arc=0pt,
+    boxsep=3pt,
+    left=4pt, right=4pt, top=4pt, bottom=4pt
+}
+
+\newtcolorbox{solutionbox}{
+    boxrule=0.5pt,
+    colback=black!3,
+    colframe=black!40,
+    arc=0pt,
+    boxsep=4pt,
+    left=6pt, right=6pt, top=6pt, bottom=6pt
+}
+
+\newtcolorbox{result}{
+    boxrule=0.8pt,
+    colback=white,
+    colframe=black,
+    arc=0pt,
+    boxsep=3pt,
+    left=4pt, right=4pt, top=4pt, bottom=4pt
+}
+
+\newtcolorbox{hintbox}{
+    boxrule=0.5pt,
+    colback=yellow!5,
+    colframe=black!30,
+    arc=0pt,
+    boxsep=3pt,
+    left=4pt, right=4pt, top=4pt, bottom=4pt
+}
+
+% Header/footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small MATH 110}
+\fancyhead[R]{\small Exercises 1B Solutions}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Exercise counter and command
+\newcounter{exercise}
+\newcommand{\exercise}{\refstepcounter{exercise}\noindent\textbf{Exercise \theexercise.} }
+
+% Solution environment
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+\begin{document}
+
+\noindent
+\begin{minipage}{\linewidth}
+    \centering
+    \textbf{\Large Exercises 1B Solutions: Definition of Vector Space} \\[0.5em]
+    \textit{Linear Algebra Done Right, 4th ed.}\\[0.3em]
+    \hrule
+\end{minipage}
+\vspace{1.5em}
+
+%==============================================================================
+% BASIC VECTOR SPACE PROPERTIES (1-3)
+%==============================================================================
+
+\exercise
+Prove that $-(-v) = v$ for every $v \in V$.
+
+\medskip
+
+\begin{solution}
+By definition, $-(-v)$ is the additive inverse of $(-v)$, meaning it is the unique element satisfying $(-v) + (-(-v)) = 0$.
+
+We claim that $v$ satisfies this property. Indeed:
+\[
+    (-v) + v = v + (-v) = 0
+\]
+where the first equality uses commutativity of addition.
+
+Since $v$ is an element such that $(-v) + v = 0$, and the additive inverse of $(-v)$ is unique, we conclude that $-(-v) = v$. \hfill $\square$
+\end{solution}
+
+\bigskip
+
+%------------------------------------------------------------------------------
+
+\exercise
+Suppose $a \in \F$, $v \in V$, and $av = 0$. Prove that $a = 0$ or $v = 0$.
+
+\medskip
+
+\begin{solution}
+Suppose $a \neq 0$. We will show that $v = 0$.
+
+Since $a \neq 0$ and $\F$ is a field, $a$ has a multiplicative inverse $a^{-1} \in \F$.
+
+From $av = 0$, multiply both sides by $a^{-1}$:
+\[
+    a^{-1}(av) = a^{-1} \cdot 0.
+\]
+
+The left side simplifies using associativity of scalar multiplication:
+\[
+    a^{-1}(av) = (a^{-1}a)v = 1 \cdot v = v.
+\]
+
+For the right side, we show $a^{-1} \cdot 0_V = 0_V$: Since $0_V = 0_V + 0_V$, we have
+\[
+    a^{-1} \cdot 0_V = a^{-1}(0_V + 0_V) = a^{-1} \cdot 0_V + a^{-1} \cdot 0_V.
+\]
+Adding $-(a^{-1} \cdot 0_V)$ to both sides gives $0_V = a^{-1} \cdot 0_V$.
+
+Therefore $v = 0$.
+
+We have shown: if $a \neq 0$, then $v = 0$. Equivalently, $a = 0$ or $v = 0$. \hfill $\square$
+\end{solution}
+
+\bigskip
+
+%------------------------------------------------------------------------------
+
+\exercise
+Suppose $v, w \in V$. Explain why there exists a unique $x \in V$ such that $v + 3x = w$.
+
+\medskip
+
+\begin{solutionbox}
+\textbf{Solution:} We prove both existence and uniqueness.
+
+\textbf{Existence:} Define $x = \frac{1}{3}(w + (-v)) = \frac{1}{3}(w - v)$.
+
+We verify that this $x$ satisfies $v + 3x = w$:
+\begin{align*}
+    v + 3x &= v + 3 \cdot \frac{1}{3}(w - v) \\
+    &= v + 1 \cdot (w - v) \\
+    &= v + (w - v) \\
+    &= v + w + (-v) \\
+    &= w + v + (-v) \\
+    &= w + 0 = w.
+\end{align*}
+
+\textbf{Uniqueness:} Suppose $x_1$ and $x_2$ both satisfy the equation:
+\[
+    v + 3x_1 = w \quad \text{and} \quad v + 3x_2 = w.
+\]
+
+Then $v + 3x_1 = v + 3x_2$.
+
+Adding $(-v)$ to both sides:
+\[
+    3x_1 = 3x_2.
+\]
+
+Multiplying both sides by $\frac{1}{3}$:
+\[
+    x_1 = x_2.
+\]
+
+Therefore there exists a unique $x \in V$ such that $v + 3x = w$:
+\[
+    \boxed{x = \frac{1}{3}(w - v)}
+\]
+\hfill $\square$
+\end{solutionbox}
+
+\newpage
+
+%==============================================================================
+% AXIOM ANALYSIS (4-6)
+%==============================================================================
+
+\exercise
+The empty set is not a vector space. The empty set fails to satisfy only one of the requirements listed in the definition of a vector space (1.20). Which one?
+
+\medskip
+
+\begin{solution}
+The empty set fails the \textbf{additive identity} axiom.
+
+The additive identity axiom requires the existence of an element $0 \in V$ such that $v + 0 = v$ for all $v \in V$.
+
+Since the empty set contains no elements, there is no element that could serve as the additive identity. Even though the condition ``$v + 0 = v$ for all $v \in V$'' is vacuously true (there are no $v$ to check), the requirement that such an element \emph{exists} fails.
+
+All other axioms are vacuously satisfied because they are statements about elements of $V$, and the empty set has no elements to violate them. \hfill $\square$
+\end{solution}
+
+\begin{hintbox}
+\textbf{Why not additive inverse?} The additive inverse axiom says: ``for every $v \in V$, there exists $w \in V$ such that $v + w = 0$.'' For the empty set, there are no elements $v$ to consider, so this statement is vacuously true. The key difference is that additive identity requires something to \emph{exist}, while additive inverse only makes claims about elements that are already there.
+\end{hintbox}
+
+\bigskip
+
+%------------------------------------------------------------------------------
+
+\exercise
+Show that in the definition of a vector space (1.20), the additive inverse condition can be replaced with the condition that
+\[
+    0v = 0 \text{ for all } v \in V.
+\]
+Here the $0$ on the left side is the number $0$, and the $0$ on the right side is the additive identity of $V$.
+
+\begin{solutionbox}
+\textbf{Solution:} We must show that if $V$ satisfies all vector space axioms except the additive inverse axiom, but does satisfy $0v = 0$ for all $v \in V$, then the additive inverse axiom holds.
+
+We need to show: for every $v \in V$, there exists $w \in V$ such that $v + w = 0$.
+
+Given $v \in V$, consider $w = (-1)v$.
+
+We claim $v + w = 0$:
+\begin{align*}
+    v + (-1)v &= 1 \cdot v + (-1)v && \text{(multiplicative identity axiom)} \\
+    &= (1 + (-1))v && \text{(distributivity over scalar addition)} \\
+    &= 0v && \text{(arithmetic in } \F\text{)} \\
+    &= 0 && \text{(our assumed condition)}
+\end{align*}
+
+Therefore $(-1)v$ serves as the additive inverse of $v$.
+
+This shows the additive inverse axiom is a consequence of $0v = 0$ together with the other axioms. Hence the two formulations of vector space are equivalent. \hfill $\square$
+\end{solutionbox}
+
+\newpage
+
+%------------------------------------------------------------------------------
+
+\exercise
+Let $\infty$ and $-\infty$ denote two distinct objects, neither of which is in $\R$. Define an addition and scalar multiplication on $\R \cup \{\infty, -\infty\}$ as you could guess from the notation. Specifically, the sum and product of two real numbers is as usual, and for $t \in \R$ define
+\begin{align*}
+    t \cdot \infty &= \begin{cases} -\infty & \text{if } t < 0, \\ 0 & \text{if } t = 0, \\ \infty & \text{if } t > 0; \end{cases} &
+    t \cdot (-\infty) &= \begin{cases} \infty & \text{if } t < 0, \\ 0 & \text{if } t = 0, \\ -\infty & \text{if } t > 0; \end{cases}
+\end{align*}
+\[
+    t + \infty = \infty + t = \infty, \quad t + (-\infty) = (-\infty) + t = -\infty,
+\]
+\[
+    \infty + \infty = \infty, \quad (-\infty) + (-\infty) = -\infty, \quad \infty + (-\infty) = 0.
+\]
+Is $\R \cup \{\infty, -\infty\}$ a vector space over $\R$? Explain.
+
+\begin{solutionbox}
+\textbf{Solution:} No, $\R \cup \{\infty, -\infty\}$ is not a vector space over $\R$.
+
+The \textbf{associativity of addition} fails.
+
+Consider the following computation:
+\[
+    (1 + \infty) + (-\infty) = \infty + (-\infty) = 0.
+\]
+
+But:
+\[
+    1 + (\infty + (-\infty)) = 1 + 0 = 1.
+\]
+
+Since $(1 + \infty) + (-\infty) = 0 \neq 1 = 1 + (\infty + (-\infty))$, addition is not associative.
+
+Therefore $\R \cup \{\infty, -\infty\}$ is not a vector space. \hfill $\square$
+\end{solutionbox}
+
+\begin{hintbox}
+\textbf{Intuition:} The extended real line $\R \cup \{\infty, -\infty\}$ is useful in analysis (limits, measure theory), but the rules $\infty + (-\infty) = 0$ and $t + \infty = \infty$ are inherently inconsistent with associativity. This is why $\infty - \infty$ is considered an ``indeterminate form'' in calculus.
+\end{hintbox}
+
+\newpage
+
+%==============================================================================
+% FUNCTION SPACES AND COMPLEXIFICATION (7-8)
+%==============================================================================
+
+\exercise
+Suppose $S$ is a nonempty set and $V$ is a vector space. Let $V^S$ denote the set of functions from $S$ to $V$. Define addition and scalar multiplication on $V^S$ by
+\[
+    (f + g)(x) = f(x) + g(x) \quad \text{and} \quad (\lambda f)(x) = \lambda f(x)
+\]
+for all $f, g \in V^S$, $\lambda \in \F$, and $x \in S$. Prove that $V^S$ is a vector space.
+
+\begin{solutionbox}
+\textbf{Solution:} We verify all eight vector space axioms for $V^S$. Each property is verified pointwise: two functions are equal if and only if they agree at every point $x \in S$.
+
+\medskip
+\textit{Addition axioms:}
+\begin{enumerate}[leftmargin=2em, itemsep=0.3em]
+    \item \textbf{Commutativity:} $(f + g)(x) = f(x) + g(x) = g(x) + f(x) = (g + f)(x)$.
+
+    \item \textbf{Associativity:} $((f + g) + h)(x) = (f(x) + g(x)) + h(x) = f(x) + (g(x) + h(x)) = (f + (g + h))(x)$.
+
+    \item \textbf{Additive identity:} Define $\mathbf{0} \in V^S$ by $\mathbf{0}(x) = 0_V$. Then $(f + \mathbf{0})(x) = f(x) + 0_V = f(x)$.
+
+    \item \textbf{Additive inverse:} Define $(-f)(x) = -f(x)$. Then $(f + (-f))(x) = f(x) + (-f(x)) = 0_V$.
+\end{enumerate}
+
+\medskip
+\textit{Scalar multiplication axioms:}
+\begin{enumerate}[leftmargin=2em, itemsep=0.3em, resume]
+    \item \textbf{Multiplicative identity:} $(1f)(x) = 1 \cdot f(x) = f(x)$.
+
+    \item \textbf{Associativity:} $((\alpha\beta)f)(x) = (\alpha\beta)f(x) = \alpha(\beta f(x)) = (\alpha(\beta f))(x)$.
+
+    \item \textbf{Distributivity (vectors):} $(\lambda(f + g))(x) = \lambda(f(x) + g(x)) = \lambda f(x) + \lambda g(x) = (\lambda f + \lambda g)(x)$.
+
+    \item \textbf{Distributivity (scalars):} $((\alpha + \beta)f)(x) = (\alpha + \beta)f(x) = \alpha f(x) + \beta f(x) = (\alpha f + \beta f)(x)$.
+\end{enumerate}
+
+\medskip
+All axioms are satisfied, so $V^S$ is a vector space over $\F$. \hfill $\square$
+\end{solutionbox}
+
+\newpage
+
+%------------------------------------------------------------------------------
+
+\exercise
+Suppose $V$ is a real vector space. The \textbf{complexification} of $V$, denoted $V_\C$, equals $V \times V$. An element of $V_\C$ is an ordered pair $(u, v)$, where $u, v \in V$, but we write this as $u + iv$.
+
+Define addition and complex scalar multiplication on $V_\C$ by
+\[
+    (u_1 + iv_1) + (u_2 + iv_2) = (u_1 + u_2) + i(v_1 + v_2)
+\]
+\[
+    (a + bi)(u + iv) = (au - bv) + i(av + bu)
+\]
+for all $u_1, v_1, u_2, v_2, u, v \in V$ and $a, b \in \R$.
+
+Prove that with the definitions of addition and scalar multiplication as above, $V_\C$ is a complex vector space.
+
+\begin{solutionbox}
+\textbf{Solution:} We verify the vector space axioms for $V_\C$ over $\C$. Each axiom reduces to properties of the real vector space $V$.
+
+\medskip
+\textit{Addition axioms} (straightforward from $V$):
+\begin{enumerate}[leftmargin=2em, itemsep=0.2em]
+    \item \textbf{Commutativity:} $(u_1 + iv_1) + (u_2 + iv_2) = (u_1 + u_2) + i(v_1 + v_2) = (u_2 + u_1) + i(v_2 + v_1)$.
+
+    \item \textbf{Associativity:} Follows from associativity in $V$ applied to both components.
+
+    \item \textbf{Additive identity:} $0_{V_\C} = 0 + i0$. Then $(u + iv) + (0 + i0) = u + iv$.
+
+    \item \textbf{Additive inverse:} $-(u + iv) = (-u) + i(-v)$.
+\end{enumerate}
+
+\medskip
+\textit{Scalar multiplication axioms:}
+\begin{enumerate}[leftmargin=2em, itemsep=0.2em, resume]
+    \item \textbf{Multiplicative identity:} $(1 + 0i)(u + iv) = (1 \cdot u - 0 \cdot v) + i(1 \cdot v + 0 \cdot u) = u + iv$. \checkmark
+
+    \item \textbf{Associativity:} Let $\alpha = a + bi$, $\beta = c + di$, so $\alpha\beta = (ac-bd) + (ad+bc)i$.
+
+    Computing $(\alpha\beta)(u + iv)$:
+    \[
+        = ((ac-bd)u - (ad+bc)v) + i((ac-bd)v + (ad+bc)u).
+    \]
+    Computing $\alpha(\beta(u + iv))$ where $\beta(u+iv) = (cu-dv) + i(cv+du)$:
+    \begin{align*}
+        &= (a(cu-dv) - b(cv+du)) + i(a(cv+du) + b(cu-dv)) \\
+        &= (acu - adv - bcv - bdu) + i(acv + adu + bcu - bdv).
+    \end{align*}
+    Regrouping confirms equality. \checkmark
+
+    \item \textbf{Distributivity (vectors):} For $\lambda = a + bi$:
+    \begin{align*}
+        \lambda((u_1 + iv_1) + (u_2 + iv_2)) &= (a+bi)((u_1+u_2) + i(v_1+v_2)) \\
+        &= \lambda(u_1 + iv_1) + \lambda(u_2 + iv_2). \quad \checkmark
+    \end{align*}
+
+    \item \textbf{Distributivity (scalars):} For $\alpha = a + bi$, $\beta = c + di$:
+    \[
+        (\alpha + \beta)(u + iv) = \alpha(u + iv) + \beta(u + iv). \quad \checkmark
+    \]
+\end{enumerate}
+
+\medskip
+All axioms are satisfied, so $V_\C$ is a complex vector space. \hfill $\square$
+\end{solutionbox}
+
+\vfill
+
+\end{document}
