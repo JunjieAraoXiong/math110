@@ -1,0 +1,214 @@
+%==============================================================================
+% EXERCISES 1C WORKSHEET
+% Linear Algebra Done Right (4th ed.) - Sheldon Axler
+%==============================================================================
+
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+
+% Required packages
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{xcolor}
+
+% Custom commands (from style guide)
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% Header/footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small MATH 110}
+\fancyhead[R]{\small Exercises 1C}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Exercise counter and command
+\newcounter{exercise}
+\newcommand{\exercise}{\refstepcounter{exercise}\noindent\textbf{Exercise \theexercise.} }
+
+% Ruled solution space with gray separator
+\newcommand{\ruledspace}[1]{%
+  \par\vspace{0.3em}%
+  \noindent\textcolor{gray!30}{\hrule}%
+  \vspace{#1}%
+}
+
+% Answer line for computation problems
+\newcommand{\answerline}{%
+  \vspace{0.5em}%
+  \noindent\textbf{Answer:} \hrulefill%
+  \vspace{1em}%
+}
+
+\begin{document}
+
+\noindent
+\begin{minipage}{\linewidth}
+    \centering
+    \textbf{\Large Exercises 1C: Subspaces} \\[0.5em]
+    \textit{Linear Algebra Done Right, 4th ed.}\\[0.3em]
+    \hrule
+\end{minipage}
+\vspace{1.5em}
+
+%==============================================================================
+% INTERSECTION AND UNION OF SUBSPACES (11-13)
+%==============================================================================
+
+\exercise
+Prove that the intersection of every collection of subspaces of $V$ is a subspace of $V$.
+\ruledspace{7cm}
+
+%------------------------------------------------------------------------------
+
+\exercise
+Prove that the union of two subspaces of $V$ is a subspace of $V$ if and only if one of the subspaces is contained in the other.
+\ruledspace{8cm}
+
+\newpage
+
+%------------------------------------------------------------------------------
+
+\exercise
+Prove that the union of three subspaces of $V$ is a subspace of $V$ if and only if one of the subspaces contains the other two.
+
+\textit{Hint:} This exercise is more complicated than the previous exercise; there is no quick argument. First prove this in the special case where $\F$ has only two elements, and then prove it when $\F$ has more than two elements.
+\ruledspace{10cm}
+
+\newpage
+
+%==============================================================================
+% SUMS OF SUBSPACES (14-18)
+%==============================================================================
+
+\exercise
+Suppose $U$ is the subspace of $\F^3$ defined by
+\[
+    U = \{(x, -x, 2x) \in \F^3 : x \in \F\}.
+\]
+Also suppose $W$ is the subspace of $\F^3$ defined by
+\[
+    W = \{(x, x, 2x) \in \F^3 : x \in \F\}.
+\]
+Describe $U + W$ both symbolically and non-symbolically.
+\ruledspace{6cm}
+\answerline
+
+%------------------------------------------------------------------------------
+
+\exercise
+Suppose $U$ is a subspace of $V$. What is $U + U$?
+\ruledspace{4cm}
+\answerline
+
+\newpage
+
+%------------------------------------------------------------------------------
+
+\exercise
+Is the operation of addition on the subspaces of $V$ commutative? In other words, if $U$ and $W$ are subspaces of $V$, is $U + W = W + U$?
+\ruledspace{5cm}
+
+%------------------------------------------------------------------------------
+
+\exercise
+Is the operation of addition on the subspaces of $V$ associative? In other words, if $V_1$, $V_2$, $V_3$ are subspaces of $V$, is
+\[
+    (V_1 + V_2) + V_3 = V_1 + (V_2 + V_3)?
+\]
+\ruledspace{6cm}
+
+\newpage
+
+%------------------------------------------------------------------------------
+
+\exercise
+Does the operation of addition on the subspaces of $V$ have an additive identity? Which subspaces have additive inverses?
+\ruledspace{6cm}
+
+%==============================================================================
+% PROVE OR GIVE A COUNTEREXAMPLE (19, 23)
+%==============================================================================
+
+\exercise
+Suppose $V_1$, $V_2$, and $U$ are subspaces of $V$. Prove or give a counterexample: If $V_1 + U = V_2 + U$, then $V_1 = V_2$.
+\ruledspace{7cm}
+
+\newpage
+
+%------------------------------------------------------------------------------
+
+\exercise
+Suppose $V_1$, $V_2$, and $U$ are subspaces of $V$. Prove or give a counterexample: If $V = V_1 \oplus U$ and $V = V_2 \oplus U$, then $V_1 = V_2$.
+
+\textit{Hint:} Think about subspaces of $\F^2$.
+\ruledspace{7cm}
+
+%==============================================================================
+% DIRECT SUM PROBLEMS (20-22)
+%==============================================================================
+
+\exercise
+Suppose
+\[
+    U = \{(x, x, y, y) \in \F^4 : x, y \in \F\}.
+\]
+Find a subspace $W$ of $\F^4$ such that $\F^4 = U \oplus W$.
+\ruledspace{6cm}
+\answerline
+
+\newpage
+
+%------------------------------------------------------------------------------
+
+\exercise
+Suppose
+\[
+    U = \{(x, y, x+y, x-y, 2x) \in \F^5 : x, y \in \F\}.
+\]
+Find a subspace $W$ of $\F^5$ such that $\F^5 = U \oplus W$.
+\ruledspace{7cm}
+\answerline
+
+%------------------------------------------------------------------------------
+
+\exercise
+Suppose
+\[
+    U = \{(x, y, x+y, x-y, 2x) \in \F^5 : x, y \in \F\}.
+\]
+Find three nonzero subspaces $W_1$, $W_2$, $W_3$ of $\F^5$, none of which equals $\{0\}$, such that
+\[
+    \F^5 = U \oplus W_1 \oplus W_2 \oplus W_3.
+\]
+\ruledspace{7cm}
+
+\newpage
+
+%==============================================================================
+% EVEN AND ODD FUNCTIONS (24)
+%==============================================================================
+
+\exercise
+A function $f: \R \to \R$ is called \textbf{even} if
+\[
+    f(-x) = f(x) \quad \text{for all } x \in \R.
+\]
+A function $f: \R \to \R$ is called \textbf{odd} if
+\[
+    f(-x) = -f(x) \quad \text{for all } x \in \R.
+\]
+Let $V_e$ denote the set of real-valued even functions on $\R$, and let $V_o$ denote the set of real-valued odd functions on $\R$. Show that
+\[
+    \R^\R = V_e \oplus V_o.
+\]
+\ruledspace{10cm}
+
+\vfill
+
+\end{document}

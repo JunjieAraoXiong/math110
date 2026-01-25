@@ -1,0 +1,166 @@
+%==============================================================================
+% EXERCISES 1B WORKSHEET
+% Linear Algebra Done Right (4th ed.) - Sheldon Axler
+%==============================================================================
+
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+
+% Required packages
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{xcolor}
+
+% Custom commands (from style guide)
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% Header/footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small MATH 110}
+\fancyhead[R]{\small Exercises 1B}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Exercise counter and command
+\newcounter{exercise}
+\newcommand{\exercise}{\refstepcounter{exercise}\noindent\textbf{Exercise \theexercise.} }
+
+% Ruled solution space with gray separator
+\newcommand{\ruledspace}[1]{%
+  \par\vspace{0.3em}%
+  \noindent\textcolor{gray!30}{\hrule}%
+  \vspace{#1}%
+}
+
+% Answer line for computation problems
+\newcommand{\answerline}{%
+  \vspace{0.5em}%
+  \noindent\textbf{Answer:} \hrulefill%
+  \vspace{1em}%
+}
+
+\begin{document}
+
+\noindent
+\begin{minipage}{\linewidth}
+    \centering
+    \textbf{\Large Exercises 1B: Definition of Vector Space} \\[0.5em]
+    \textit{Linear Algebra Done Right, 4th ed.}\\[0.3em]
+    \hrule
+\end{minipage}
+\vspace{1.5em}
+
+%==============================================================================
+% BASIC VECTOR SPACE PROOFS (1-4)
+%==============================================================================
+
+\exercise
+Prove that $-(-v) = v$ for every $v \in V$.
+\ruledspace{6cm}
+
+%------------------------------------------------------------------------------
+
+\exercise
+Suppose $a \in \F$, $v \in V$, and $av = 0$. Prove that $a = 0$ or $v = 0$.
+\ruledspace{7cm}
+
+\newpage
+
+%------------------------------------------------------------------------------
+
+\exercise
+Suppose $v, w \in V$. Explain why there exists a unique $x \in V$ such that $v + 3x = w$.
+\ruledspace{7cm}
+
+%------------------------------------------------------------------------------
+
+\exercise
+The empty set is not a vector space. The empty set fails to satisfy only one of the requirements listed in the definition of a vector space (1.20). Which one?
+\ruledspace{5cm}
+\answerline
+
+\newpage
+
+%==============================================================================
+% ALTERNATIVE AXIOMS AND EXTENDED REALS (5-6)
+%==============================================================================
+
+\exercise
+Show that in the definition of a vector space (1.20), the additive inverse condition can be replaced with the condition that
+\[
+    0v = 0 \quad \text{for all } v \in V.
+\]
+The $0$ on the left side is the number $0$, and the $0$ on the right side is the additive identity of $V$.
+
+\textit{Hint:} The point here is that if the expression ``for every $v \in V$, there exists $w \in V$ such that $v + w = 0$'' in the definition of vector space is replaced with ``$0v = 0$ for all $v \in V$,'' then the other conditions in the definition of vector space imply that for each $v \in V$, there exists an additive inverse of $v$.
+\ruledspace{8cm}
+
+\newpage
+
+%------------------------------------------------------------------------------
+
+\exercise
+Let $\infty$ and $-\infty$ denote two distinct objects, neither of which is in $\R$. Define an addition and scalar multiplication on $\R \cup \{\infty, -\infty\}$ as follows: the usual operations on $\R$ are unchanged; for $t \in \R$ define
+\begin{align*}
+    t + \infty &= \infty + t = \infty, \\
+    t + (-\infty) &= (-\infty) + t = -\infty, \\
+    \infty + \infty &= \infty, \\
+    (-\infty) + (-\infty) &= -\infty, \\
+    \infty + (-\infty) &= 0;
+\end{align*}
+for $t \in \R$ with $t > 0$ define
+\begin{align*}
+    t \cdot \infty &= \infty, & t \cdot (-\infty) &= -\infty;
+\end{align*}
+for $t \in \R$ with $t < 0$ define
+\begin{align*}
+    t \cdot \infty &= -\infty, & t \cdot (-\infty) &= \infty;
+\end{align*}
+and define
+\begin{align*}
+    0 \cdot \infty &= 0, & 0 \cdot (-\infty) &= 0.
+\end{align*}
+Is $\R \cup \{\infty, -\infty\}$ a vector space over $\R$? Explain.
+\ruledspace{6cm}
+
+\newpage
+
+%==============================================================================
+% FUNCTION SPACES AND COMPLEXIFICATION (7-8)
+%==============================================================================
+
+\exercise
+Suppose $S$ is a nonempty set and $V$ is a vector space. Let $V^S$ denote the set of functions from $S$ to $V$. Define a natural addition and scalar multiplication on $V^S$, and show that $V^S$ is a vector space with these definitions.
+\ruledspace{10cm}
+
+\newpage
+
+%------------------------------------------------------------------------------
+
+\exercise
+Suppose $V$ is a real vector space. The \textbf{complexification} of $V$, denoted $V_\C$, equals $V \times V$. An element of $V_\C$ is an ordered pair $(u, v)$, where $u, v \in V$, but we will write this as $u + iv$.
+
+Define addition on $V_\C$ by
+\[
+    (u_1 + iv_1) + (u_2 + iv_2) = (u_1 + u_2) + i(v_1 + v_2)
+\]
+for $u_1, v_1, u_2, v_2 \in V$.
+
+Define complex scalar multiplication on $V_\C$ by
+\[
+    (a + bi)(u + iv) = (au - bv) + i(av + bu)
+\]
+for $a, b \in \R$ and $u, v \in V$.
+
+Prove that with the definitions of addition and scalar multiplication as above, $V_\C$ is a complex vector space.
+\ruledspace{10cm}
+
+\vfill
+
+\end{document}

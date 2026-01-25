@@ -1,0 +1,483 @@
+%==============================================================================
+% EXERCISES 1A SOLUTIONS
+% Linear Algebra Done Right (4th ed.) - Sheldon Axler
+%==============================================================================
+
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+
+% Required packages
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+
+% Custom commands (from style guide)
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% Header/footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small MATH 110}
+\fancyhead[R]{\small Exercises 1A Solutions}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Exercise counter and command
+\newcounter{exercise}
+\newcommand{\exercise}{\refstepcounter{exercise}\noindent\textbf{Exercise \theexercise.} }
+
+% Solution environment
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+\begin{document}
+
+\noindent
+\begin{minipage}{\linewidth}
+    \centering
+    \textbf{\Large Exercises 1A Solutions: $\R^n$ and $\C^n$} \\[0.5em]
+    \textit{Linear Algebra Done Right, 4th ed.}\\[0.3em]
+    \hrule
+\end{minipage}
+\vspace{1.5em}
+
+%==============================================================================
+% COMPLEX NUMBER EXERCISES (1-6)
+%==============================================================================
+
+\exercise
+Suppose $a$ and $b$ are real numbers, not both $0$. Find real numbers $c$ and $d$ such that
+\[
+    \frac{1}{a + bi} = c + di.
+\]
+
+\begin{solution}
+Multiply the numerator and denominator by the complex conjugate of the denominator:
+\[
+    \frac{1}{a + bi} = \frac{1}{a + bi} \cdot \frac{a - bi}{a - bi} = \frac{a - bi}{a^2 + b^2}.
+\]
+Since $a$ and $b$ are not both $0$, we have $a^2 + b^2 \neq 0$. Separating into real and imaginary parts:
+\[
+    \frac{1}{a + bi} = \frac{a}{a^2 + b^2} - \frac{b}{a^2 + b^2}i.
+\]
+Therefore:
+\[
+    \boxed{c = \frac{a}{a^2 + b^2}, \quad d = \frac{-b}{a^2 + b^2}}
+\]
+\end{solution}
+
+%------------------------------------------------------------------------------
+
+\exercise
+Show that
+\[
+    \frac{-1 + \sqrt{3}\,i}{2}
+\]
+is a cube root of $1$ (meaning that its cube equals $1$).
+
+\begin{solution}
+Let $\omega = \frac{-1 + \sqrt{3}\,i}{2}$. We compute $\omega^3$ step by step.
+
+First, compute $\omega^2$:
+\begin{align*}
+    \omega^2 &= \left(\frac{-1 + \sqrt{3}\,i}{2}\right)^2 = \frac{(-1 + \sqrt{3}\,i)^2}{4} \\[6pt]
+    &= \frac{1 - 2\sqrt{3}\,i + 3i^2}{4} = \frac{1 - 2\sqrt{3}\,i - 3}{4} \\[6pt]
+    &= \frac{-2 - 2\sqrt{3}\,i}{4} = \frac{-1 - \sqrt{3}\,i}{2}.
+\end{align*}
+
+Now compute $\omega^3 = \omega^2 \cdot \omega$:
+\begin{align*}
+    \omega^3 &= \frac{-1 - \sqrt{3}\,i}{2} \cdot \frac{-1 + \sqrt{3}\,i}{2} \\[6pt]
+    &= \frac{(-1 - \sqrt{3}\,i)(-1 + \sqrt{3}\,i)}{4} \\[6pt]
+    &= \frac{(-1)^2 - (\sqrt{3}\,i)^2}{4} = \frac{1 - 3i^2}{4} = \frac{1 + 3}{4} = 1.
+\end{align*}
+
+Therefore $\omega^3 = 1$, so $\omega$ is a cube root of $1$. \hfill $\square$
+\end{solution}
+
+%------------------------------------------------------------------------------
+
+\exercise
+Find two distinct square roots of $i$.
+
+\begin{solution}
+We seek $z = a + bi$ such that $z^2 = i$, where $a, b \in \R$.
+
+Expanding $z^2$:
+\[
+    z^2 = (a + bi)^2 = a^2 + 2abi + b^2i^2 = (a^2 - b^2) + 2abi.
+\]
+
+Setting $z^2 = i = 0 + 1 \cdot i$, we equate real and imaginary parts:
+\begin{align*}
+    a^2 - b^2 &= 0 \\
+    2ab &= 1
+\end{align*}
+
+From the first equation, $a^2 = b^2$, so $a = \pm b$.
+
+If $a = b$: From $2ab = 1$, we get $2a^2 = 1$, so $a = \pm\frac{1}{\sqrt{2}}$.
+This gives $a = b = \frac{1}{\sqrt{2}}$ or $a = b = -\frac{1}{\sqrt{2}}$.
+
+If $a = -b$: From $2ab = 1$, we get $-2a^2 = 1$, which has no real solutions.
+
+Therefore the two square roots of $i$ are:
+\[
+    \boxed{z_1 = \frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}}i = \frac{\sqrt{2}}{2}(1 + i), \quad z_2 = -\frac{1}{\sqrt{2}} - \frac{1}{\sqrt{2}}i = -\frac{\sqrt{2}}{2}(1 + i)}
+\]
+\end{solution}
+
+\newpage
+
+%------------------------------------------------------------------------------
+
+\exercise
+Show that $\alpha + \beta = \beta + \alpha$ for all $\alpha, \beta \in \C$.
+
+\begin{solution}
+Let $\alpha = a + bi$ and $\beta = c + di$ where $a, b, c, d \in \R$.
+
+Computing $\alpha + \beta$:
+\[
+    \alpha + \beta = (a + bi) + (c + di) = (a + c) + (b + d)i.
+\]
+
+Computing $\beta + \alpha$:
+\[
+    \beta + \alpha = (c + di) + (a + bi) = (c + a) + (d + b)i.
+\]
+
+Since addition of real numbers is commutative ($a + c = c + a$ and $b + d = d + b$):
+\[
+    \alpha + \beta = (a + c) + (b + d)i = (c + a) + (d + b)i = \beta + \alpha.
+\]
+
+Therefore $\alpha + \beta = \beta + \alpha$ for all $\alpha, \beta \in \C$. \hfill $\square$
+\end{solution}
+
+%------------------------------------------------------------------------------
+
+\exercise
+Show that $(\alpha + \beta) + \lambda = \alpha + (\beta + \lambda)$ for all $\alpha, \beta, \lambda \in \C$.
+
+\begin{solution}
+Let $\alpha = a + bi$, $\beta = c + di$, and $\lambda = e + fi$ where $a, b, c, d, e, f \in \R$.
+
+Computing the left-hand side:
+\begin{align*}
+    (\alpha + \beta) + \lambda &= \bigl((a + c) + (b + d)i\bigr) + (e + fi) \\
+    &= \bigl((a + c) + e\bigr) + \bigl((b + d) + f\bigr)i.
+\end{align*}
+
+Computing the right-hand side:
+\begin{align*}
+    \alpha + (\beta + \lambda) &= (a + bi) + \bigl((c + e) + (d + f)i\bigr) \\
+    &= \bigl(a + (c + e)\bigr) + \bigl(b + (d + f)\bigr)i.
+\end{align*}
+
+Since addition of real numbers is associative:
+\[
+    (a + c) + e = a + (c + e) \quad \text{and} \quad (b + d) + f = b + (d + f).
+\]
+
+Therefore $(\alpha + \beta) + \lambda = \alpha + (\beta + \lambda)$. \hfill $\square$
+\end{solution}
+
+%------------------------------------------------------------------------------
+
+\exercise
+Show that $(\alpha\beta)\lambda = \alpha(\beta\lambda)$ for all $\alpha, \beta, \lambda \in \C$.
+
+\begin{solution}
+Let $\alpha = a + bi$, $\beta = c + di$, and $\lambda = e + fi$ where $a, b, c, d, e, f \in \R$.
+
+First, compute $\alpha\beta$:
+\[
+    \alpha\beta = (a + bi)(c + di) = (ac - bd) + (ad + bc)i.
+\]
+
+Then compute $(\alpha\beta)\lambda$:
+\begin{align*}
+    (\alpha\beta)\lambda &= \bigl((ac - bd) + (ad + bc)i\bigr)(e + fi) \\
+    &= \bigl((ac - bd)e - (ad + bc)f\bigr) + \bigl((ac - bd)f + (ad + bc)e\bigr)i \\
+    &= (ace - bde - adf - bcf) + (acf - bdf + ade + bce)i.
+\end{align*}
+
+Now compute $\beta\lambda$:
+\[
+    \beta\lambda = (c + di)(e + fi) = (ce - df) + (cf + de)i.
+\]
+
+Then compute $\alpha(\beta\lambda)$:
+\begin{align*}
+    \alpha(\beta\lambda) &= (a + bi)\bigl((ce - df) + (cf + de)i\bigr) \\
+    &= \bigl(a(ce - df) - b(cf + de)\bigr) + \bigl(a(cf + de) + b(ce - df)\bigr)i \\
+    &= (ace - adf - bcf - bde) + (acf + ade + bce - bdf)i.
+\end{align*}
+
+Comparing terms, we see that LHS $=$ RHS. Therefore $(\alpha\beta)\lambda = \alpha(\beta\lambda)$. \hfill $\square$
+\end{solution}
+
+\newpage
+
+%==============================================================================
+% MORE COMPLEX NUMBER EXERCISES (7-8)
+%==============================================================================
+
+\exercise
+Show that for every $\alpha \in \C$, there exists a unique $\beta \in \C$ such that $\alpha + \beta = 0$.
+
+\begin{solution}
+Let $\alpha = a + bi$ where $a, b \in \R$.
+
+\textbf{Existence:} Define $\beta = -a + (-b)i = -a - bi$. Then:
+\[
+    \alpha + \beta = (a + bi) + (-a - bi) = (a - a) + (b - b)i = 0 + 0i = 0.
+\]
+So such a $\beta$ exists.
+
+\textbf{Uniqueness:} Suppose $\beta_1$ and $\beta_2$ both satisfy $\alpha + \beta_1 = 0$ and $\alpha + \beta_2 = 0$.
+
+Then:
+\begin{align*}
+    \beta_1 &= \beta_1 + 0 = \beta_1 + (\alpha + \beta_2) \\
+    &= (\beta_1 + \alpha) + \beta_2 = (\alpha + \beta_1) + \beta_2 \\
+    &= 0 + \beta_2 = \beta_2.
+\end{align*}
+
+Therefore $\beta$ is unique. \hfill $\square$
+\end{solution}
+
+%------------------------------------------------------------------------------
+
+\exercise
+Show that for every $\alpha \in \C$ with $\alpha \neq 0$, there exists a unique $\beta \in \C$ such that $\alpha\beta = 1$.
+
+\begin{solution}
+Let $\alpha = a + bi$ where $a, b \in \R$ and $a$ and $b$ are not both zero.
+
+\textbf{Existence:} Define $\beta = \frac{a}{a^2 + b^2} - \frac{b}{a^2 + b^2}i$.
+
+Note that $a^2 + b^2 \neq 0$ since $\alpha \neq 0$, so $\beta$ is well-defined. Then:
+\begin{align*}
+    \alpha\beta &= (a + bi)\left(\frac{a}{a^2 + b^2} - \frac{b}{a^2 + b^2}i\right) \\[6pt]
+    &= \frac{a^2}{a^2 + b^2} - \frac{ab}{a^2 + b^2}i + \frac{ab}{a^2 + b^2}i - \frac{b^2}{a^2 + b^2}i^2 \\[6pt]
+    &= \frac{a^2}{a^2 + b^2} + \frac{b^2}{a^2 + b^2} = \frac{a^2 + b^2}{a^2 + b^2} = 1.
+\end{align*}
+
+\textbf{Uniqueness:} Suppose $\beta_1$ and $\beta_2$ both satisfy $\alpha\beta_1 = 1$ and $\alpha\beta_2 = 1$.
+
+Then:
+\begin{align*}
+    \beta_1 &= \beta_1 \cdot 1 = \beta_1(\alpha\beta_2) = (\beta_1\alpha)\beta_2 = (\alpha\beta_1)\beta_2 = 1 \cdot \beta_2 = \beta_2.
+\end{align*}
+
+Therefore $\beta$ is unique. \hfill $\square$
+\end{solution}
+
+\newpage
+
+%==============================================================================
+% VECTOR EXERCISES (9-10)
+%==============================================================================
+
+\exercise
+Find $x \in \R^4$ such that
+\[
+    (4, -3, 1, 7) + 2x = (5, 9, -6, 8).
+\]
+
+\begin{solution}
+Isolate $2x$ by subtracting $(4, -3, 1, 7)$ from both sides:
+\[
+    2x = (5, 9, -6, 8) - (4, -3, 1, 7) = (5 - 4, 9 - (-3), -6 - 1, 8 - 7) = (1, 12, -7, 1).
+\]
+
+Divide by $2$:
+\[
+    x = \frac{1}{2}(1, 12, -7, 1) = \left(\frac{1}{2}, 6, -\frac{7}{2}, \frac{1}{2}\right).
+\]
+
+Therefore:
+\[
+    \boxed{x = \left(\frac{1}{2}, 6, -\frac{7}{2}, \frac{1}{2}\right)}
+\]
+\end{solution}
+
+%------------------------------------------------------------------------------
+
+\exercise
+Explain why there does not exist $\lambda \in \C$ such that
+\[
+    \lambda(2 - 3i, 5 + 4i, -6 + 7i) = (12 - 5i, 7 + 22i, -32 - 9i).
+\]
+
+\begin{solution}
+If such a $\lambda$ exists, then each component equation must hold simultaneously.
+
+From the first component: $\lambda(2 - 3i) = 12 - 5i$.
+
+Solving for $\lambda$:
+\[
+    \lambda = \frac{12 - 5i}{2 - 3i} = \frac{(12 - 5i)(2 + 3i)}{(2 - 3i)(2 + 3i)} = \frac{24 + 36i - 10i - 15i^2}{4 + 9} = \frac{24 + 26i + 15}{13} = \frac{39 + 26i}{13} = 3 + 2i.
+\]
+
+Now check the second component with $\lambda = 3 + 2i$:
+\[
+    (3 + 2i)(5 + 4i) = 15 + 12i + 10i + 8i^2 = 15 + 22i - 8 = 7 + 22i. \quad \checkmark
+\]
+
+Check the third component with $\lambda = 3 + 2i$:
+\[
+    (3 + 2i)(-6 + 7i) = -18 + 21i - 12i + 14i^2 = -18 + 9i - 14 = -32 + 9i.
+\]
+
+But we need $-32 - 9i$, not $-32 + 9i$.
+
+Since the imaginary parts differ ($9i \neq -9i$), there is no single $\lambda \in \C$ that satisfies all three component equations simultaneously. \hfill $\square$
+\end{solution}
+
+\newpage
+
+%==============================================================================
+% F^n PROPERTIES (11-15)
+%==============================================================================
+
+\exercise
+Show that $(x + y) + z = x + (y + z)$ for all $x, y, z \in \F^n$.
+
+\begin{solution}
+Let $x = (x_1, \ldots, x_n)$, $y = (y_1, \ldots, y_n)$, and $z = (z_1, \ldots, z_n)$ where $x_j, y_j, z_j \in \F$.
+
+Computing the left-hand side:
+\begin{align*}
+    (x + y) + z &= (x_1 + y_1, \ldots, x_n + y_n) + (z_1, \ldots, z_n) \\
+    &= ((x_1 + y_1) + z_1, \ldots, (x_n + y_n) + z_n).
+\end{align*}
+
+Computing the right-hand side:
+\begin{align*}
+    x + (y + z) &= (x_1, \ldots, x_n) + (y_1 + z_1, \ldots, y_n + z_n) \\
+    &= (x_1 + (y_1 + z_1), \ldots, x_n + (y_n + z_n)).
+\end{align*}
+
+Since addition in $\F$ is associative, for each $j$:
+\[
+    (x_j + y_j) + z_j = x_j + (y_j + z_j).
+\]
+
+Therefore $(x + y) + z = x + (y + z)$. \hfill $\square$
+\end{solution}
+
+%------------------------------------------------------------------------------
+
+\exercise
+Show that $(ab)x = a(bx)$ for all $x \in \F^n$ and all $a, b \in \F$.
+
+\begin{solution}
+Let $x = (x_1, \ldots, x_n)$ where $x_j \in \F$.
+
+Computing the left-hand side:
+\[
+    (ab)x = ((ab)x_1, \ldots, (ab)x_n).
+\]
+
+Computing the right-hand side:
+\[
+    a(bx) = a(bx_1, \ldots, bx_n) = (a(bx_1), \ldots, a(bx_n)).
+\]
+
+Since multiplication in $\F$ is associative, for each $j$:
+\[
+    (ab)x_j = a(bx_j).
+\]
+
+Therefore $(ab)x = a(bx)$. \hfill $\square$
+\end{solution}
+
+\newpage
+
+%------------------------------------------------------------------------------
+
+\exercise
+Show that $1x = x$ for all $x \in \F^n$.
+
+\begin{solution}
+Let $x = (x_1, \ldots, x_n)$ where $x_j \in \F$.
+
+By the definition of scalar multiplication:
+\[
+    1x = (1 \cdot x_1, \ldots, 1 \cdot x_n).
+\]
+
+Since $1$ is the multiplicative identity in $\F$, we have $1 \cdot x_j = x_j$ for each $j$.
+
+Therefore:
+\[
+    1x = (x_1, \ldots, x_n) = x. \quad \square
+\]
+\end{solution}
+
+%------------------------------------------------------------------------------
+
+\exercise
+Show that $\lambda(x + y) = \lambda x + \lambda y$ for all $\lambda \in \F$ and all $x, y \in \F^n$.
+
+\begin{solution}
+Let $x = (x_1, \ldots, x_n)$ and $y = (y_1, \ldots, y_n)$ where $x_j, y_j \in \F$.
+
+Computing the left-hand side:
+\begin{align*}
+    \lambda(x + y) &= \lambda(x_1 + y_1, \ldots, x_n + y_n) \\
+    &= (\lambda(x_1 + y_1), \ldots, \lambda(x_n + y_n)).
+\end{align*}
+
+Computing the right-hand side:
+\begin{align*}
+    \lambda x + \lambda y &= (\lambda x_1, \ldots, \lambda x_n) + (\lambda y_1, \ldots, \lambda y_n) \\
+    &= (\lambda x_1 + \lambda y_1, \ldots, \lambda x_n + \lambda y_n).
+\end{align*}
+
+Since multiplication distributes over addition in $\F$, for each $j$:
+\[
+    \lambda(x_j + y_j) = \lambda x_j + \lambda y_j.
+\]
+
+Therefore $\lambda(x + y) = \lambda x + \lambda y$. \hfill $\square$
+\end{solution}
+
+%------------------------------------------------------------------------------
+
+\exercise
+Show that $(a + b)x = ax + bx$ for all $a, b \in \F$ and all $x \in \F^n$.
+
+\begin{solution}
+Let $x = (x_1, \ldots, x_n)$ where $x_j \in \F$.
+
+Computing the left-hand side:
+\[
+    (a + b)x = ((a + b)x_1, \ldots, (a + b)x_n).
+\]
+
+Computing the right-hand side:
+\begin{align*}
+    ax + bx &= (ax_1, \ldots, ax_n) + (bx_1, \ldots, bx_n) \\
+    &= (ax_1 + bx_1, \ldots, ax_n + bx_n).
+\end{align*}
+
+Since multiplication distributes over addition in $\F$, for each $j$:
+\[
+    (a + b)x_j = ax_j + bx_j.
+\]
+
+Therefore $(a + b)x = ax + bx$. \hfill $\square$
+\end{solution}
+
+\vfill
+
+\end{document}
