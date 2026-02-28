@@ -1,0 +1,581 @@
+% ── Section 3D ──
+
+\exerciseheader{3D}{1}
+\begin{exercise}{1}
+  Suppose $T \in \mathcal{L}(V, W)$ is invertible. Show that $T^{-1}$ is invertible and
+  \[
+    (T^{-1})^{-1} = T.
+  \]
+\end{exercise}
+\begin{solution}
+  The desired result follows from the equations
+  \[
+    TT^{-1} = I \quad \text{and} \quad T^{-1}T = I,
+  \]
+  which show that $T$ is an inverse of $T^{-1}$.
+\end{solution}
+
+\exerciseheader{3D}{2}
+\begin{exercise}{2}
+  Suppose $T \in \mathcal{L}(U, V)$ and $S \in \mathcal{L}(V, W)$ are both invertible linear maps. Prove that $ST \in \mathcal{L}(U, W)$ is invertible and that $(ST)^{-1} = T^{-1}S^{-1}$.
+\end{exercise}
+\begin{solution}
+  Note that
+  \[
+    (ST)(T^{-1}S^{-1}) = S(TT^{-1})S^{-1} = SIS^{-1} = SS^{-1} = I
+  \]
+  and
+  \[
+    (T^{-1}S^{-1})(ST) = T^{-1}(S^{-1}S)T = T^{-1}IT = T^{-1}T = I.
+  \]
+  Thus $ST$ is invertible and $(ST)^{-1} = T^{-1}S^{-1}$.
+\end{solution}
+
+\exerciseheader{3D}{3}
+\begin{exercise}{3}
+  Suppose $V$ is finite-dimensional and $T \in \mathcal{L}(V)$. Prove that the following are equivalent.
+  \begin{enumerate}[label=(\alph*)]
+    \item $T$ is invertible.
+    \item $Tv_1, \dots, Tv_n$ is a basis of $V$ for every basis $v_1, \dots, v_n$ of $V$.
+    \item $Tv_1, \dots, Tv_n$ is a basis of $V$ for some basis $v_1, \dots, v_n$ of $V$.
+  \end{enumerate}
+\end{exercise}
+\begin{solution}
+  First suppose (a) holds, so $T$ is invertible. Suppose $v_1, \dots, v_n$ is a basis of $V$. To show that $Tv_1, \dots, Tv_n$ is linearly independent, suppose $c_1, \dots, c_n \in \F$ are such that
+  \[
+    c_1 Tv_1 + \cdots + c_n Tv_n = 0.
+  \]
+  Then
+  \[
+    T(c_1 v_1 + \cdots + c_n v_n) = 0.
+  \]
+  Because $T$ is invertible, the equation above implies that
+  \[
+    c_1 v_1 + \cdots + c_n v_n = 0.
+  \]
+  Because $v_1, \dots, v_n$ is a basis of $V$, the equation above implies that $c_1 = \cdots = c_n = 0$. Thus the list $Tv_1, \dots, Tv_n$ is linearly independent and hence is a basis of $V$, completing the proof that (a) implies (b).
+
+  Clearly (b) implies (c).
+
+  Now suppose (c) holds. Thus there exists a basis $v_1, \dots, v_n$ of $V$ such that $Tv_1, \dots, Tv_n$ is a basis of $V$. Suppose $v \in V$ is such that $Tv = 0$. There exist $c_1, \dots, c_n \in \F$ such that
+  \[
+    v = c_1 v_1 + \cdots + c_n v_n.
+  \]
+  Because $Tv = 0$, the equation above implies that
+  \[
+    0 = c_1 Tv_1 + \cdots + c_n Tv_n.
+  \]
+  Because $Tv_1, \dots, Tv_n$ is a basis of $V$, the equation above implies that $c_1 = \cdots = c_n = 0$. Hence $v = 0$. This shows that $T$ is injective and thus is invertible, completing the proof that (c) implies (a).
+\end{solution}
+
+\exerciseheader{3D}{4}
+\begin{exercise}{4}
+  Suppose $V$ is finite-dimensional and $\dim V > 1$. Prove that the set of noninvertible linear maps from $V$ to itself is not a subspace of $\mathcal{L}(V)$.
+\end{exercise}
+\begin{solution}
+  Let $n = \dim V$ and let $v_1, \dots, v_n$ be a basis of $V$. Define $S, T \in \mathcal{L}(V)$ by
+  \[
+    S(a_1 v_1 + \cdots + a_n v_n) = a_1 v_1
+  \]
+  and
+  \[
+    T(a_1 v_1 + \cdots + a_n v_n) = a_2 v_2 + \cdots + a_n v_n.
+  \]
+  Then $S$ is not injective because $Sv_2 = 0$ (this is where we use the hypothesis that $\dim V > 1$), and $T$ is not injective because $Tv_1 = 0$. Thus both $S$ and $T$ are not invertible. However, $S + T$ equals $I$, which is invertible. Thus the set of noninvertible linear maps from $V$ to itself is not closed under addition, and hence it is not a subspace of $\mathcal{L}(V)$.
+\end{solution}
+\begin{comment}
+  If $\dim V \leq 1$, then the set of noninvertible linear maps from $V$ to itself equals $\{0\}$, which is a subspace of $\mathcal{L}(V)$.
+\end{comment}
+
+\exerciseheader{3D}{5}
+\begin{exercise}{5}
+  Suppose $V$ is finite-dimensional, $U$ is a subspace of $V$, and $S \in \mathcal{L}(U, V)$. Prove that there exists an invertible linear map $T$ from $V$ to itself such that $Tu = Su$ for every $u \in U$ if and only if $S$ is injective.
+\end{exercise}
+\begin{solution}
+  First suppose there exists an invertible linear map $T$ from $V$ to itself such that $Tu = Su$ for every $u \in U$. Because $T$ is injective, it is clear that $S$ is injective.
+
+  Conversely, now suppose $S$ is injective. Let $u_1, \dots, u_m$ be a basis of $U$. Extend $u_1, \dots, u_m$ to a basis $u_1, \dots, u_m, v_1, \dots, v_n$ of $V$.
+
+  By Exercise~9 in Section~3B, the list $Su_1, \dots, Su_m$ is linearly independent. Thus we can extend to a basis $Su_1, \dots, Su_m, w_1, \dots, w_n$ of $V$.
+
+  Use the linear map lemma (3.4) to define $T \in \mathcal{L}(V)$ by
+  \[
+    Tu_k = Su_k \text{ for } k = 1, \dots, m \quad \text{and} \quad Tv_k = w_k \text{ for } k = 1, \dots, n.
+  \]
+  Then $Tu = Su$ for every $u \in U$ (because $T$ and $S$ agree on a basis of $U$) and $T$ is invertible (because the range of $T$ includes $Su_1, \dots, Su_m, w_1, \dots, w_n$, we see that $T$ is surjective and hence invertible).
+\end{solution}
+
+\exerciseheader{3D}{6}
+\begin{exercise}{6}
+  Suppose that $W$ is finite-dimensional and $S, T \in \mathcal{L}(V, W)$. Prove that $\operatorname{null} S = \operatorname{null} T$ if and only if there exists an invertible $E \in \mathcal{L}(W)$ such that $S = ET$.
+\end{exercise}
+\begin{solution}
+  First suppose that there exists an invertible $E \in \mathcal{L}(W)$ such that $S = ET$. Let $v \in V$. Then
+  \begin{align*}
+    v \in \operatorname{null} S &\iff Sv = 0 \\
+                                &\iff E(Tv) = 0 \\
+                                &\iff Tv = 0 \\
+                                &\iff v \in \operatorname{null} T,
+  \end{align*}
+  where the second equivalence holds because $E$ is invertible (and hence injective). Thus $\operatorname{null} S = \operatorname{null} T$, as desired.
+
+  Now suppose that $\operatorname{null} S = \operatorname{null} T$. Define $E_1\colon \operatorname{range} T \to W$ by
+  \[
+    E_1(Tv) = Sv
+  \]
+  for each $v \in V$. To show that this definition makes sense, we must show that if $u, v \in V$ and $Tu = Tv$, then $Su = Sv$. But this is true, because if $Tu = Tv$ then $u - v \in \operatorname{null} T = \operatorname{null} S$ and hence $Su = Sv$.
+
+  Now that $E_1$ is well defined, it is easy to verify that $E_1$ is a linear map from $\operatorname{range} T$ to $W$. Suppose $w \in \operatorname{range} T$ and $E_1 w = 0$. There exists $v \in V$ such that $w = Tv$. Now
+  \[
+    0 = E_1 w = E_1(Tv) = Sv,
+  \]
+  and thus $v \in \operatorname{null} S = \operatorname{null} T$. Hence $w = Tv = 0$. Thus $E_1$ is injective.
+
+  By Exercise~5, we can extend $E_1$ to an invertible linear map $E$ from $W$ to itself.
+
+  The definition of $E_1$ shows that $S = ET$.
+\end{solution}
+
+\exerciseheader{3D}{7}
+\begin{exercise}{7}
+  Suppose that $V$ is finite-dimensional and $S, T \in \mathcal{L}(V, W)$. Prove that $\operatorname{range} S = \operatorname{range} T$ if and only if there exists an invertible $E \in \mathcal{L}(V)$ such that $S = TE$.
+\end{exercise}
+\begin{solution}
+  First suppose there exists an invertible $E \in \mathcal{L}(V)$ such that $S = TE$. If $w \in \operatorname{range} S$, then there exists $v \in V$ such that $w = Sv$. Thus
+  \[
+    w = Sv = (TE)(v) = T(Ev),
+  \]
+  and hence $w \in \operatorname{range} T$. Thus $\operatorname{range} S \subseteq \operatorname{range} T$.
+
+  We have $T = SE^{-1}$. Thus by the same reasoning as in the paragraph above, we conclude that $\operatorname{range} T \subseteq \operatorname{range} S$.
+
+  Combining the conclusions of the two paragraphs above shows that
+  \[
+    \operatorname{range} S = \operatorname{range} T,
+  \]
+  as desired.
+
+  To prove the other direction, now suppose that $\operatorname{range} S = \operatorname{range} T$. The fundamental theorem of linear maps (3.21) implies that
+  \[
+    \dim \operatorname{null} S = \dim \operatorname{null} T.
+  \]
+  Let $v_1, \dots, v_m$ be a basis of $\operatorname{null} S$, and let $u_1, \dots, u_m$ be a basis of $\operatorname{null} T$.
+
+  Extend $v_1, \dots, v_m$ to a basis $v_1, \dots, v_m, \dots v_n$ of $V$, and extend $u_1, \dots, u_m$ to a basis $u_1, \dots, u_m, \dots, u_n$ of $V$. For $m < k \leq n$, we have $Sv_k \in \operatorname{range} S = \operatorname{range} T$, and thus there exists $u_k \in V$ such that $Sv_k = Tu_k$.
+
+  Note that if $1 \leq k \leq m$, then we also have $Sv_k = Tu_k$ because both sides equal~0.
+
+  Now use the linear map lemma (3.4) to define a linear map $E$ from $V$ to $V$ such that $Ev_k = u_k$ for each $k = 1, \dots, n$. If $1 \leq k \leq n$, then
+  \[
+    Sv_k = Tu_k = T(Ev_k) = (TE)(v_k).
+  \]
+  Thus $S = TE$ because these two linear maps agree on a basis.
+
+  To prove that $E$ is invertible, suppose $v \in V$ and $Ev = 0$. Then $Sv = TEv = 0$, and hence $v \in \operatorname{null} S = \operatorname{span}(v_1, \dots, v_m)$, and we can write
+  \[
+    v = a_1 v_1 + \cdots + a_m v_m
+  \]
+  for some $a_1, \dots, a_m \in \F$. Applying $E$ to both sides of the equation above gives
+  \[
+    0 = a_1 u_1 + \cdots + a_m u_m.
+  \]
+  Because $u_1, \dots, u_m$ is linearly independent, this implies $a_1 = \cdots = a_m = 0$. Hence $v = 0$. Thus $E$ is injective.
+
+  Now 3.63 implies that $E$ is invertible, as desired.
+\end{solution}
+
+\exerciseheader{3D}{8}
+\begin{exercise}{8}
+  Suppose $V$ and $W$ are finite-dimensional and $S, T \in \mathcal{L}(V, W)$. Prove that there exist invertible $E_1 \in \mathcal{L}(V)$ and $E_2 \in \mathcal{L}(W)$ such that $S = E_2 T E_1$ if and only if $\dim \operatorname{null} S = \dim \operatorname{null} T$.
+\end{exercise}
+\begin{solution}
+  First suppose that there exist invertible $E_2 \in \mathcal{L}(W)$ and $E_1 \in \mathcal{L}(V)$ such that $S = E_2 T E_1$. Suppose $v \in V$. Then
+  \begin{align*}
+    v \in \operatorname{null} S &\iff Sv = 0 \\
+                                &\iff E_2 T E_1 v = 0 \\
+                                &\iff T E_1 v = 0 \\
+                                &\iff E_1 v \in \operatorname{null} T \\
+                                &\iff v \in \operatorname{range}(E_1^{-1}|_{\operatorname{null} T})
+  \end{align*}
+  Thus $\operatorname{null} S = \operatorname{range}(E_1^{-1}|_{\operatorname{null} T})$. Hence
+  \[
+    \dim \operatorname{null} S = \dim \operatorname{range}(E_1^{-1}|_{\operatorname{null} T}) = \dim \operatorname{null} T,
+  \]
+  where the last equality follows from the fundamental theorem of linear maps (3.21). Thus $\dim \operatorname{null} S = \dim \operatorname{null} T$, as desired.
+
+  To prove the other direction, now suppose $\dim \operatorname{null} S = \dim \operatorname{null} T$. Let $v_1, \dots, v_m$ be a basis of $\operatorname{null} S$, and let $u_1, \dots, u_m$ be a basis of $\operatorname{null} T$.
+
+  Extend $v_1, \dots, v_m$ to a basis $v_1, \dots, v_m, \dots, v_n$ of $V$, and extend $u_1, \dots, u_m$ to a basis $u_1, \dots, u_m, \dots, u_n$ of $V$. Use the linear map lemma (3.4) to define $E_1 \in \mathcal{L}(V)$ such that $E_1 v_k = u_k$ for all $k = 1, \dots, n$. Because $v_1, \dots, v_n$ and $u_1, \dots, u_n$ are both bases of $V$, it is easy to see that $E_1$ is an invertible linear map from $V$ to $V$.
+
+  Suppose $v \in V$. Then
+  \begin{align*}
+    v \in \operatorname{null} S &\iff E_1 v \in \operatorname{null} T \\
+                                &\iff T(E_1 v) = 0 \\
+                                &\iff v \in \operatorname{null} TE_1.
+  \end{align*}
+  Thus $\operatorname{null} S = \operatorname{null} TE_1$. Applying Exercise~6 to the linear maps $S$ and $TE_1$, we conclude that there exists an invertible $E_2 \in \mathcal{L}(W)$ such that $S = E_2 TE_1$.
+\end{solution}
+
+\exerciseheader{3D}{9}
+\begin{exercise}{9}
+  Suppose $V$ is finite-dimensional and $T\colon V \to W$ is a surjective linear map of $V$ onto $W$. Prove that there is a subspace $U$ of $V$ such that $T|_U$ is an isomorphism of $U$ onto $W$.
+
+  \textit{Here $T|_U$ means the function $T$ restricted to $U$. Thus $T|_U$ is the function whose domain is $U$, with $T|_U(u) = Tu$ for every $u \in U$.}
+\end{exercise}
+\begin{solution}
+  Let $w_1, \dots, w_m$ be a basis of $W$. Because $T$ is surjective, for each $k = 1, \dots, m$, there exists $v_k \in V$ such that $Tv_k = w_k$.
+
+  Let $U = \operatorname{span}(v_1, \dots, v_m)$. Thus $\dim U \leq m$.
+
+  Now $\operatorname{range} T|_U = W$ (because $w_k \in \operatorname{range} T|_U$ for each $k = 1, \dots, m$). The fundamental theorem of linear maps (3.21) thus tells us that
+  \[
+    m \geq \dim U = \dim \operatorname{null} T|_U + m,
+  \]
+  which implies that $\dim \operatorname{null} T|_U = 0$, which implies that $T|_U$ is injective. Thus $T|_U$ is an isomorphism of $U$ onto $W$.
+\end{solution}
+
+\exerciseheader{3D}{10}
+\begin{exercise}{10}
+  Suppose $V$ and $W$ are finite-dimensional and $U$ is a subspace of $V$. Let
+  \[
+    \mathcal{E} = \{T \in \mathcal{L}(V, W) : U \subseteq \operatorname{null} T\}.
+  \]
+  \begin{enumerate}[label=(\alph*)]
+    \item Show that $\mathcal{E}$ is a subspace of $\mathcal{L}(V, W)$.
+    \item Find a formula for $\dim \mathcal{E}$ in terms of $\dim V$, $\dim W$, and $\dim U$.
+  \end{enumerate}
+
+  \textit{Hint: Define $\Phi\colon \mathcal{L}(V, W) \to \mathcal{L}(U, W)$ by $\Phi(T) = T|_U$. What is $\operatorname{null} \Phi$? What is $\operatorname{range} \Phi$?}
+\end{exercise}
+\begin{solution}
+  Define $\Phi\colon \mathcal{L}(V, W) \to \mathcal{L}(U, W)$ by $\Phi(T) = T|_U$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Because $\Phi$ is a linear map and $\operatorname{null} \Phi = \mathcal{E}$, we can conclude that $\mathcal{E}$ is a subspace of $\mathcal{L}(V, W)$.
+
+    \item Exercise~13 in Section~3A implies that $\operatorname{range} \Phi = \mathcal{L}(U, W)$. Thus the fundamental theorem of linear maps shows that
+    \begin{align*}
+      (\dim V)(\dim W) &= \dim \mathcal{L}(V, W) \\
+                        &= \dim \operatorname{null} \Phi + \dim \operatorname{range} \Phi \\
+                        &= \dim \mathcal{E} + \dim \mathcal{L}(U, W) \\
+                        &= \dim \mathcal{E} + (\dim U)(\dim W).
+    \end{align*}
+    Thus
+    \[
+      \dim \mathcal{E} = (\dim V - \dim U)(\dim W).
+    \]
+  \end{enumerate}
+\end{solution}
+
+\exerciseheader{3D}{11}
+\begin{exercise}{11}
+  Suppose $V$ is finite-dimensional and $S, T \in \mathcal{L}(V)$. Prove that
+  \[
+    ST \text{ is invertible} \iff S \text{ and } T \text{ are invertible}.
+  \]
+\end{exercise}
+\begin{solution}
+  First suppose $ST$ is invertible. Thus there exists $R \in \mathcal{L}(V)$ such that $R(ST) = (ST)R = I$. If $v \in V$ is such that $Tv = 0$, then
+  \begin{align*}
+    v &= Iv \\
+      &= R(ST)v \\
+      &= 0.
+  \end{align*}
+  Because $v$ was an arbitrary vector in $\operatorname{null} T$, this shows that $\operatorname{null} T = \{0\}$. Thus $T$ is injective (by 3.15). Hence $T$ is invertible (by 3.65), as desired.
+
+  If $u \in V$, then
+  \begin{align*}
+    u &= Iu \\
+      &= (ST)Ru \\
+      &= S(TRu),
+  \end{align*}
+  which shows that $u \in \operatorname{range} S$. Because $u$ was an arbitrary vector in $V$, this implies that $\operatorname{range} S = V$. Thus $S$ is surjective. Hence $S$ is invertible (by 3.65), as desired.
+
+  To prove the implication in the other direction, now suppose both $S$ and $T$ are invertible. Then
+  \begin{align*}
+    (ST)(T^{-1}S^{-1}) &= S(TT^{-1})S^{-1} \\
+                        &= SS^{-1} \\
+                        &= I
+  \end{align*}
+  and
+  \begin{align*}
+    (T^{-1}S^{-1})(ST) &= T^{-1}(S^{-1}S)T \\
+                        &= T^{-1}T \\
+                        &= I.
+  \end{align*}
+  Thus $T^{-1}S^{-1}$ satisfies the properties required for an inverse of $ST$. Thus $ST$ is invertible and $(ST)^{-1} = T^{-1}S^{-1}$.
+\end{solution}
+
+\exerciseheader{3D}{12}
+\begin{exercise}{12}
+  Suppose $V$ is finite-dimensional and $S, T, U \in \mathcal{L}(V)$ and $STU = I$. Show that $T$ is invertible and that $T^{-1} = US$.
+\end{exercise}
+\begin{solution}
+  The equation $(ST)U = I$ implies (by 3.68) that $U(ST) = I$, which we can write as
+  \[
+    (US)T = I.
+  \]
+  Now 3.68 implies that
+  \[
+    T(US) = I.
+  \]
+  The two displayed equations above imply that $T$ is invertible and $T^{-1} = US$.
+\end{solution}
+
+\exerciseheader{3D}{13}
+\begin{exercise}{13}
+  Show that the result in Exercise~12 can fail without the hypothesis that $V$ is finite-dimensional.
+\end{exercise}
+\begin{solution}
+  Let $V = \F^\infty$ and let $S$ be the identity operator on $\F^\infty$.
+
+  Let $T$ be the backward shift on $\F^\infty$:
+  \[
+    T(x_1, x_2, x_3, \dots) = (x_2, x_3, \dots),
+  \]
+  and let $U$ be the forward shift on $\F^\infty$:
+  \[
+    U(x_1, x_2, x_3, \dots) = (0, x_1, x_2, \dots).
+  \]
+  Then $STU = I$, but $T$ is not invertible.
+\end{solution}
+
+\exerciseheader{3D}{14}
+\begin{exercise}{14}
+  Prove or give a counterexample: If $V$ is a finite-dimensional vector space and $R, S, T \in \mathcal{L}(V)$ are such that $RST$ is surjective, then $S$ is injective.
+\end{exercise}
+\begin{solution}
+  Because $RST$ is surjective, $R(ST)$ is invertible (by 3.65). Exercise~11 now implies that $ST$ is invertible. Another use of Exercise~11 implies that $S$ is invertible. Thus $S$ is injective.
+\end{solution}
+
+\exerciseheader{3D}{15}
+\begin{exercise}{15}
+  Suppose $T \in \mathcal{L}(V)$ and $v_1, \dots, v_m$ is a list in $V$ such that $Tv_1, \dots, Tv_m$ spans $V$. Prove that $v_1, \dots, v_m$ spans $V$.
+\end{exercise}
+\begin{solution}
+  Because the list $Tv_1, \dots, Tv_m$ spans $V$, the vector space $V$ is finite-dimensional and the linear map $T$ is surjective. Thus $T$ is injective (by 3.65).
+
+  Suppose $v \in V$. Because $Tv \in V$ and $Tv_1, \dots, Tv_m$ spans $V$, there exist $a_1, \dots, a_m \in \F$ such that
+  \[
+    Tv = a_1 Tv_1 + \cdots + a_m Tv_m = T(a_1 v_1 + \cdots + a_m v_m).
+  \]
+  Because $T$ is injective, the equation above implies that
+  \[
+    v = a_1 v_1 + \cdots + a_m v_m.
+  \]
+  Thus $v_1, \dots, v_m$ spans $V$.
+\end{solution}
+
+\exerciseheader{3D}{16}
+\begin{exercise}{16}
+  Prove that every linear map from $\F^{n,1}$ to $\F^{m,1}$ is given by a matrix multiplication. In other words, prove that if $T \in \mathcal{L}(\F^{n,1}, \F^{m,1})$, then there exists an $m$-by-$n$ matrix $A$ such that $Tx = Ax$ for every $x \in \F^{n,1}$.
+\end{exercise}
+\begin{solution}
+  The vector spaces $\F^{n,1}$ and $\F^{m,1}$ have standard bases (consisting of matrices that have $0$ in all entries except for a $1$ in one entry). Let $A$ be the matrix of $T$ with respect to these bases. Note that if $x \in \F^{n,1}$, then $\mathcal{M}(x) = x$ and $\mathcal{M}(Tx) = Tx$. Thus
+  \begin{align*}
+    Tx &= \mathcal{M}(Tx) \\
+       &= \mathcal{M}(T)\mathcal{M}(x) \\
+       &= Ax,
+  \end{align*}
+  where the second equality comes from 3.76.
+\end{solution}
+
+\exerciseheader{3D}{17}
+\begin{exercise}{17}
+  Suppose $V$ is finite-dimensional and $S \in \mathcal{L}(V)$. Define $\mathcal{A} \in \mathcal{L}(\mathcal{L}(V))$ by
+  \[
+    \mathcal{A}(T) = ST
+  \]
+  for $T \in \mathcal{L}(V)$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Show that $\dim \operatorname{null} \mathcal{A} = (\dim V)(\dim \operatorname{null} S)$.
+    \item Show that $\dim \operatorname{range} \mathcal{A} = (\dim V)(\dim \operatorname{range} S)$.
+  \end{enumerate}
+\end{exercise}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item Note that
+    \[
+      \operatorname{null} \mathcal{A} = \{T \in \mathcal{L}(V) : \operatorname{range} T \subseteq \operatorname{null} S\}.
+    \]
+    In other words, $\operatorname{null} \mathcal{A}$ is the vector space of linear maps from $V$ to $\operatorname{null} S$. By 3.72, the dimension of this vector space is $(\dim V)(\dim \operatorname{null} S)$. Thus $\dim \operatorname{null} \mathcal{A} = (\dim V)(\dim \operatorname{null} S)$.
+
+    \item We have
+    \begin{align*}
+      \dim \operatorname{range} \mathcal{A} &= \dim \mathcal{L}(V) - \dim \operatorname{null} \mathcal{A} \\
+        &= (\dim V)^2 - (\dim V)(\dim \operatorname{null} S) \\
+        &= (\dim V)(\dim V - \dim \operatorname{null} S) \\
+        &= (\dim V)(\dim \operatorname{range} S),
+    \end{align*}
+    where the first and last equalities come from the fundamental theorem of linear maps and the second equality comes from 3.72 and~(a).
+  \end{enumerate}
+\end{solution}
+
+\exerciseheader{3D}{18}
+\begin{exercise}{18}
+  Show that $V$ and $\mathcal{L}(\F, V)$ are isomorphic vector spaces.
+\end{exercise}
+\begin{solution}
+  Define $T\colon V \to \mathcal{L}(\F, V)$ by
+  \[
+    (Tv)(\lambda) = \lambda v
+  \]
+  for each $v \in V$ and each $\lambda \in \F$. The easy verifications that $Tv$ is a linear map from $\F$ to $V$ and that $T$ is a linear map from $V$ to $\mathcal{L}(\F, V)$ follow from the definition of a vector space.
+
+  Suppose $v \in V$ and $Tv = 0$. Thus $0 = (Tv)(1) = v$. Hence $T$ is injective by 3.15.
+
+  To show that $T$ is surjective, suppose $S \in \mathcal{L}(\F, V)$. Let $v = S(1)$. If $\lambda \in \F$, then
+  \begin{align*}
+    (Tv)(\lambda) &= \lambda v \\
+                  &= \lambda S(1) \\
+                  &= S(\lambda).
+  \end{align*}
+  Thus $S = Tv$. Hence $T$ is surjective.
+
+  Because $T$ is injective and surjective, we conclude that $V$ and $\mathcal{L}(\F, V)$ are isomorphic vector spaces, as desired.
+\end{solution}
+
+\exerciseheader{3D}{19}
+\begin{exercise}{19}
+  Suppose $V$ is finite-dimensional and $T \in \mathcal{L}(V)$. Prove that $T$ has the same matrix with respect to every basis of $V$ if and only if $T$ is a scalar multiple of the identity operator.
+\end{exercise}
+\begin{solution}
+  First suppose $T$ has the same matrix with respect to every basis of $V$. We begin by proving that $v, Tv$ is linearly dependent for every $v \in V$. To do this, fix $v \in V$, and suppose $v, Tv$ is linearly independent. Then $v, Tv$ can be extended to a basis $v, Tv, u_1, \dots, u_n$ of $V$. The first column of the matrix of $T$ with respect to this basis is
+  \[
+    \begin{pmatrix} 0 \\ 1 \\ 0 \\ \vdots \\ 0 \end{pmatrix}\!.
+  \]
+  Clearly $2v, Tv, u_1, \dots, u_n$ is also a basis of $V$. The first column of the matrix of $T$ with respect to this basis is
+  \[
+    \begin{pmatrix} 0 \\ 2 \\ 0 \\ \vdots \\ 0 \end{pmatrix}\!.
+  \]
+  Thus $T$ has different matrices with respect to the two bases we have considered. This contradiction shows that $v, Tv$ is linearly dependent for every $v \in V$. This implies that for every nonzero vector in $V$ is an eigenvector of $T$. This implies that $T$ is a scalar multiple of the identity operator (by Exercise~26 in Chapter~5).
+
+  To prove the implication in the other direction, note that if $\lambda \in \F$ and $T = \lambda I$, then the matrix of $T$ with respect to every basis of $V$ is the diagonal matrix with only $\lambda$ on the diagonal.
+\end{solution}
+
+\exerciseheader{3D}{20}
+\begin{exercise}{20}
+  Suppose $q \in \mathcal{P}(\R)$. Prove that there exists a polynomial $p \in \mathcal{P}(\R)$ such that
+  \[
+    q(x) = (x^2 + x)p''(x) + 2xp'(x) + p(3)
+  \]
+  for all $x \in \R$.
+\end{exercise}
+\begin{solution}
+  Let $m = \deg q$. Define $T \in \mathcal{L}(\mathcal{P}_m(\R))$ by
+  \[
+    Tp = (x^2 + x)p''(x) + 2xp'(x) + p(3)
+  \]
+  for all $x \in \R$. The linear map $T$ indeed maps $\mathcal{P}_m(\R)$ to itself because
+  \[
+    \deg (x^2 + x)p''(x) + 2xp'(x) + p(3) = \deg p
+  \]
+  for every polynomial $p \in \mathcal{P}(\R)$.
+
+  The equation above also implies that if $Tp = 0$ then $p = 0$. Thus $T$ is injective. Hence $T$ is surjective (by 3.65). Thus there exists $p \in \mathcal{P}_m(\R)$ such that $Tp = q$.
+\end{solution}
+
+\exerciseheader{3D}{21}
+\begin{exercise}{21}
+  Suppose $n$ is a positive integer and $A_{j,k} \in \F$ for all $j, k = 1, \dots, n$. Prove that the following are equivalent (note that in both parts below, the number of equations equals the number of variables).
+  \begin{enumerate}[label=(\alph*)]
+    \item The trivial solution $x_1 = \cdots = x_n = 0$ is the only solution to the homogeneous system of equations
+    \[
+      \sum_{k=1}^{n} A_{1,k}\,x_k = 0 \qquad \cdots \qquad \sum_{k=1}^{n} A_{n,k}\,x_k = 0.
+    \]
+    \item For every $c_1, \dots, c_n \in \F$, there exists a solution to the system of equations
+    \[
+      \sum_{k=1}^{n} A_{1,k}\,x_k = c_1 \qquad \cdots \qquad \sum_{k=1}^{n} A_{n,k}\,x_k = c_n.
+    \]
+  \end{enumerate}
+\end{exercise}
+\begin{solution}
+  Define $T \in \mathcal{L}(\F^n)$ by
+  \[
+    T(x_1, \dots, x_n) = \Bigl(\sum_{k=1}^{n} A_{1,k}\,x_k,\, \dots,\, \sum_{k=1}^{n} A_{n,k}\,x_k\Bigr).
+  \]
+  Then (a) above is the assertion that $T$ is injective, and (b) above is the assertion that $T$ is surjective. By 3.65, these two assertions are equivalent.
+\end{solution}
+
+\exerciseheader{3D}{22}
+\begin{exercise}{22}
+  Suppose $T \in \mathcal{L}(V)$ and $v_1, \dots, v_n$ is a basis of $V$. Prove that
+  \[
+    \mathcal{M}(T, (v_1, \dots, v_n)) \text{ is invertible} \iff T \text{ is invertible}.
+  \]
+\end{exercise}
+\begin{solution}
+  First suppose $\mathcal{M}(T)$ is an invertible matrix (because the only basis in sight is $v_1, \dots, v_n$, we can leave the basis out of the notation). Thus there exists an $n$-by-$n$ matrix $B$ such that
+  \[
+    \mathcal{M}(T)B = B\mathcal{M}(T) = I.
+  \]
+  There exists an operator $S \in \mathcal{L}(V)$ such that $\mathcal{M}(S) = B$ (see 3.71). Thus the equations above become
+  \[
+    \mathcal{M}(T)\mathcal{M}(S) = \mathcal{M}(S)\mathcal{M}(T) = I,
+  \]
+  which we can rewrite as
+  \[
+    \mathcal{M}(TS) = \mathcal{M}(ST) = \mathcal{M}(I),
+  \]
+  which implies that
+  \[
+    TS = ST = I.
+  \]
+  Thus $T$ is invertible, as desired, with inverse $S$.
+
+  To prove the implication in the other direction, suppose now that $T$ is invertible. Thus there exists $S \in \mathcal{L}(V)$ such that
+  \[
+    TS = ST = I.
+  \]
+  This implies that
+  \[
+    \mathcal{M}(TS) = \mathcal{M}(ST) = \mathcal{M}(I),
+  \]
+  which implies that
+  \[
+    \mathcal{M}(T)\mathcal{M}(S) = \mathcal{M}(S)\mathcal{M}(T) = I.
+  \]
+  Thus $\mathcal{M}(T)$ is invertible, as desired, with inverse $\mathcal{M}(S)$.
+\end{solution}
+
+\exerciseheader{3D}{23}
+\begin{exercise}{23}
+  Suppose that $u_1, \dots, u_n$ and $v_1, \dots, v_n$ are bases of $V$. Let $T \in \mathcal{L}(V)$ be such that $Tv_k = u_k$ for each $k = 1, \dots, n$. Prove that
+  \[
+    \mathcal{M}(T, (v_1, \dots, v_n)) = \mathcal{M}(I, (u_1, \dots, u_n), (v_1, \dots, v_n)).
+  \]
+\end{exercise}
+\begin{solution}
+  Fix $k$. Write
+  \[
+    u_k = A_1 v_1 + \cdots + A_n v_n,
+  \]
+  where $A_1, \dots, A_n \in \F$.
+
+  Because $Tv_k = u_k$, the $k^{\text{th}}$ column of the matrix $\mathcal{M}(T, (v_1, \dots, v_n))$ consists of the numbers $A_1, \dots, A_n$.
+
+  Because $Iu_k = u_k$, the $k^{\text{th}}$ column of
+  \[
+    \mathcal{M}(I, (u_1, \dots, u_n), (v_1, \dots, v_n))
+  \]
+  also consists of the numbers $A_1, \dots, A_n$.
+
+  Because $\mathcal{M}(T, (v_1, \dots, v_n))$ and $\mathcal{M}(I, (u_1, \dots, u_n), (v_1, \dots, v_n))$ have the same columns, these two matrices are equal.
+\end{solution}
+
+\exerciseheader{3D}{24}
+\begin{exercise}{24}
+  Suppose $A$ and $B$ are square matrices of the same size and $AB = I$. Prove that $BA = I$.
+\end{exercise}
+\begin{solution}
+  Suppose $A$ and $B$ are $n$-by-$n$ matrices and $AB = I$. There exist $S, T \in \mathcal{L}(\F^n)$ such that
+  \[
+    \mathcal{M}(S) = A \quad \text{and} \quad \mathcal{M}(T) = B;
+  \]
+  here we are using the standard basis of $\F^n$ (the existence of $S, T \in \mathcal{L}(\F^n)$ satisfying the equations above follows from 3.71). Because $AB = I$, we have $\mathcal{M}(S)\mathcal{M}(T) = I$, which implies that $\mathcal{M}(ST) = \mathcal{M}(I)$, which implies that $ST = I$, which implies that $TS = I$ (by 3.68). Thus
+  \begin{align*}
+    BA &= \mathcal{M}(T)\mathcal{M}(S) \\
+       &= \mathcal{M}(TS) \\
+       &= \mathcal{M}(I) \\
+       &= I.
+  \end{align*}
+\end{solution}

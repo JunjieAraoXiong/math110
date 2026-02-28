@@ -1,0 +1,367 @@
+% ── Section 3C ──
+
+\exerciseheader{3C}{1}
+\begin{exercise}{1}
+  Suppose $T \in \calL(V, W)$. Show that with respect to each choice of bases of $V$ and $W$, the matrix of $T$ has at least $\dim \operatorname{range} T$ nonzero entries.
+\end{exercise}
+\begin{solution}
+  Suppose $v_1, \dots, v_n$ is a basis of $V$ and $w_1, \dots, w_m$ is a basis of $W$. Thus $\dim V = n$.
+
+  Suppose $p$ of the columns of $\calM(T)$ contain only 0's. Thus $Tv_k = 0$ for $p$ different choices of $k$. Because $v_1, \dots, v_n$ is a linearly independent list, this implies that $\dim \operatorname{null} T \ge p$.
+
+  The fundamental theorem of linear maps (3.21) implies that
+  \begin{align*}
+    n - p &= \dim \operatorname{range} T + \dim \operatorname{null} T - p \\
+          &\ge \dim \operatorname{range} T.
+  \end{align*}
+
+  The definition of $p$ implies that the number of columns of $\calM(T)$ that have at least one nonzero entry is $n - p$. The inequality above implies that there are at least $\dim \operatorname{range} T$ such columns. Hence the matrix of $T$ has at least $\dim \operatorname{range} T$ nonzero entries.
+\end{solution}
+
+\exerciseheader{3C}{2}
+\begin{exercise}{2}
+  Suppose $V$ and $W$ are finite-dimensional and $T \in \calL(V, W)$. Prove that $\dim \operatorname{range} T = 1$ if and only if there exist a basis of $V$ and a basis of $W$ such that with respect to these bases, all entries of $\calM(T)$ equal~1.
+\end{exercise}
+\begin{solution}
+  First suppose there exist a basis $v_1, \dots, v_n$ of $V$ and a basis $w_1, \dots, w_m$ of $W$ such that with respect to these bases, all entries of $\calM(T)$ equal~1. Thus
+  \[
+    Tv_k = w_1 + \dots + w_m
+  \]
+  for each $k = 1, \dots, n$. Hence
+  \[
+    \operatorname{range} T = \operatorname{span}(w_1 + \dots + w_m)
+  \]
+  and thus $\dim \operatorname{range} T = 1$ (note that $w_1 + \dots + w_m \ne 0$ because $w_1, \dots, w_m$ is linearly independent).
+
+  Conversely, suppose now that $\dim \operatorname{range} T = 1$. Let $n = \dim V$. By the fundamental theorem of linear maps (3.21), we have $\dim \operatorname{null} T = n - 1$. Let $u_1, \dots, u_{n-1}$ be a basis of $\operatorname{null} T$. Extend to a basis $u_1, \dots, u_{n-1}, u_n$ of $V$. Note that $u_n \notin \operatorname{null} T$ and thus $Tu_n \ne 0$. Let $w = Tu_n$.
+
+  It is easy to verify that $u_1 + u_n, \dots, u_{n-1} + u_n, u_n$ is a basis of $V$, which we will relabel as $v_1, \dots, v_n$. Clearly $Tv_k = w$ for each $k = 1, \dots, n$.
+
+  Extend $w$ to a basis $w, w_2, \dots, w_m$ of $W$. It is easy to verify that
+  \[
+    w - w_2, w_2 - w_3, \dots, w_{m-1} - w_m, w_m
+  \]
+  is a basis of $W$. Furthermore,
+  \[
+    w = (w - w_2) + (w_2 - w_3) + \dots + (w_{m-1} - w_m) + w_m.
+  \]
+  Thus the matrix of $T$ with respect to the basis $v_1, \dots, v_n$ of $V$ and the basis $w - w_2, w_2 - w_3, \dots, w_{m-1} - w_m, w_m$ of $W$ consists of all 1's.
+\end{solution}
+
+\exerciseheader{3C}{3}
+\begin{exercise}{3}
+  Suppose $v_1, \dots, v_n$ is a basis of $V$ and $w_1, \dots, w_m$ is a basis of $W$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Show that if $S, T \in \calL(V, W)$, then $\calM(S + T) = \calM(S) + \calM(T)$.
+    \item Show that if $\lambda \in \F$ and $T \in \calL(V, W)$, then $\calM(\lambda T) = \lambda \calM(T)$.
+  \end{enumerate}
+
+  \textit{This exercise asks you to verify 3.35 and 3.38.}
+\end{exercise}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item Suppose $S, T \in \calL(V, W)$. Let $A = \calM(S)$ and $C = \calM(T)$. Thus if $k = 1, \dots, n$, then
+    \[
+      Sv_k = \sum_{j=1}^{m} A_{j,k} w_j \quad \text{and} \quad Tv_k = \sum_{j=1}^{m} C_{j,k} w_j.
+    \]
+    Hence
+    \[
+      (S + T)v_k = \sum_{j=1}^{m} (A_{j,k} + C_{j,k}) w_j.
+    \]
+    The equation above implies that the entry in row $j$, column $k$, of $\calM(S + T)$ equals $A_{j,k} + C_{j,k}$. Thus $\calM(S + T) = A + C = \calM(S) + \calM(T)$.
+
+    \item Suppose $\lambda \in \F$ and $T \in \calL(V, W)$. Let $A = \calM(T)$. Thus if $k = 1, \dots, n$, then
+    \[
+      Tv_k = \sum_{j=1}^{m} A_{j,k} w_j.
+    \]
+    Hence
+    \[
+      (\lambda T)v_k = \sum_{j=1}^{m} \lambda A_{j,k} w_j.
+    \]
+    The equation above implies that the entry in row $j$, column $k$, of $\calM(\lambda T)$ equals $\lambda A_{j,k}$. Thus $\calM(\lambda T) = \lambda A = \lambda \calM(T)$.
+  \end{enumerate}
+\end{solution}
+
+\exerciseheader{3C}{4}
+\begin{exercise}{4}
+  Suppose that $D \in \calL(\calP_3(\R), \calP_2(\R))$ is the differentiation map defined by $Dp = p'$. Find a basis of $\calP_3(\R)$ and a basis of $\calP_2(\R)$ such that the matrix of $D$ with respect to these bases is
+  \[
+    \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \end{pmatrix}.
+  \]
+
+  \textit{Compare with Example 3.33. The next exercise generalizes this exercise.}
+\end{exercise}
+\begin{solution}
+  Take $x^3, x^2, x, 1$ as a basis of $\calP_3(\R)$ and take $3x^2, 2x, 1$ as a basis of $\calP_2(\R)$. Then the matrix of $D$ with respect to these bases is the matrix above.
+\end{solution}
+
+\exerciseheader{3C}{5}
+\begin{exercise}{5}
+  Suppose $V$ and $W$ are finite-dimensional and $T \in \calL(V, W)$. Prove that there exist a basis of $V$ and a basis of $W$ such that with respect to these bases, all entries of $\calM(T)$ are $0$ except that the entries in row $k$, column $k$, equal $1$ if $1 \le k \le \dim \operatorname{range} T$.
+\end{exercise}
+\begin{solution}
+  Let $u_1, \dots, u_m$ be a basis of $\operatorname{null} T$. Extend $u_1, \dots, u_m$ to a basis $u_1, \dots, u_m, v_1, \dots, v_n$ of $V$. Then $Tv_1, \dots, Tv_n$ is a basis of $\operatorname{range} T$, as was proved in the proof of 3.21. Thus $n = \dim \operatorname{range} T$.
+
+  Because $Tv_1, \dots, Tv_n$ is a basis of the subspace $\operatorname{range} T$, this list is linearly independent in $W$. Extend the linearly independent list $Tv_1, \dots, Tv_n$ to a basis $Tv_1, \dots, Tv_n, w_1, \dots, w_p$ of $W$.
+
+  With respect to the basis $v_1, \dots, v_n, u_1, \dots, u_m$ of $V$ (note that the $v$'s now come before the $u$'s) and the basis $Tv_1, \dots, Tv_n, w_1, \dots, w_p$ of $W$, the matrix of $T$ has the desired form.
+
+  [Here some of $m$, $n$, or $p$ might be 0.]
+\end{solution}
+
+\exerciseheader{3C}{6}
+\begin{exercise}{6}
+  Suppose $v_1, \dots, v_m$ is a basis of $V$ and $W$ is finite-dimensional. Suppose $T \in \calL(V, W)$. Prove that there exists a basis $w_1, \dots, w_n$ of $W$ such that all entries in the first column of $\calM(T)$ [with respect to the bases $v_1, \dots, v_m$ and $w_1, \dots, w_n$] are $0$ except for possibly a $1$ in the first row, first column.
+
+  \textit{In this exercise, unlike Exercise~5, you are given the basis of $V$ instead of being able to choose a basis of $V$.}
+\end{exercise}
+\begin{solution}
+  If $Tv_1 = 0$, then the first column of $\calM(T)$ will consist of all 0's for every choice of basis of $W$ (using, of course, $v_1, \dots, v_m$ as the basis of $V$).
+
+  Thus suppose $Tv_1 \ne 0$. Let $w_1 = Tv_1$. Extend the list $w_1$ to a basis $w_1, \dots, w_n$ of $W$. Then with respect to the bases $v_1, \dots, v_m$ and $w_1, \dots, w_n$, the first column of $\calM(T)$ consists of all 0's except for a $1$ in the first row, first column.
+\end{solution}
+
+\exerciseheader{3C}{7}
+\begin{exercise}{7}
+  Suppose $w_1, \dots, w_n$ is a basis of $W$ and $V$ is finite-dimensional. Suppose $T \in \calL(V, W)$. Prove that there exists a basis $v_1, \dots, v_m$ of $V$ such that all entries in the first row of $\calM(T)$ [with respect to the bases $v_1, \dots, v_m$ and $w_1, \dots, w_n$] are $0$ except for possibly a $1$ in the first row, first column.
+
+  \textit{In this exercise, unlike Exercise~5, you are given the basis of $W$ instead of being able to choose a basis of $W$.}
+\end{exercise}
+\begin{solution}
+  If $\operatorname{range} T \subseteq \operatorname{span}(w_2, \dots, w_n)$, then the first row will consist of all 0's for every choice of basis of $V$ (using, of course, $w_1, \dots, w_n$ as the basis of $W$).
+
+  Thus suppose $\operatorname{range} T \not\subset \operatorname{span}(w_2, \dots, w_n)$. Let $u_1 \in V$ be such that $Tu_1 \notin \operatorname{span}(w_2, \dots, w_n)$. Because $w_1, \dots, w_n$ is a basis of $W$, we can write
+  \[
+    Tu_1 = c_1 w_1 + \dots + c_n w_n
+  \]
+  for some $c_1, \dots, c_n \in \F$. Because $Tu_1 \notin \operatorname{span}(w_2, \dots, w_n)$, we know that $c_1 \ne 0$. Thus replacing $u_1$ with $\frac{1}{c_1} u_1$, we can assume that $c_1 = 1$. In other words,
+  \[
+    Tu_1 = w_1 + c_2 w_2 + \dots + c_n w_n.
+  \]
+
+  Extend $u_1$ to a basis $u_1, \dots, u_m$ of $V$. For each $k \in \{2, \dots, m\}$, we can write
+  \[
+    Tu_k = a_{1,k} w_1 + \dots + a_{n,k} w_n.
+  \]
+  Thus
+  \[
+    T(u_k - a_{1,k} u_1) = (a_{2,k} - a_{1,k} c_2) w_2 + \dots + (a_{n,k} - a_{1,k} c_n) w_n.
+  \]
+
+  Thus with respect to the basis
+  \[
+    u_1, u_2 - a_{1,2} u_1, u_3 - a_{1,3} u_1, \dots, u_m - a_{1,m} u_1
+  \]
+  of $V$ and $w_1, \dots, w_n$ of $W$, we see that the first row of $\calM(T)$ consists of all 0's except for a $1$ in row 1, column 1.
+\end{solution}
+
+\exerciseheader{3C}{8}
+\begin{exercise}{8}
+  Suppose $A$ is an $m$-by-$n$ matrix and $B$ is an $n$-by-$p$ matrix. Prove that
+  \[
+    (AB)_{j,\cdot} = A_{j,\cdot}\, B
+  \]
+  for each $1 \le j \le m$. In other words, show that row $j$ of $AB$ equals (row $j$ of $A$) times $B$.
+
+  \textit{This exercise gives the row version of 3.48.}
+\end{exercise}
+\begin{solution}
+  Note that both $(AB)_{j,\cdot}$ and $A_{j,\cdot}\, B$ are $1$-by-$p$ matrices.
+
+  By the definition of matrix multiplication, the entry in column $k$ of $(AB)_{j,\cdot}$ is
+  \[
+    \sum_{r=1}^{n} A_{j,r} B_{r,k}.
+  \]
+  Again by the definition of matrix multiplication, the entry in column $k$ of $A_{j,\cdot}\, B$ is also equal to
+  \[
+    \sum_{r=1}^{n} A_{j,r} B_{r,k}.
+  \]
+
+  Thus $(AB)_{j,\cdot} = A_{j,\cdot}\, B$.
+\end{solution}
+
+\exerciseheader{3C}{9}
+\begin{exercise}{9}
+  Suppose $a = \begin{pmatrix} a_1 & \cdots & a_n \end{pmatrix}$ is a $1$-by-$n$ matrix and $B$ is an $n$-by-$p$ matrix. Prove that
+  \[
+    aB = a_1 B_{1,\cdot} + \dots + a_n B_{n,\cdot}\,.
+  \]
+  In other words, show that $aB$ is a linear combination of the rows of $B$, with the scalars that multiply the rows coming from $a$.
+
+  \textit{This exercise gives the row version of 3.50.}
+\end{exercise}
+\begin{solution}
+  Note that both $aB$ and $a_1 B_{1,\cdot} + \dots + a_n B_{n,\cdot}$ are $1$-by-$p$ matrices.
+
+  By the definition of matrix multiplication, the entry in column $k$ of $aB$ is
+  \[
+    \sum_{r=1}^{n} a_r B_{r,k}.
+  \]
+  For $r = 1, \dots, n$, the entry in column $k$ of $a_r B_{r,\cdot}$ is $a_r B_{r,k}$. Thus the entry in column $k$ of $a_1 B_{1,\cdot} + \dots + a_n B_{n,\cdot}$ is
+  \[
+    \sum_{r=1}^{n} a_r B_{r,k}.
+  \]
+
+  Thus $aB = a_1 B_{1,\cdot} + \dots + a_n B_{n,\cdot}$.
+\end{solution}
+
+\exerciseheader{3C}{10}
+\begin{exercise}{10}
+  Give an example of $2$-by-$2$ matrices $A$ and $B$ such that $AB \ne BA$.
+\end{exercise}
+\begin{solution}
+  Almost any randomly chosen $2$-by-$2$ matrices will work.
+\end{solution}
+
+\exerciseheader{3C}{11}
+\begin{exercise}{11}
+  Prove that the distributive property holds for matrix addition and matrix multiplication. In other words, suppose $A$, $B$, $C$, $D$, $E$, and $F$ are matrices whose sizes are such that $A(B + C)$ and $(D + E)F$ make sense. Explain why $AB + AC$ and $DF + EF$ both make sense and prove that
+  \[
+    A(B + C) = AB + AC \quad \text{and} \quad (D + E)F = DF + EF.
+  \]
+\end{exercise}
+\begin{solution}
+  Because $A(B + C)$ makes sense, $B$ and $C$ have the same size. Furthermore, the number of columns of $A$ (let's call this number $n$) equals the number of rows of $B$ and $C$. All this means that $AB + AC$ makes sense.
+
+  To prove that $A(B + C) = AB + AC$, just use the definition of matrix addition, the definition of matrix multiplication, and the usual distributive property for elements of $\F$. Specifically, let $A_{j,k}$, $b_{j,k}$, and $c_{j,k}$ denote the entries in row $j$, column $k$ of $A$, $B$, and $C$, respectively. The entry in row $j$, column $k$ of $B + C$ is $b_{j,k} + c_{j,k}$. Thus the entry in row $j$, column $k$ of $A(B + C)$ is
+  \[
+    \sum_{r=1}^{n} A_{j,r}(b_{r,k} + c_{r,k}),
+  \]
+  which equals
+  \[
+    \sum_{r=1}^{n} A_{j,r} b_{r,k} + \sum_{r=1}^{n} A_{j,r} c_{r,k},
+  \]
+  which equals the entry in row $j$, column $k$ of $AB + AC$, as desired.
+\end{solution}
+
+\exerciseheader{3C}{12}
+\begin{exercise}{12}
+  Prove that matrix multiplication is associative. In other words, suppose $A$, $B$, and $C$ are matrices whose sizes are such that $(AB)C$ makes sense. Explain why $A(BC)$ makes sense and prove that
+  \[
+    (AB)C = A(BC).
+  \]
+
+  \textit{Try to find a clean proof that illustrates the following quote from Emil Artin: ``It is my experience that proofs involving matrices can be shortened by 50\% if one throws the matrices out.''}
+\end{exercise}
+\begin{solution}
+  This exercise can be done by a brute force calculation, in the style of the solution to Exercise~11. Here is a solution that uses only the associativity of the product of linear maps (which is easy to verify because composition of functions is clearly associative) and the nice property that the matrix of the product of two linear maps equals the product of the matrices of the two linear maps (see 3.43).
+
+  Suppose $A$ is an $m$-by-$n$ matrix, $B$ is an $n$-by-$p$ matrix, and $C$ is a $p$-by-$q$ matrix; the sizes much match up like this in order for $(AB)C$ to make sense. Let $R \in \calL(\F^n, \F^m)$, $S \in \calL(\F^p, \F^n)$, $T \in \calL(\F^q, \F^p)$ be such that, with respect to the standard bases, $\calM(R) = A$, $\calM(S) = B$, $\calM(T) = C$; 3.71 ensures that such linear maps exist. Now
+  \begin{align*}
+    (AB)C &= (\calM(R)\calM(S))\calM(T) \\
+          &= \calM(RS)\calM(T) \\
+          &= \calM((RS)T) \\
+          &= \calM(R(ST)) \\
+          &= \calM(R)\calM(ST) \\
+          &= \calM(R)(\calM(S)\calM(T)) \\
+          &= A(BC).
+  \end{align*}
+\end{solution}
+
+\exerciseheader{3C}{13}
+\begin{exercise}{13}
+  Suppose $A$ is an $n$-by-$n$ matrix and $1 \le j, k \le n$. Show that the entry in row $j$, column $k$, of $A^3$ (which is defined to mean $AAA$) is
+  \[
+    \sum_{p=1}^{n} \sum_{r=1}^{n} A_{j,p}\, A_{p,r}\, A_{r,k}.
+  \]
+\end{exercise}
+\begin{solution}
+  By the definition of matrix multiplication, we have
+  \begin{align*}
+    (A^3)_{j,k} &= (AA^2)_{j,k} \\
+                 &= \sum_{p=1}^{n} A_{j,p}\, (A^2)_{p,k} \\
+                 &= \sum_{p=1}^{n} A_{j,p}\, (AA)_{p,k} \\
+                 &= \sum_{p=1}^{n} A_{j,p} \sum_{r=1}^{n} A_{p,r}\, A_{r,k} \\
+                 &= \sum_{p=1}^{n} \sum_{r=1}^{n} A_{j,p}\, A_{p,r}\, A_{r,k}.
+  \end{align*}
+\end{solution}
+
+\exerciseheader{3C}{14}
+\begin{exercise}{14}
+  Suppose $m$ and $n$ are positive integers. Prove that the function $A \mapsto A^\mathsf{t}$ is a linear map from $\F^{m,n}$ to $\F^{n,m}$.
+\end{exercise}
+\begin{solution}
+  The linearity of the map that takes $A$ to $A^\mathsf{t}$ follows from the definitions.
+\end{solution}
+
+\exerciseheader{3C}{15}
+\begin{exercise}{15}
+  Prove that if $A$ is an $m$-by-$n$ matrix and $C$ is an $n$-by-$p$ matrix, then
+  \[
+    (AC)^\mathsf{t} = C^\mathsf{t} A^\mathsf{t}.
+  \]
+
+  \textit{This exercise shows that the transpose of the product of two matrices is the product of the transposes in the opposite order.}
+\end{exercise}
+\begin{solution}
+  Suppose $1 \le k \le p$ and $1 \le j \le m$. Then
+  \begin{align*}
+    ((AC)^\mathsf{t})_{k,j} &= (AC)_{j,k} \\
+                              &= \sum_{r=1}^{n} A_{j,r}\, C_{r,k} \\
+                              &= \sum_{r=1}^{n} (C^\mathsf{t})_{k,r}\, (A^\mathsf{t})_{r,j} \\
+                              &= (C^\mathsf{t} A^\mathsf{t})_{k,j}.
+  \end{align*}
+
+  Thus $(AC)^\mathsf{t} = C^\mathsf{t} A^\mathsf{t}$, as desired.
+\end{solution}
+
+\exerciseheader{3C}{16}
+\begin{exercise}{16}
+  Suppose $A$ is an $m$-by-$n$ matrix with $A \ne 0$. Prove that the rank of $A$ is $1$ if and only if there exist $(c_1, \dots, c_m) \in \F^m$ and $(d_1, \dots, d_n) \in \F^n$ such that $A_{j,k} = c_j d_k$ for every $j = 1, \dots, m$ and every $k = 1, \dots, n$.
+\end{exercise}
+\begin{solution}
+  First suppose there exist $(c_1, \dots, c_m) \in \F^m$ and $(d_1, \dots, d_n) \in \F^n$ such that $A_{j,k} = c_j d_k$ for every $j = 1, \dots, m$ and every $k = 1, \dots, n$. Let
+  \[
+    d = \begin{pmatrix} d_1 & d_2 & \dots & d_n \end{pmatrix} \in \F^{1,n}.
+  \]
+  Then row $j$ of $A$ equals $c_j d$ for each $j = 1, \dots, m$. Thus each row of $A$ is in $\operatorname{span}(d)$. Thus the row rank of $A$ is less than or equal to~1. However, the rank of $A$ does not equal $0$ (because $A \ne 0$), and hence the rank of $A$ is~1.
+
+  To prove the other direction, suppose the rank of $A$ is~1. Let
+  \[
+    d = \begin{pmatrix} d_1 & d_2 & \dots & d_n \end{pmatrix} \in \F^{1,n}
+  \]
+  be a row of $A$ that is not identically $0$ (such a row must exist because $A \ne 0$). Because $A$ has row rank~1, for each $j = 1, \dots, m$ there exists $c_j \in \F$ such that row $j$ of $A$ equals $c_j d$. Hence $A_{j,k} = c_j d_k$ for every $j = 1, \dots, m$ and every $k = 1, \dots, n$, as desired.
+\end{solution}
+
+\exerciseheader{3C}{17}
+\begin{exercise}{17}
+  Suppose $T \in \calL(V)$, and $u_1, \dots, u_n$ and $v_1, \dots, v_n$ are bases of $V$. Prove that the following are equivalent.
+  \begin{enumerate}[label=(\alph*)]
+    \item $T$ is injective.
+    \item The columns of $\calM(T)$ are linearly independent in $\F^{n,1}$.
+    \item The columns of $\calM(T)$ span $\F^{n,1}$.
+    \item The rows of $\calM(T)$ span $\F^{1,n}$.
+    \item The rows of $\calM(T)$ are linearly independent in $\F^{1,n}$.
+  \end{enumerate}
+
+  Here $\calM(T)$ means $\calM(T, (u_1, \dots, u_n), (v_1, \dots, v_n))$.
+\end{exercise}
+\begin{solution}
+  First suppose (a) holds, so $T$ is injective. Define $S \colon V \to \F^{n,1}$ by
+  \[
+    Sv = \begin{pmatrix} a_1 \\ \vdots \\ a_n \end{pmatrix},
+  \]
+  where $a_1, \dots, a_n \in \F$ are such that $v = a_1 v_1 + \dots + a_n v_n$. Then $S$ is an injective linear map from $V$ to $\F^{n,1}$. Thus $ST$ is also an injective linear map from $V$ to $\F^{n,1}$. Hence $STu_1, \dots, STu_n$ is a linearly independent list in $\F^{n,1}$ (by Exercise~9 in Section~3B). Because $STu_1, \dots, STu_n$ is the list of columns of $\calM(T)$, we conclude that the columns of $\calM(T)$ are linearly independent in $\F^{n,1}$, which shows that (a) implies (b).
+
+  Now suppose (b) holds, so the columns of $\calM(T)$ are linearly independent in $\F^{n,1}$. Then, because we have a linearly independent list of length $n$ in a vector space of dimension $n$, the list of columns of $\calM(T)$ spans $\F^{n,1}$ (by 2.38). Thus (b) implies (c).
+
+  Now suppose (c) holds, so the columns of $\calM(T)$ span $\F^{n,1}$. Thus the column rank of $\calM(T)$ equals $n$, which implies that the row rank of $\calM(T)$ equals $n$ (by 3.57). Hence the rows of $\calM(T)$ span $\F^{1,n}$. Thus (c) implies (d).
+
+  Now suppose (d) holds, so the rows of $\calM(T)$ span $\F^{1,n}$. Then, because we have a spanning list of length $n$ in a vector space of dimension $n$, the list of rows of $\calM(T)$ is linearly independent in $\F^{1,n}$ (by 2.42). Thus (d) implies (e).
+
+  Now suppose (e) holds, so the rows of $\calM(T)$ are linearly independent in $\F^{1,n}$. Then, because we have a linearly independent list of length $n$ in a vector space of dimension $n$, this list also spans $\F^{1,n}$ (by 2.38). Thus the row rank of $\calM(T)$ equals $n$, which implies that the column rank of $\calM(T)$ equals $n$ (by 3.57). Hence the columns of $\calM(T)$ span $\F^{n,1}$. Thus the columns of $\calM(T)$ are linearly independent in $\F^{n,1}$ (by 2.42).
+
+  To prove that $T$ is injective, suppose $u \in V$ and $Tu = 0$. There exist $b_1, \dots, b_n \in \F$ such that
+  \[
+    u = b_1 u_1 + \dots + b_n u_n.
+  \]
+  Thus
+  \[
+    0 = Tu = b_1 Tu_1 + \dots + b_n Tu_n.
+  \]
+  Applying the linear map $S$ defined in the first paragraph of this solution to both sides of the equation above, we have
+  \[
+    0 = STu = b_1 STu_1 + \dots + b_n STu_n.
+  \]
+  However, $STu_1, \dots, STu_n$ are the columns of $\calM(T)$, which are linearly independent by the paragraph above. Thus the equation above implies that $b_1 = \dots = b_n = 0$. This implies that $u = 0$. Hence $T$ is injective, completing the proof that (e) implies (a).
+\end{solution}

@@ -1,0 +1,557 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{fancyhdr}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage{mathrsfs}
+
+% ── Color matching the PDF ──
+\definecolor{headercolor}{RGB}{0,128,128}
+
+% ── Bold math shortcuts ──
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\F}{\mathbf{F}}
+\newcommand{\Z}{\mathbf{Z}}
+
+% ── Page style ──
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{Edward Frenkel}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Exercise header command ──
+% \exerciseheader{section}{number} produces the teal header line
+\newcommand{\exerciseheader}[2]{%
+  \newpage
+  \fancyhead[L]{\textcolor{headercolor}{Instructor's Solutions Manual, Section #1}}%
+  \fancyhead[R]{\textcolor{headercolor}{Exercise #2}}%
+  \renewcommand{\headrulewidth}{0.4pt}%
+  \renewcommand{\headrule}{\hbox to\headwidth{%
+    \color{headercolor}\leaders\hrule height \headrulewidth\hfill}}%
+}
+
+% ── Exercise environment ──
+\newcounter{exnum}
+\newenvironment{exercise}[1]{%
+  \setcounter{exnum}{#1}%
+  \par\medskip\noindent\textbf{\theexnum}\quad\ignorespaces
+}{\par\medskip}
+
+\begin{document}
+
+% ── Section 3A ──
+
+\exerciseheader{3A}{1}
+\begin{exercise}{1}
+  Suppose $b, c \in \R$. Define $T\colon \R^3 \to \R^2$ by
+  \[
+    T(x, y, z) = (2x - 4y + 3z + b,\, 6x + cxyz).
+  \]
+  Show that $T$ is linear if and only if $b = c = 0$.
+\end{exercise}
+
+\exerciseheader{3A}{2}
+\begin{exercise}{2}
+  Suppose $b, c \in \R$. Define $T\colon \mathcal{P}(\R) \to \R^2$ by
+  \[
+    Tp = \bigl(3p(4) + 5p'(6) + bp(1)p(2),\, \int_{-1}^{2} x^3 p(x)\,dx + c\sin p(0)\bigr).
+  \]
+  Show that $T$ is linear if and only if $b = c = 0$.
+\end{exercise}
+
+\exerciseheader{3A}{3}
+\begin{exercise}{3}
+  Suppose that $T \in \mathcal{L}(\F^n, \F^m)$. Show that there exist scalars $A_{j,k} \in \F$ for $j = 1, \dots, m$ and $k = 1, \dots, n$ such that
+  \[
+    T(x_1, \dots, x_n) = (A_{1,1}x_1 + \cdots + A_{1,n}\,x_n,\, \dots,\, A_{m,1}x_1 + \cdots + A_{m,n}\,x_n)
+  \]
+  for every $(x_1, \dots, x_n) \in \F^n$.
+
+  \textit{This exercise shows that the linear map $T$ has the form promised in the second to last item of Example~3.3.}
+\end{exercise}
+
+\exerciseheader{3A}{4}
+\begin{exercise}{4}
+  Suppose $T \in \mathcal{L}(V, W)$ and $v_1, \dots, v_m$ is a list of vectors in $V$ such that $Tv_1, \dots, Tv_m$ is a linearly independent list in $W$. Prove that $v_1, \dots, v_m$ is linearly independent.
+\end{exercise}
+
+\exerciseheader{3A}{5}
+\begin{exercise}{5}
+  Prove that $\mathcal{L}(V, W)$ is a vector space, as was asserted in~3.6.
+\end{exercise}
+
+\exerciseheader{3A}{6}
+\begin{exercise}{6}
+  Prove that multiplication of linear maps has the associative, identity, and distributive properties asserted in~3.8.
+\end{exercise}
+
+\exerciseheader{3A}{7}
+\begin{exercise}{7}
+  Show that every linear map from a one-dimensional vector space to itself is multiplication by some scalar. More precisely, prove that if $\dim V = 1$ and $T \in \mathcal{L}(V)$, then there exists $\lambda \in \F$ such that $Tv = \lambda v$ for all $v \in V$.
+\end{exercise}
+
+\exerciseheader{3A}{8}
+\begin{exercise}{8}
+  Give an example of a function $\varphi\colon \R^2 \to \R$ such that
+  \[
+    \varphi(av) = a\varphi(v)
+  \]
+  for all $a \in \R$ and all $v \in \R^2$ but $\varphi$ is not linear.
+
+  \textit{This exercise and the next exercise show that neither homogeneity nor additivity alone is enough to imply that a function is a linear map.}
+\end{exercise}
+
+\exerciseheader{3A}{9}
+\begin{exercise}{9}
+  Give an example of a function $\varphi\colon \C \to \C$ such that
+  \[
+    \varphi(w + z) = \varphi(w) + \varphi(z)
+  \]
+  for all $w, z \in \C$ but $\varphi$ is not linear. (Here $\C$ is thought of as a complex vector space.)
+
+  \textit{There also exists a function $\varphi\colon \R \to \R$ such that $\varphi$ satisfies the additivity condition above but $\varphi$ is not linear. However, showing the existence of such a function involves considerably more advanced tools.}
+\end{exercise}
+
+\exerciseheader{3A}{10}
+\begin{exercise}{10}
+  Prove or give a counterexample: If $q \in \mathcal{P}(\R)$ and $T\colon \mathcal{P}(\R) \to \mathcal{P}(\R)$ is defined by $Tp = q \circ p$, then $T$ is a linear map.
+
+  \textit{The function $T$ defined here differs from the function $T$ defined in the last bullet point of~3.3 by the order of the functions in the compositions.}
+\end{exercise}
+
+\exerciseheader{3A}{11}
+\begin{exercise}{11}
+  Suppose $V$ is finite-dimensional and $T \in \mathcal{L}(V)$. Prove that $T$ is a scalar multiple of the identity if and only if $ST = TS$ for every $S \in \mathcal{L}(V)$.
+\end{exercise}
+
+\exerciseheader{3A}{12}
+\begin{exercise}{12}
+  Suppose $U$ is a subspace of $V$ with $U \neq V$. Suppose $S \in \mathcal{L}(U, W)$ and $S \neq 0$ (which means $Su \neq 0$ for some $u \in U$). Define $T\colon V \to W$ by
+  \[
+    Tv = \begin{cases}
+      Sv & \text{if } v \in U, \\
+      0  & \text{if } v \in V \text{ and } v \notin U.
+    \end{cases}
+  \]
+  Prove that $T$ is not a linear map on $V$.
+\end{exercise}
+
+\exerciseheader{3A}{13}
+\begin{exercise}{13}
+  Suppose $V$ is finite-dimensional. Prove that every linear map on a subspace of $V$ can be extended to a linear map on $V$. In other words, show that if $U$ is a subspace of $V$ and $S \in \mathcal{L}(U, W)$, then there exists $T \in \mathcal{L}(V, W)$ such that $Tu = Su$ for all $u \in U$.
+
+  \textit{The result in this exercise is used in the proof of~3.125.}
+\end{exercise}
+
+\exerciseheader{3A}{14}
+\begin{exercise}{14}
+  Suppose $V$ is finite-dimensional with $\dim V > 0$, and suppose $W$ is infinite-dimensional. Prove that $\mathcal{L}(V, W)$ is infinite-dimensional.
+\end{exercise}
+
+\exerciseheader{3A}{15}
+\begin{exercise}{15}
+  Suppose $v_1, \dots, v_m$ is a linearly dependent list of vectors in $V$. Suppose also that $W \neq \{0\}$. Prove that there exist $w_1, \dots, w_m \in W$ such that no $T \in \mathcal{L}(V, W)$ satisfies $Tv_k = w_k$ for each $k = 1, \dots, m$.
+\end{exercise}
+
+\exerciseheader{3A}{16}
+\begin{exercise}{16}
+  Suppose $V$ is finite-dimensional with $\dim V > 1$. Prove that there exist $S, T \in \mathcal{L}(V)$ such that $ST \neq TS$.
+\end{exercise}
+
+\exerciseheader{3A}{17}
+\begin{exercise}{17}
+  Suppose $V$ is finite-dimensional. Show that the only two-sided ideals of $\mathcal{L}(V)$ are $\{0\}$ and $\mathcal{L}(V)$.
+
+  \textit{A subspace $\mathcal{E}$ of $\mathcal{L}(V)$ is called a \textbf{two-sided ideal} of $\mathcal{L}(V)$ if $TE \in \mathcal{E}$ and $ET \in \mathcal{E}$ for all $E \in \mathcal{E}$ and all $T \in \mathcal{L}(V)$.}
+\end{exercise}
+
+% ── Section 3B ──
+
+\exerciseheader{3B}{1}
+\begin{exercise}{1}
+  Give an example of a linear map $T$ with $\dim \operatorname{null} T = 3$ and $\dim \operatorname{range} T = 2$.
+\end{exercise}
+
+\exerciseheader{3B}{2}
+\begin{exercise}{2}
+  Suppose $S, T \in \mathcal{L}(V)$ are such that $\operatorname{range} S \subseteq \operatorname{null} T$. Prove that $(ST)^2 = 0$.
+\end{exercise}
+
+\exerciseheader{3B}{3}
+\begin{exercise}{3}
+  Suppose $v_1, \dots, v_m$ is a list of vectors in $V$. Define $T \in \mathcal{L}(\F^m, V)$ by
+  \[
+    T(z_1, \dots, z_m) = z_1 v_1 + \cdots + z_m v_m.
+  \]
+  \begin{enumerate}[label=(\alph*)]
+    \item What property of $T$ corresponds to $v_1, \dots, v_m$ spanning $V$?
+    \item What property of $T$ corresponds to the list $v_1, \dots, v_m$ being linearly independent?
+  \end{enumerate}
+\end{exercise}
+
+\exerciseheader{3B}{4}
+\begin{exercise}{4}
+  Show that $\{T \in \mathcal{L}(\R^5, \R^4) : \dim \operatorname{null} T > 2\}$ is not a subspace of $\mathcal{L}(\R^5, \R^4)$.
+\end{exercise}
+
+\exerciseheader{3B}{5}
+\begin{exercise}{5}
+  Give an example of $T \in \mathcal{L}(\R^4)$ such that $\operatorname{range} T = \operatorname{null} T$.
+\end{exercise}
+
+\exerciseheader{3B}{6}
+\begin{exercise}{6}
+  Prove that there does not exist $T \in \mathcal{L}(\R^5)$ such that $\operatorname{range} T = \operatorname{null} T$.
+\end{exercise}
+
+\exerciseheader{3B}{7}
+\begin{exercise}{7}
+  Suppose $V$ and $W$ are finite-dimensional with $2 \leq \dim V \leq \dim W$. Show that $\{T \in \mathcal{L}(V, W) : T \text{ is not injective}\}$ is not a subspace of $\mathcal{L}(V, W)$.
+\end{exercise}
+
+\exerciseheader{3B}{8}
+\begin{exercise}{8}
+  Suppose $V$ and $W$ are finite-dimensional with $\dim V \geq \dim W \geq 2$. Show that $\{T \in \mathcal{L}(V, W) : T \text{ is not surjective}\}$ is not a subspace of $\mathcal{L}(V, W)$.
+\end{exercise}
+
+\exerciseheader{3B}{9}
+\begin{exercise}{9}
+  Suppose $T \in \mathcal{L}(V, W)$ is injective and $v_1, \dots, v_n$ is linearly independent in $V$. Prove that $Tv_1, \dots, Tv_n$ is linearly independent in $W$.
+\end{exercise}
+
+\exerciseheader{3B}{10}
+\begin{exercise}{10}
+  Suppose $v_1, \dots, v_n$ spans $V$ and $T \in \mathcal{L}(V, W)$. Show that $Tv_1, \dots, Tv_n$ spans $\operatorname{range} T$.
+\end{exercise}
+
+\exerciseheader{3B}{11}
+\begin{exercise}{11}
+  Suppose that $V$ is finite-dimensional and that $T \in \mathcal{L}(V, W)$. Prove that there exists a subspace $U$ of $V$ such that
+  \[
+    U \cap \operatorname{null} T = \{0\} \quad \text{and} \quad \operatorname{range} T = \{Tu : u \in U\}.
+  \]
+\end{exercise}
+
+\exerciseheader{3B}{12}
+\begin{exercise}{12}
+  Suppose $T$ is a linear map from $\F^4$ to $\F^2$ such that
+  \[
+    \operatorname{null} T = \{(x_1, x_2, x_3, x_4) \in \F^4 : x_1 = 5x_2 \text{ and } x_3 = 7x_4\}.
+  \]
+  Prove that $T$ is surjective.
+\end{exercise}
+
+\exerciseheader{3B}{13}
+\begin{exercise}{13}
+  Suppose $U$ is a three-dimensional subspace of $\R^8$ and that $T$ is a linear map from $\R^8$ to $\R^5$ such that $\operatorname{null} T = U$. Prove that $T$ is surjective.
+\end{exercise}
+
+\exerciseheader{3B}{14}
+\begin{exercise}{14}
+  Prove that there does not exist a linear map from $\F^5$ to $\F^2$ whose null space equals $\{(x_1, x_2, x_3, x_4, x_5) \in \F^5 : x_1 = 3x_2 \text{ and } x_3 = x_4 = x_5\}$.
+\end{exercise}
+
+\exerciseheader{3B}{15}
+\begin{exercise}{15}
+  Suppose there exists a linear map on $V$ whose null space and range are both finite-dimensional. Prove that $V$ is finite-dimensional.
+\end{exercise}
+
+\exerciseheader{3B}{16}
+\begin{exercise}{16}
+  Suppose $V$ and $W$ are both finite-dimensional. Prove that there exists an injective linear map from $V$ to $W$ if and only if $\dim V \leq \dim W$.
+\end{exercise}
+
+\exerciseheader{3B}{17}
+\begin{exercise}{17}
+  Suppose $V$ and $W$ are both finite-dimensional. Prove that there exists a surjective linear map from $V$ onto $W$ if and only if $\dim V \geq \dim W$.
+\end{exercise}
+
+\exerciseheader{3B}{18}
+\begin{exercise}{18}
+  Suppose $V$ and $W$ are finite-dimensional and that $U$ is a subspace of $V$. Prove that there exists $T \in \mathcal{L}(V, W)$ such that $\operatorname{null} T = U$ if and only if $\dim U \geq \dim V - \dim W$.
+\end{exercise}
+
+\exerciseheader{3B}{19}
+\begin{exercise}{19}
+  Suppose $W$ is finite-dimensional and $T \in \mathcal{L}(V, W)$. Prove that $T$ is injective if and only if there exists $S \in \mathcal{L}(W, V)$ such that $ST$ is the identity operator on $V$.
+\end{exercise}
+
+\exerciseheader{3B}{20}
+\begin{exercise}{20}
+  Suppose $W$ is finite-dimensional and $T \in \mathcal{L}(V, W)$. Prove that $T$ is surjective if and only if there exists $S \in \mathcal{L}(W, V)$ such that $TS$ is the identity operator on $W$.
+\end{exercise}
+
+\exerciseheader{3B}{21}
+\begin{exercise}{21}
+  Suppose $V$ is finite-dimensional, $T \in \mathcal{L}(V, W)$, and $U$ is a subspace of $W$. Prove that $\{v \in V : Tv \in U\}$ is a subspace of $V$ and
+  \[
+    \dim\{v \in V : Tv \in U\} = \dim \operatorname{null} T + \dim(U \cap \operatorname{range} T).
+  \]
+\end{exercise}
+
+\exerciseheader{3B}{22}
+\begin{exercise}{22}
+  Suppose $U$ and $V$ are finite-dimensional vector spaces and $S \in \mathcal{L}(V, W)$ and $T \in \mathcal{L}(U, V)$. Prove that
+  \[
+    \dim \operatorname{null} ST \leq \dim \operatorname{null} S + \dim \operatorname{null} T.
+  \]
+\end{exercise}
+
+\exerciseheader{3B}{23}
+\begin{exercise}{23}
+  Suppose $U$ and $V$ are finite-dimensional vector spaces and $S \in \mathcal{L}(V, W)$ and $T \in \mathcal{L}(U, V)$. Prove that
+  \[
+    \dim \operatorname{range} ST \leq \min\{\dim \operatorname{range} S, \dim \operatorname{range} T\}.
+  \]
+\end{exercise}
+
+\exerciseheader{3B}{24}
+\begin{exercise}{24}
+  \begin{enumerate}[label=(\alph*)]
+    \item Suppose $\dim V = 5$ and $S, T \in \mathcal{L}(V)$ are such that $ST = 0$. Prove that $\dim \operatorname{range} TS \leq 2$.
+    \item Give an example of $S, T \in \mathcal{L}(\F^5)$ with $ST = 0$ and $\dim \operatorname{range} TS = 2$.
+  \end{enumerate}
+\end{exercise}
+
+\exerciseheader{3B}{25}
+\begin{exercise}{25}
+  Suppose that $W$ is finite-dimensional and $S, T \in \mathcal{L}(V, W)$. Prove that $\operatorname{null} S \subseteq \operatorname{null} T$ if and only if there exists $E \in \mathcal{L}(W)$ such that $T = ES$.
+\end{exercise}
+
+\exerciseheader{3B}{26}
+\begin{exercise}{26}
+  Suppose that $V$ is finite-dimensional and $S, T \in \mathcal{L}(V, W)$. Prove that $\operatorname{range} S \subseteq \operatorname{range} T$ if and only if there exists $E \in \mathcal{L}(V)$ such that $S = TE$.
+\end{exercise}
+
+\exerciseheader{3B}{27}
+\begin{exercise}{27}
+  Suppose $P \in \mathcal{L}(V)$ and $P^2 = P$. Prove that $V = \operatorname{null} P \oplus \operatorname{range} P$.
+\end{exercise}
+
+\exerciseheader{3B}{28}
+\begin{exercise}{28}
+  Suppose $D \in \mathcal{L}(\mathcal{P}(\R))$ is such that $\deg Dp = (\deg p) - 1$ for every nonconstant polynomial $p \in \mathcal{P}(\R)$. Prove that $D$ is surjective.
+
+  \textit{The notation $D$ is used above to remind you of the differentiation map that sends a polynomial $p$ to $p'$.}
+\end{exercise}
+
+\exerciseheader{3B}{29}
+\begin{exercise}{29}
+  Suppose $p \in \mathcal{P}(\R)$. Prove that there exists a polynomial $q \in \mathcal{P}(\R)$ such that $5q'' + 3q' = p$.
+
+  \textit{This exercise can be done without linear algebra, but it's more fun to do it using linear algebra.}
+\end{exercise}
+
+\exerciseheader{3B}{30}
+\begin{exercise}{30}
+  Suppose $\varphi \in \mathcal{L}(V, \F)$ and $\varphi \neq 0$. Suppose $u \in V$ is not in $\operatorname{null} \varphi$. Prove that
+  \[
+    V = \operatorname{null} \varphi \oplus \{au : a \in \F\}.
+  \]
+\end{exercise}
+
+\exerciseheader{3B}{31}
+\begin{exercise}{31}
+  Suppose $V$ is finite-dimensional, $X$ is a subspace of $V$, and $Y$ is a finite-dimensional subspace of $W$. Prove that there exists $T \in \mathcal{L}(V, W)$ such that $\operatorname{null} T = X$ and $\operatorname{range} T = Y$ if and only if $\dim X + \dim Y = \dim V$.
+\end{exercise}
+
+\exerciseheader{3B}{32}
+\begin{exercise}{32}
+  Suppose $V$ is finite-dimensional with $\dim V > 1$. Show that if $\varphi\colon \mathcal{L}(V) \to \F$ is a linear map such that $\varphi(ST) = \varphi(S)\varphi(T)$ for all $S, T \in \mathcal{L}(V)$, then $\varphi = 0$.
+
+  \textit{Hint: The description of the two-sided ideals of $\mathcal{L}(V)$ given by Exercise~17 in Section~3A might be useful.}
+\end{exercise}
+
+\exerciseheader{3B}{33}
+\begin{exercise}{33}
+  Suppose that $V$ and $W$ are real vector spaces and $T \in \mathcal{L}(V, W)$. Define $T_{\C}\colon V_{\C} \to W_{\C}$ by
+  \[
+    T_{\C}(u + iv) = Tu + iTv
+  \]
+  for all $u, v \in V$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Show that $T_{\C}$ is a (complex) linear map from $V_{\C}$ to $W_{\C}$.
+    \item Show that $T_{\C}$ is injective if and only if $T$ is injective.
+    \item Show that $\operatorname{range} T_{\C} = W_{\C}$ if and only if $\operatorname{range} T = W$.
+  \end{enumerate}
+
+  \textit{See Exercise~8 in Section~1B for the definition of the complexification $V_{\C}$. The linear map $T_{\C}$ is called the \textbf{complexification} of the linear map $T$.}
+\end{exercise}
+
+% ── Section 3D ──
+
+\exerciseheader{3D}{1}
+\begin{exercise}{1}
+  Suppose $T \in \mathcal{L}(V, W)$ is invertible. Show that $T^{-1}$ is invertible and
+  \[
+    (T^{-1})^{-1} = T.
+  \]
+\end{exercise}
+
+\exerciseheader{3D}{2}
+\begin{exercise}{2}
+  Suppose $T \in \mathcal{L}(U, V)$ and $S \in \mathcal{L}(V, W)$ are both invertible linear maps. Prove that $ST \in \mathcal{L}(U, W)$ is invertible and that $(ST)^{-1} = T^{-1}S^{-1}$.
+\end{exercise}
+
+\exerciseheader{3D}{3}
+\begin{exercise}{3}
+  Suppose $V$ is finite-dimensional and $T \in \mathcal{L}(V)$. Prove that the following are equivalent.
+  \begin{enumerate}[label=(\alph*)]
+    \item $T$ is invertible.
+    \item $Tv_1, \dots, Tv_n$ is a basis of $V$ for every basis $v_1, \dots, v_n$ of $V$.
+    \item $Tv_1, \dots, Tv_n$ is a basis of $V$ for some basis $v_1, \dots, v_n$ of $V$.
+  \end{enumerate}
+\end{exercise}
+
+\exerciseheader{3D}{4}
+\begin{exercise}{4}
+  Suppose $V$ is finite-dimensional and $\dim V > 1$. Prove that the set of noninvertible linear maps from $V$ to itself is not a subspace of $\mathcal{L}(V)$.
+\end{exercise}
+
+\exerciseheader{3D}{5}
+\begin{exercise}{5}
+  Suppose $V$ is finite-dimensional, $U$ is a subspace of $V$, and $S \in \mathcal{L}(U, V)$. Prove that there exists an invertible linear map $T$ from $V$ to itself such that $Tu = Su$ for every $u \in U$ if and only if $S$ is injective.
+\end{exercise}
+
+\exerciseheader{3D}{6}
+\begin{exercise}{6}
+  Suppose that $W$ is finite-dimensional and $S, T \in \mathcal{L}(V, W)$. Prove that $\operatorname{null} S = \operatorname{null} T$ if and only if there exists an invertible $E \in \mathcal{L}(W)$ such that $S = ET$.
+\end{exercise}
+
+\exerciseheader{3D}{7}
+\begin{exercise}{7}
+  Suppose that $V$ is finite-dimensional and $S, T \in \mathcal{L}(V, W)$. Prove that $\operatorname{range} S = \operatorname{range} T$ if and only if there exists an invertible $E \in \mathcal{L}(V)$ such that $S = TE$.
+\end{exercise}
+
+\exerciseheader{3D}{8}
+\begin{exercise}{8}
+  Suppose $V$ and $W$ are finite-dimensional and $S, T \in \mathcal{L}(V, W)$. Prove that there exist invertible $E_1 \in \mathcal{L}(V)$ and $E_2 \in \mathcal{L}(W)$ such that $S = E_2 T E_1$ if and only if $\dim \operatorname{null} S = \dim \operatorname{null} T$.
+\end{exercise}
+
+\exerciseheader{3D}{9}
+\begin{exercise}{9}
+  Suppose $V$ is finite-dimensional and $T\colon V \to W$ is a surjective linear map of $V$ onto $W$. Prove that there is a subspace $U$ of $V$ such that $T|_U$ is an isomorphism of $U$ onto $W$.
+
+  \textit{Here $T|_U$ means the function $T$ restricted to $U$. Thus $T|_U$ is the function whose domain is $U$, with $T|_U(u) = Tu$ for every $u \in U$.}
+\end{exercise}
+
+\exerciseheader{3D}{10}
+\begin{exercise}{10}
+  Suppose $V$ and $W$ are finite-dimensional and $U$ is a subspace of $V$. Let
+  \[
+    \mathcal{E} = \{T \in \mathcal{L}(V, W) : U \subseteq \operatorname{null} T\}.
+  \]
+  \begin{enumerate}[label=(\alph*)]
+    \item Show that $\mathcal{E}$ is a subspace of $\mathcal{L}(V, W)$.
+    \item Find a formula for $\dim \mathcal{E}$ in terms of $\dim V$, $\dim W$, and $\dim U$.
+  \end{enumerate}
+
+  \textit{Hint: Define $\Phi\colon \mathcal{L}(V, W) \to \mathcal{L}(U, W)$ by $\Phi(T) = T|_U$. What is $\operatorname{null} \Phi$? What is $\operatorname{range} \Phi$?}
+\end{exercise}
+
+\exerciseheader{3D}{11}
+\begin{exercise}{11}
+  Suppose $V$ is finite-dimensional and $S, T \in \mathcal{L}(V)$. Prove that
+  \[
+    ST \text{ is invertible} \iff S \text{ and } T \text{ are invertible}.
+  \]
+\end{exercise}
+
+\exerciseheader{3D}{12}
+\begin{exercise}{12}
+  Suppose $V$ is finite-dimensional and $S, T, U \in \mathcal{L}(V)$ and $STU = I$. Show that $T$ is invertible and that $T^{-1} = US$.
+\end{exercise}
+
+\exerciseheader{3D}{13}
+\begin{exercise}{13}
+  Show that the result in Exercise~12 can fail without the hypothesis that $V$ is finite-dimensional.
+\end{exercise}
+
+\exerciseheader{3D}{14}
+\begin{exercise}{14}
+  Prove or give a counterexample: If $V$ is a finite-dimensional vector space and $R, S, T \in \mathcal{L}(V)$ are such that $RST$ is surjective, then $S$ is injective.
+\end{exercise}
+
+\exerciseheader{3D}{15}
+\begin{exercise}{15}
+  Suppose $T \in \mathcal{L}(V)$ and $v_1, \dots, v_m$ is a list in $V$ such that $Tv_1, \dots, Tv_m$ spans $V$. Prove that $v_1, \dots, v_m$ spans $V$.
+\end{exercise}
+
+\exerciseheader{3D}{16}
+\begin{exercise}{16}
+  Prove that every linear map from $\F^{n,1}$ to $\F^{m,1}$ is given by a matrix multiplication. In other words, prove that if $T \in \mathcal{L}(\F^{n,1}, \F^{m,1})$, then there exists an $m$-by-$n$ matrix $A$ such that $Tx = Ax$ for every $x \in \F^{n,1}$.
+\end{exercise}
+
+\exerciseheader{3D}{17}
+\begin{exercise}{17}
+  Suppose $V$ is finite-dimensional and $S \in \mathcal{L}(V)$. Define $\mathcal{A} \in \mathcal{L}(\mathcal{L}(V))$ by
+  \[
+    \mathcal{A}(T) = ST
+  \]
+  for $T \in \mathcal{L}(V)$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Show that $\dim \operatorname{null} \mathcal{A} = (\dim V)(\dim \operatorname{null} S)$.
+    \item Show that $\dim \operatorname{range} \mathcal{A} = (\dim V)(\dim \operatorname{range} S)$.
+  \end{enumerate}
+\end{exercise}
+
+\exerciseheader{3D}{18}
+\begin{exercise}{18}
+  Show that $V$ and $\mathcal{L}(\F, V)$ are isomorphic vector spaces.
+\end{exercise}
+
+\exerciseheader{3D}{19}
+\begin{exercise}{19}
+  Suppose $V$ is finite-dimensional and $T \in \mathcal{L}(V)$. Prove that $T$ has the same matrix with respect to every basis of $V$ if and only if $T$ is a scalar multiple of the identity operator.
+\end{exercise}
+
+\exerciseheader{3D}{20}
+\begin{exercise}{20}
+  Suppose $q \in \mathcal{P}(\R)$. Prove that there exists a polynomial $p \in \mathcal{P}(\R)$ such that
+  \[
+    q(x) = (x^2 + x)p''(x) + 2xp'(x) + p(3)
+  \]
+  for all $x \in \R$.
+\end{exercise}
+
+\exerciseheader{3D}{21}
+\begin{exercise}{21}
+  Suppose $n$ is a positive integer and $A_{j,k} \in \F$ for all $j, k = 1, \dots, n$. Prove that the following are equivalent (note that in both parts below, the number of equations equals the number of variables).
+  \begin{enumerate}[label=(\alph*)]
+    \item The trivial solution $x_1 = \cdots = x_n = 0$ is the only solution to the homogeneous system of equations
+    \[
+      \sum_{k=1}^{n} A_{1,k}\,x_k = 0 \qquad \cdots \qquad \sum_{k=1}^{n} A_{n,k}\,x_k = 0.
+    \]
+    \item For every $c_1, \dots, c_n \in \F$, there exists a solution to the system of equations
+    \[
+      \sum_{k=1}^{n} A_{1,k}\,x_k = c_1 \qquad \cdots \qquad \sum_{k=1}^{n} A_{n,k}\,x_k = c_n.
+    \]
+  \end{enumerate}
+\end{exercise}
+
+\exerciseheader{3D}{22}
+\begin{exercise}{22}
+  Suppose $T \in \mathcal{L}(V)$ and $v_1, \dots, v_n$ is a basis of $V$. Prove that
+  \[
+    \mathcal{M}(T, (v_1, \dots, v_n)) \text{ is invertible} \iff T \text{ is invertible}.
+  \]
+\end{exercise}
+
+\exerciseheader{3D}{23}
+\begin{exercise}{23}
+  Suppose that $u_1, \dots, u_n$ and $v_1, \dots, v_n$ are bases of $V$. Let $T \in \mathcal{L}(V)$ be such that $Tv_k = u_k$ for each $k = 1, \dots, n$. Prove that
+  \[
+    \mathcal{M}(T, (v_1, \dots, v_n)) = \mathcal{M}(I, (u_1, \dots, u_n), (v_1, \dots, v_n)).
+  \]
+\end{exercise}
+
+\exerciseheader{3D}{24}
+\begin{exercise}{24}
+  Suppose $A$ and $B$ are square matrices of the same size and $AB = I$. Prove that $BA = I$.
+\end{exercise}
+
+\end{document}

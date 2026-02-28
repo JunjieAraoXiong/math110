@@ -1,0 +1,62 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{fancyhdr}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage{mathrsfs}
+
+% ── Color matching the PDF ──
+\definecolor{headercolor}{RGB}{0,128,128}
+
+% ── Bold math shortcuts ──
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\F}{\mathbf{F}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+
+% ── Page style ──
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{Edward Frenkel}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Exercise header command ──
+% \exerciseheader{section}{number} produces the teal header line
+\newcommand{\exerciseheader}[2]{%
+  \newpage
+  \fancyhead[L]{\textcolor{headercolor}{Instructor's Solutions Manual, Section #1}}%
+  \fancyhead[R]{\textcolor{headercolor}{Exercise #2}}%
+  \renewcommand{\headrulewidth}{0.4pt}%
+  \renewcommand{\headrule}{\hbox to\headwidth{%
+    \color{headercolor}\leaders\hrule height \headrulewidth\hfill}}%
+}
+
+% ── Exercise environment ──
+\newcounter{exnum}
+\newenvironment{exercise}[1]{%
+  \setcounter{exnum}{#1}%
+  \par\medskip\noindent\textbf{\theexnum}\quad\ignorespaces
+}{\par\medskip}
+
+% ── Solution environment ──
+\newenvironment{solution}{%
+  \par\medskip\noindent\textcolor{headercolor}{\textsc{solution}}\quad\ignorespaces
+}{\par\medskip}
+
+% ── Comment environment ──
+\newenvironment{comment}{%
+  \par\medskip\noindent\textcolor{headercolor}{\textsc{comment}}\quad\ignorespaces
+}{\par\medskip}
+
+\begin{document}
+
+\input{section-3c}
+\input{section-3f-1to18}
+
+\end{document}

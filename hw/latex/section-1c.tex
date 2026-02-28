@@ -1,0 +1,393 @@
+% ── Section 1C ──
+
+\exerciseheader{1C}{1}
+\begin{exercise}{1}
+  For each of the following subsets of $\F^3$, determine whether it is a subspace of $\F^3$.
+  \begin{enumerate}[label=(\alph*)]
+    \item $\{(x_1, x_2, x_3) \in \F^3 : x_1 + 2x_2 + 3x_3 = 0\}$
+    \item $\{(x_1, x_2, x_3) \in \F^3 : x_1 + 2x_2 + 3x_3 = 4\}$
+    \item $\{(x_1, x_2, x_3) \in \F^3 : x_1 x_2 x_3 = 0\}$
+    \item $\{(x_1, x_2, x_3) \in \F^3 : x_1 = 5x_3\}$
+  \end{enumerate}
+\end{exercise}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item Let
+      \[
+        U = \{(x_1, x_2, x_3) \in \F^3 : x_1 + 2x_2 + 3x_3 = 0\}.
+      \]
+      To show that $U$ is a subspace of $\F^3$, first note that $(0, 0, 0) \in U$, so $U \neq \emptyset$.
+      Next, suppose $(x_1, x_2, x_3) \in U$ and $(y_1, y_2, y_3) \in U$. Then
+      \begin{align*}
+        x_1 + 2x_2 + 3x_3 &= 0 \\
+        y_1 + 2y_2 + 3y_3 &= 0.
+      \end{align*}
+      Adding these equations, we have
+      \[
+        (x_1 + y_1) + 2(x_2 + y_2) + 3(x_3 + y_3) = 0,
+      \]
+      which means that $(x_1 + y_1, x_2 + y_2, x_3 + y_3) \in U$. Thus $U$ is closed under addition.
+      Next, suppose $(x_1, x_2, x_3) \in U$ and $a \in \F$. Then
+      \[
+        x_1 + 2x_2 + 3x_3 = 0.
+      \]
+      Multiplying this equation by $a$, we have
+      \[
+        (ax_1) + 2(ax_2) + 3(ax_3) = 0,
+      \]
+      which means that $(ax_1, ax_2, ax_3) \in U$. Thus $U$ is closed under scalar multiplication.
+      Because $U$ is a nonempty subset of $\F^3$ that is closed under addition and scalar multiplication, $U$ is a subspace of $\F^3$.
+
+    \item Let
+      \[
+        U = \{(x_1, x_2, x_3) \in \F^3 : x_1 + 2x_2 + 3x_3 = 4\}.
+      \]
+      Then $(4, 0, 0) \in U$ but $0(4, 0, 0)$, which equals $(0, 0, 0)$, is not in $U$. Thus $U$ is not closed under scalar multiplication. Thus $U$ is not a subspace of $\F^3$.
+
+    \item Let
+      \[
+        U = \{(x_1, x_2, x_3) \in \F^3 : x_1 x_2 x_3 = 0\}.
+      \]
+      Then $(1, 1, 0) \in U$ and $(0, 0, 1) \in U$, but the sum of these two vectors, which equals $(1, 1, 1)$, is not in $U$. Thus $U$ is not closed under addition. Thus $U$ is not a subspace of $\F^3$.
+
+    \item Let
+      \[
+        U = \{(x_1, x_2, x_3) \in \F^3 : x_1 = 5x_3\}.
+      \]
+      To show that $U$ is a subspace of $\F^3$, first note that $(0, 0, 0) \in U$, so $U$ is nonempty.
+      Next, suppose $(x_1, x_2, x_3) \in U$ and $(y_1, y_2, y_3) \in U$. Then
+      \begin{align*}
+        x_1 &= 5x_3 \\
+        y_1 &= 5y_3.
+      \end{align*}
+      Adding these equations, we have
+      \[
+        x_1 + y_1 = 5(x_3 + y_3),
+      \]
+      which means that $(x_1 + y_1, x_2 + y_2, x_3 + y_3) \in U$. Thus $U$ is closed under addition.
+      Next, suppose $(x_1, x_2, x_3) \in U$ and $a \in \F$. Then
+      \[
+        x_1 = 5x_3.
+      \]
+      Multiplying this equation by $a$, we have
+      \[
+        ax_1 = 5(ax_3),
+      \]
+      which means that $(ax_1, ax_2, ax_3) \in U$. Thus $U$ is closed under scalar multiplication.
+      Because $U$ is a nonempty subset of $\F^3$ that is closed under addition and scalar multiplication, $U$ is a subspace of $\F^3$.
+  \end{enumerate}
+\end{solution}
+
+\exerciseheader{1C}{3}
+\begin{exercise}{3}
+  Show that the set of differentiable real-valued functions $f$ on the interval $(-4, 4)$ such that $f'(-1) = 3f(2)$ is a subspace of $\R^{(-4,4)}$.
+\end{exercise}
+\begin{solution}
+  Let
+  \[
+    U = \{f \in \R^{(-4,4)} : f \text{ is differentiable and } f'(-1) = 3f(2)\}.
+  \]
+  Clearly the $0$ function is in $U$.
+
+  The sum of any two differentiable functions is differentiable, as is every constant multiple of any differentiable function.
+
+  Suppose $f, g \in U$ and $c \in \R$. Then
+  \begin{align*}
+    (f + g)'(-1) &= f'(-1) + g'(-1) \\
+                  &= 3f(2) + 3g(2) \\
+                  &= 3(f + g)(2)
+  \end{align*}
+  and
+  \begin{align*}
+    (cf)'(-1) &= cf'(-1) \\
+              &= 3cf(2) \\
+              &= 3(cf)(2).
+  \end{align*}
+  Thus $f + g \in U$ and $cf \in U$.
+
+  Thus $U$ satisfies the three conditions in 1.34 and hence $U$ is a subspace of $\R^{(-4,4)}$.
+\end{solution}
+
+\exerciseheader{1C}{6}
+\begin{exercise}{6}
+  \begin{enumerate}[label=(\alph*)]
+    \item Is $\{(a, b, c) \in \R^3 : a^3 = b^3\}$ a subspace of $\R^3$?
+    \item Is $\{(a, b, c) \in \C^3 : a^3 = b^3\}$ a subspace of $\C^3$?
+  \end{enumerate}
+\end{exercise}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item If $a, b$ are real numbers such that $a^3 = b^3$, then $a = b$. Thus $\{(a, b, c) \in \R^3 : a^3 = b^3\}$ equals $\{(a, b, c) \in \R^3 : a = b\}$, which is a subspace of $\R^3$.
+
+    \item Let
+      \[
+        U = \{(a, b, c) \in \C^3 : a^3 = b^3\}.
+      \]
+      Then $(1, 1, 0) \in U$ and $(2, -1 + \sqrt{3}\,i, 0) \in U$, as is easy to verify. It is also easy to verify that the sum of these two vectors, which equals $(3, \sqrt{3}\,i, 0)$, is not in $U$. Thus $U$ is not a subspace of $\C^3$.
+  \end{enumerate}
+\end{solution}
+
+\exerciseheader{1C}{7}
+\begin{exercise}{7}
+  Prove or give a counterexample: If $U$ is a nonempty subset of $\R^2$ such that $U$ is closed under addition and under taking additive inverses (meaning $-u \in U$ whenever $u \in U$), then $U$ is a subspace of $\R^2$.
+\end{exercise}
+\begin{solution}
+  To construct a counterexample, let $U = \{(j, k) : j \text{ and } k \text{ are integers}\}$. Then clearly $U$ is closed under addition and under taking additive inverses. However, $(1, 1) \in U$ but $\frac{1}{2}(1, 1) \notin U$, so $U$ is not closed under scalar multiplication. Thus $U$ is not a subspace of $\R^2$.
+\end{solution}
+
+\exerciseheader{1C}{8}
+\begin{exercise}{8}
+  Give an example of a nonempty subset $U$ of $\R^2$ such that $U$ is closed under scalar multiplication, but $U$ is not a subspace of $\R^2$.
+\end{exercise}
+\begin{solution}
+  Let $U$ be the union of the two coordinate axes in $\R^2$. More precisely, let
+  \[
+    U = \{(x, 0) : x \in \R\} \cup \{(0, y) : y \in \R\}.
+  \]
+  Then clearly $U$ is closed under scalar multiplication. However, $(1, 0)$ and $(0, 1)$ are in $U$ but their sum, which equals $(1, 1)$, is not in $U$, so $U$ is not closed under addition. Thus $U$ is not a subspace of $\R^2$.
+
+  Of course there are also many other examples.
+\end{solution}
+
+\exerciseheader{1C}{9}
+\begin{exercise}{9}
+  A function $f\colon \R \to \R$ is called \textit{periodic} if there exists a positive number $p$ such that $f(x) = f(x + p)$ for all $x \in \R$. Is the set of periodic functions from $\R$ to $\R$ a subspace of $\R^\R$? Explain.
+\end{exercise}
+\begin{solution}
+  Let $\Z$ denote the set of integers. Define $f, g\colon \R \to \R$ by
+  \[
+    f(x) = \begin{cases} 0 & \text{if } x \notin \Z, \\ 1 & \text{if } x \in \Z, \end{cases}
+    \quad \text{and} \quad
+    g(x) = \begin{cases} 0 & \text{if } x \notin \sqrt{2}\Z, \\ 1 & \text{if } x \in \sqrt{2}\Z \end{cases}
+  \]
+  for $x \in \R$. Then $f$ and $g$ are periodic functions (take $p = 1$ for $f$ and $p = \sqrt{2}$ for $g$).
+
+  Note that $\Z \cap \sqrt{2}\Z = \{0\}$ because $\sqrt{2}$ is irrational. Thus for each $x \in \R$,
+  \[
+    (f + g)(x) = 2 \quad \text{if and only if} \quad x = 0.
+  \]
+  Hence if $p$ is a positive number, then $(f + g)(0) \neq (f + g)(0 + p)$. Thus $f + g$ is not periodic. Thus the set of periodic functions is not closed under addition and hence is not a subspace of $\R^\R$.
+\end{solution}
+
+\exerciseheader{1C}{10}
+\begin{exercise}{10}
+  Suppose $V_1$ and $V_2$ are subspaces of $V$. Prove that the intersection $V_1 \cap V_2$ is a subspace of $V$.
+\end{exercise}
+\begin{solution}
+  The additive identity $0$ is in $V_1$ and in $V_2$. Thus $0 \in V_1 \cap V_2$.
+
+  Suppose $u, v \in V_1 \cap V_2$. Then $u, v \in V_1$ and $u, v \in V_2$. Thus $u + v \in V_1$ and $u + v \in V_2$. Hence $u + v \in V_1 \cap V_2$. Thus $V_1 \cap V_2$ is closed under addition.
+
+  Suppose $u \in V_1 \cap V_2$ and $a \in \F$. Then $u \in V_1$ and $u \in V_2$. Thus $au \in V_1$ and $au \in V_2$. Hence $au \in V_1 \cap V_2$. Thus $V_1 \cap V_2$ is closed under scalar multiplication.
+
+  Thus $V_1 \cap V_2$ satisfies the three conditions of 1.34 and hence is a subspace of $V$.
+\end{solution}
+
+\exerciseheader{1C}{11}
+\begin{exercise}{11}
+  Prove that the intersection of every collection of subspaces of $V$ is a subspace of $V$.
+\end{exercise}
+\begin{solution}
+  Suppose $\{V_\alpha\}_{\alpha \in \Gamma}$ is a collection of subspaces of $V$; here $\Gamma$ is an arbitrary index set. We need to prove that $\bigcap_{\alpha \in \Gamma} V_\alpha$, which equals the set of vectors that are in $V_\alpha$ for every $\alpha \in \Gamma$, is a subspace of $V$.
+
+  The additive identity $0$ is in $V_\alpha$ for every $\alpha \in \Gamma$ (because each $V_\alpha$ is a subspace of $V$). Thus $0 \in \bigcap_{\alpha \in \Gamma} V_\alpha$. In particular, $\bigcap_{\alpha \in \Gamma} V_\alpha$ is a nonempty subset of $V$.
+
+  Suppose $u, v \in \bigcap_{\alpha \in \Gamma} V_\alpha$. Then $u, v \in V_\alpha$ for every $\alpha \in \Gamma$. Thus $u + v \in V_\alpha$ for every $\alpha \in \Gamma$ (because each $V_\alpha$ is a subspace of $V$). Thus $u + v \in \bigcap_{\alpha \in \Gamma} V_\alpha$. Thus $\bigcap_{\alpha \in \Gamma} V_\alpha$ is closed under addition.
+
+  Suppose $u \in \bigcap_{\alpha \in \Gamma} V_\alpha$ and $a \in \F$. Then $u \in V_\alpha$ for every $\alpha \in \Gamma$. Thus $au \in V_\alpha$ for every $\alpha \in \Gamma$ (because each $V_\alpha$ is a subspace of $V$). Thus $au \in \bigcap_{\alpha \in \Gamma} V_\alpha$. Thus $\bigcap_{\alpha \in \Gamma} V_\alpha$ is closed under scalar multiplication.
+
+  Because $\bigcap_{\alpha \in \Gamma} V_\alpha$ is a nonempty subset of $V$ that is closed under addition and scalar multiplication, $\bigcap_{\alpha \in \Gamma} V_\alpha$ is a subspace of $V$.
+\end{solution}
+\begin{comment}
+  For many students, the hardest part of this exercise is understanding the meaning of an arbitrary intersection of sets. Instructors who do not want to deal with this issue should change the exercise to ``Prove that the intersection of every finite collection of subspaces of $V$ is a subspace of $V$.'' Many students will then prove that the intersection of two subspaces of $V$ is a subspace of $V$ and use induction to get the result for finite collections of subspaces.
+\end{comment}
+
+\exerciseheader{1C}{12}
+\begin{exercise}{12}
+  Prove that the union of two subspaces of $V$ is a subspace of $V$ if and only if one of the subspaces is contained in the other.
+\end{exercise}
+\begin{solution}
+  Suppose $U$ and $W$ are subspaces of $V$ such that $U \cup W$ is a subspace of $V$. We will use proof by contradiction to show that $U \subseteq W$ or $W \subseteq U$. Suppose our desired result is false. Then $U \not\subset W$ and $W \not\subset U$. This means that there exists $u \in U$ such that $u \notin W$ and there exists $w \in W$ such that $w \notin U$. Because $u$ and $w$ are both in $U \cup W$, which is a subspace of $V$, we can conclude that $u + w \in U \cup W$. Thus $u + w \in U$ or $u + w \in W$.
+
+  First consider the possibility that $u + w \in U$. In this case $w$, which equals $(u + w) + (-u)$, would be in the sum of two elements of $U$. Hence we would have $w \in U$, contradicting our assumption that $w \notin U$.
+
+  Now consider the possibility that $u + w \in W$. In this case $u$, which equals $(u + w) + (-w)$, would be in the sum of two elements of $W$. Hence we would have $u \in W$, contradicting our assumption that $u \notin W$.
+
+  The two paragraphs above show that $u + w \notin U$ and $u + w \notin W$, contradicting the final sentence of the first paragraph of this solution. This contradiction completes our proof that $U \subseteq W$ or $W \subseteq U$.
+
+  The other direction of this exercise is trivial: if we have two subspaces of $V$, one of which is contained in the other, then the union of these two subspaces equals the larger of them, which is a subspace of $V$.
+\end{solution}
+
+\exerciseheader{1C}{13}
+\begin{exercise}{13}
+  Prove that the union of three subspaces of $V$ is a subspace of $V$ if and only if one of the subspaces contains the other two.
+
+  \textit{This exercise is surprisingly harder than Exercise 12, possibly because this exercise is not true if we replace\/ $\F$ with a field containing only two elements.}
+\end{exercise}
+\begin{solution}
+  One direction of this exercise is trivial: if we have three subspaces of $V$, one of which contains the other two, then the union of these three subspaces equals the larger of them, which is a subspace of $V$.
+
+  To prove the other direction, suppose $V_1$, $V_2$, $V_3$ are subspaces of $V$ such that $V_1 \cup V_2 \cup V_3$ is a subspace of $V$. We want to prove that one of these three subspaces contains the other two.
+
+  First consider the case $V_1 \subseteq V_2 \cup V_3$. Then $V_2 \cup V_3$ equals $V_1 \cup V_2 \cup V_3$, which is a subspace of $V$. The Exercise 12 now implies that $V_2 \subseteq V_3$ (and thus also $V_1 \subseteq V_3$) or $V_3 \subseteq V_2$ (and thus also $V_1 \subseteq V_2$). Either way, we have our desired conclusion that one of the subspaces $V_1$, $V_2$, $V_3$ contains the other two.
+
+  Now consider the case $V_1 \not\subset V_2 \cup V_3$. Let $v \in V_1$ be such that $v \notin V_2 \cup V_3$. Suppose $V_2 \not\subset V_1$. Let $w \in V_2$ be such that $w \notin V_1$.
+
+  For each $\lambda \in \F$, the vector $\lambda v + w$ is not in $V_1$ (because otherwise we would have $w \in V_1$). However, for each $\lambda \in \F$, the vector $\lambda v + w$ is in the subspace $V_1 \cup V_2 \cup V_3$ and thus is in $V_2 \cup V_3$. Thinking about three distinct values of $\lambda$, for each of which $\lambda v + w$ is in $V_2 \cup V_3$, we see that there are two distinct numbers $\lambda_1, \lambda_2 \in \F$ such that
+  \[
+    \lambda_1 v + w \in V_2 \quad \text{and} \quad \lambda_2 v + w \in V_2
+  \]
+  or
+  \[
+    \lambda_1 v + w \in V_3 \quad \text{and} \quad \lambda_2 v + w \in V_3.
+  \]
+  Subtracting the two vectors in the first case above, we have $(\lambda_1 - \lambda_2)v \in V_2$, which implies that $v \in V_2$, which is a contradiction. Subtracting the two vectors in the second case above, we have $(\lambda_1 - \lambda_2)v \in V_3$, which implies that $v \in V_3$, which is a contradiction. Either way, we have a contradiction to our assumption that $V_2 \not\subset V_1$. Thus $V_2 \subseteq V_1$.
+
+  Similarly, $V_3 \subseteq V_1$. Thus we have shown that one of the subspaces contains the other two, as desired.
+\end{solution}
+
+\exerciseheader{1C}{14}
+\begin{exercise}{14}
+  Suppose
+  \[
+    U = \{(x, -x, 2x) \in \F^3 : x \in \F\} \quad \text{and} \quad W = \{(x, x, 2x) \in \F^3 : x \in \F\}.
+  \]
+  Describe $U + W$ using symbols, and also give a description of $U + W$ that uses no symbols.
+\end{exercise}
+\begin{solution}
+  A typical element of $U$ is $(a, -a, 2a)$, where $a \in \F$. A typical element of $W$ is $(b, b, 2b)$, where $b \in \F$. Thus
+  \[
+    U + W = \{(a + b, b - a, 2a + 2b) \in \F^3 : a, b \in \F\}.
+  \]
+  The equation above shows that the third coordinate of each element of $U + W$ equals twice the first coordinate. Thus
+  \[
+    \tag{$*$} U + W \subseteq \{(x, y, 2x) \in \F^3 : x, y, z \in \F\}.
+  \]
+  Conversely, suppose $x, y \in \F$. Then
+  \[
+    (x, y, 2x) = \Bigl(\frac{x - y}{2}, \frac{y - x}{2}, x - y\Bigr) + \Bigl(\frac{x + y}{2}, \frac{x + y}{2}, x + y\Bigr),
+  \]
+  where the first vector on the right is in $U$ and the second vector on the right is in $W$. Thus $(x, y, 2x) \in U + W$. Hence
+  \[
+    \tag{$**$} \{(x, y, 2x) \in \F^3 : x, y \in \F\} \subseteq U + W
+  \]
+  Now $(*)$ and $(**)$ imply that
+  \[
+    U + W = \{(x, y, 2x) \in \F^3 : x, y, z \in \F\}.
+  \]
+  In other words, $U + W$ consists of the vectors in $\F^3$ whose third coordinate equals twice the first coordinate.
+\end{solution}
+
+\exerciseheader{1C}{15}
+\begin{exercise}{15}
+  Suppose $U$ is a subspace of $V$. What is $U + U$?
+\end{exercise}
+\begin{solution}
+  By definition, $U + U = \{u + v : u, v \in U\}$. Clearly $U \subseteq U + U$ because if $u \in U$, then $u$ equals $u + 0$, which expresses $u$ as a sum of two elements of $U$. Conversely, $U + U \subseteq U$ because the sum of two elements of $U$ is an element of $U$ (because $U$ is a subspace of $V$). Conclusion: $U + U = U$.
+\end{solution}
+
+\exerciseheader{1C}{19}
+\begin{exercise}{19}
+  Prove or give a counterexample: If $V_1$, $V_2$, $U$ are subspaces of $V$ such that
+  \[
+    V_1 + U = V_2 + U,
+  \]
+  then $V_1 = V_2$.
+\end{exercise}
+\begin{solution}
+  The statement above is false. To construct a counterexample, choose $V$ to be any nonzero vector space. Let $V_1 = \{0\}$, $V_2 = V$, and $U = V$. Then $V_1 + U$ and $V_2 + U$ are both equal to $V$, but $V_1 \neq V_2$.
+\end{solution}
+
+\exerciseheader{1C}{20}
+\begin{exercise}{20}
+  Suppose
+  \[
+    U = \{(x, x, y, y) \in \F^4 : x, y \in \F\}.
+  \]
+  Find a subspace $W$ of $\F^4$ such that $\F^4 = U \oplus W$.
+\end{exercise}
+\begin{solution}
+  Let
+  \[
+    W = \{(a, 0, b, 0) \in \F^4 : a, b \in \F\}.
+  \]
+  Then $\F^4 = U \oplus W$, as is easy to verify.
+\end{solution}
+
+\exerciseheader{1C}{21}
+\begin{exercise}{21}
+  Suppose
+  \[
+    U = \{(x, y, x + y, x - y, 2x) \in \F^5 : x, y \in \F\}.
+  \]
+  Find a subspace $W$ of $\F^5$ such that $\F^5 = U \oplus W$.
+\end{exercise}
+\begin{solution}
+  Let
+  \[
+    W = \{(0, 0, a, b, c) \in \F^5 : a, b, c \in \F\}.
+  \]
+  Then $\F^5 = U \oplus W$, as is easy to verify.
+\end{solution}
+
+\exerciseheader{1C}{22}
+\begin{exercise}{22}
+  Suppose
+  \[
+    U = \{(x, y, x + y, x - y, 2x) \in \F^5 : x, y \in \F\}.
+  \]
+  Find three subspaces $W_1$, $W_2$, $W_3$ of $\F^5$, none of which equals $\{0\}$, such that $\F^5 = U \oplus W_1 \oplus W_2 \oplus W_3$.
+\end{exercise}
+\begin{solution}
+  Let
+  \begin{align*}
+    W_1 &= \{(0, 0, a, 0, 0) \in \F^5 : a \in \F\}, \\
+    W_2 &= \{(0, 0, 0, b, 0) \in \F^5 : b \in \F\}, \\
+    W_3 &= \{(0, 0, 0, 0, c) \in \F^5 : c \in \F\}.
+  \end{align*}
+  Then $\F^5 = U \oplus W_1 \oplus W_2 \oplus W_3$, as is easy to verify.
+\end{solution}
+
+\exerciseheader{1C}{23}
+\begin{exercise}{23}
+  Prove or give a counterexample: If $V_1$, $V_2$, $U$ are subspaces of $V$ such that
+  \[
+    V = V_1 \oplus U \quad \text{and} \quad V = V_2 \oplus U,
+  \]
+  then $V_1 = V_2$.
+
+  \textit{Hint: When trying to discover whether a conjecture in linear algebra is true or false, it is often useful to start by experimenting in\/ $\F^2$.}
+\end{exercise}
+\begin{solution}
+  To construct a counterexample for the assertion above, let $V = \F^2$, let $V_1 = \{(x, 0) : x \in \F\}$, let $V_2 = \{(0, y) : y \in \F\}$, and let $U = \{(z, z) : z \in \F\}$. Then
+  \[
+    \F^2 = V_1 \oplus U \quad \text{and} \quad \F^2 = V_2 \oplus U,
+  \]
+  as is easy to verify, but $V_1 \neq V_2$.
+\end{solution}
+
+\exerciseheader{1C}{24}
+\begin{exercise}{24}
+  A function $f\colon \R \to \R$ is called \textit{even} if
+  \[
+    f(-x) = f(x)
+  \]
+  for all $x \in \R$. A function $f\colon \R \to \R$ is called \textit{odd} if
+  \[
+    f(-x) = -f(x)
+  \]
+  for all $x \in \R$. Let $V_\mathrm{e}$ denote the set of real-valued even functions on $\R$ and let $V_\mathrm{o}$ denote the set of real-valued odd functions on $\R$. Show that $\R^\R = V_\mathrm{e} \oplus V_\mathrm{o}$.
+\end{exercise}
+\begin{solution}
+  Suppose $f \in V_\mathrm{e} \cap V_\mathrm{o}$. Then for all $x \in \R$ we have
+  \[
+    f(x) = f(-x) = -f(x),
+  \]
+  where the first equality holds because $f$ is even and the second equality holds because $f$ is odd. The equation above implies that $f$ is the $0$ function. Thus by 1.46, $V_\mathrm{e} + V_\mathrm{o}$ is a direct sum.
+
+  Suppose $g \in \R^\R$. Then
+  \[
+    g(x) = \underbrace{\frac{g(x) + g(-x)}{2}}_{g_e(x)} + \underbrace{\frac{g(x) - g(-x)}{2}}_{g_o(x)}
+  \]
+  for every $x \in \R$. With functions $g_e$ and $g_o$ defined as in the equation above, we have $g = g_e + g_o$, where $g_e \in V_\mathrm{e}$ and $g_o \in V_\mathrm{o}$. Thus $\R^\R = V_\mathrm{e} \oplus V_\mathrm{o}$.
+\end{solution}

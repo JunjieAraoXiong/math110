@@ -1,0 +1,187 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{fancyhdr}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage{microtype}
+
+% ── Color matching the PDF ──
+\definecolor{headercolor}{RGB}{0,128,128}
+
+% ── Bold math shortcuts ──
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\F}{\mathbf{F}}
+\newcommand{\Z}{\mathbf{Z}}
+
+% ── Page style ──
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{Edward Frenkel}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Exercise header command ──
+% \exerciseheader{section}{number} produces the teal header line
+\newcommand{\exerciseheader}[2]{%
+  \newpage
+  \fancyhead[L]{\textcolor{headercolor}{Instructor's Solutions Manual, Section #1}}%
+  \fancyhead[R]{\textcolor{headercolor}{Exercise #2}}%
+  \renewcommand{\headrulewidth}{0.4pt}%
+  \renewcommand{\headrule}{\hbox to\headwidth{%
+    \color{headercolor}\leaders\hrule height \headrulewidth\hfill}}%
+}
+
+% ── Exercise environment ──
+\newcounter{exnum}
+\newenvironment{exercise}[1]{%
+  \setcounter{exnum}{#1}%
+  \par\medskip\noindent\textbf{\theexnum}\quad\ignorespaces
+}{\par\medskip}
+
+\begin{document}
+
+% ── Section 3F ──
+
+\exerciseheader{3F}{19}
+\begin{exercise}{19}
+  Suppose $U \subseteq V$. Explain why
+  \[
+    U^0 = \{\varphi \in V' : U \subseteq \operatorname{null} \varphi\}.
+  \]
+\end{exercise}
+
+\exerciseheader{3F}{20}
+\begin{exercise}{20}
+  Suppose $V$ is finite-dimensional and $U$ is a subspace of $V$. Show that
+  \[
+    U = \{v \in V : \varphi(v) = 0 \text{ for every } \varphi \in U^0\}.
+  \]
+\end{exercise}
+
+\exerciseheader{3F}{21}
+\begin{exercise}{21}
+  Suppose $V$ is finite-dimensional and $U$ and $W$ are subspaces of $V$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Prove that $W^0 \subseteq U^0$ if and only if $U \subseteq W$.
+    \item Prove that $W^0 = U^0$ if and only if $U = W$.
+  \end{enumerate}
+\end{exercise}
+
+\exerciseheader{3F}{22}
+\begin{exercise}{22}
+  Suppose $V$ is finite-dimensional and $U$ and $W$ are subspaces of $V$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Show that $(U + W)^0 = U^0 \cap W^0$.
+    \item Show that $(U \cap W)^0 = U^0 + W^0$.
+  \end{enumerate}
+\end{exercise}
+
+\exerciseheader{3F}{23}
+\begin{exercise}{23}
+  Suppose $V$ is finite-dimensional and $\varphi_1, \ldots, \varphi_m \in V'$. Prove that the following three sets are equal to each other.
+  \begin{enumerate}[label=(\alph*)]
+    \item $\operatorname{span}(\varphi_1, \ldots, \varphi_m)$
+    \item $\bigl((\operatorname{null} \varphi_1) \cap \cdots \cap (\operatorname{null} \varphi_m)\bigr)^0$
+    \item $\{\varphi \in V' : (\operatorname{null} \varphi_1) \cap \cdots \cap (\operatorname{null} \varphi_m) \subseteq \operatorname{null} \varphi\}$
+  \end{enumerate}
+\end{exercise}
+
+\exerciseheader{3F}{24}
+\begin{exercise}{24}
+  Suppose $V$ is finite-dimensional and $v_1, \ldots, v_m \in V$. Define a linear map $\Gamma \colon V' \to \F^m$ by $\Gamma(\varphi) = \bigl(\varphi(v_1), \ldots, \varphi(v_m)\bigr)$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Prove that $v_1, \ldots, v_m$ spans $V$ if and only if $\Gamma$ is injective.
+    \item Prove that $v_1, \ldots, v_m$ is linearly independent if and only if $\Gamma$ is surjective.
+  \end{enumerate}
+\end{exercise}
+
+\exerciseheader{3F}{25}
+\begin{exercise}{25}
+  Suppose $V$ is finite-dimensional and $\varphi_1, \ldots, \varphi_m \in V'$. Define a linear map $\Gamma \colon V \to \F^m$ by $\Gamma(v) = \bigl(\varphi_1(v), \ldots, \varphi_m(v)\bigr)$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Prove that $\varphi_1, \ldots, \varphi_m$ spans $V'$ if and only if $\Gamma$ is injective.
+    \item Prove that $\varphi_1, \ldots, \varphi_m$ is linearly independent if and only if $\Gamma$ is surjective.
+  \end{enumerate}
+\end{exercise}
+
+\exerciseheader{3F}{26}
+\begin{exercise}{26}
+  Suppose $V$ is finite-dimensional and $\Omega$ is a subspace of $V'$. Prove that
+  \[
+    \Omega = \{v \in V : \varphi(v) = 0 \text{ for every } \varphi \in \Omega\}^0.
+  \]
+\end{exercise}
+
+\exerciseheader{3F}{27}
+\begin{exercise}{27}
+  Suppose $T \in \mathcal{L}\bigl(\mathcal{P}_5(\R)\bigr)$ and $\operatorname{null} T' = \operatorname{span}(\varphi)$, where $\varphi$ is the linear functional on $\mathcal{P}_5(\R)$ defined by $\varphi(p) = p(8)$. Prove that
+  \[
+    \operatorname{range} T = \{p \in \mathcal{P}_5(\R) : p(8) = 0\}.
+  \]
+\end{exercise}
+
+\exerciseheader{3F}{28}
+\begin{exercise}{28}
+  Suppose $V$ is finite-dimensional and $\varphi_1, \ldots, \varphi_m$ is a linearly independent list in $V'$. Prove that
+  \[
+    \dim\bigl((\operatorname{null} \varphi_1) \cap \cdots \cap (\operatorname{null} \varphi_m)\bigr) = (\dim V) - m.
+  \]
+\end{exercise}
+
+\exerciseheader{3F}{29}
+\begin{exercise}{29}
+  Suppose $V$ and $W$ are finite-dimensional and $T \in \mathcal{L}(V, W)$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Prove that if $\varphi \in W'$ and $\operatorname{null} T' = \operatorname{span}(\varphi)$, then $\operatorname{range} T = \operatorname{null} \varphi$.
+    \item Prove that if $\psi \in V'$ and $\operatorname{range} T' = \operatorname{span}(\psi)$, then $\operatorname{null} T = \operatorname{null} \psi$.
+  \end{enumerate}
+\end{exercise}
+
+\exerciseheader{3F}{30}
+\begin{exercise}{30}
+  Suppose $V$ is finite-dimensional and $\varphi_1, \ldots, \varphi_n$ is a basis of $V'$. Show that there exists a basis of $V$ whose dual basis is $\varphi_1, \ldots, \varphi_n$.
+\end{exercise}
+
+\exerciseheader{3F}{31}
+\begin{exercise}{31}
+  Suppose $U$ is a subspace of $V$. Let $i \colon U \to V$ be the inclusion map defined by $i(u) = u$. Thus $i' \in \mathcal{L}(V', U')$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Show that $\operatorname{null} i' = U^0$.
+    \item Prove that if $V$ is finite-dimensional, then $\operatorname{range} i' = U'$.
+    \item Prove that if $V$ is finite-dimensional, then $\tilde{\imath}'$ is an isomorphism from $V'/U^0$ onto $U'$.
+  \end{enumerate}
+
+  \textit{The isomorphism in (c) is natural in that it does not depend on a choice of basis in either vector space.}
+\end{exercise}
+
+\exerciseheader{3F}{32}
+\begin{exercise}{32}
+  The \textit{double dual space} of $V$, denoted by $V''$, is defined to be the dual space of $V'$. In other words, $V'' = (V')'$. Define $\Lambda \colon V \to V''$ by
+  \[
+    (\Lambda v)(\varphi) = \varphi(v)
+  \]
+  for each $v \in V$ and each $\varphi \in V'$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Show that $\Lambda$ is a linear map from $V$ to $V''$.
+    \item Show that if $T \in \mathcal{L}(V)$, then $T'' \circ \Lambda = \Lambda \circ T$, where $T'' = (T')'$.
+    \item Show that if $V$ is finite-dimensional, then $\Lambda$ is an isomorphism from $V$ onto $V''$.
+  \end{enumerate}
+
+  \textit{Suppose $V$ is finite-dimensional. Then $V$ and $V'$ are isomorphic, but finding an isomorphism from $V$ onto $V'$ generally requires choosing a basis of $V$. In contrast, the isomorphism $\Lambda$ from $V$ onto $V''$ does not require a choice of basis and thus is considered more natural.}
+\end{exercise}
+
+\exerciseheader{3F}{33}
+\begin{exercise}{33}
+  Suppose $U$ is a subspace of $V$. Let $\pi \colon V \to V/U$ be the usual quotient map. Thus $\pi' \in \mathcal{L}\bigl((V/U)', V'\bigr)$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Show that $\pi'$ is injective.
+    \item Show that $\operatorname{range} \pi' = U^0$.
+    \item Conclude that $\pi'$ is an isomorphism from $(V/U)'$ onto $U^0$.
+  \end{enumerate}
+
+  \textit{The isomorphism in (c) is natural in that it does not depend on a choice of basis in either vector space. In fact, there is no assumption here that any of these vector spaces are finite-dimensional.}
+\end{exercise}
+
+\end{document}

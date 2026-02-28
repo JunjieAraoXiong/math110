@@ -1,0 +1,479 @@
+% ── Section 3F ──
+
+\exerciseheader{3F}{19}
+\begin{exercise}{19}
+  Suppose $U \subseteq V$. Explain why
+  \[
+    U^0 = \{\varphi \in V' : U \subseteq \operatorname{null} \varphi\}.
+  \]
+\end{exercise}
+\begin{solution}
+  By definition,
+  \[
+    U^0 = \{\varphi \in V' : \varphi(u) = 0 \text{ for all } u \in U\}.
+  \]
+  However, $\varphi(u) = 0$ for all $u \in U$ if and only if $U \subseteq \operatorname{null} \varphi$. Thus
+  \[
+    U^0 = \{\varphi \in V' : U \subseteq \operatorname{null} \varphi\}.
+  \]
+\end{solution}
+
+\exerciseheader{3F}{20}
+\begin{exercise}{20}
+  Suppose $V$ is finite-dimensional and $U$ is a subspace of $V$. Show that
+  \[
+    U = \{v \in V : \varphi(v) = 0 \text{ for every } \varphi \in U^0\}.
+  \]
+\end{exercise}
+\begin{solution}
+  If $u \in U$, then $\varphi(u) = 0$ for every $\varphi \in U^0$. Thus
+  \[
+    U \subseteq \{v \in V : \varphi(v) = 0 \text{ for every } \varphi \in U^0\}.
+  \]
+
+  To prove the inclusion in the other direction, suppose $w \in V$ but $w \notin U$. Let $u_1, \ldots, u_m$ be a basis of $U$. Because $w \notin U$, the list $u_1, \ldots, u_m, w$ is linearly independent and hence can be extended to a basis of $V$. Thus by the linear map lemma (3.4), there exists $\psi \in V'$ such that
+  \[
+    \psi(u_k) = 0 \text{ for } k = 1, \ldots, m \quad \text{and} \quad \psi(w) = 1.
+  \]
+  Thus $\psi \in U^0$ but $\psi(w) \neq 0$. Hence
+  \[
+    w \notin \{v \in V : \varphi(v) = 0 \text{ for every } \varphi \in U^0\}.
+  \]
+  Thus
+  \[
+    U \supseteq \{v \in V : \varphi(v) = 0 \text{ for every } \varphi \in U^0\},
+  \]
+  which implies that
+  \[
+    U = \{v \in V : \varphi(v) = 0 \text{ for every } \varphi \in U^0\},
+  \]
+  as desired.
+\end{solution}
+
+\exerciseheader{3F}{21}
+\begin{exercise}{21}
+  Suppose $V$ is finite-dimensional and $U$ and $W$ are subspaces of $V$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Prove that $W^0 \subseteq U^0$ if and only if $U \subseteq W$.
+    \item Prove that $W^0 = U^0$ if and only if $U = W$.
+  \end{enumerate}
+\end{exercise}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item First suppose $U \subseteq W$. Suppose $\varphi \in W^0$. If $u \in U$, then $u \in W$, and hence $\varphi(u) = 0$. Thus $\varphi \in U^0$. Hence $W^0 \subseteq U^0$.
+
+    To prove the implication in the other direction, now suppose $W^0 \subseteq U^0$. Suppose $u \in U$. Thus $\varphi(u) = 0$ for every $\varphi \in U^0$. Hence $\varphi(u) = 0$ for every $\varphi \in W^0$. Now Exercise~20 implies that $u \in W$. Thus $U \subseteq W$, as desired.
+
+    \item If $U = W$, then clearly $W^0 = U^0$.
+
+    To prove the implication in the other direction, now suppose $W^0 = U^0$. Then $W^0 \subseteq U^0$ and $U^0 \subseteq W^0$. Now (a) implies that $U \subseteq W$ and $W \subseteq U$. Thus $U = W$, as desired.
+  \end{enumerate}
+\end{solution}
+
+\exerciseheader{3F}{22}
+\begin{exercise}{22}
+  Suppose $V$ is finite-dimensional and $U$ and $W$ are subspaces of $V$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Show that $(U + W)^0 = U^0 \cap W^0$.
+    \item Show that $(U \cap W)^0 = U^0 + W^0$.
+  \end{enumerate}
+\end{exercise}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item First suppose $\varphi \in (U + W)^0$. Then $\varphi(u + w) = 0$ for all $u \in U$ and all $w \in W$. Taking $w = 0$ and then taking $u = 0$, in particular we see that $\varphi(u) = 0$ for all $u \in U$ and $\varphi(w) = 0$ for all $w \in W$. Thus $\varphi \in U^0$ and $\varphi \in W^0$. In other words, $\varphi \in U^0 \cap W^0$. Thus $(U + W)^0 \subseteq U^0 \cap W^0$.
+
+    To prove the inclusion in the other direction, suppose $\varphi \in U^0 \cap W^0$. If $u \in U$ and $w \in W$, then
+    \[
+      \varphi(u + w) = \varphi(u) + \varphi(w) = 0 + 0 = 0.
+    \]
+    Hence $\varphi \in (U + W)^0$. Thus $(U + W)^0 \supseteq U^0 \cap W^0$.
+
+    Thus $(U + W)^0 = U^0 \cap W^0$, as desired.
+
+    \item First suppose $\varphi \in U^0 + W^0$. Thus $\varphi = \varphi_1 + \varphi_2$, where $\varphi_1 \in U^0$ and $\varphi_2 \in W^0$. If $v \in U \cap W$, then
+    \[
+      \varphi(v) = \varphi_1(v) + \varphi_2(v) = 0 + 0 = 0.
+    \]
+    Hence $\varphi \in (U \cap W)^0$. Thus
+    \[
+      U^0 + W^0 \subseteq (U \cap W)^0.
+    \]
+
+    To show that the inclusion above is an equality, we will show that both sides have the same dimension. We have
+    \begin{align*}
+      \dim(U \cap W)^0 &= \dim V - \dim(U \cap W) \\
+                       &= \dim V - (\dim U + \dim W - \dim(U + W)) \\
+                       &= \dim U^0 + \dim W^0 - \dim(U + W)^0 \\
+                       &= \dim U^0 + \dim W^0 - \dim(U^0 \cap W^0) \\
+                       &= \dim(U^0 + W^0),
+    \end{align*}
+    where the first equality comes from 3.125, the second equality comes from 2.43, the third equality comes from 3.125, the fourth equality comes from Exercise~22(a), and the fifth equality comes from 2.43.
+
+    The equality of dimensions along with the inclusion above show that
+    \[
+      (U \cap W)^0 = U^0 + W^0,
+    \]
+    as desired.
+  \end{enumerate}
+\end{solution}
+
+\exerciseheader{3F}{23}
+\begin{exercise}{23}
+  Suppose $V$ is finite-dimensional and $\varphi_1, \ldots, \varphi_m \in V'$. Prove that the following three sets are equal to each other.
+  \begin{enumerate}[label=(\alph*)]
+    \item $\operatorname{span}(\varphi_1, \ldots, \varphi_m)$
+    \item $\bigl((\operatorname{null} \varphi_1) \cap \cdots \cap (\operatorname{null} \varphi_m)\bigr)^0$
+    \item $\{\varphi \in V' : (\operatorname{null} \varphi_1) \cap \cdots \cap (\operatorname{null} \varphi_m) \subseteq \operatorname{null} \varphi\}$
+  \end{enumerate}
+\end{exercise}
+\begin{solution}
+  Let $A$ denote the set in (a), $B$ denote the set in (b), and $C$ denote the set in (c).
+
+  We will prove that $A = B$ by induction on $m$. For $m = 1$, we need to show that
+  \[
+    \operatorname{span}(\varphi_1) = (\operatorname{null} \varphi_1)^0.
+  \]
+  The inclusion $\operatorname{span}(\varphi_1) \subseteq (\operatorname{null} \varphi_1)^0$ follows from the definitions. To prove the inclusion in the other direction, suppose $\psi \in (\operatorname{null} \varphi_1)^0$. Thus $\operatorname{null} \varphi_1 \subseteq \operatorname{null} \psi$. Now Exercise~6 implies $\psi \in \operatorname{span}(\varphi_1)$, as desired.
+
+  Now suppose that $m > 1$ and that the desired result holds when $m$ is replaced with $m - 1$. Then
+  \begin{align*}
+    \operatorname{span}(\varphi_1, \ldots, \varphi_m) &= \operatorname{span}(\varphi_1, \ldots, \varphi_{m-1}) + \operatorname{span}(\varphi_m) \\
+    &= \bigl((\operatorname{null} \varphi_1) \cap \cdots \cap (\operatorname{null} \varphi_{m-1})\bigr)^0 + (\operatorname{null} \varphi_m)^0 \\
+    &= \bigl((\operatorname{null} \varphi_1) \cap \cdots \cap (\operatorname{null} \varphi_m)\bigr)^0,
+  \end{align*}
+  where the second equality above comes from our induction hypothesis and the third equality above comes from Exercise~22(b). The last equality above completes the proof that $A = B$.
+
+  Now suppose $\varphi \in A$. Thus there exist $a_1, \ldots, a_m$ such that
+  \[
+    \varphi = a_1 \varphi_1 + \cdots + a_m \varphi_m.
+  \]
+  The equation above shows that if $v \in (\operatorname{null} \varphi_1) \cap \cdots \cap (\operatorname{null} \varphi_m)$, then $\varphi(v) = 0$ and hence $v \in \operatorname{null} \varphi$. Thus $\varphi \in C$, proving that $A \subseteq C$.
+
+  Now suppose $\varphi \in C$. Thus
+  \begin{equation}
+    (\operatorname{null} \varphi_1) \cap \cdots \cap (\operatorname{null} \varphi_m) \subseteq \operatorname{null} \varphi. \tag{$*$}
+  \end{equation}
+  To show that $\varphi \in B$, suppose $v \in (\operatorname{null} \varphi_1) \cap \cdots \cap (\operatorname{null} \varphi_m)$. Thus $(*)$ shows that $v \in \operatorname{null} \varphi$. Hence $\varphi(v) = 0$, which shows that $\varphi \in B$. Thus $C \subseteq B$, completing the proof.
+\end{solution}
+
+\exerciseheader{3F}{24}
+\begin{exercise}{24}
+  Suppose $V$ is finite-dimensional and $v_1, \ldots, v_m \in V$. Define a linear map $\Gamma \colon V' \to \F^m$ by $\Gamma(\varphi) = \bigl(\varphi(v_1), \ldots, \varphi(v_m)\bigr)$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Prove that $v_1, \ldots, v_m$ spans $V$ if and only if $\Gamma$ is injective.
+    \item Prove that $v_1, \ldots, v_m$ is linearly independent if and only if $\Gamma$ is surjective.
+  \end{enumerate}
+\end{exercise}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item First suppose $v_1, \ldots, v_m$ spans $V$. If $\varphi \in V'$ and $\Gamma(\varphi) = 0$, then
+    \[
+      \varphi(v_1) = \cdots = \varphi(v_m) = 0,
+    \]
+    which implies that $\varphi(v) = 0$ for all $v \in V$, which implies that $\varphi = 0$. Thus $\Gamma$ is injective.
+
+    To prove the implication in the other direction, we will prove its contrapositive. Thus suppose $v_1, \ldots, v_m$ does not span $V$. Thus there exists $\varphi \in V'$ such that $\varphi$ equals $0$ on $\operatorname{span}(v_1, \ldots, v_m)$ but $\varphi \neq 0$. Thus $\Gamma(\varphi) = 0$, which implies that $\Gamma$ is not injective, as desired.
+
+    \item First suppose $v_1, \ldots, v_m$ is linearly independent. Then the list $v_1, \ldots, v_m$ can be extended to a basis of $V$. Hence the linear map lemma (3.4) implies that $\varphi(v_1), \ldots, \varphi(v_m)$ can take on any values we choose. Thus $\Gamma$ is surjective.
+
+    Conversely, suppose $\Gamma$ is surjective. Thus it is not possible to write any $v_k$ as a linear combination of $v_1, \ldots, v_{k-1}$ because doing so would contradict the existence of $\varphi \in V'$ such that
+    \[
+      \varphi(v_1) = \cdots = \varphi(v_{k-1}) = 0 \quad \text{but} \quad \varphi(v_k) = 1.
+    \]
+    The linear dependence lemma (2.19) now implies $v_1, \ldots, v_m$ is linearly independent, as desired.
+  \end{enumerate}
+\end{solution}
+
+\exerciseheader{3F}{25}
+\begin{exercise}{25}
+  Suppose $V$ is finite-dimensional and $\varphi_1, \ldots, \varphi_m \in V'$. Define a linear map $\Gamma \colon V \to \F^m$ by $\Gamma(v) = \bigl(\varphi_1(v), \ldots, \varphi_m(v)\bigr)$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Prove that $\varphi_1, \ldots, \varphi_m$ spans $V'$ if and only if $\Gamma$ is injective.
+    \item Prove that $\varphi_1, \ldots, \varphi_m$ is linearly independent if and only if $\Gamma$ is surjective.
+  \end{enumerate}
+\end{exercise}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item First suppose $\varphi_1, \ldots, \varphi_m$ spans $V'$. If $v \in V$ and $\Gamma(v) = 0$, then
+    \[
+      \varphi_1(v) = \cdots = \varphi_m(v) = 0,
+    \]
+    which implies that $\varphi(v) = 0$ for all $\varphi \in V'$, which implies that $v = 0$. Thus $\Gamma$ is injective.
+
+    Conversely, suppose that $\Gamma$ is injective. Thus
+    \[
+      (\operatorname{null} \varphi_1) \cap \cdots \cap (\operatorname{null} \varphi_m) = \{0\},
+    \]
+    which implies that
+    \[
+      \bigl((\operatorname{null} \varphi_1) \cap \cdots \cap (\operatorname{null} \varphi_m)\bigr)^0 = V'.
+    \]
+    Now Exercise~23 implies that $\varphi_1, \ldots, \varphi_m$ spans $V'$.
+
+    \item First we will prove that if $\varphi_1, \ldots, \varphi_m$ is linearly independent, then $\Gamma$ is surjective. This will be done by induction on $m$.
+
+    Consider first the case $m = 1$. The statement that the list $\varphi_1$ is linearly independent implies $\varphi_1 \neq 0$, which implies that $\operatorname{range} \Gamma = \F^1$, verifying the desired statement when $m = 1$.
+
+    Thus assume that $m > 1$ and that the desired statement holds for $m - 1$. Suppose $\varphi_1, \ldots, \varphi_m$ is linearly independent. Hence $\varphi_1, \ldots, \varphi_{m-1}$ is linearly independent. By our induction hypothesis,
+    \begin{equation}
+      \{(\varphi_1(v), \ldots, \varphi_{m-1}(v)) : v \in V\} = \F^{m-1}. \tag{$*$}
+    \end{equation}
+    Because $\varphi_1, \ldots, \varphi_m$ is linearly independent, $\varphi_m \notin \operatorname{span}(\varphi_1, \ldots, \varphi_{m-1})$. Thus Exercise~23 implies that
+    \[
+      (\operatorname{null} \varphi_1) \cap \cdots \cap (\operatorname{null} \varphi_{m-1}) \not\subseteq \operatorname{null} \varphi_m.
+    \]
+    Hence there exists $v \in V$ such that $\varphi_1(v) = \cdots = \varphi_{m-1}(v) = 0$ but $\varphi_m(v) \neq 0$.
+
+    If $(c_1, \ldots, c_m) \in \F^m$, then by $(*)$ there exists $u \in V$ such that $\varphi_k(u) = c_k$ for each $k = 1, \ldots, m - 1$. Thus
+    \[
+      \varphi_k\!\left(u + \frac{c_m - \varphi_m(u)}{\varphi_m(v)}\,v\right) = c_k
+    \]
+    for every $k = 1, \ldots, m$. Hence $\Gamma$ is surjective, as desired.
+
+    To prove the implication in the other direction, we will prove its contrapositive. Thus suppose $\varphi_1, \ldots, \varphi_m$ is linearly dependent. Hence there exists $n \in \{1, \ldots, m\}$ such that $\varphi_n$ is a linear combination of $\varphi_1, \ldots, \varphi_{n-1}$. This means that each vector in $\F^m$ whose first $n - 1$ coordinates equal $0$ and whose $n^{\text{th}}$ coordinate equals $1$ is not in the range of $\Gamma$. Hence $\Gamma$ is not surjective, as desired.
+  \end{enumerate}
+\end{solution}
+
+\exerciseheader{3F}{26}
+\begin{exercise}{26}
+  Suppose $V$ is finite-dimensional and $\Omega$ is a subspace of $V'$. Prove that
+  \[
+    \Omega = \{v \in V : \varphi(v) = 0 \text{ for every } \varphi \in \Omega\}^0.
+  \]
+\end{exercise}
+\begin{solution}
+  Let $\varphi_1, \ldots, \varphi_m$ be a basis of $\Omega$. Thus
+  \begin{align*}
+    \Omega &= \operatorname{span}(\varphi_1, \ldots, \varphi_m) \\
+           &= \bigl((\operatorname{null} \varphi_1) \cap \cdots \cap (\operatorname{null} \varphi_m)\bigr)^0 \\
+           &= \{v \in V : \varphi_k(v) = 0 \text{ for } k = 1, \ldots, m\}^0 \\
+           &= \{v \in V : \varphi(v) = 0 \text{ for every } \varphi \in \Omega\}^0,
+  \end{align*}
+  where the second line follows from Exercise~23.
+\end{solution}
+
+\exerciseheader{3F}{27}
+\begin{exercise}{27}
+  Suppose $T \in \mathcal{L}\bigl(\mathcal{P}_5(\R)\bigr)$ and $\operatorname{null} T' = \operatorname{span}(\varphi)$, where $\varphi$ is the linear functional on $\mathcal{P}_5(\R)$ defined by $\varphi(p) = p(8)$. Prove that
+  \[
+    \operatorname{range} T = \{p \in \mathcal{P}_5(\R) : p(8) = 0\}.
+  \]
+\end{exercise}
+\begin{solution}
+  We have $\dim \operatorname{null} T' = 1$, which by the fundamental theorem of linear maps (3.21) implies that
+  \[
+    \dim \operatorname{range} T' = \dim\bigl(\mathcal{P}_5(\R)\bigr)' - 1.
+  \]
+  Using 3.130(a) and 3.111 and then applying the fundamental theorem of linear maps to $\varphi$, we can rewrite the equation above as
+  \begin{align*}
+    \dim \operatorname{range} T &= \dim \mathcal{P}_5(\R) - 1 \\
+    &= \dim \operatorname{null} \varphi. \tag{$*$}
+  \end{align*}
+
+  Because $\varphi \in \operatorname{null} T'$, we have $0 = T'(\varphi) = \varphi \circ T$. Thus
+  \[
+    \operatorname{range} T \subseteq \operatorname{null} \varphi = \{p \in \mathcal{P}_5(\R) : p(8) = 0\}.
+  \]
+  But these subspaces of $\mathcal{P}_5(\R)$ have the same dimension by $(*)$, and hence they are equal, as desired.
+\end{solution}
+
+\exerciseheader{3F}{28}
+\begin{exercise}{28}
+  Suppose $V$ is finite-dimensional and $\varphi_1, \ldots, \varphi_m$ is a linearly independent list in $V'$. Prove that
+  \[
+    \dim\bigl((\operatorname{null} \varphi_1) \cap \cdots \cap (\operatorname{null} \varphi_m)\bigr) = (\dim V) - m.
+  \]
+\end{exercise}
+\begin{solution}
+  We have
+  \begin{align*}
+    \dim\bigl((\operatorname{null} \varphi_1) \cap \cdots \cap (\operatorname{null} \varphi_m)\bigr)
+    &= \dim V - \dim\bigl((\operatorname{null} \varphi_1) \cap \cdots \cap (\operatorname{null} \varphi_m)\bigr)^0 \\
+    &= \dim V - \dim \operatorname{span}(\varphi_1, \ldots, \varphi_m) \\
+    &= \dim V - m,
+  \end{align*}
+  where the first equality comes from 3.125, the second equality comes from Exercise~23, and the third equality holds because $\varphi_1, \ldots, \varphi_m$ is linearly independent.
+\end{solution}
+
+\exerciseheader{3F}{29}
+\begin{exercise}{29}
+  Suppose $V$ and $W$ are finite-dimensional and $T \in \mathcal{L}(V, W)$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Prove that if $\varphi \in W'$ and $\operatorname{null} T' = \operatorname{span}(\varphi)$, then $\operatorname{range} T = \operatorname{null} \varphi$.
+    \item Prove that if $\psi \in V'$ and $\operatorname{range} T' = \operatorname{span}(\psi)$, then $\operatorname{null} T = \operatorname{null} \psi$.
+  \end{enumerate}
+\end{exercise}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item Suppose $\varphi \in W'$ and $\operatorname{null} T' = \operatorname{span}(\varphi)$.
+
+    First consider the case $\varphi = 0$. In this case, $\operatorname{null} T' = \{0\}$. Thus $T'$ is injective. Thus $T$ is surjective (by 3.129), which means that $\operatorname{range} T = W$. Therefore $\operatorname{range} T = \operatorname{null} \varphi$ because both sides of this equation equal $W$ in this case where $\varphi = 0$.
+
+    Now consider the case $\varphi \neq 0$. Thus $\dim \operatorname{null} T' = 1$, which by the fundamental theorem of linear maps (3.21) implies that
+    \[
+      \dim \operatorname{range} T' = \dim W' - 1.
+    \]
+    Using 3.130(a) and 3.111 and then applying the fundamental theorem of linear maps to $\varphi$, we can rewrite the equation above as
+    \begin{align*}
+      \dim \operatorname{range} T &= \dim W - 1 \\
+                                  &= \dim \operatorname{null} \varphi.
+    \end{align*}
+
+    Because $\varphi \in \operatorname{null} T'$, we have $0 = T'(\varphi) = \varphi \circ T$. Thus $\operatorname{range} T \subseteq \operatorname{null} \varphi$. But these two subspaces of $W$ have the same dimension by the displayed equation above, and hence they are equal, as desired.
+
+    \item Suppose $\psi \in V'$ and $\operatorname{range} T' = \operatorname{span}(\psi)$.
+
+    First consider the case in which $\psi = 0$. In this case, $\operatorname{range} T' = \{0\}$. Thus $\dim \operatorname{range} T' = 0$, which implies that $\dim \operatorname{range} T = 0$ [by 3.130(a)]. Thus $T = 0$, which means that $\operatorname{null} T = V$. Therefore both sides of this equation equal $V$ in this case where $\psi = 0$.
+
+    Now consider the case $\psi \neq 0$. Thus $\dim \operatorname{range} T' = 1$, which implies that $\dim \operatorname{range} T = 1$ [by 3.130(a)], which by the fundamental theorem of linear maps (3.21) implies that
+    \begin{align*}
+      \dim \operatorname{null} T &= \dim V - 1 \\
+                                 &= \dim \operatorname{null} \psi.
+    \end{align*}
+
+    Because $\varphi \in \operatorname{range} T'$, we have $\varphi = T'(\psi)$ for some $\psi \in W'$. Thus $\varphi = \psi \circ T$, which implies that $\operatorname{null} T \subseteq \operatorname{null} \varphi$. But these two subspaces of $V$ have the same dimension by the displayed equation above, and hence they are equal, as desired.
+  \end{enumerate}
+\end{solution}
+
+\exerciseheader{3F}{30}
+\begin{exercise}{30}
+  Suppose $V$ is finite-dimensional and $\varphi_1, \ldots, \varphi_n$ is a basis of $V'$. Show that there exists a basis of $V$ whose dual basis is $\varphi_1, \ldots, \varphi_n$.
+\end{exercise}
+\begin{solution}
+  From Exercise~28, we know that
+  \[
+    \dim\bigl((\operatorname{null} \varphi_2) \cap \cdots \cap (\operatorname{null} \varphi_n)\bigr) = 1
+  \]
+  and
+  \[
+    \dim\bigl((\operatorname{null} \varphi_1) \cap \cdots \cap (\operatorname{null} \varphi_n)\bigr) = 0.
+  \]
+  Thus
+  \[
+    (\operatorname{null} \varphi_2) \cap \cdots \cap (\operatorname{null} \varphi_n) \not\subset (\operatorname{null} \varphi_1) \cap \cdots \cap (\operatorname{null} \varphi_n).
+  \]
+  In other words, there exists $x_1 \in V$ such that $x_1 \in (\operatorname{null} \varphi_2) \cap \cdots \cap (\operatorname{null} \varphi_n)$ but $\varphi_1(x_1) \neq 0$. Multiplying $x_1$ by an appropriate scalar, we can assume that $\varphi_1(x_1) = 1$.
+
+  Similarly, for each $j = 2, \ldots, n$, there exists $x_j \in V$ such that
+  \begin{equation}
+    \varphi_k(x_j) = 0 \text{ for } k \in \{1, \ldots, n\} \setminus j \quad \text{and} \quad \varphi_j(x_j) = 1. \tag{$*$}
+  \end{equation}
+
+  If $a_1, \ldots, a_n \in \F$ and
+  \[
+    0 = a_1 x_1 + \cdots + a_n x_n,
+  \]
+  then for each $j = 1, \ldots, n$ we have
+  \[
+    0 = \varphi_j(a_1 x_1 + \cdots + a_n x_n) = a_j.
+  \]
+  Hence $x_1, \ldots, x_n$ is linearly independent and thus is a basis of $V$ (by 2.38). Clearly $(*)$ shows that the dual basis of $x_1, \ldots, x_n$ is $\varphi_1, \ldots, \varphi_n$.
+\end{solution}
+
+\exerciseheader{3F}{31}
+\begin{exercise}{31}
+  Suppose $U$ is a subspace of $V$. Let $i \colon U \to V$ be the inclusion map defined by $i(u) = u$. Thus $i' \in \mathcal{L}(V', U')$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Show that $\operatorname{null} i' = U^0$.
+    \item Prove that if $V$ is finite-dimensional, then $\operatorname{range} i' = U'$.
+    \item Prove that if $V$ is finite-dimensional, then $\tilde{\imath}'$ is an isomorphism from $V'/U^0$ onto $U'$.
+  \end{enumerate}
+
+  \textit{The isomorphism in (c) is natural in that it does not depend on a choice of basis in either vector space.}
+\end{exercise}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item Suppose $\varphi \in V'$. Then
+    \begin{align*}
+      \varphi \in \operatorname{null} i' &\iff i'(\varphi) = 0 \\
+                                         &\iff \varphi \circ i = 0 \\
+                                         &\iff \varphi(u) = 0 \text{ for all } u \in U \\
+                                         &\iff \varphi \in U^0.
+    \end{align*}
+    Thus $\operatorname{null} i' = U^0$.
+
+    \item Suppose $V$ is finite-dimensional. Clearly $i$ is injective. Thus by 3.131, $T'$ is surjective. Hence $\operatorname{range} i' = U'$.
+
+    \item Suppose $V$ is finite-dimensional. By 3.107(b) and 3.107(b), $\tilde{\imath}'$ is an injective map from $V'/\operatorname{null} i'$ onto $\operatorname{range} i'$. Thus by (a) and (b) of this exercise, $\tilde{\imath}'$ is an isomorphism from $V'/U^0$ onto $U'$.
+  \end{enumerate}
+\end{solution}
+
+\exerciseheader{3F}{32}
+\begin{exercise}{32}
+  The \textit{double dual space} of $V$, denoted by $V''$, is defined to be the dual space of $V'$. In other words, $V'' = (V')'$. Define $\Lambda \colon V \to V''$ by
+  \[
+    (\Lambda v)(\varphi) = \varphi(v)
+  \]
+  for each $v \in V$ and each $\varphi \in V'$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Show that $\Lambda$ is a linear map from $V$ to $V''$.
+    \item Show that if $T \in \mathcal{L}(V)$, then $T'' \circ \Lambda = \Lambda \circ T$, where $T'' = (T')'$.
+    \item Show that if $V$ is finite-dimensional, then $\Lambda$ is an isomorphism from $V$ onto $V''$.
+  \end{enumerate}
+
+  \textit{Suppose $V$ is finite-dimensional. Then $V$ and $V'$ are isomorphic, but finding an isomorphism from $V$ onto $V'$ generally requires choosing a basis of $V$. In contrast, the isomorphism $\Lambda$ from $V$ onto $V''$ does not require a choice of basis and thus is considered more natural.}
+\end{exercise}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item A straightforward application of the definitions shows that $\Lambda$ is a linear map from $V$ to $V''$.
+
+    \item Suppose $T \in \mathcal{L}(V)$. Suppose $v \in V$ and $\varphi \in V'$. Then
+    \begin{align*}
+      \bigl((T'' \circ \Lambda)(v)\bigr)(\varphi) &= \bigl(T''(\Lambda v)\bigr)(\varphi) \\
+      &= (\Lambda v \circ T')(\varphi) \\
+      &= (\Lambda v)\bigl(T'(\varphi)\bigr) \\
+      &= (\Lambda v)(\varphi \circ T) \\
+      &= (\varphi \circ T)(v) \\
+      &= \varphi(Tv).
+    \end{align*}
+    Also,
+    \begin{align*}
+      \bigl((\Lambda \circ T)(v)\bigr)(\varphi) &= \bigl(\Lambda(Tv)\bigr)(\varphi) \\
+      &= \varphi(Tv).
+    \end{align*}
+    Thus
+    \[
+      \bigl((T'' \circ \Lambda)(v)\bigr)(\varphi) = \bigl((\Lambda \circ T)(v)\bigr)(\varphi),
+    \]
+    for all $\varphi \in V'$, which implies that
+    \[
+      (T'' \circ \Lambda)(v) = (\Lambda \circ T)(v),
+    \]
+    for all $v \in V$, which implies that $T'' \circ \Lambda = \Lambda \circ T$, as desired.
+
+    \item Suppose $V$ is finite-dimensional. Suppose $v \in V$ and $\Lambda v = 0$. Thus $\varphi(v) = 0$ for every $\varphi \in V'$. Now Exercise~3 implies that $v = 0$. Thus $\Lambda$ is injective.
+
+    Because $\dim V = \dim V' = \dim V''$ (by 3.111), we can conclude that $\Lambda$ is an isomorphism of $V$ onto $V''$.
+  \end{enumerate}
+\end{solution}
+
+\exerciseheader{3F}{33}
+\begin{exercise}{33}
+  Suppose $U$ is a subspace of $V$. Let $\pi \colon V \to V/U$ be the usual quotient map. Thus $\pi' \in \mathcal{L}\bigl((V/U)', V'\bigr)$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Show that $\pi'$ is injective.
+    \item Show that $\operatorname{range} \pi' = U^0$.
+    \item Conclude that $\pi'$ is an isomorphism from $(V/U)'$ onto $U^0$.
+  \end{enumerate}
+
+  \textit{The isomorphism in (c) is natural in that it does not depend on a choice of basis in either vector space. In fact, there is no assumption here that any of these vector spaces are finite-dimensional.}
+\end{exercise}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item Suppose $\varphi \in (V/U)'$ and $\pi'(\varphi) = 0$. Then $\varphi \circ \pi = 0$, which means that $(\varphi \circ \pi)(v) = 0$ for every $v \in V$, which means that $\varphi(v + U) = 0$ for every $v \in V$. Thus $\varphi = 0$, which implies that $\pi'$ is injective.
+
+    \item Suppose $\varphi \in (V/U)'$. If $u \in U$, then
+    \[
+      (\pi'(\varphi))(u) = (\varphi \circ \pi)(u) = \varphi(u + U) = \varphi(0) = 0
+    \]
+    and thus $\pi'(\varphi) \in U^0$. Hence $\operatorname{range} \pi' \subseteq U^0$.
+
+    To show the inclusion in the other direction, suppose $\psi \in U^0$. Thus $\psi \in V'$ and $\psi(u) = 0$ for all $u \in U$. Define $\varphi \in (V/U)'$ by
+    \[
+      \varphi(v + U) = \psi(v);
+    \]
+    the condition that $\psi(u) = 0$ for all $u \in U$ shows that $\varphi$ is well defined. The definitions now show that $\pi'(\varphi) = \psi$. Thus $\operatorname{range} \pi' \supseteq U^0$, completing the proof that $\operatorname{range} \pi' = U^0$.
+
+    \item Now (a) and (b) immediately imply that $\pi'$ is an isomorphism from $(V/U)'$ onto $U^0$.
+  \end{enumerate}
+\end{solution}

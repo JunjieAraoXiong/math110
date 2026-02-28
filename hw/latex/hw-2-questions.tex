@@ -1,0 +1,335 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{fancyhdr}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage{microtype}
+
+% ── Color matching the PDF ──
+\definecolor{headercolor}{RGB}{0,128,128}
+
+% ── Bold math shortcuts ──
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\F}{\mathbf{F}}
+\newcommand{\Z}{\mathbf{Z}}
+
+% ── Page style ──
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{Edward Frenkel}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Exercise header command ──
+% \exerciseheader{section}{number} produces the teal header line
+\newcommand{\exerciseheader}[2]{%
+  \newpage
+  \fancyhead[L]{\textcolor{headercolor}{Instructor's Solutions Manual, Section #1}}%
+  \fancyhead[R]{\textcolor{headercolor}{Exercise #2}}%
+  \renewcommand{\headrulewidth}{0.4pt}%
+  \renewcommand{\headrule}{\hbox to\headwidth{%
+    \color{headercolor}\leaders\hrule height \headrulewidth\hfill}}%
+}
+
+% ── Exercise environment ──
+\newcounter{exnum}
+\newenvironment{exercise}[1]{%
+  \setcounter{exnum}{#1}%
+  \par\medskip\noindent\textbf{\theexnum}\quad\ignorespaces
+}{\par\medskip}
+
+\begin{document}
+
+% ── Section 2A ──
+
+\exerciseheader{2A}{1}
+\begin{exercise}{1}
+  Find a list of four distinct vectors in $\F^3$ whose span equals
+  \[
+    \{(x,y,z) \in \F^3 : x + y + z = 0\}.
+  \]
+\end{exercise}
+
+\exerciseheader{2A}{2}
+\begin{exercise}{2}
+  Prove or give a counterexample: If $v_1, v_2, v_3, v_4$ spans $V$, then the list
+  \[
+    v_1 - v_2, v_2 - v_3, v_3 - v_4, v_4
+  \]
+  also spans $V$.
+\end{exercise}
+
+\exerciseheader{2A}{3}
+\begin{exercise}{3}
+  Suppose $v_1, \ldots, v_m$ is a list of vectors in $V$. For $k \in \{1, \ldots, m\}$, let
+  \[
+    w_k = v_1 + \cdots + v_k.
+  \]
+  Show that $\operatorname{span}(v_1, \ldots, v_m) = \operatorname{span}(w_1, \ldots, w_m)$.
+\end{exercise}
+
+\exerciseheader{2A}{4}
+\begin{exercise}{4}
+  \begin{enumerate}[label=(\alph*)]
+    \item Show that a list of length one in a vector space is linearly independent if and only if the vector in the list is not $0$.
+    \item Show that a list of length two in a vector space is linearly independent if and only if neither of the two vectors in the list is a scalar multiple of the other.
+  \end{enumerate}
+\end{exercise}
+
+\exerciseheader{2A}{5}
+\begin{exercise}{5}
+  Find a number $t$ such that
+  \[
+    (3,1,4),\, (2,-3,5),\, (5,9,t)
+  \]
+  is not linearly independent in $\R^3$.
+\end{exercise}
+
+\exerciseheader{2A}{6}
+\begin{exercise}{6}
+  Show that the list $(2,3,1), (1,-1,2), (7,3,c)$ is linearly dependent in $\F^3$ if and only if $c = 8$.
+\end{exercise}
+
+\exerciseheader{2A}{7}
+\begin{exercise}{7}
+  \begin{enumerate}[label=(\alph*)]
+    \item Show that if we think of $\C$ as a vector space over $\R$, then the list $1+i, 1-i$ is linearly independent.
+    \item Show that if we think of $\C$ as a vector space over $\C$, then the list $1+i, 1-i$ is linearly dependent.
+  \end{enumerate}
+\end{exercise}
+
+\exerciseheader{2A}{8}
+\begin{exercise}{8}
+  Suppose $v_1, v_2, v_3, v_4$ is linearly independent in $V$. Prove that the list
+  \[
+    v_1 - v_2, v_2 - v_3, v_3 - v_4, v_4
+  \]
+  is also linearly independent.
+\end{exercise}
+
+\exerciseheader{2A}{9}
+\begin{exercise}{9}
+  Prove or give a counterexample: If $v_1, v_2, \ldots, v_m$ is a linearly independent list of vectors in $V$, then
+  \[
+    5v_1 - 4v_2, v_2, v_3, \ldots, v_m
+  \]
+  is linearly independent.
+\end{exercise}
+
+\exerciseheader{2A}{10}
+\begin{exercise}{10}
+  Prove or give a counterexample: If $v_1, v_2, \ldots, v_m$ is a linearly independent list of vectors in $V$ and $\lambda \in \F$ with $\lambda \neq 0$, then $\lambda v_1, \lambda v_2, \ldots, \lambda v_m$ is linearly independent.
+\end{exercise}
+
+\exerciseheader{2A}{11}
+\begin{exercise}{11}
+  Prove or give a counterexample: If $v_1, \ldots, v_m$ and $w_1, \ldots, w_m$ are linearly independent lists of vectors in $V$, then the list $v_1 + w_1, \ldots, v_m + w_m$ is linearly independent.
+\end{exercise}
+
+\exerciseheader{2A}{12}
+\begin{exercise}{12}
+  Suppose $v_1, \ldots, v_m$ is linearly independent in $V$ and $w \in V$. Prove that if $v_1 + w, \ldots, v_m + w$ is linearly dependent, then $w \in \operatorname{span}(v_1, \ldots, v_m)$.
+\end{exercise}
+
+\exerciseheader{2A}{13}
+\begin{exercise}{13}
+  Suppose $v_1, \ldots, v_m$ is linearly independent in $V$ and $w \in V$. Show that
+  \[
+    v_1, \ldots, v_m, w \text{ is linearly independent} \iff w \notin \operatorname{span}(v_1, \ldots, v_m).
+  \]
+\end{exercise}
+
+\exerciseheader{2A}{14}
+\begin{exercise}{14}
+  Suppose $v_1, \ldots, v_m$ is a list of vectors in $V$. For $k \in \{1, \ldots, m\}$, let
+  \[
+    w_k = v_1 + \cdots + v_k.
+  \]
+  Show that the list $v_1, \ldots, v_m$ is linearly independent if and only if the list $w_1, \ldots, w_m$ is linearly independent.
+\end{exercise}
+
+\exerciseheader{2A}{15}
+\begin{exercise}{15}
+  Explain why there does not exist a list of six polynomials that is linearly independent in $\mathcal{P}_4(\F)$.
+\end{exercise}
+
+\exerciseheader{2A}{16}
+\begin{exercise}{16}
+  Explain why no list of four polynomials spans $\mathcal{P}_4(\F)$.
+\end{exercise}
+
+\exerciseheader{2A}{17}
+\begin{exercise}{17}
+  Prove that $V$ is infinite-dimensional if and only if there is a sequence $v_1, v_2, \ldots$ of vectors in $V$ such that $v_1, \ldots, v_m$ is linearly independent for every positive integer $m$.
+\end{exercise}
+
+\exerciseheader{2A}{18}
+\begin{exercise}{18}
+  Prove that $\F^\infty$ is infinite-dimensional.
+\end{exercise}
+
+\exerciseheader{2A}{19}
+\begin{exercise}{19}
+  Prove that the real vector space of all continuous real-valued functions on the interval $[0,1]$ is infinite-dimensional.
+\end{exercise}
+
+\exerciseheader{2A}{20}
+\begin{exercise}{20}
+  Suppose $p_0, p_1, \ldots, p_m$ are polynomials in $\mathcal{P}_m(\F)$ such that $p_k(2) = 0$ for each $k \in \{0, \ldots, m\}$. Prove that $p_0, p_1, \ldots, p_m$ is not linearly independent in $\mathcal{P}_m(\F)$.
+\end{exercise}
+
+% ── Section 2B ──
+
+\exerciseheader{2B}{1}
+\begin{exercise}{1}
+  Find all vector spaces that have exactly one basis.
+\end{exercise}
+
+\exerciseheader{2B}{2}
+\begin{exercise}{2}
+  Verify all assertions in Example~2.27.
+\end{exercise}
+
+\exerciseheader{2B}{3}
+\begin{exercise}{3}
+  \begin{enumerate}[label=(\alph*)]
+    \item Let $U$ be the subspace of $\R^5$ defined by
+    \[
+      U = \{(x_1, x_2, x_3, x_4, x_5) \in \R^5 : x_1 = 3x_2 \text{ and } x_3 = 7x_4\}.
+    \]
+    Find a basis of $U$.
+    \item Extend the basis in~(a) to a basis of $\R^5$.
+    \item Find a subspace $W$ of $\R^5$ such that $\R^5 = U \oplus W$.
+  \end{enumerate}
+\end{exercise}
+
+\exerciseheader{2B}{4}
+\begin{exercise}{4}
+  \begin{enumerate}[label=(\alph*)]
+    \item Let $U$ be the subspace of $\C^5$ defined by
+    \[
+      U = \{(z_1, z_2, z_3, z_4, z_5) \in \C^5 : 6z_1 = z_2 \text{ and } z_3 + 2z_4 + 3z_5 = 0\}.
+    \]
+    Find a basis of $U$.
+    \item Extend the basis in~(a) to a basis of $\C^5$.
+    \item Find a subspace $W$ of $\C^5$ such that $\C^5 = U \oplus W$.
+  \end{enumerate}
+\end{exercise}
+
+\exerciseheader{2B}{5}
+\begin{exercise}{5}
+  Suppose $V$ is finite-dimensional and $U, W$ are subspaces of $V$ such that $V = U + W$. Prove that there exists a basis of $V$ consisting of vectors in $U \cup W$.
+\end{exercise}
+
+\exerciseheader{2B}{6}
+\begin{exercise}{6}
+  Prove or give a counterexample: If $p_0, p_1, p_2, p_3$ is a list in $\mathcal{P}_3(\F)$ such that none of the polynomials $p_0, p_1, p_2, p_3$ has degree~$2$, then $p_0, p_1, p_2, p_3$ is not a basis of $\mathcal{P}_3(\F)$.
+\end{exercise}
+
+\exerciseheader{2B}{7}
+\begin{exercise}{7}
+  Suppose $v_1, v_2, v_3, v_4$ is a basis of $V$. Prove that
+  \[
+    v_1 + v_2,\, v_2 + v_3,\, v_3 + v_4,\, v_4
+  \]
+  is also a basis of $V$.
+\end{exercise}
+
+\exerciseheader{2B}{8}
+\begin{exercise}{8}
+  Prove or give a counterexample: If $v_1, v_2, v_3, v_4$ is a basis of $V$ and $U$ is a subspace of $V$ such that $v_1, v_2 \in U$ and $v_3 \notin U$ and $v_4 \notin U$, then $v_1, v_2$ is a basis of $U$.
+\end{exercise}
+
+\exerciseheader{2B}{9}
+\begin{exercise}{9}
+  Suppose $v_1, \ldots, v_m$ is a list of vectors in $V$. For $k \in \{1, \ldots, m\}$, let
+  \[
+    w_k = v_1 + \cdots + v_k.
+  \]
+  Show that $v_1, \ldots, v_m$ is a basis of $V$ if and only if $w_1, \ldots, w_m$ is a basis of $V$.
+\end{exercise}
+
+\exerciseheader{2B}{10}
+\begin{exercise}{10}
+  Suppose $U$ and $W$ are subspaces of $V$ such that $V = U \oplus W$. Suppose also that $u_1, \ldots, u_m$ is a basis of $U$ and $w_1, \ldots, w_n$ is a basis of $W$. Prove that
+  \[
+    u_1, \ldots, u_m, w_1, \ldots, w_n
+  \]
+  is a basis of $V$.
+\end{exercise}
+
+\exerciseheader{2B}{11}
+\begin{exercise}{11}
+  Suppose $V$ is a real vector space. Show that if $v_1, \ldots, v_n$ is a basis of $V$ (as a real vector space), then $v_1, \ldots, v_n$ is also a basis of the complexification $V_\C$ (as a complex vector space).
+
+  \textit{See Exercise~8 in Section~1B for the definition of the complexification $V_\C$.}
+\end{exercise}
+
+% ── Section 2C ──
+
+\exerciseheader{2C}{1}
+\begin{exercise}{1}
+  Show that the subspaces of $\R^2$ are precisely $\{0\}$, all lines in $\R^2$ containing the origin, and $\R^2$.
+\end{exercise}
+
+\exerciseheader{2C}{2}
+\begin{exercise}{2}
+  Show that the subspaces of $\R^3$ are precisely $\{0\}$, all lines in $\R^3$ containing the origin, all planes in $\R^3$ containing the origin, and $\R^3$.
+\end{exercise}
+
+\exerciseheader{2C}{3}
+\begin{exercise}{3}
+  \begin{enumerate}[label=(\alph*)]
+    \item Let $U = \{p \in \mathcal{P}_4(\F) : p(6) = 0\}$. Find a basis of $U$.
+    \item Extend the basis in~(a) to a basis of $\mathcal{P}_4(\F)$.
+    \item Find a subspace $W$ of $\mathcal{P}_4(\F)$ such that $\mathcal{P}_4(\F) = U \oplus W$.
+  \end{enumerate}
+\end{exercise}
+
+\exerciseheader{2C}{4}
+\begin{exercise}{4}
+  \begin{enumerate}[label=(\alph*)]
+    \item Let $U = \{p \in \mathcal{P}_4(\R) : p''(6) = 0\}$. Find a basis of $U$.
+    \item Extend the basis in~(a) to a basis of $\mathcal{P}_4(\R)$.
+    \item Find a subspace $W$ of $\mathcal{P}_4(\R)$ such that $\mathcal{P}_4(\R) = U \oplus W$.
+  \end{enumerate}
+\end{exercise}
+
+\exerciseheader{2C}{5}
+\begin{exercise}{5}
+  \begin{enumerate}[label=(\alph*)]
+    \item Let $U = \{p \in \mathcal{P}_4(\F) : p(2) = p(5)\}$. Find a basis of $U$.
+    \item Extend the basis in~(a) to a basis of $\mathcal{P}_4(\F)$.
+    \item Find a subspace $W$ of $\mathcal{P}_4(\F)$ such that $\mathcal{P}_4(\F) = U \oplus W$.
+  \end{enumerate}
+\end{exercise}
+
+\exerciseheader{2C}{6}
+\begin{exercise}{6}
+  \begin{enumerate}[label=(\alph*)]
+    \item Let $U = \{p \in \mathcal{P}_4(\F) : p(2) = p(5) = p(6)\}$. Find a basis of $U$.
+    \item Extend the basis in~(a) to a basis of $\mathcal{P}_4(\F)$.
+    \item Find a subspace $W$ of $\mathcal{P}_4(\F)$ such that $\mathcal{P}_4(\F) = U \oplus W$.
+  \end{enumerate}
+\end{exercise}
+
+\exerciseheader{2C}{7}
+\begin{exercise}{7}
+  \begin{enumerate}[label=(\alph*)]
+    \item Let $U = \bigl\{p \in \mathcal{P}_4(\R) : \int_{-1}^{1} p = 0\bigr\}$. Find a basis of $U$.
+    \item Extend the basis in~(a) to a basis of $\mathcal{P}_4(\R)$.
+    \item Find a subspace $W$ of $\mathcal{P}_4(\R)$ such that $\mathcal{P}_4(\R) = U \oplus W$.
+  \end{enumerate}
+\end{exercise}
+
+\exerciseheader{2C}{8}
+\begin{exercise}{8}
+  Suppose $v_1, \ldots, v_m$ is linearly independent in $V$ and $w \in V$. Prove that
+  \[
+    \dim \operatorname{span}(v_1 + w, \ldots, v_m + w) \geq m - 1.
+  \]
+\end{exercise}
+
+\end{document}

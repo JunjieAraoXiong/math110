@@ -1,0 +1,280 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{fancyhdr}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage{microtype}
+
+% ── Color matching the PDF ──
+\definecolor{headercolor}{RGB}{0,128,128}
+
+% ── Bold math shortcuts ──
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\F}{\mathbf{F}}
+\newcommand{\Z}{\mathbf{Z}}
+
+% ── Page style ──
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{Edward Frenkel}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ── Exercise header command ──
+% \exerciseheader{section}{number} produces the teal header line
+\newcommand{\exerciseheader}[2]{%
+  \newpage
+  \fancyhead[L]{\textcolor{headercolor}{Instructor's Solutions Manual, Section #1}}%
+  \fancyhead[R]{\textcolor{headercolor}{Exercise #2}}%
+  \renewcommand{\headrulewidth}{0.4pt}%
+  \renewcommand{\headrule}{\hbox to\headwidth{%
+    \color{headercolor}\leaders\hrule height \headrulewidth\hfill}}%
+}
+
+% ── Exercise environment ──
+\newcounter{exnum}
+\newenvironment{exercise}[1]{%
+  \setcounter{exnum}{#1}%
+  \par\medskip\noindent\textbf{\theexnum}\quad\ignorespaces
+}{\par\medskip}
+
+\begin{document}
+
+% ── Section 1A ──
+
+\exerciseheader{1A}{1}
+\begin{exercise}{1}
+  Show that $\alpha + \beta = \beta + \alpha$ for all $\alpha, \beta \in \C$.
+\end{exercise}
+
+\exerciseheader{1A}{5}
+\begin{exercise}{5}
+  Show that for every $\alpha \in \C$, there exists a unique $\beta \in \C$ such that $\alpha + \beta = 0$.
+\end{exercise}
+
+\exerciseheader{1A}{6}
+\begin{exercise}{6}
+  Show that for every $\alpha \in \C$ with $\alpha \neq 0$, there exists a unique $\beta \in \C$ such that $\alpha\beta = 1$.
+\end{exercise}
+
+\exerciseheader{1A}{7}
+\begin{exercise}{7}
+  Show that
+  \[
+    \frac{-1 + \sqrt{3}\,i}{2}
+  \]
+  is a cube root of 1 (meaning that its cube equals 1).
+\end{exercise}
+
+\exerciseheader{1A}{8}
+\begin{exercise}{8}
+  Find two distinct square roots of $i$.
+\end{exercise}
+
+\exerciseheader{1A}{10}
+\begin{exercise}{10}
+  Explain why there does not exist $\lambda \in \C$ such that
+  \[
+    \lambda(2 - 3i, 5 + 4i, -6 + 7i) = (12 - 5i, 7 + 22i, -32 - 9i).
+  \]
+\end{exercise}
+
+% ── Section 1B ──
+
+\exerciseheader{1B}{1}
+\begin{exercise}{1}
+  Prove that $-(-v) = v$ for every $v \in V$.
+\end{exercise}
+
+\exerciseheader{1B}{2}
+\begin{exercise}{2}
+  Suppose $a \in \F$, $v \in V$, and $av = 0$. Prove that $a = 0$ or $v = 0$.
+\end{exercise}
+
+\exerciseheader{1B}{3}
+\begin{exercise}{3}
+  Suppose $v, w \in V$. Explain why there exists a unique $x \in V$ such that $v + 3x = w$.
+\end{exercise}
+
+\exerciseheader{1B}{4}
+\begin{exercise}{4}
+  The empty set is not a vector space. The empty set fails to satisfy only one of the requirements listed in the definition of a vector space (1.20). Which one?
+\end{exercise}
+
+\exerciseheader{1B}{5}
+\begin{exercise}{5}
+  Show that in the definition of a vector space (1.20), the additive inverse condition can be replaced with the condition that
+  \[
+    0v = 0 \text{ for all } v \in V.
+  \]
+  Here the $0$ on the left side is the number $0$, and the $0$ on the right side is the additive identity of $V$.
+
+  \textit{The phrase a ``condition can be replaced'' in a definition means that the collection of objects satisfying the definition is unchanged if the original condition is replaced with the new condition.}
+\end{exercise}
+
+\exerciseheader{1B}{7}
+\begin{exercise}{7}
+  Suppose $S$ is a nonempty set. Let $V^S$ denote the set of functions from $S$ to $V$. Define a natural addition and scalar multiplication on $V^S$, and show that $V^S$ is a vector space with these definitions.
+\end{exercise}
+
+\exerciseheader{1B}{8}
+\begin{exercise}{8}
+  Suppose $V$ is a real vector space.
+  \begin{itemize}
+    \item The \textit{complexification} of $V$, denoted by $V_\C$, equals $V \times V$. An element of $V_\C$ is an ordered pair $(u, v)$, where $u, v \in V$, but we write this as $u + iv$.
+    \item Addition on $V_\C$ is defined by
+      \[
+        (u_1 + iv_1) + (u_2 + iv_2) = (u_1 + u_2) + i(v_1 + v_2)
+      \]
+      for all $u_1, v_1, u_2, v_2 \in V$.
+    \item Complex scalar multiplication on $V_\C$ is defined by
+      \[
+        (a + bi)(u + iv) = (au - bv) + i(av + bu)
+      \]
+      for all $a, b \in \R$ and all $u, v \in V$.
+  \end{itemize}
+  Prove that with the definitions of addition and scalar multiplication as above, $V_\C$ is a complex vector space.
+
+  \textit{Think of $V$ as a subset of $V_\C$ by identifying $u \in V$ with $u + i0$. The construction of $V_\C$ from $V$ can then be thought of as generalizing the construction of\/ $\C^n$ from $\R^n$.}
+\end{exercise}
+
+% ── Section 1C ──
+
+\exerciseheader{1C}{1}
+\begin{exercise}{1}
+  For each of the following subsets of $\F^3$, determine whether it is a subspace of $\F^3$.
+  \begin{enumerate}[label=(\alph*)]
+    \item $\{(x_1, x_2, x_3) \in \F^3 : x_1 + 2x_2 + 3x_3 = 0\}$
+    \item $\{(x_1, x_2, x_3) \in \F^3 : x_1 + 2x_2 + 3x_3 = 4\}$
+    \item $\{(x_1, x_2, x_3) \in \F^3 : x_1 x_2 x_3 = 0\}$
+    \item $\{(x_1, x_2, x_3) \in \F^3 : x_1 = 5x_3\}$
+  \end{enumerate}
+\end{exercise}
+
+\exerciseheader{1C}{3}
+\begin{exercise}{3}
+  Show that the set of differentiable real-valued functions $f$ on the interval $(-4, 4)$ such that $f'(-1) = 3f(2)$ is a subspace of $\R^{(-4,4)}$.
+\end{exercise}
+
+\exerciseheader{1C}{6}
+\begin{exercise}{6}
+  \begin{enumerate}[label=(\alph*)]
+    \item Is $\{(a, b, c) \in \R^3 : a^3 = b^3\}$ a subspace of $\R^3$?
+    \item Is $\{(a, b, c) \in \C^3 : a^3 = b^3\}$ a subspace of $\C^3$?
+  \end{enumerate}
+\end{exercise}
+
+\exerciseheader{1C}{7}
+\begin{exercise}{7}
+  Prove or give a counterexample: If $U$ is a nonempty subset of $\R^2$ such that $U$ is closed under addition and under taking additive inverses (meaning $-u \in U$ whenever $u \in U$), then $U$ is a subspace of $\R^2$.
+\end{exercise}
+
+\exerciseheader{1C}{8}
+\begin{exercise}{8}
+  Give an example of a nonempty subset $U$ of $\R^2$ such that $U$ is closed under scalar multiplication, but $U$ is not a subspace of $\R^2$.
+\end{exercise}
+
+\exerciseheader{1C}{9}
+\begin{exercise}{9}
+  A function $f\colon \R \to \R$ is called \textit{periodic} if there exists a positive number $p$ such that $f(x) = f(x + p)$ for all $x \in \R$. Is the set of periodic functions from $\R$ to $\R$ a subspace of $\R^\R$? Explain.
+\end{exercise}
+
+\exerciseheader{1C}{10}
+\begin{exercise}{10}
+  Suppose $V_1$ and $V_2$ are subspaces of $V$. Prove that the intersection $V_1 \cap V_2$ is a subspace of $V$.
+\end{exercise}
+
+\exerciseheader{1C}{11}
+\begin{exercise}{11}
+  Prove that the intersection of every collection of subspaces of $V$ is a subspace of $V$.
+\end{exercise}
+
+\exerciseheader{1C}{12}
+\begin{exercise}{12}
+  Prove that the union of two subspaces of $V$ is a subspace of $V$ if and only if one of the subspaces is contained in the other.
+\end{exercise}
+
+\exerciseheader{1C}{13}
+\begin{exercise}{13}
+  Prove that the union of three subspaces of $V$ is a subspace of $V$ if and only if one of the subspaces contains the other two.
+
+  \textit{This exercise is surprisingly harder than Exercise 12, possibly because this exercise is not true if we replace\/ $\F$ with a field containing only two elements.}
+\end{exercise}
+
+\exerciseheader{1C}{14}
+\begin{exercise}{14}
+  Suppose
+  \[
+    U = \{(x, -x, 2x) \in \F^3 : x \in \F\} \quad \text{and} \quad W = \{(x, x, 2x) \in \F^3 : x \in \F\}.
+  \]
+  Describe $U + W$ using symbols, and also give a description of $U + W$ that uses no symbols.
+\end{exercise}
+
+\exerciseheader{1C}{15}
+\begin{exercise}{15}
+  Suppose $U$ is a subspace of $V$. What is $U + U$?
+\end{exercise}
+
+\exerciseheader{1C}{19}
+\begin{exercise}{19}
+  Prove or give a counterexample: If $V_1$, $V_2$, $U$ are subspaces of $V$ such that
+  \[
+    V_1 + U = V_2 + U,
+  \]
+  then $V_1 = V_2$.
+\end{exercise}
+
+\exerciseheader{1C}{20}
+\begin{exercise}{20}
+  Suppose
+  \[
+    U = \{(x, x, y, y) \in \F^4 : x, y \in \F\}.
+  \]
+  Find a subspace $W$ of $\F^4$ such that $\F^4 = U \oplus W$.
+\end{exercise}
+
+\exerciseheader{1C}{21}
+\begin{exercise}{21}
+  Suppose
+  \[
+    U = \{(x, y, x + y, x - y, 2x) \in \F^5 : x, y \in \F\}.
+  \]
+  Find a subspace $W$ of $\F^5$ such that $\F^5 = U \oplus W$.
+\end{exercise}
+
+\exerciseheader{1C}{22}
+\begin{exercise}{22}
+  Suppose
+  \[
+    U = \{(x, y, x + y, x - y, 2x) \in \F^5 : x, y \in \F\}.
+  \]
+  Find three subspaces $W_1$, $W_2$, $W_3$ of $\F^5$, none of which equals $\{0\}$, such that $\F^5 = U \oplus W_1 \oplus W_2 \oplus W_3$.
+\end{exercise}
+
+\exerciseheader{1C}{23}
+\begin{exercise}{23}
+  Prove or give a counterexample: If $V_1$, $V_2$, $U$ are subspaces of $V$ such that
+  \[
+    V = V_1 \oplus U \quad \text{and} \quad V = V_2 \oplus U,
+  \]
+  then $V_1 = V_2$.
+
+  \textit{Hint: When trying to discover whether a conjecture in linear algebra is true or false, it is often useful to start by experimenting in\/ $\F^2$.}
+\end{exercise}
+
+\exerciseheader{1C}{24}
+\begin{exercise}{24}
+  A function $f\colon \R \to \R$ is called \textit{even} if
+  \[
+    f(-x) = f(x)
+  \]
+  for all $x \in \R$. A function $f\colon \R \to \R$ is called \textit{odd} if
+  \[
+    f(-x) = -f(x)
+  \]
+  for all $x \in \R$. Let $V_\mathrm{e}$ denote the set of real-valued even functions on $\R$ and let $V_\mathrm{o}$ denote the set of real-valued odd functions on $\R$. Show that $\R^\R = V_\mathrm{e} \oplus V_\mathrm{o}$.
+\end{exercise}
+
+\end{document}

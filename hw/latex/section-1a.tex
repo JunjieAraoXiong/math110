@@ -1,0 +1,151 @@
+% ── Section 1A ──
+
+\exerciseheader{1A}{1}
+\begin{exercise}{1}
+  Show that $\alpha + \beta = \beta + \alpha$ for all $\alpha, \beta \in \C$.
+\end{exercise}
+\begin{solution}
+  Suppose
+  \[
+    \alpha = a + bi \quad \text{and} \quad \beta = c + di,
+  \]
+  where $a, b, c, d \in \R$. Then
+  \begin{align*}
+    \alpha + \beta &= (a + bi) + (c + di) \\
+                   &= (a + c) + (b + d)i \\
+                   &= (c + a) + (d + b)i \\
+                   &= (c + di) + (a + bi) \\
+                   &= \beta + \alpha,
+  \end{align*}
+  where the second and fourth equalities hold because of the definition of addition in $\C$ and the third equality holds because of addition is commutative on $\R$.
+\end{solution}
+
+\exerciseheader{1A}{5}
+\begin{exercise}{5}
+  Show that for every $\alpha \in \C$, there exists a unique $\beta \in \C$ such that $\alpha + \beta = 0$.
+\end{exercise}
+\begin{solution}
+  Suppose $\alpha = a + bi$, where $a, b \in \R$. Let $\beta = -a - bi$. Then the definition of complex addition shows that
+  \[
+    \alpha + \beta = 0.
+  \]
+
+  Suppose $\lambda \in \C$ is such that
+  \[
+    \alpha + \lambda = 0.
+  \]
+  Adding $\beta$ to both sides of the equation above shows that $\lambda = \beta$. Thus $\alpha$ has a unique additive inverse.
+\end{solution}
+
+\exerciseheader{1A}{6}
+\begin{exercise}{6}
+  Show that for every $\alpha \in \C$ with $\alpha \neq 0$, there exists a unique $\beta \in \C$ such that $\alpha\beta = 1$.
+\end{exercise}
+\begin{solution}
+  Suppose $\alpha = a + bi$, where $a, b \in \R$ with at least one of $a, b$ not equal to~0. Suppose $c, d \in \R$ are such that
+  \[
+    (a + bi)(c + di) = 1.
+  \]
+  Multiply both sides of the equation above by $a - bi$, getting
+  \[
+    (a^2 + b^2)(c + di) = a - bi.
+  \]
+  Thus
+  \[
+    (a^2 + b^2)c = a \quad \text{and} \quad (a^2 + b^2)d = -b,
+  \]
+  which implies that
+  \[
+    c = \frac{a}{a^2 + b^2} \quad \text{and} \quad d = \frac{-b}{a^2 + b^2}.
+  \]
+  The equations above show that there is at most one $\beta \in \C$ such that $\alpha\beta = 1$.
+
+  The equations above motivate us to define $\beta \in \C$ by
+  \[
+    \beta = \frac{a}{a^2 + b^2} - \frac{b}{a^2 + b^2}i.
+  \]
+  The definition of complex multiplication shows that
+  \[
+    \alpha\beta = 1.
+  \]
+\end{solution}
+
+\exerciseheader{1A}{7}
+\begin{exercise}{7}
+  Show that
+  \[
+    \frac{-1 + \sqrt{3}\,i}{2}
+  \]
+  is a cube root of 1 (meaning that its cube equals 1).
+\end{exercise}
+\begin{solution}
+  Using the definition of complex multiplication, we have
+  \[
+    \Bigl(\frac{-1 + \sqrt{3}\,i}{2}\Bigr)^2 = \frac{-1 - \sqrt{3}\,i}{2}.
+  \]
+  Thus
+  \begin{align*}
+    \Bigl(\frac{-1 + \sqrt{3}\,i}{2}\Bigr)^3
+      &= \Bigl(\frac{-1 - \sqrt{3}\,i}{2}\Bigr)\Bigl(\frac{-1 + \sqrt{3}\,i}{2}\Bigr) \\
+      &= 1.
+  \end{align*}
+\end{solution}
+
+\exerciseheader{1A}{8}
+\begin{exercise}{8}
+  Find two distinct square roots of $i$.
+\end{exercise}
+\begin{solution}
+  Suppose $a$ and $b$ are real numbers such that
+  \[
+    (a + bi)^2 = i.
+  \]
+  Then
+  \begin{align*}
+    i &= (a + bi)^2 \\
+      &= (a^2 - b^2) + 2abi.
+  \end{align*}
+  Thus
+  \[
+    a^2 = b^2 \quad \text{and} \quad 2ab = 1.
+  \]
+
+  The equation $a^2 = b^2$ implies that $a = b$ or $a = -b$. However, if $a = -b$, the equation $2ab = 1$ implies that $-2b^2 = 1$, which is impossible because $b$ is a real number.
+
+  Thus we have $a = b$. The equation $2ab = 1$ now becomes the equation $2b^2 = 1$, which leads to $a = b = \pm\frac{\sqrt{2}}{2}$.
+
+  Hence the only two possibilities for square roots of $i$ are
+  \[
+    \frac{\sqrt{2}}{2} + \frac{\sqrt{2}}{2}\,i \quad \text{and} \quad -\frac{\sqrt{2}}{2} - \frac{\sqrt{2}}{2}\,i.
+  \]
+  Squaring each of the numbers above gives $i$. Thus the two numbers above are indeed square roots of $i$.
+\end{solution}
+
+\exerciseheader{1A}{10}
+\begin{exercise}{10}
+  Explain why there does not exist $\lambda \in \C$ such that
+  \[
+    \lambda(2 - 3i, 5 + 4i, -6 + 7i) = (12 - 5i, 7 + 22i, -32 - 9i).
+  \]
+\end{exercise}
+\begin{solution}
+  The equation above is equivalent to the equation
+  \[
+    \bigl(\lambda(2 - 3i), \lambda(5 + 4i), \lambda(-6 + 7i)\bigr) = (12 - 5i, 7 + 22i, -32 - 9i),
+  \]
+  which is equivalent to the three equations
+  \[
+    \lambda(2 - 3i) = 12 - 5i, \quad \lambda(5 + 4i) = 7 + 22i, \quad \lambda(-6 + 7i) = -32 - 9i.
+  \]
+  The first equation above implies that
+  \begin{align*}
+    \lambda &= \frac{12 - 5i}{2 - 3i} \\[6pt]
+            &= \frac{12 - 5i}{2 - 3i} \cdot \frac{2 + 3i}{2 + 3i} \\[6pt]
+            &= \frac{(24 + 15) + (36 - 10)i}{2^2 + 3^2} \\[6pt]
+            &= 3 + 2i.
+  \end{align*}
+
+  The choice of $\lambda$ forced by the equation above indeed satisfies the second required equation $\lambda(5 + 4i) = 7 + 22i$. However, with this choice of $\lambda$ we have $\lambda(-6 + 7i) = -32 + 9i$, which shows that the third required equation is not satisfied.
+
+  Thus no choice of $\lambda \in \C$ satisfies all three required equations.
+\end{solution}

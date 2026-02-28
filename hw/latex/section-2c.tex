@@ -1,0 +1,192 @@
+% ── Section 2C ──
+
+\exerciseheader{2C}{1}
+\begin{exercise}{1}
+  Show that the subspaces of $\R^2$ are precisely $\{0\}$, all lines in $\R^2$ containing the origin, and $\R^2$.
+\end{exercise}
+\begin{solution}
+  The set $\{0\}$, the set $\R^2$, and all lines in $\R^2$ through the origin are all subspaces of $\R^2$.
+
+  To show that there are no other subspaces of $\R^2$, suppose $U$ is a subspace of $\R^2$. Then by~2.37, $\dim U$ equals $0$, $1$, or $2$.
+
+  If $\dim U = 0$, then $U = \{0\}$.
+
+  If $\dim U = 1$, then there is a basis of $U$ consisting of one vector $v$, and $U$ equals all scalar multiples of $v$; thus $U$ is a line through the origin.
+
+  If $\dim U = 2$, then $U = \R^2$.
+\end{solution}
+
+\exerciseheader{2C}{2}
+\begin{exercise}{2}
+  Show that the subspaces of $\R^3$ are precisely $\{0\}$, all lines in $\R^3$ containing the origin, all planes in $\R^3$ containing the origin, and $\R^3$.
+\end{exercise}
+\begin{solution}
+  The set $\{0\}$, the set $\R^3$, all lines in $\R^3$ through the origin, and all planes in $\R^3$ through the origin are all subspaces of $\R^3$.
+
+  To show that there are no other subspaces of $\R^3$, suppose $U$ is a subspace of $\R^3$. Then by~2.37, $\dim U$ equals $0$, $1$, $2$, or $3$.
+
+  If $\dim U = 0$, then $U = \{0\}$.
+
+  If $\dim U = 1$, then there is a basis of $U$ consisting of one vector $v$, and $U$ equals all scalar multiples of $v$; thus $U$ is a line through the origin.
+
+  If $\dim U = 2$, then there is a basis $v_1, v_2$ of the subspace $U$, and hence $U$ equals $\operatorname{span}(v_1, v_2)$; thus $U$ is a plane through the origin.
+
+  If $\dim U = 3$, then $U = \R^3$.
+\end{solution}
+
+\exerciseheader{2C}{3}
+\begin{exercise}{3}
+  \begin{enumerate}[label=(\alph*)]
+    \item Let $U = \{p \in \mathcal{P}_4(\F) : p(6) = 0\}$. Find a basis of $U$.
+    \item Extend the basis in~(a) to a basis of $\mathcal{P}_4(\F)$.
+    \item Find a subspace $W$ of $\mathcal{P}_4(\F)$ such that $\mathcal{P}_4(\F) = U \oplus W$.
+  \end{enumerate}
+\end{exercise}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item A basis of $U$ is
+    \[
+      x - 6,\, (x-6)^2,\, (x-6)^3,\, (x-6)^4.
+    \]
+
+    To verify that the list above is indeed a basis of $U$, first note that the list above is linearly independent (using the same reasoning as was used in Example~2.41 to show that the list in that example is linearly independent). Then note that the linearly independent list above has length four, and thus $\dim U \geq 4$. However, $\dim \mathcal{P}_4(\F) = 5$, which implies that $\dim U = 4$ or $\dim U = 5$. Because $U$ is a proper subspace of $\mathcal{P}_4(\F)$, this implies that $\dim U = 4$. Hence the list above is a basis of $U$.
+
+    \item The constant function $1$ clearly is not in $U$. Thus
+    \[
+      x - 6,\, (x-6)^2,\, (x-6)^3,\, (x-6)^4,\, 1
+    \]
+    is a linearly independent list in $\mathcal{P}_4(\F)$ of length five. By~2.38, the list above is a basis of $\mathcal{P}_4(\F)$.
+
+    \item Using the idea of the proof of~2.33 and the answer above to~(b), we see that taking $W$ to be the subspace of $\mathcal{P}_4(\F)$ consisting of the constant functions gives a subspace $W$ such that $\mathcal{P}_4(\F) = U \oplus W$.
+  \end{enumerate}
+\end{solution}
+
+\exerciseheader{2C}{4}
+\begin{exercise}{4}
+  \begin{enumerate}[label=(\alph*)]
+    \item Let $U = \{p \in \mathcal{P}_4(\R) : p''(6) = 0\}$. Find a basis of $U$.
+    \item Extend the basis in~(a) to a basis of $\mathcal{P}_4(\R)$.
+    \item Find a subspace $W$ of $\mathcal{P}_4(\R)$ such that $\mathcal{P}_4(\R) = U \oplus W$.
+  \end{enumerate}
+\end{exercise}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item A basis of $U$ is
+    \[
+      1,\, x-6,\, (x-6)^3,\, (x-6)^4.
+    \]
+
+    Each polynomial in the list above is clearly in $U$. To verify that the list above is indeed a basis of $U$, first note that the list above is linearly independent (using the same reasoning as was used in Example~2.41 to show that the list in that example is linearly independent). Then note that the linearly independent list above has length four, and thus $\dim U \geq 4$. However, $\dim \mathcal{P}_4(\R) = 5$, which implies that $\dim U = 4$ or $\dim U = 5$. Because $U$ is a proper subspace of $\mathcal{P}_4(\R)$, this implies that $\dim U = 4$. Hence the list above is a basis of $U$.
+
+    \item The polynomial $(x-2)^2$ clearly is not in $U$. Thus
+    \[
+      1,\, x-6,\, (x-6)^3,\, (x-6)^4,\, (x-6)^2
+    \]
+    is a linearly independent list in $\mathcal{P}_4(\R)$ of length five. By~2.38, the list above is a basis of $\mathcal{P}_4(\R)$.
+
+    \item Using the idea of the proof of~2.33 and the answer above to~(b), we see that taking $W$ to be the subspace of $\mathcal{P}_4(\R)$ consisting of the constant multiples of $(x-6)^2$ gives a subspace $W$ such that $\mathcal{P}_4(\R) = U \oplus W$.
+  \end{enumerate}
+\end{solution}
+
+\exerciseheader{2C}{5}
+\begin{exercise}{5}
+  \begin{enumerate}[label=(\alph*)]
+    \item Let $U = \{p \in \mathcal{P}_4(\F) : p(2) = p(5)\}$. Find a basis of $U$.
+    \item Extend the basis in~(a) to a basis of $\mathcal{P}_4(\F)$.
+    \item Find a subspace $W$ of $\mathcal{P}_4(\F)$ such that $\mathcal{P}_4(\F) = U \oplus W$.
+  \end{enumerate}
+\end{exercise}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item A basis of $U$ is
+    \[
+      1,\, (x-2)(x-5),\, (x-2)^2(x-5),\, (x-2)^3(x-5).
+    \]
+
+    Each polynomial in the list above is clearly in $U$. To verify that the list above is indeed a basis of $U$, first note that the list above is linearly independent (using the same reasoning as was used in Example~2.41 to show that the list in that example is linearly independent). Then note that the linearly independent list above has length four, and thus $\dim U \geq 4$. However, $\dim \mathcal{P}_4(\F) = 5$, which implies that $\dim U = 4$ or $\dim U = 5$. Because $U$ is a proper subspace of $\mathcal{P}_4(\F)$, this implies that $\dim U = 4$. Hence the list above is a basis of $U$.
+
+    \item The polynomial $x$ clearly is not in $U$. Thus
+    \[
+      1,\, (x-2)(x-5),\, (x-2)^2(x-5),\, (x-2)^3(x-5),\, x
+    \]
+    is a linearly independent list in $\mathcal{P}_4(\F)$ of length five. By~2.38, the list above is a basis of $\mathcal{P}_4(\F)$.
+
+    \item Using the idea of the proof of~2.33 and the answer above to~(b), we see that taking $W$ to be the subspace of $\mathcal{P}_4(\F)$ consisting of the constant multiples of $x$ gives a subspace $W$ such that $\mathcal{P}_4(\F) = U \oplus W$.
+  \end{enumerate}
+\end{solution}
+
+\exerciseheader{2C}{6}
+\begin{exercise}{6}
+  \begin{enumerate}[label=(\alph*)]
+    \item Let $U = \{p \in \mathcal{P}_4(\F) : p(2) = p(5) = p(6)\}$. Find a basis of $U$.
+    \item Extend the basis in~(a) to a basis of $\mathcal{P}_4(\F)$.
+    \item Find a subspace $W$ of $\mathcal{P}_4(\F)$ such that $\mathcal{P}_4(\F) = U \oplus W$.
+  \end{enumerate}
+\end{exercise}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item A basis of $U$ is
+    \[
+      1,\, (x-2)(x-5)(x-6),\, (x-2)^2(x-5)(x-6).
+    \]
+
+    Each polynomial in the list above is clearly in $U$. To verify that the list above is indeed a basis of $U$, first note that the list above is linearly independent (using the same reasoning as was used in Example~2.41 to show that the list in that example is linearly independent). Then note that the linearly independent list above has length three and thus $\dim U \geq 3$. However, $U$ is a proper subspace of $\{p \in \mathcal{P}_4(\F) : p(2) = p(5)\}$, which from the solution to Exercise~5 has dimension four. This implies that $\dim U = 3$. Hence the list above is a basis of $U$.
+
+    \item The list
+    \[
+      1,\, (x-2)(x-5)(x-6),\, (x-2)^2(x-5)(x-6),\, x,\, x^2
+    \]
+    is a linearly independent list in $\mathcal{P}_4(\F)$ of length five. By~2.38, the list above is a basis of $\mathcal{P}_4(\F)$.
+
+    \item Using the idea of the proof of~2.33 and the answer above to~(b), we see that taking $W = \operatorname{span}(x, x^2)$ gives a subspace $W$ such that $\mathcal{P}_4(\F) = U \oplus W$.
+  \end{enumerate}
+\end{solution}
+
+\exerciseheader{2C}{7}
+\begin{exercise}{7}
+  \begin{enumerate}[label=(\alph*)]
+    \item Let $U = \bigl\{p \in \mathcal{P}_4(\R) : \int_{-1}^{1} p = 0\bigr\}$. Find a basis of $U$.
+    \item Extend the basis in~(a) to a basis of $\mathcal{P}_4(\R)$.
+    \item Find a subspace $W$ of $\mathcal{P}_4(\R)$ such that $\mathcal{P}_4(\R) = U \oplus W$.
+  \end{enumerate}
+\end{exercise}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item A basis of $U$ is
+    \[
+      x,\, x^2 - \tfrac{1}{3},\, x^3,\, x^4 - \tfrac{1}{5}.
+    \]
+
+    Simple calculus shows that each polynomial in the list above is in $U$. To verify that the list above is indeed a basis of $U$, first note that the list above is linearly independent (using the same reasoning as was used in Example~2.41 to show that the list in that example is linearly independent). Then note that the linearly independent list above has length four, and thus $\dim U \geq 4$. However, $\dim \mathcal{P}_4(\R) = 5$, which implies that $\dim U = 4$ or $\dim U = 5$. Because $U$ is a proper subspace of $\mathcal{P}_4(\R)$, this implies that $\dim U = 4$. Hence the list above is a basis of $U$.
+
+    \item The constant polynomial $1$ clearly is not in $U$. Thus
+    \[
+      x,\, x^2 - \tfrac{1}{3},\, x^3,\, x^4 - \tfrac{1}{5},\, 1
+    \]
+    is a linearly independent list in $\mathcal{P}_4(\R)$ of length five. By~2.38, the list above is a basis of $\mathcal{P}_4(\R)$.
+
+    \item Using the idea of the proof of~2.33 and the answer above to~(b), we see that taking $W$ to be the subspace of $\mathcal{P}_4(\R)$ consisting of the constant polynomials gives a subspace $W$ such that $\mathcal{P}_4(\R) = U \oplus W$.
+  \end{enumerate}
+\end{solution}
+
+\exerciseheader{2C}{8}
+\begin{exercise}{8}
+  Suppose $v_1, \ldots, v_m$ is linearly independent in $V$ and $w \in V$. Prove that
+  \[
+    \dim \operatorname{span}(v_1 + w, \ldots, v_m + w) \geq m - 1.
+  \]
+\end{exercise}
+\begin{solution}
+  We have
+  \[
+    v_k - v_m = (v_k + w) - (v_m + w) \in \operatorname{span}(v_1 + w, \ldots, v_m + w)
+  \]
+  for $k = 1, 2, \ldots, m-1$. Because $v_1, \ldots, v_m$ is linearly independent, it is easy to see that
+  \[
+    v_1 - v_m, v_2 - v_m, \ldots, v_{m-1} - v_m
+  \]
+  is also linearly independent. Thus we have a linearly independent list of length $m - 1$ in $\operatorname{span}(v_1 + w, \ldots, v_m + w)$. Hence
+  \[
+    \dim \operatorname{span}(v_1 + w, \ldots, v_m + w) \geq m - 1.
+  \]
+\end{solution}

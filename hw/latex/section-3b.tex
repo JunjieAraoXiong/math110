@@ -1,0 +1,698 @@
+% ── Section 3B ──
+
+\exerciseheader{3B}{1}
+\begin{exercise}{1}
+  Give an example of a linear map $T$ with $\dim \operatorname{null} T = 3$ and $\dim \operatorname{range} T = 2$.
+\end{exercise}
+\begin{solution}
+  Define $T \in \mathcal{L}(\R^5, \R^2)$ by
+  \[
+    T(x_1, x_2, x_3, x_4, x_5) = (x_1, x_2).
+  \]
+  Then $\operatorname{null} T = \{(0, 0, x_3, x_4, x_5) : x_3, x_4, x_5 \in \R\}$, which has dimension three, and $\operatorname{range} T = \R^2$, which has dimension two.
+\end{solution}
+
+\exerciseheader{3B}{2}
+\begin{exercise}{2}
+  Suppose $S, T \in \mathcal{L}(V)$ are such that $\operatorname{range} S \subseteq \operatorname{null} T$. Prove that $(ST)^2 = 0$.
+\end{exercise}
+\begin{solution}
+  Suppose $v \in V$. Then
+  \[
+    (ST)^2 v = ST(S(Tv)).
+  \]
+  Now $S(Tv) \in \operatorname{range} S \subseteq \operatorname{null} T$. Thus $T(S(Tv)) = 0$. Hence the equation above shows that $(ST)^2 v = 0$. Thus $(ST)^2 = 0$.
+\end{solution}
+
+\exerciseheader{3B}{3}
+\begin{exercise}{3}
+  Suppose $v_1, \dots, v_m$ is a list of vectors in $V$. Define $T \in \mathcal{L}(\F^m, V)$ by
+  \[
+    T(z_1, \dots, z_m) = z_1 v_1 + \cdots + z_m v_m.
+  \]
+  \begin{enumerate}[label=(\alph*)]
+    \item What property of $T$ corresponds to $v_1, \dots, v_m$ spanning $V$?
+    \item What property of $T$ corresponds to the list $v_1, \dots, v_m$ being linearly independent?
+  \end{enumerate}
+\end{exercise}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item The list $v_1, \dots, v_m$ spans $V$ if and only if $T$ is surjective.
+    \item The list $v_1, \dots, v_m$ is linearly independent if and only if $T$ is injective.
+  \end{enumerate}
+\end{solution}
+
+\exerciseheader{3B}{4}
+\begin{exercise}{4}
+  Show that $\{T \in \mathcal{L}(\R^5, \R^4) : \dim \operatorname{null} T > 2\}$ is not a subspace of $\mathcal{L}(\R^5, \R^4)$.
+\end{exercise}
+\begin{solution}
+  Define $S, T \in \mathcal{L}(\R^5, \R^4)$ by
+  \[
+    S(x_1, x_2, x_3, x_4, x_5) = (x_1, x_2, 0, 0)
+  \]
+  and
+  \[
+    T(x_1, x_2, x_3, x_4, x_5) = (0, 0, x_3, x_4).
+  \]
+  Then
+  \[
+    \operatorname{null} S = \{(0, 0, x_3, x_4, x_5) : x_3, x_4, x_5 \in \R\}
+  \]
+  and
+  \[
+    \operatorname{null} T = \{(x_1, x_2, 0, 0, x_5) : x_1, x_2, x_5 \in \R\}.
+  \]
+  Thus $\dim \operatorname{null} S = \dim \operatorname{null} T = 3$. However,
+  \[
+    (S + T)(x_1, x_2, x_3, x_4, x_5) = (x_1, x_2, x_3, x_4).
+  \]
+  Thus $\operatorname{null}(S + T) = \{(0, 0, 0, 0, x_5) : x_5 \in \R\}$, which has dimension one. Thus $\{T \in \mathcal{L}(\R^5, \R^4) : \dim \operatorname{null} T > 2\}$ is not closed under addition and hence is not a subspace of $\mathcal{L}(\R^5, \R^4)$.
+\end{solution}
+
+\exerciseheader{3B}{5}
+\begin{exercise}{5}
+  Give an example of $T \in \mathcal{L}(\R^4)$ such that $\operatorname{range} T = \operatorname{null} T$.
+\end{exercise}
+\begin{solution}
+  Define $T \in \mathcal{L}(\R^4, \R^4)$ by
+  \[
+    T(x_1, x_2, x_3, x_4) = (x_3, x_4, 0, 0).
+  \]
+  Then $\operatorname{range} T = \operatorname{null} T = \{(x_3, x_4, 0, 0) \in \R^4 : x_3, x_4 \in \R\}$.
+\end{solution}
+
+\exerciseheader{3B}{6}
+\begin{exercise}{6}
+  Prove that there does not exist $T \in \mathcal{L}(\R^5)$ such that $\operatorname{range} T = \operatorname{null} T$.
+\end{exercise}
+\begin{solution}
+  Suppose $T \in \mathcal{L}(\R^5, \R^5)$. By the fundamental theorem of linear maps (3.21), we have
+  \[
+    5 = \dim \operatorname{null} T + \dim \operatorname{range} T.
+  \]
+  If $\operatorname{range} T = \operatorname{null} T$, then the right side of the equation above would be an even number, which is a contradiction to the value on the left side. Hence $\operatorname{range} T \neq \operatorname{null} T$.
+\end{solution}
+
+\exerciseheader{3B}{7}
+\begin{exercise}{7}
+  Suppose $V$ and $W$ are finite-dimensional with $2 \leq \dim V \leq \dim W$. Show that $\{T \in \mathcal{L}(V, W) : T \text{ is not injective}\}$ is not a subspace of $\mathcal{L}(V, W)$.
+\end{exercise}
+\begin{solution}
+  Let $v_1, \dots, v_m$ be a basis of $V$ and let $w_1, \dots, w_n$ be a basis of $W$. Thus $2 \leq m \leq n$.
+
+  Using the linear map lemma (3.4), let $S, T \in \mathcal{L}(V, W)$ be such that
+  \[
+    Sv_1 = 0 \quad \text{and} \quad Sv_k = w_k \text{ for } k = 2, \dots, m
+  \]
+  and
+  \[
+    Tv_1 = w_1 \quad \text{and} \quad Tv_k = 0 \text{ for } k = 2, \dots, m.
+  \]
+  Then neither $S$ nor $T$ is injective because $Sv_1 = Tv_2 = 0$. However, $(S + T)v_k = w_k$ for each $k = 1, \dots, m$, and thus $S + T$ is injective (as is easy to see). Hence the set of linear maps from $V$ to $W$ that are not injective is not closed under addition and thus is not a subspace of $\mathcal{L}(V, W)$.
+\end{solution}
+
+\exerciseheader{3B}{8}
+\begin{exercise}{8}
+  Suppose $V$ and $W$ are finite-dimensional with $\dim V \geq \dim W \geq 2$. Show that $\{T \in \mathcal{L}(V, W) : T \text{ is not surjective}\}$ is not a subspace of $\mathcal{L}(V, W)$.
+\end{exercise}
+\begin{solution}
+  Let $v_1, \dots, v_m$ be a basis of $V$ and let $w_1, \dots, w_n$ be a basis of $W$. Thus $m \geq n \geq 2$.
+
+  Using the linear map lemma (3.4), let $S, T \in \mathcal{L}(V, W)$ be such that
+  \[
+    Sv_k = w_k \text{ for } k = 2, \dots, n \quad \text{and} \quad Sv_k = 0 \text{ for } k = 1, n + 1, n + 2, \dots, m
+  \]
+  and
+  \[
+    Tv_1 = w_1 \quad \text{and} \quad Tv_k = 0 \text{ for } k = 2, \dots, m.
+  \]
+  Then neither $S$ nor $T$ is surjective because $w_1 \notin \operatorname{range} S$ and $w_2 \notin \operatorname{range} T$. However, $(S + T)v_k = w_k$ for each $k = 1, \dots, n$, and thus $S + T$ is surjective (as is easy to see). Hence the set of linear maps from $V$ to $W$ that are not surjective is not closed under addition and thus is not a subspace of $\mathcal{L}(V, W)$.
+\end{solution}
+
+\exerciseheader{3B}{9}
+\begin{exercise}{9}
+  Suppose $T \in \mathcal{L}(V, W)$ is injective and $v_1, \dots, v_n$ is linearly independent in $V$. Prove that $Tv_1, \dots, Tv_n$ is linearly independent in $W$.
+\end{exercise}
+\begin{solution}
+  To show that $Tv_1, \dots, Tv_n$ is linearly independent, suppose that $a_1, \dots, a_n \in \F$ are such that
+  \[
+    a_1 Tv_1 + \cdots + a_n Tv_n = 0.
+  \]
+  Because $T$ is a linear map, this equation can be rewritten as
+  \[
+    T(a_1 v_1 + \cdots + a_n v_n) = 0.
+  \]
+  Because $T$ is injective, this implies that
+  \[
+    a_1 v_1 + \cdots + a_n v_n = 0.
+  \]
+  Because $v_1, \dots, v_n$ is linearly independent, the equation above implies that $a_1 = \cdots = a_n = 0$. Thus $Tv_1, \dots, Tv_n$ is linearly independent.
+\end{solution}
+
+\exerciseheader{3B}{10}
+\begin{exercise}{10}
+  Suppose $v_1, \dots, v_n$ spans $V$ and $T \in \mathcal{L}(V, W)$. Show that $Tv_1, \dots, Tv_n$ spans $\operatorname{range} T$.
+\end{exercise}
+\begin{solution}
+  Let $w \in \operatorname{range} T$. Thus there exists $v \in V$ such that $Tv = w$. Because $v_1, \dots, v_n$ spans $V$, there exist $a_1, \dots, a_n \in \F$ such that
+  \[
+    v = a_1 v_1 + \cdots + a_n v_n.
+  \]
+  Applying $T$ to both sides of this equation, we get
+  \[
+    Tv = a_1 Tv_1 + \cdots + a_n Tv_n.
+  \]
+  Because $Tv = w$, the equation above implies that $w \in \operatorname{span}(Tv_1, \dots, Tv_n)$. Because $w$ was an arbitrary vector in $\operatorname{range} T$, this implies that $Tv_1, \dots, Tv_n$ spans $\operatorname{range} T$.
+\end{solution}
+
+\exerciseheader{3B}{11}
+\begin{exercise}{11}
+  Suppose that $V$ is finite-dimensional and that $T \in \mathcal{L}(V, W)$. Prove that there exists a subspace $U$ of $V$ such that
+  \[
+    U \cap \operatorname{null} T = \{0\} \quad \text{and} \quad \operatorname{range} T = \{Tu : u \in U\}.
+  \]
+\end{exercise}
+\begin{solution}
+  There exists a subspace $U$ of $V$ such that
+  \[
+    V = \operatorname{null} T \oplus U;
+  \]
+  this follows from 2.33 (with $\operatorname{null} T$ playing the role of $U$ and $U$ playing the role of $W$).
+
+  From the definition of direct sum, we have $U \cap \operatorname{null} T = \{0\}$.
+
+  Clearly $\operatorname{range} T \supseteq \{Tu : u \in U\}$. To prove the inclusion in the other direction, suppose $v \in V$. Then there exist $w \in \operatorname{null} T$ and $x \in U$ such that
+  \[
+    v = w + x.
+  \]
+  Applying $T$ to both sides of this equation, we have $Tv = Tw + Tx = Tx$. Thus $Tv \in \{Tu : u \in U\}$. Because $v$ was an arbitrary vector in $V$ (and thus $Tv$ is an arbitrary vector in $\operatorname{range} T$), this implies that
+  \[
+    \operatorname{range} T \subseteq \{Tu : u \in U\}.
+  \]
+  Thus $\operatorname{range} T = \{Tu : u \in U\}$, as desired.
+\end{solution}
+
+\exerciseheader{3B}{12}
+\begin{exercise}{12}
+  Suppose $T$ is a linear map from $\F^4$ to $\F^2$ such that
+  \[
+    \operatorname{null} T = \{(x_1, x_2, x_3, x_4) \in \F^4 : x_1 = 5x_2 \text{ and } x_3 = 7x_4\}.
+  \]
+  Prove that $T$ is surjective.
+\end{exercise}
+\begin{solution}
+  The hypothesis implies that $(5, 1, 0, 0)$, $(0, 0, 7, 1)$ is a basis of $\operatorname{null} T$. Hence $\dim \operatorname{null} T = 2$. From the fundamental theorem of linear maps we have
+  \begin{align*}
+    \dim \operatorname{range} T &= \dim \F^4 - \dim \operatorname{null} T \\
+                                &= 4 - 2 \\
+                                &= 2.
+  \end{align*}
+  Because $\operatorname{range} T$ is a two-dimensional subspace of $\F^2$, we have $\operatorname{range} T = \F^2$. In other words, $T$ is surjective.
+\end{solution}
+
+\exerciseheader{3B}{13}
+\begin{exercise}{13}
+  Suppose $U$ is a three-dimensional subspace of $\R^8$ and that $T$ is a linear map from $\R^8$ to $\R^5$ such that $\operatorname{null} T = U$. Prove that $T$ is surjective.
+\end{exercise}
+\begin{solution}
+  From the fundamental theorem of linear maps (3.21), we have
+  \begin{align*}
+    8 &= \dim \operatorname{null} T + \dim \operatorname{range} T \\
+      &= \dim U + \dim \operatorname{range} T \\
+      &= 3 + \dim \operatorname{range} T.
+  \end{align*}
+  Thus $\dim \operatorname{range} T = 5$. Hence $\operatorname{range} T = \R^5$. Thus $T$ is surjective.
+\end{solution}
+
+\exerciseheader{3B}{14}
+\begin{exercise}{14}
+  Prove that there does not exist a linear map from $\F^5$ to $\F^2$ whose null space equals $\{(x_1, x_2, x_3, x_4, x_5) \in \F^5 : x_1 = 3x_2 \text{ and } x_3 = x_4 = x_5\}$.
+\end{exercise}
+\begin{solution}
+  Suppose $U$ is the subspace of $\F^5$ displayed above. Then
+  \[
+    (3, 1, 0, 0, 0),\quad (0, 0, 1, 1, 1)
+  \]
+  is a basis of $U$. Hence $\dim U = 2$.
+
+  If $T \in \mathcal{L}(\F^5, \F^2)$ then from the fundamental theorem of linear maps we have
+  \begin{align*}
+    \dim \operatorname{null} T &= \dim \F^5 - \dim \operatorname{range} T \\
+                               &= 5 - \dim \operatorname{range} T \\
+                               &\geq 3 \\
+                               &> \dim U,
+  \end{align*}
+  where the first inequality holds because $\operatorname{range} T \subseteq \F^2$. The inequality above shows that if $T \in \mathcal{L}(\F^5, \F^2)$, then $\operatorname{null} T \neq U$, as desired.
+\end{solution}
+
+\exerciseheader{3B}{15}
+\begin{exercise}{15}
+  Suppose there exists a linear map on $V$ whose null space and range are both finite-dimensional. Prove that $V$ is finite-dimensional.
+\end{exercise}
+\begin{solution}
+  Suppose $T$ is a linear map from $V$ into some vector space such that $\operatorname{null} T$ and $\operatorname{range} T$ are both finite-dimensional. Thus there exist vectors $u_1, \dots, u_m \in V$ and $w_1, \dots, w_n \in \operatorname{range} T$ such that $u_1, \dots, u_m$ spans $\operatorname{null} T$ and $w_1, \dots, w_n$ spans $\operatorname{range} T$. Because each $w_k \in \operatorname{range} T$, there exists $v_k \in V$ such that $w_k = Tv_k$.
+
+  Suppose $v \in V$. Then $Tv \in \operatorname{range} T$, so there exist $b_1, \dots, b_n \in \F$ such that
+  \[
+    Tv = b_1 w_1 + \cdots + b_n w_n.
+  \]
+  \[
+    Tv = b_1 Tv_1 + \cdots + b_n Tv_n.
+  \]
+  The equation above implies that $T(v - b_1 v_1 - \cdots - b_n v_n) = 0$. In other words, $v - b_1 v_1 - \cdots - b_n v_n \in \operatorname{null} T$. Thus there exist $a_1, \dots, a_m \in \F$ such that
+  \[
+    v - b_1 v_1 - \cdots - b_n v_n = a_1 u_1 + \cdots + a_m u_m.
+  \]
+  The equation above can be rewritten as
+  \[
+    v = a_1 u_1 + \cdots + a_m u_m + b_1 v_1 + \cdots + b_n v_n.
+  \]
+  The equation above shows that every vector $v \in V$ is a linear combination of $u_1, \dots, u_m, v_1, \dots, v_n$. In other words, $u_1, \dots, u_m, v_1, \dots, v_n$ spans $V$. Thus $V$ is finite-dimensional.
+\end{solution}
+\begin{comment}
+  The hypothesis of the fundamental theorem of linear maps is that $V$ is finite-dimensional (which is what we are trying to prove in this exercise), so the fundamental theorem of linear maps cannot be used in this exercise.
+\end{comment}
+
+\exerciseheader{3B}{16}
+\begin{exercise}{16}
+  Suppose $V$ and $W$ are both finite-dimensional. Prove that there exists an injective linear map from $V$ to $W$ if and only if $\dim V \leq \dim W$.
+\end{exercise}
+\begin{solution}
+  First suppose that there exists an injective linear map $T$ from $V$ to $W$. Then by the fundamental theorem of linear maps (3.21), we have
+  \begin{align*}
+    \dim V &= \dim \operatorname{null} T + \dim \operatorname{range} T \\
+           &= \dim\{0\} + \dim \operatorname{range} T \\
+           &= \dim \operatorname{range} T \\
+           &\leq \dim W.
+  \end{align*}
+
+  Conversely, suppose $\dim V \leq \dim W$. Let $v_1, \dots, v_m$ be a basis of $V$ and let $w_1, \dots, w_n$ be a basis of $W$. Thus $m \leq n$. Use the linear map lemma (3.4) to define a linear map $T \in \mathcal{L}(V, W)$ such that
+  \[
+    Tv_k = w_k \text{ for } k = 1, \dots, m.
+  \]
+
+  Suppose $v \in V$ and $Tv = 0$. There exist $c_1, \dots, c_m \in \F$ such that
+  \[
+    v = c_1 v_1 + \cdots + c_m v_m.
+  \]
+  Thus
+  \begin{align*}
+    0 &= Tv \\
+      &= c_1 Tv_1 + \cdots + c_m Tv_m \\
+      &= c_1 w_1 + \cdots + c_m w_m.
+  \end{align*}
+  Because $w_1, \dots, w_m$ is linearly independent, we have $c_1 = \cdots = c_m = 0$. Thus $v = 0$. Thus $T$ is injective, as desired.
+\end{solution}
+
+\exerciseheader{3B}{17}
+\begin{exercise}{17}
+  Suppose $V$ and $W$ are both finite-dimensional. Prove that there exists a surjective linear map from $V$ onto $W$ if and only if $\dim V \geq \dim W$.
+\end{exercise}
+\begin{solution}
+  First suppose there exists a surjective linear map $T$ from $V$ onto $W$. Then
+  \begin{align*}
+    \dim W &= \dim \operatorname{range} T \\
+           &= \dim V - \dim \operatorname{null} T \\
+           &\leq \dim V,
+  \end{align*}
+  where the second equality comes from the fundamental theorem of linear maps.
+
+  To prove the other direction, now suppose $\dim W \leq \dim V$. Let $w_1, \dots, w_m$ be a basis of $W$ and let $v_1, \dots, v_n$ be a basis of $V$. For scalars $a_1, \dots, a_n \in \F$ define $T(a_1 v_1 + \cdots + a_n v_n)$ by
+  \[
+    T(a_1 v_1 + \cdots + a_n v_n) = a_1 w_1 + \cdots + a_m w_m.
+  \]
+  Because $\dim W \leq \dim V$, we have $m \leq n$ and so $a_m$ on the right side of the equation above makes sense. Clearly $T$ is a surjective linear map from $V$ onto $W$.
+\end{solution}
+
+\exerciseheader{3B}{18}
+\begin{exercise}{18}
+  Suppose $V$ and $W$ are finite-dimensional and that $U$ is a subspace of $V$. Prove that there exists $T \in \mathcal{L}(V, W)$ such that $\operatorname{null} T = U$ if and only if $\dim U \geq \dim V - \dim W$.
+\end{exercise}
+\begin{solution}
+  First suppose there exists $T \in \mathcal{L}(V, W)$ such that $\operatorname{null} T = U$. Then
+  \begin{align*}
+    \dim U &= \dim \operatorname{null} T \\
+           &= \dim V - \dim \operatorname{range} T \\
+           &\geq \dim V - \dim W,
+  \end{align*}
+  where the second equality comes from the fundamental theorem of linear maps.
+
+  To prove the other direction, now suppose $\dim U \geq \dim V - \dim W$. Let $u_1, \dots, u_m$ be a basis of $U$. Extend to a basis $u_1, \dots, u_m, v_1, \dots, v_n$ of $V$. Let $w_1, \dots, w_p$ be a basis of $W$. For $a_1, \dots, a_m, b_1, \dots, b_n \in \F$ define
+  \[
+    T(a_1 u_1 + \cdots + a_m u_m + b_1 v_1 + \cdots + b_n v_n) = b_1 w_1 + \cdots + b_n w_n.
+  \]
+  Because $\dim W \geq \dim V - \dim U$, we have $p \geq n$ and so $w_n$ on the right side of the equation above makes sense. Clearly $T \in \mathcal{L}(V, W)$ and $\operatorname{null} T = U$.
+\end{solution}
+
+\exerciseheader{3B}{19}
+\begin{exercise}{19}
+  Suppose $W$ is finite-dimensional and $T \in \mathcal{L}(V, W)$. Prove that $T$ is injective if and only if there exists $S \in \mathcal{L}(W, V)$ such that $ST$ is the identity operator on $V$.
+\end{exercise}
+\begin{solution}
+  First suppose $T$ is injective. Define $S_1\colon \operatorname{range} T \to V$ by
+  \[
+    S_1(Tv) = v;
+  \]
+  because $T$ is injective, each element of $\operatorname{range} T$ can be represented in the form $Tv$ in only one way, so $T$ is well defined. As can easily be checked, $S_1$ is a linear map on $\operatorname{range} T$. By Exercise~13 in Section~3A, $S_1$ can be extended to a linear map $S$ from $W$ to $V$. If $v \in V$, then $(ST)v = S(Tv) = S_1(Tv) = v$. Thus $ST$ is the identity operator on $V$.
+
+  To prove the implication in the other direction, now suppose there exists $S \in \mathcal{L}(W, V)$ such that $ST$ is the identity operator on $V$. If $u, v \in V$ are such that $Tu = Tv$, then
+  \[
+    u = (ST)(u) = S(Tu) = S(Tv) = (ST)v = v.
+  \]
+  Hence $u = v$. Thus $T$ is injective, as desired.
+\end{solution}
+
+\exerciseheader{3B}{20}
+\begin{exercise}{20}
+  Suppose $W$ is finite-dimensional and $T \in \mathcal{L}(V, W)$. Prove that $T$ is surjective if and only if there exists $S \in \mathcal{L}(W, V)$ such that $TS$ is the identity operator on $W$.
+\end{exercise}
+\begin{solution}
+  First suppose $T$ is surjective. Let $w_1, \dots, w_m$ be a basis of $W$. Because $T$ is surjective, for each $k$ there exists $v_k \in V$ such that $w_k = Tv_k$. Define $S \in \mathcal{L}(W, V)$ by
+  \[
+    S(a_1 w_1 + \cdots + a_m w_m) = a_1 v_1 + \cdots + a_m v_m.
+  \]
+  Then
+  \begin{align*}
+    (TS)(a_1 w_1 + \cdots + a_m w_m) &= T(a_1 v_1 + \cdots + a_m v_m) \\
+                                      &= a_1 Tv_1 + \cdots + a_m Tv_m \\
+                                      &= a_1 w_1 + \cdots + a_m w_m.
+  \end{align*}
+  Thus $TS$ is the identity operator on $W$.
+
+  To prove the implication in the other direction, now suppose there exists $S \in \mathcal{L}(W, V)$ such that $TS$ is the identity operator on $W$. If $w \in W$, then $w = T(Sw)$, and hence $w \in \operatorname{range} T$. Thus $\operatorname{range} T = W$. In other words, $T$ is surjective, as desired.
+\end{solution}
+
+\exerciseheader{3B}{21}
+\begin{exercise}{21}
+  Suppose $V$ is finite-dimensional, $T \in \mathcal{L}(V, W)$, and $U$ is a subspace of $W$. Prove that $\{v \in V : Tv \in U\}$ is a subspace of $V$ and
+  \[
+    \dim\{v \in V : Tv \in U\} = \dim \operatorname{null} T + \dim(U \cap \operatorname{range} T).
+  \]
+\end{exercise}
+\begin{solution}
+  Let
+  \[
+    E = \{v \in V : Tv \in U\}.
+  \]
+  If $v \in E$ and $\lambda \in \F$, then $T(\lambda v) = \lambda Tv \in U$, which means $\lambda v \in E$. Also, if $v, w \in E$ then $Tv \in U$ and $Tw \in U$ and hence $T(u + w) = Tu + Tw \in U$, which means that $v + w \in E$. Thus $E$ is a subspace of $V$.
+
+  Note that $\operatorname{null} T \subseteq E$. Let $S = T|_E$. Then
+  \[
+    \operatorname{null} S = \operatorname{null} T \quad \text{and} \quad \operatorname{range} S = U \cap \operatorname{range} T.
+  \]
+  Thus the fundamental theorem of linear maps, as applied to $S$, shows that
+  \[
+    \dim E = \dim \operatorname{null} S + \dim \operatorname{range} S = \dim \operatorname{null} T + \dim(U \cap \operatorname{range} T),
+  \]
+  as desired.
+\end{solution}
+
+\exerciseheader{3B}{22}
+\begin{exercise}{22}
+  Suppose $U$ and $V$ are finite-dimensional vector spaces and $S \in \mathcal{L}(V, W)$ and $T \in \mathcal{L}(U, V)$. Prove that
+  \[
+    \dim \operatorname{null} ST \leq \dim \operatorname{null} S + \dim \operatorname{null} T.
+  \]
+\end{exercise}
+\begin{solution}
+  Define a linear map $R\colon \operatorname{null} ST \to V$ by $Ru = Tu$. If $u \in \operatorname{null} ST$, then $S(Tu) = 0$, which means that $Tu \in \operatorname{null} S$. In other words, $\operatorname{range} R \subseteq \operatorname{null} S$. Now
+  \begin{align*}
+    \dim \operatorname{null} ST &= \dim \operatorname{null} R + \dim \operatorname{range} R \\
+                                &\leq \dim \operatorname{null} R + \dim \operatorname{null} S \\
+                                &\leq \dim \operatorname{null} T + \dim \operatorname{null} S,
+  \end{align*}
+  where the first line follows from the fundamental theorem of linear maps (applied to $R$), the second line holds because $\operatorname{range} R \subseteq \operatorname{null} S$, and the third line holds because of the inclusion $\operatorname{null} R \subseteq \operatorname{null} T$.
+\end{solution}
+
+\exerciseheader{3B}{23}
+\begin{exercise}{23}
+  Suppose $U$ and $V$ are finite-dimensional vector spaces and $S \in \mathcal{L}(V, W)$ and $T \in \mathcal{L}(U, V)$. Prove that
+  \[
+    \dim \operatorname{range} ST \leq \min\{\dim \operatorname{range} S, \dim \operatorname{range} T\}.
+  \]
+\end{exercise}
+\begin{solution}
+  First note that $\operatorname{range} ST \subseteq \operatorname{range} S$. Thus
+  \[
+    \dim \operatorname{range} ST \leq \dim \operatorname{range} S.
+  \]
+  Next, note that
+  \[
+    \dim \operatorname{range} ST = \dim S|_{\operatorname{range} T} \leq \dim \operatorname{range} T,
+  \]
+  where the inequality above follows from the fundamental theorem of linear maps (3.21).
+
+  Combining the two displayed inequalities above gives the desired result.
+\end{solution}
+
+\exerciseheader{3B}{24}
+\begin{exercise}{24}
+  \begin{enumerate}[label=(\alph*)]
+    \item Suppose $\dim V = 5$ and $S, T \in \mathcal{L}(V)$ are such that $ST = 0$. Prove that $\dim \operatorname{range} TS \leq 2$.
+    \item Give an example of $S, T \in \mathcal{L}(\F^5)$ with $ST = 0$ and $\dim \operatorname{range} TS = 2$.
+  \end{enumerate}
+\end{exercise}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item The equation $ST = 0$ implies that $\operatorname{range} T \subseteq \operatorname{null} S$. Thus
+    \[
+      \dim \operatorname{range} T \leq \dim \operatorname{null} S = \dim V - \dim \operatorname{range} S = 5 - \dim \operatorname{range} S.
+    \]
+    Hence
+    \[
+      \dim \operatorname{range} S + \dim \operatorname{range} T \leq 5,
+    \]
+    which implies that at least one of $\dim \operatorname{range} S$ and $\dim \operatorname{range} T$ is less than or equal to~2. Thus Exercise~23 implies that $\dim \operatorname{range} TS \leq 2$.
+
+    \item Define $S, T \in \mathcal{L}(\F^5)$ by
+    \[
+      S(z_1, z_2, z_3, z_4, z_5) = (z_3, z_4, z_5, 0, 0)
+    \]
+    and
+    \[
+      T(z_1, z_2, z_3, z_4, z_5) = (z_1, z_2, 0, 0, 0).
+    \]
+    Then $ST = 0$ and
+    \[
+      TS(z_1, z_2, z_3, z_4, z_5) = (z_3, z_4, 0, 0, 0).
+    \]
+    Thus $\dim \operatorname{range} TS = 2$, as desired.
+  \end{enumerate}
+\end{solution}
+
+\exerciseheader{3B}{25}
+\begin{exercise}{25}
+  Suppose that $W$ is finite-dimensional and $S, T \in \mathcal{L}(V, W)$. Prove that $\operatorname{null} S \subseteq \operatorname{null} T$ if and only if there exists $E \in \mathcal{L}(W)$ such that $T = ES$.
+\end{exercise}
+\begin{solution}
+  First suppose there exists $E \in \mathcal{L}(W)$ such that $T = ES$. Suppose $v \in \operatorname{null} S$. Thus
+  \[
+    Tv = (ES)v = E(Sv) = E(0) = 0.
+  \]
+  Thus $v \in \operatorname{null} T$. Hence $\operatorname{null} S \subseteq \operatorname{null} T$, as desired.
+
+  Now suppose that $\operatorname{null} S \subseteq \operatorname{null} T$. Define $E_1\colon \operatorname{range} S \to W$ by
+  \[
+    E_1(Sv) = Tv
+  \]
+  for each $v \in V$. To show that this definition makes sense, we must show that if $u, v \in V$ and $Su = Sv$, then $Tu = Tv$. But this is true, because if $Su = Sv$ then $u - v \in \operatorname{null} S \subseteq \operatorname{null} T$ and hence $Tu = Tv$.
+
+  Now that $E_1$ is well defined, it is easy to verify that $E_1$ is a linear map from $\operatorname{range} S$ to $W$. Thus $E_1$ can be extended to a linear map $E$ from $W$ to $W$ (see Exercise~13 in Section~3A). The displayed equation above shows that $T = ES$, as desired.
+\end{solution}
+
+\exerciseheader{3B}{26}
+\begin{exercise}{26}
+  Suppose that $V$ is finite-dimensional and $S, T \in \mathcal{L}(V, W)$. Prove that $\operatorname{range} S \subseteq \operatorname{range} T$ if and only if there exists $E \in \mathcal{L}(V)$ such that $S = TE$.
+\end{exercise}
+\begin{solution}
+  First suppose there exists $E \in \mathcal{L}(V)$ such that $S = TE$. Suppose $w \in \operatorname{range} S$. Hence there exists $v \in V$ such that $w = Sv$. Thus
+  \[
+    w = Sv = (TE)v = T(Ev).
+  \]
+  Thus $w \in \operatorname{range} T$. Hence $\operatorname{range} S \subseteq \operatorname{range} T$, as desired.
+
+  Now suppose that $\operatorname{range} S \subseteq \operatorname{range} T$. Let $v_1, \dots, v_n$ be a basis of $V$. For each $k = 1, \dots, n$, we have $Sv_k \in \operatorname{range} S \subseteq \operatorname{range} T$, and hence there exists $u_k \in V$ such that
+  \[
+    Sv_k = Tu_k.
+  \]
+  Use the linear map lemma (3.4) to define a linear map $E \in \mathcal{L}(V)$ such that
+  \[
+    Ev_k = u_k
+  \]
+  for each $k = 1, \dots, n$. Then
+  \[
+    Sv_k = Tu_k = TEv_k
+  \]
+  for each $k = 1, \dots, n$. Because $S$ and $TE$ are linear maps on $V$ that agree on a basis of $V$, we have $S = TE$, as desired.
+\end{solution}
+
+\exerciseheader{3B}{27}
+\begin{exercise}{27}
+  Suppose $P \in \mathcal{L}(V)$ and $P^2 = P$. Prove that $V = \operatorname{null} P \oplus \operatorname{range} P$.
+\end{exercise}
+\begin{solution}
+  First suppose $u \in \operatorname{null} P \cap \operatorname{range} P$. Then $Pu = 0$, and there exists $w \in V$ such that $u = Pw$. Applying $P$ to both sides of the last equation, we have $Pu = P^2 w = Pw$. But $Pu = 0$, so this implies that $Pw = 0$. Because $u = Pw$, this implies that $u = 0$. Because $u$ was an arbitrary vector in $\operatorname{null} P \cap \operatorname{range} P$, this implies that $\operatorname{null} P \cap \operatorname{range} P = \{0\}$.
+
+  Now suppose $v \in V$. Then obviously
+  \[
+    v = (v - Pv) + Pv.
+  \]
+  Note that $P(v - Pv) = Pv - P^2 v = 0$, so $(v - Pv) \in \operatorname{null} P$. Clearly $Pv \in \operatorname{range} P$. Thus the equation above shows that $v \in \operatorname{null} P + \operatorname{range} P$. Because $v$ was an arbitrary vector in $V$, this implies that $V = \operatorname{null} P + \operatorname{range} P$.
+
+  We have shown that $\operatorname{null} P \cap \operatorname{range} P = \{0\}$ and $V = \operatorname{null} P + \operatorname{range} P$. Thus $V = \operatorname{null} P \oplus \operatorname{range} P$ (by 1.46).
+\end{solution}
+
+\exerciseheader{3B}{28}
+\begin{exercise}{28}
+  Suppose $D \in \mathcal{L}(\mathcal{P}(\R))$ is such that $\deg Dp = (\deg p) - 1$ for every nonconstant polynomial $p \in \mathcal{P}(\R)$. Prove that $D$ is surjective.
+
+  \textit{The notation $D$ is used above to remind you of the differentiation map that sends a polynomial $p$ to $p'$.}
+\end{exercise}
+\begin{solution}
+  Let $m$ be a positive integer. Let $V = \operatorname{span}(x, x^2, \dots, x^m)$ in $\mathcal{P}(\R)$. Note that $\dim V = m$.
+
+  Let $T = D|_V$. Our hypothesis on $D$ implies that $D$ is a linear map from $V$ into $\mathcal{P}_{m-1}(\R)$. Furthermore, our hypothesis on $D$ implies that $\operatorname{null} D = \{0\}$. The fundamental theorem of linear maps (3.21) thus implies that
+  \[
+    m = \dim V = \dim \operatorname{range} T.
+  \]
+  Because $\operatorname{range} T$ has dimension $m$ and $\operatorname{range} T$ is a subspace of the $m$-dimensional vector space $\mathcal{P}_{m-1}(\R)$, we conclude that $\operatorname{range} T = \mathcal{P}_{m-1}(\R)$.
+
+  Thus $\operatorname{range} D$ contains $\mathcal{P}_n(\R)$ for every nonnegative integer $n$. This implies that $\operatorname{range} D$ contains $\mathcal{P}(\R)$. Hence $D$ is surjective.
+\end{solution}
+
+\exerciseheader{3B}{29}
+\begin{exercise}{29}
+  Suppose $p \in \mathcal{P}(\R)$. Prove that there exists a polynomial $q \in \mathcal{P}(\R)$ such that $5q'' + 3q' = p$.
+
+  \textit{This exercise can be done without linear algebra, but it's more fun to do it using linear algebra.}
+\end{exercise}
+\begin{solution}
+  Define $D \in \mathcal{L}(\mathcal{P}(\R), \mathcal{P}(\R))$ by
+  \[
+    Dq = 5q'' + 3q'.
+  \]
+  Then $D$ satisfies the hypotheses of Exercise~28. Thus by Exercise~28, $D$ is surjective. Hence there exists a polynomial $q \in \mathcal{P}(\R)$ such that $5q'' + 3q' = p$.
+\end{solution}
+
+\exerciseheader{3B}{30}
+\begin{exercise}{30}
+  Suppose $\varphi \in \mathcal{L}(V, \F)$ and $\varphi \neq 0$. Suppose $u \in V$ is not in $\operatorname{null} \varphi$. Prove that
+  \[
+    V = \operatorname{null} \varphi \oplus \{au : a \in \F\}.
+  \]
+\end{exercise}
+\begin{solution}
+  If $a \in \F$ and $au \in \operatorname{null} \varphi$, then $0 = \varphi(au) = a\varphi(u)$, which implies that $a = 0$ (because $\varphi(u) \neq 0$). Thus
+  \[
+    \operatorname{null} \varphi \cap \{au : a \in \F\} = \{0\}.
+  \]
+
+  If $v \in V$, then
+  \[
+    v = \Bigl(v - \frac{\varphi(v)}{\varphi(u)}u\Bigr) + \frac{\varphi(v)}{\varphi(u)}u.
+  \]
+  Note that $\varphi\bigl(v - \frac{\varphi(v)}{\varphi(u)}u\bigr) = \varphi(v) - \frac{\varphi(v)}{\varphi(u)}\varphi(u) = 0$. Thus the equation above expresses an arbitrary vector $v \in V$ as the sum of a vector in $\operatorname{null} \varphi$ and a scalar multiple of $u$. Hence $V = \operatorname{null} \varphi + \{au : a \in \F\}$. Using 1.46, we conclude that $V = \operatorname{null} \varphi \oplus \{au : a \in \F\}$.
+\end{solution}
+
+\exerciseheader{3B}{31}
+\begin{exercise}{31}
+  Suppose $V$ is finite-dimensional, $X$ is a subspace of $V$, and $Y$ is a finite-dimensional subspace of $W$. Prove that there exists $T \in \mathcal{L}(V, W)$ such that $\operatorname{null} T = X$ and $\operatorname{range} T = Y$ if and only if $\dim X + \dim Y = \dim V$.
+\end{exercise}
+\begin{solution}
+  First suppose there exists $T \in \mathcal{L}(V, W)$ such that $\operatorname{null} T = X$ and $\operatorname{range} T = Y$. Then $\dim X + \dim Y = \dim V$ by the fundamental theorem of linear maps.
+
+  To prove the implication in the other direction, now suppose
+  \[
+    \dim X + \dim Y = \dim V.
+  \]
+  Let $x_1, \dots, x_m$ be a basis of $X$, and extend to a basis $x_1, \dots, x_m, v_1, \dots, v_n$ of $V$. Let $(y_1, \dots, y_n)$ be a basis of $Y$. Our hypothesis implies that $n = \dim Y$.
+
+  Let $T \in \mathcal{L}(V, W)$ be the linear map from $V$ to $W$ such that
+  \[
+    Tx_j = 0 \text{ for } j = 1, \dots, m \quad \text{and} \quad Tv_k = y_k \text{ for } k = 1, \dots, n.
+  \]
+  Then $\operatorname{null} T = X$ and $\operatorname{range} T = Y$.
+\end{solution}
+
+\exerciseheader{3B}{32}
+\begin{exercise}{32}
+  Suppose $V$ is finite-dimensional with $\dim V > 1$. Show that if $\varphi\colon \mathcal{L}(V) \to \F$ is a linear map such that $\varphi(ST) = \varphi(S)\varphi(T)$ for all $S, T \in \mathcal{L}(V)$, then $\varphi = 0$.
+
+  \textit{Hint: The description of the two-sided ideals of $\mathcal{L}(V)$ given by Exercise~17 in Section~3A might be useful.}
+\end{exercise}
+\begin{solution}
+  Suppose $\varphi\colon \mathcal{L}(V) \to \F$ is a linear map such that
+  \[
+    \varphi(ST) = \varphi(S)\varphi(T)
+  \]
+  for all $S, T \in \mathcal{L}(V)$. Then it is straightforward to verify that $\operatorname{null} \varphi$ is a two-sided ideal of $\mathcal{L}(V)$. By Exercise~17 in Section~3A, this implies that
+  \[
+    \operatorname{null} \varphi = \{0\} \quad \text{or} \quad \operatorname{null} \varphi = \mathcal{L}(V).
+  \]
+
+  Suppose $v_1, \dots, v_n$ is a basis of $V$, where $n \geq 2$. Then there exist $S, T \in \mathcal{L}(V)$ such that
+  \[
+    Sv_1 = v_1 \quad \text{and} \quad Sv_2 = 0
+  \]
+  and
+  \[
+    Tv_1 = 0 \quad \text{and} \quad Tv_2 = v_2,
+  \]
+  where we have used the linear map lemma (3.4). Neither $S$ nor $T$ is a scalar multiple of the other, and thus $S, T$ is a linearly independent list of length two in $\mathcal{L}(V)$. Hence
+  \[
+    \dim \mathcal{L}(V) \geq 2.
+  \]
+  The inequality above implies that $\varphi$ is not injective (see 3.22). Thus $\operatorname{null} \varphi \neq \{0\}$, which implies that $\operatorname{null} \varphi = \mathcal{L}(V)$. Hence $\varphi = 0$.
+\end{solution}
+
+\exerciseheader{3B}{33}
+\begin{exercise}{33}
+  Suppose that $V$ and $W$ are real vector spaces and $T \in \mathcal{L}(V, W)$. Define $T_{\C}\colon V_{\C} \to W_{\C}$ by
+  \[
+    T_{\C}(u + iv) = Tu + iTv
+  \]
+  for all $u, v \in V$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Show that $T_{\C}$ is a (complex) linear map from $V_{\C}$ to $W_{\C}$.
+    \item Show that $T_{\C}$ is injective if and only if $T$ is injective.
+    \item Show that $\operatorname{range} T_{\C} = W_{\C}$ if and only if $\operatorname{range} T = W$.
+  \end{enumerate}
+
+  \textit{See Exercise~8 in Section~1B for the definition of the complexification $V_{\C}$. The linear map $T_{\C}$ is called the \textbf{complexification} of the linear map $T$.}
+\end{exercise}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item Suppose $u_1, v_1, u_2, v_2 \in V$. Then
+    \begin{align*}
+      T_{\C}((u_1 + iv_1) + (u_2 + iv_2)) &= T_{\C}((u_1 + u_2) + i(v_1 + v_2)) \\
+        &= T(u_1 + u_2) + i(T(v_1 + v_2)) \\
+        &= (Tu_1 + Tu_2) + i(Tv_1 + Tv_2) \\
+        &= (Tu_1 + iTv_1) + (Tu_2 + iTv_2) \\
+        &= T_{\C}(u_1 + iv_1) + T_{\C}(u_2 + iv_2).
+    \end{align*}
+    Thus $T_{\C}$ is additive.
+
+    Suppose now that $a, b \in \R$ and $u, v \in V$. Then
+    \begin{align*}
+      T_{\C}((a + bi)(u + iv)) &= T_{\C}((au - bv) + i(av + bu)) \\
+        &= T(au - bv) + iT(av + bu) \\
+        &= (aTu - bTv) + i(aTv + bTu) \\
+        &= (a + bi)(Tu + iTv) \\
+        &= (a + bi)T_{\C}(u + iv).
+    \end{align*}
+    Thus $T_{\C}$ is homogeneous.
+
+    \item First suppose $T_{\C}$ is injective. If $v \in V$ and $Tv = 0$, then $T_{\C}(v) = Tv = 0$, which implies that $v = 0$. Hence $T$ is injective.
+
+    To prove the implication in the other direction, now suppose $T$ is injective. If $u, v \in V$ and $T_{\C}(u + iv) = 0$, then $Tu = 0$ and $Tv = 0$, which implies that $u = 0$ and $v = 0$, which implies that $u + iv = 0$. Hence $T_{\C}$ is injective.
+
+    \item First suppose $\operatorname{range} T_{\C} = W_{\C}$. If $w \in W$, then there exist $u, v \in V$ such that $T_{\C}(u + iv) = w$, which implies that $Tu = w$, which implies that $w \in \operatorname{range} T$. Thus $\operatorname{range} T = W$.
+
+    To prove the implication in the other direction, now suppose
+    \[
+      \operatorname{range} T = W.
+    \]
+    If $w_1, w_2 \in W$, then there exist $v_1, v_2 \in V$ such that $Tv_1 = w_1$ and $Tv_2 = w_2$, which implies that $T_{\C}(v_1 + iv_2) = w_1 + iw_2$, which implies that $w_1 + iw_2 \in \operatorname{range} T_{\C}$. Thus $\operatorname{range} T_{\C} = W_{\C}$.
+  \end{enumerate}
+\end{solution}

@@ -1,0 +1,362 @@
+% ── Section 3F (Exercises 1--18) ──
+
+\exerciseheader{3F}{1}
+\begin{exercise}{1}
+  Explain why each linear functional is surjective or is the zero map.
+\end{exercise}
+\begin{solution}
+  A linear functional is a linear map into $\F$. The range of a linear map is a subspace of the target space. The only subspaces of $\F$ are $\F$ and $\{0\}$. Thus each linear functional is surjective (if the range equals $\F$) or is the zero map (if the range equals $\{0\}$).
+\end{solution}
+
+\exerciseheader{3F}{2}
+\begin{exercise}{2}
+  Give three distinct examples of linear functionals on $\R^{[0,1]}$.
+\end{exercise}
+\begin{solution}
+  For $t \in [0,1]$, define $\varphi_t \colon \R^{[0,1]} \to \R$ by
+  \[
+    \varphi_t(f) = f(t)
+  \]
+  for each $f \in \R^{[0,1]}$.
+
+  For each $t \in [0,1]$, $\varphi_t$ is a linear functional on $\R^{[0,1]}$. Thus three distinct linear functionals on $\R^{[0,1]}$ are $\varphi_0$, $\varphi_{1/2}$, and $\varphi_1$.
+\end{solution}
+
+\exerciseheader{3F}{3}
+\begin{exercise}{3}
+  Suppose $V$ is finite-dimensional and $v \in V$ with $v \ne 0$. Prove that there exists $\varphi \in V'$ such that $\varphi(v) = 1$.
+\end{exercise}
+\begin{solution}
+  Because $v \ne 0$, we can extend $v$ to a basis $v, v_2, \dots, v_n$ of $V$ (by 2.32). Now the linear map lemma (3.4) implies that there exists $\varphi \in V'$ such that $\varphi(v) = 1$ [and $\varphi(v_k)$ equals whatever we want for each $k = 2, \dots, n$].
+\end{solution}
+
+\exerciseheader{3F}{4}
+\begin{exercise}{4}
+  Suppose $V$ is finite-dimensional and $U$ is a subspace of $V$ such that $U \ne V$. Prove that there exists $\varphi \in V'$ such that $\varphi(u) = 0$ for every $u \in U$ but $\varphi \ne 0$.
+\end{exercise}
+\begin{solution}
+  Let $u_1, \dots, u_m$ be a basis of $U$. Extend this list to a basis
+  \[
+    u_1, \dots, u_m, v_1, \dots, v_n
+  \]
+  of $V$ (using 2.32). Now the linear map lemma (3.4) implies that there exists $\varphi \in V'$ such that
+  \[
+    \varphi(u_k) = 0 \text{ for } k = 1, \dots, m
+  \]
+  and
+  \[
+    \varphi(v_k) = 1 \text{ for } k = 1, \dots, n.
+  \]
+  Thus $\varphi(u) = 0$ for every $u \in U$ but $\varphi \ne 0$, as desired.
+\end{solution}
+
+\exerciseheader{3F}{5}
+\begin{exercise}{5}
+  Suppose $T \in \calL(V, W)$ and $w_1, \dots, w_m$ is a basis of $\operatorname{range} T$. Hence for each $v \in V$, there exist unique numbers $\varphi_1(v), \dots, \varphi_m(v)$ such that
+  \[
+    Tv = \varphi_1(v) w_1 + \dots + \varphi_m(v) w_m,
+  \]
+  thus defining functions $\varphi_1, \dots, \varphi_m$ from $V$ to $\F$. Show that each of the functions $\varphi_1, \dots, \varphi_m$ is a linear functional on $V$.
+\end{exercise}
+\begin{solution}
+  Suppose $u, v \in V$. Then
+  \begin{align*}
+    \varphi_1(u + v) w_1 + \dots + \varphi_m(u + v) w_m &= T(u + v) \\
+      &= Tu + Tv \\
+      &= (\varphi_1(u) w_1 + \dots + \varphi_m(u) w_m) + (\varphi_1(v) w_1 + \dots + \varphi_m(v) w_m) \\
+      &= (\varphi_1(u) + \varphi_1(v)) w_1 + \dots + (\varphi_m(u) + \varphi_m(v)) w_m.
+  \end{align*}
+  Because $w_1, \dots, w_m$ is linearly independent, the equation above shows that
+  \[
+    \varphi_1(u + v) = \varphi_1(u) + \varphi_1(v), \;\dots,\; \varphi_m(u + v) = \varphi_m(u) + \varphi_m(v).
+  \]
+
+  Similarly, suppose now that $\lambda \in \F$ and $v \in V$. Then
+  \begin{align*}
+    \varphi_1(\lambda v) w_1 + \dots + \varphi_m(\lambda v) w_m &= T(\lambda v) \\
+      &= \lambda Tv \\
+      &= \lambda(\varphi_1(v) w_1 + \dots + \varphi_m(v) w_m) \\
+      &= \lambda \varphi_1(v) w_1 + \dots + \lambda \varphi_m(v) w_m.
+  \end{align*}
+  Because $w_1, \dots, w_m$ is linearly independent, the equation above shows that
+  \[
+    \varphi_1(\lambda v) = \lambda \varphi_1(v), \;\dots,\; \varphi_m(\lambda v) = \lambda \varphi_m(v),
+  \]
+  completing the proof that each of the functions $\varphi_1, \dots, \varphi_m$ is a linear functional on $V$.
+\end{solution}
+
+\exerciseheader{3F}{6}
+\begin{exercise}{6}
+  Suppose $\varphi, \beta \in V'$. Prove that $\operatorname{null} \varphi \subseteq \operatorname{null} \beta$ if and only if there exists $c \in \F$ such that $\beta = c\varphi$.
+\end{exercise}
+\begin{solution}
+  If $\beta = c\varphi$ for some $c \in \F$, then clearly $\operatorname{null} \varphi \subseteq \operatorname{null} \beta$.
+
+  The implication in the other direction follows from Exercise~25 in Section~3B (with $W = \F$) and from Exercise~7 in Section~3A.
+\end{solution}
+
+\exerciseheader{3F}{7}
+\begin{exercise}{7}
+  Suppose that $V_1, \dots, V_m$ are vector spaces. Prove that $(V_1 \times \dots \times V_m)'$ and $V_1' \times \dots \times V_m'$ are isomorphic vector spaces.
+\end{exercise}
+\begin{solution}
+  For $k = 1, \dots, m$ and $\varphi \in (V_1 \times \dots \times V_m)'$, define $\varphi_k \in V_k'$ by
+  \[
+    \varphi_k(v) = \varphi(0, \dots, 0, v, 0, \dots, 0),
+  \]
+  for each $v \in V_k$, where the $v$ on the right side above appears in the $k^\text{th}$ slot.
+
+  Now define $\Gamma \colon (V_1 \times \dots \times V_m)' \to V_1' \times \dots \times V_m'$ by
+  \[
+    \Gamma\varphi = (\varphi_1, \dots, \varphi_m).
+  \]
+  It is easy to verify that $\Gamma$ is a linear map and that $\Gamma$ is injective and surjective. Thus $(V_1 \times \dots \times V_m)'$ and $V_1' \times \dots \times V_m'$ are isomorphic vector spaces.
+\end{solution}
+
+\exerciseheader{3F}{8}
+\begin{exercise}{8}
+  Suppose $v_1, \dots, v_n$ is a basis of $V$ and $\varphi_1, \dots, \varphi_n$ is the dual basis of $V'$. Define $\Gamma \colon V \to \F^n$ and $\Lambda \colon \F^n \to V$ by
+  \[
+    \Gamma(v) = (\varphi_1(v), \dots, \varphi_n(v)) \quad \text{and} \quad \Lambda(a_1, \dots, a_n) = a_1 v_1 + \dots + a_n v_n.
+  \]
+  Explain why $\Gamma$ and $\Lambda$ are inverses of each other.
+\end{exercise}
+\begin{solution}
+  First suppose $a_1, \dots, a_n \in \F^n$. Then
+  \begin{align*}
+    \Gamma(\Lambda(a_1, \dots, a_n)) &= \Gamma(a_1 v_1 + \dots + a_n v_n) \\
+      &= (\varphi_1(a_1 v_1 + \dots + a_n v_n), \dots, \varphi_n(a_1 v_1 + \dots + a_n v_n)) \\
+      &= (a_1, \dots, a_n).
+  \end{align*}
+
+  Also,
+  \begin{align*}
+    \Lambda(\Gamma(v)) &= \Lambda(\varphi_1(v), \dots, \varphi_n(v)) \\
+      &= \varphi_1(v) v_1 + \dots + \varphi_n(v) v_n \\
+      &= v,
+  \end{align*}
+  where the last line follows from 3.114.
+\end{solution}
+
+\exerciseheader{3F}{9}
+\begin{exercise}{9}
+  Suppose $m$ is a positive integer. Show that the dual basis of the basis $1, x, \dots, x^m$ of $\calP_m(\R)$ is $\varphi_0, \varphi_1, \dots, \varphi_m$, where
+  \[
+    \varphi_k(p) = \frac{p^{(k)}(0)}{k!}.
+  \]
+
+  \textit{Here $p^{(k)}$ denotes the $k^\text{th}$ derivative of $p$, with the understanding that the $0^\text{th}$ derivative of $p$ is $p$.}
+\end{exercise}
+\begin{solution}
+  Note that
+  \[
+    \varphi_k(x^j) = \frac{(x^j)^{(k)}(0)}{k!} = \begin{cases} 1 & \text{if } j = k, \\ 0 & \text{if } j \ne k. \end{cases}
+  \]
+  Thus $\varphi_0, \varphi_1, \dots, \varphi_m$ is indeed the dual basis of $1, x, \dots, x^m$.
+\end{solution}
+
+\exerciseheader{3F}{10}
+\begin{exercise}{10}
+  Suppose $m$ is a positive integer.
+  \begin{enumerate}[label=(\alph*)]
+    \item Show that $1, x - 5, \dots, (x - 5)^m$ is a basis of $\calP_m(\R)$.
+    \item What is the dual basis of the basis in~(a)?
+  \end{enumerate}
+\end{exercise}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item Define $\varphi_0, \varphi_1, \dots, \varphi_m \in (\calP_m(\R))'$ by
+    \[
+      \varphi_j(p) = \frac{p^{(j)}(5)}{j!}.
+    \]
+    Suppose $a_0, a_1, \dots, a_m \in \R$ and
+    \[
+      a_0 + a_1(x - 5) + \dots + a_m(x - 5)^m = 0.
+    \]
+    Then for each $j = 0, 1, \dots, m$, we have
+    \[
+      a_j = \varphi_j(a_0 + a_1(x - 5) + \dots + a_m(x - 5)^m) = \varphi_j(0) = 0.
+    \]
+    Thus $a_0 = a_1 = \dots = a_m = 0$. Hence $1, x - 5, \dots, (x - 5)^m$ is a linearly independent list in $\calP_m(\R)$ of length $m + 1$, which equals the dimension of $\calP_m(\R)$. Thus $1, x - 5, \dots, (x - 5)^m$ is a basis of $\calP_m(\R)$ (by 2.38).
+
+    \item Let $\varphi_0, \varphi_1, \dots, \varphi_m \in (\calP_m(\R))'$ be defined as in~(a). Then
+    \[
+      \varphi_j((x - 5)^k) = \begin{cases} 1 & \text{if } k = j, \\ 0 & \text{if } k \ne j. \end{cases}
+    \]
+    Thus $\varphi_0, \varphi_1, \dots, \varphi_m$ is the dual basis of $1, x - 5, \dots, (x - 5)^m$.
+  \end{enumerate}
+\end{solution}
+
+\exerciseheader{3F}{11}
+\begin{exercise}{11}
+  Suppose $v_1, \dots, v_n$ is a basis of $V$ and $\varphi_1, \dots, \varphi_n$ is the corresponding dual basis of $V'$. Suppose $\psi \in V'$. Prove that
+  \[
+    \psi = \psi(v_1)\varphi_1 + \dots + \psi(v_n)\varphi_n.
+  \]
+\end{exercise}
+\begin{solution}
+  We have
+  \[
+    (\psi(v_1)\varphi_1 + \dots + \psi(v_n)\varphi_n)(v_k) = \psi(v_k)
+  \]
+  for each $k = 1, \dots, n$. Because the linear functionals $\psi(v_1)\varphi_1 + \dots + \psi(v_n)\varphi_n$ and $\psi$ agree on a basis, they are equal by the uniqueness part of the linear map lemma (3.4).
+\end{solution}
+
+\exerciseheader{3F}{12}
+\begin{exercise}{12}
+  Suppose $S, T \in \calL(V, W)$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Prove that $(S + T)' = S' + T'$.
+    \item Prove that $(\lambda T)' = \lambda T'$ for all $\lambda \in \F$.
+  \end{enumerate}
+
+  \textit{This exercise asks you to verify (a) and (b) in 3.120.}
+\end{exercise}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item We have
+    \begin{align*}
+      (S + T)'(\varphi) &= \varphi \circ (S + T) \\
+        &= \varphi \circ S + \varphi \circ T \\
+        &= S'(\varphi) + T'(\varphi).
+    \end{align*}
+    Thus $(S + T)' = S' + T'$, as desired.
+
+    \item Suppose $\lambda \in \F$. Then
+    \begin{align*}
+      (\lambda T)'(\varphi) &= \varphi \circ (\lambda T) \\
+        &= \lambda(\varphi \circ T) \\
+        &= \lambda T'(\varphi).
+    \end{align*}
+    Thus $(\lambda T)' = \lambda T'$, as desired.
+  \end{enumerate}
+\end{solution}
+
+\exerciseheader{3F}{13}
+\begin{exercise}{13}
+  Show that the dual map of the identity operator on $V$ is the identity operator on $V'$.
+\end{exercise}
+\begin{solution}
+  Let $I$ denote the identity operator on $V$. For $\varphi \in V'$ we have
+  \[
+    I'(\varphi) = \varphi \circ I = \varphi.
+  \]
+  Thus $I'$ is the identity operator on $V'$.
+\end{solution}
+
+\exerciseheader{3F}{14}
+\begin{exercise}{14}
+  Define $T \colon \R^3 \to \R^2$ by
+  \[
+    T(x, y, z) = (4x + 5y + 6z,\; 7x + 8y + 9z).
+  \]
+  Suppose $\varphi_1, \varphi_2$ denotes the dual basis of the standard basis of $\R^2$ and $\psi_1, \psi_2, \psi_3$ denotes the dual basis of the standard basis of $\R^3$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Describe the linear functionals $T'(\varphi_1)$ and $T'(\varphi_2)$.
+    \item Write $T'(\varphi_1)$ and $T'(\varphi_2)$ as linear combinations of $\psi_1, \psi_2, \psi_3$.
+  \end{enumerate}
+\end{exercise}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item Note that $\varphi_1(a, b) = a$ and $\varphi_2(a, b) = b$ for all $(a, b) \in \R^2$. Recall that $T'(\varphi_1) = \varphi_1 \circ T$ and $T'(\varphi_2) = \varphi_2 \circ T$. Thus
+    \[
+      (T'(\varphi_1))(x, y, z) = 4x + 5y + 6z
+    \]
+    and
+    \[
+      (T'(\varphi_2))(x, y, z) = 7x + 8y + 9z.
+    \]
+
+    \item We have $\psi_1(x, y, z) = x$, $\psi_2(x, y, z) = y$, and $\psi_3(x, y, z) = z$. Using~(a), we thus see that
+    \[
+      T'(\varphi_1) = 4\psi_1 + 5\psi_2 + 6\psi_3
+    \]
+    and
+    \[
+      T'(\varphi_2) = 7\psi_1 + 8\psi_2 + 9\psi_3.
+    \]
+  \end{enumerate}
+\end{solution}
+
+\exerciseheader{3F}{15}
+\begin{exercise}{15}
+  Define $T \colon \calP(\R) \to \calP(\R)$ by
+  \[
+    (Tp)(x) = x^2 p(x) + p''(x)
+  \]
+  for each $x \in \R$.
+  \begin{enumerate}[label=(\alph*)]
+    \item Suppose $\varphi \in \calP(\R)'$ is defined by $\varphi(p) = p'(4)$. Describe the linear functional $T'(\varphi)$ on $\calP(\R)$.
+    \item Suppose $\varphi \in \calP(\R)'$ is defined by $\varphi(p) = \int_0^1 p$. Evaluate $(T'(\varphi))(x^3)$.
+  \end{enumerate}
+\end{exercise}
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+    \item Suppose $p \in \calP(\R)$. Then
+    \begin{align*}
+      (T'(\varphi))(p) &= (\varphi \circ T)(p) \\
+        &= \varphi(Tp) \\
+        &= \varphi(x^2 p + p'') \\
+        &= (x^2 p + p'')'(4) \\
+        &= (2xp + x^2 p' + p''')(4) \\
+        &= 8p(4) + 16p'(4) + p'''(4).
+    \end{align*}
+
+    \item We have
+    \begin{align*}
+      (T'(\varphi))(x^3) &= (\varphi \circ T)(x^3) \\
+        &= \varphi(Tx^3) \\
+        &= \varphi(x^5 + 6x) \\
+        &= \int_0^1 (x^5 + 6x)\, dx \\
+        &= \frac{19}{6}.
+    \end{align*}
+  \end{enumerate}
+\end{solution}
+
+\exerciseheader{3F}{16}
+\begin{exercise}{16}
+  Suppose $W$ is finite-dimensional and $T \in \calL(V, W)$. Prove that
+  \[
+    T' = 0 \iff T = 0.
+  \]
+\end{exercise}
+\begin{solution}
+  First suppose $T = 0$. If $\varphi \in W'$, then $T'(\varphi) = \varphi \circ T = 0$, and thus $T' = 0$.
+
+  To prove the other direction, now suppose $T' = 0$. Thus
+  \[
+    0 = T'(\varphi) = \varphi \circ T
+  \]
+  for every $\varphi \in W'$. Thus
+  \[
+    0 = \varphi(Tv)
+  \]
+  for every $v \in V$ and every $\varphi \in W'$. Exercise~3 now implies that $Tv = 0$ for every $v \in V$. Thus $T = 0$, as desired.
+\end{solution}
+
+\exerciseheader{3F}{17}
+\begin{exercise}{17}
+  Suppose $V$ and $W$ are finite-dimensional and $T \in \calL(V, W)$. Prove that $T$ is invertible if and only if $T' \in \calL(W', V')$ is invertible.
+\end{exercise}
+\begin{solution}
+  A linear map is invertible if and only if it is injective and surjective. Thus the desired result follows from 3.129 and 3.131.
+\end{solution}
+
+\exerciseheader{3F}{18}
+\begin{exercise}{18}
+  Suppose $V$ and $W$ are finite-dimensional. Prove that the map that takes $T \in \calL(V, W)$ to $T' \in \calL(W', V')$ is an isomorphism of $\calL(V, W)$ onto $\calL(W', V')$.
+\end{exercise}
+\begin{solution}
+  Define $\Gamma \colon \calL(V, W) \to \calL(W', V')$ by $\Gamma(T) = T'$. By 3.120, $\Gamma$ is a linear map.
+
+  Exercise~16 implies that $\Gamma$ is injective. Note that
+  \begin{align*}
+    \dim \calL(V, W) &= (\dim V)(\dim W) \\
+      &= (\dim V')(\dim W') \\
+      &= (\dim W')(\dim V') \\
+      &= \dim \calL(W', V'),
+  \end{align*}
+  where the first and last equalities above come from 3.72 and the second equality above comes from 3.111.
+
+  The fundamental theorem of linear maps (3.21) and the equation above now imply that $\dim \operatorname{range} \Gamma = \dim(\calL(W', V'))$. Thus $\Gamma$ is surjective and hence is an isomorphism of $\calL(V, W)$ onto $\calL(W', V')$, as desired.
+\end{solution}

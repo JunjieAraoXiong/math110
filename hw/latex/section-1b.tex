@@ -1,0 +1,212 @@
+% ── Section 1B ──
+
+\exerciseheader{1B}{1}
+\begin{exercise}{1}
+  Prove that $-(-v) = v$ for every $v \in V$.
+\end{exercise}
+\begin{solution}
+  Let $v \in V$. By the definition of additive inverse, we have
+  \[
+    v + (-v) = 0.
+  \]
+  The additive inverse of $-v$, which by definition is $-(-v)$, is the unique vector that when added to $-v$ gives $0$. The equation above shows that $v$ has this property. Thus $-(-v) = v$.
+\end{solution}
+\begin{comment}
+  Using 1.32 twice leads to another proof that $-(-v) = v$. However, the proof given above uses only the additive structure of $V$, whereas a proof using 1.32 also uses the multiplicative structure.
+\end{comment}
+
+\exerciseheader{1B}{2}
+\begin{exercise}{2}
+  Suppose $a \in \F$, $v \in V$, and $av = 0$. Prove that $a = 0$ or $v = 0$.
+\end{exercise}
+\begin{solution}
+  We want to prove that $a = 0$ or $v = 0$. If $a = 0$, then we are done. So suppose $a \neq 0$. Multiplying both sides of the equation above by $1/a$ gives
+  \[
+    \frac{1}{a}(av) = \frac{1}{a}0.
+  \]
+  The associative property shows that the left side of the equation above equals $1v$, which equals $v$. The right side of the equation above equals $0$ (by 1.31). Thus $v = 0$, completing the proof.
+\end{solution}
+
+\exerciseheader{1B}{3}
+\begin{exercise}{3}
+  Suppose $v, w \in V$. Explain why there exists a unique $x \in V$ such that $v + 3x = w$.
+\end{exercise}
+\begin{solution}
+  There exists a unique vector $-v \in V$ such that $v + (-v) = 0$. Adding $-v$ to both sides of the equation above, we see that the equation above is equivalent to the equation
+  \[
+    3x = w - v,
+  \]
+  which is equivalent to the equation
+  \[
+    x = \tfrac{1}{3}(w - v),
+  \]
+  which shows that our original equation has a unique solution.
+\end{solution}
+
+\exerciseheader{1B}{4}
+\begin{exercise}{4}
+  The empty set is not a vector space. The empty set fails to satisfy only one of the requirements listed in the definition of a vector space (1.20). Which one?
+\end{exercise}
+\begin{solution}
+  The additive identity requirement in 1.20 begins ``there exists an element $0 \in V$ \ldots''. This condition is not satisfied by the empty set.
+\end{solution}
+
+\exerciseheader{1B}{5}
+\begin{exercise}{5}
+  Show that in the definition of a vector space (1.20), the additive inverse condition can be replaced with the condition that
+  \[
+    0v = 0 \text{ for all } v \in V.
+  \]
+  Here the $0$ on the left side is the number $0$, and the $0$ on the right side is the additive identity of $V$.
+
+  \textit{The phrase a ``condition can be replaced'' in a definition means that the collection of objects satisfying the definition is unchanged if the original condition is replaced with the new condition.}
+\end{exercise}
+\begin{solution}
+  Suppose the additive inverse condition in 1.20 is replaced with the condition that
+  \[
+    0v = 0 \text{ for all } v \in V.
+  \]
+  Let $v \in V$. Then
+  \begin{align*}
+    0 &= 0v \\
+      &= (1 + (-1))v \\
+      &= 1v + (-1)v \\
+      &= v + (-1)v.
+  \end{align*}
+  This $(-1)v$ in an additive inverse of $v$. Hence the additive inverse condition is satisfied.
+\end{solution}
+
+\exerciseheader{1B}{7}
+\begin{exercise}{7}
+  Suppose $S$ is a nonempty set. Let $V^S$ denote the set of functions from $S$ to $V$. Define a natural addition and scalar multiplication on $V^S$, and show that $V^S$ is a vector space with these definitions.
+\end{exercise}
+\begin{solution}
+  For $f, g \in V^S$ and $\lambda \in \F$, let $f + g$ and $\lambda f$ be the functions from $S$ to $V$ defined by
+  \[
+    (f + g)(x) = f(x) + g(x) \quad \text{and} \quad (\lambda f)(x) = \lambda f(x)
+  \]
+  for $x \in S$. It is straightforward to verify that with these definitions of addition and scalar multiplication, $V^S$ is a vector space, where the additive identity is the function from $S$ to $V$ that is identically $0$ and the additive inverse of $f \in V^S$ is the function from $S$ to $V$ that takes $x \in S$ to $-f(x)$.
+\end{solution}
+
+\exerciseheader{1B}{8}
+\begin{exercise}{8}
+  Suppose $V$ is a real vector space.
+  \begin{itemize}
+    \item The \textit{complexification} of $V$, denoted by $V_\C$, equals $V \times V$. An element of $V_\C$ is an ordered pair $(u, v)$, where $u, v \in V$, but we write this as $u + iv$.
+    \item Addition on $V_\C$ is defined by
+      \[
+        (u_1 + iv_1) + (u_2 + iv_2) = (u_1 + u_2) + i(v_1 + v_2)
+      \]
+      for all $u_1, v_1, u_2, v_2 \in V$.
+    \item Complex scalar multiplication on $V_\C$ is defined by
+      \[
+        (a + bi)(u + iv) = (au - bv) + i(av + bu)
+      \]
+      for all $a, b \in \R$ and all $u, v \in V$.
+  \end{itemize}
+  Prove that with the definitions of addition and scalar multiplication as above, $V_\C$ is a complex vector space.
+
+  \textit{Think of $V$ as a subset of $V_\C$ by identifying $u \in V$ with $u + i0$. The construction of $V_\C$ from $V$ can then be thought of as generalizing the construction of\/ $\C^n$ from $\R^n$.}
+\end{exercise}
+\begin{solution}
+  Suppose $u, v, u_1, u_2, v_1, v_2 \in V$ and $a, b, c, d \in \R$.
+
+  Then
+  \begin{align*}
+    (u_1 + iv_1) + (u_2 + iv_2)
+      &= (u_1 + u_2) + i(v_1 + v_2) \\
+      &= (u_2 + u_1) + i(v_2 + v_1) \\
+      &= (u_2 + iv_2) + (u_1 + iv_1),
+  \end{align*}
+  where the first equality comes from the definition of addition in $V_\C$, the second equality holds because addition in $V$ is commutative, and the third equality comes from the definition of addition in $V_\C$. The equation above shows that addition in $V_\C$ is commutative.
+
+  Also,
+  \begin{align*}
+    \bigl((u_1 + iv_1) + (u_2 + iv_2)\bigr) + (u + iv)
+      &= \bigl((u_1 + u_2) + i(v_1 + v_2)\bigr) + (u + iv) \\
+      &= ((u_1 + u_2) + u) + i(( v_1 + v_2) + v) \\
+      &= (u_1 + (u_2 + u)) + i(v_1 + (v_2 + v)) \\
+      &= (u_1 + iv_1) + ((u_2 + u) + i(v_2 + v)) \\
+      &= (u_1 + iv_1) + ((u_2 + iv_2) + (u + iv)),
+  \end{align*}
+  where the third equality holds because addition in $V$ is associative and the other equalities come from the definition of addition in $V_\C$. The equation above shows that addition in $V_\C$ is associative.
+
+  Also,
+  \begin{align*}
+    ((a + bi)(c + di))(u + iv)
+      &= ((ac - bd) + (ad + bc)i)(u + iv) \\
+      &= ((ac - bd)u - (ad + bc)v) + i((ac - bd)v + (ad + bc)u).
+  \end{align*}
+  Furthermore,
+  \begin{align*}
+    (a + bi)((c + di)(u + iv))
+      &= (a + bi)((cu - dv) + i(cv + du)) \\
+      &= (a(cu - dv) - b(cv + du)) + i(a(cv + du) + b(cu - dv)) \\
+      &= ((ac - bd)u - (ad + bc)v) + i((ac - bd)v + (ad - bc)u).
+  \end{align*}
+  Comparing the last two sets of equations, we conclude that
+  \[
+    ((a + bi)(c + di))(u + iv) = (a + bi)((c + di)(u + iv)),
+  \]
+  verifying the associative property required of scalar multiplication in a vector space.
+
+  Also,
+  \begin{align*}
+    (u + iv) + (0 + i0) &= (u + 0) + i(v + 0) \\
+                         &= u + iv.
+  \end{align*}
+  Thus $0 + i0$ is an additive identity for $V_\C$. This additive identity is usually denoted as just $0$.
+
+  Also,
+  \begin{align*}
+    (u + iv) + (-u + i(-v)) &= (u + (-u)) + i(v + (-v)) \\
+                             &= 0 + i0,
+  \end{align*}
+  which shows that every element of $V_\C$ has an additive inverse.
+
+  Also,
+  \[
+    1(u + iv) = (1u) + i(1v) = u + iv,
+  \]
+  which shows that the multiplicative identity works as required.
+
+  Also,
+  \begin{align*}
+    (a + bi)\bigl((u_1 + iv_1) + (u_2 + iv_2)\bigr)
+      &= (a + bi)\bigl((u_1 + u_2) + i(v_1 + v_2)\bigr) \\
+      &= (a(u_1 + u_2) - b(v_1 + v_2)) + i(a(v_1 + v_2) + b(u_1 + u_2)) \\
+      &= (au_1 + au_2 - bv_1 - bv_2) + i(av_1 + av_2 + bu_1 + bu_2).
+  \end{align*}
+  Furthermore
+  \begin{align*}
+    (a + bi)(u_1 + iv_1) + (a + bi)(u_2 + iv_2)
+      &= ((au_1 - bv_1) + i(av_1 + bu_1)) + ((au_2 - bv_2) + i(av_2 + bu_2)) \\
+      &= (au_1 + au_2 - bv_1 - bv_2) + i(av_1 + av_2 + bu_1 + bu_2).
+  \end{align*}
+  Comparing the last two sets of equations, we conclude that
+  \[
+    (a + bi)\bigl((u_1 + iv_1) + (u_2 + iv_2)\bigr) = (a + bi)(u_1 + iv_1) + (a + bi)(u_2 + iv_2),
+  \]
+  verifying the first distributive property required in a vector space.
+
+  Also,
+  \begin{align*}
+    ((a + bi) + (c + di))(u + iv)
+      &= ((a + c) + (b + d)i)(u + iv) \\
+      &= ((a + c)u - (b + d)v) + i((a + c)v + (b + d)u) \\
+      &= (au + cu - bv - dv) + i(av + cv + bu + du).
+  \end{align*}
+  Furthermore,
+  \begin{align*}
+    (a + bi)(u + iv) + (c + di)(u + iv)
+      &= ((au - bv) + i(av + bu)) + ((cu - dv) + i(cv + du)) \\
+      &= (au + cu - bv - dv) + i(av + cv + bu + du).
+  \end{align*}
+  Comparing the last two sets of equations, we conclude that
+  \[
+    ((a + bi) + (c + di))(u + iv) = (a + bi)(u + iv) + (c + di)(u + iv),
+  \]
+  verifying the second distributive property required in a vector space.
+
+  All properties required for a complex vector space have now been verified for $V_\C$.
+\end{solution}
